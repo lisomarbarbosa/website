@@ -1,3 +1,4 @@
+import { copyFileSync } from "fs";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -10,6 +11,15 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   // Plugins
+  plugins: [
+    react(),
+    {
+      name: "copy-to-404",
+      closeBundle() {
+        copyFileSync("dist/index.html", "dist/404.html");
+      },
+    },
+  ],
   // Resolução de aliases
   resolve: {
     alias: {
