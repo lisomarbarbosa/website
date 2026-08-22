@@ -26,20 +26,29 @@ const MAX_ATTEMPTS = 10;
  * Atualizada em ago/2026 — verificada na API de modelos disponíveis.
  * Ordem: maior capacidade → menor capacidade.
  * Todos confirmados gratuitos em agosto/2026.
- * Ref: openrouter.ai/collections/free-models
+ * Ref: openrouter.ai/models?order=newest&supported_parameters=free
+ *
+ * IMPORTANTE: use sempre o sufixo :free para garantir acesso gratuito.
+ * Modelos sem :free podem exigir créditos pagos.
  */
 const MODELS = [
-  "nvidia/nemotron-3-ultra-550b-a55b:free",
-  "nvidia/nemotron-3-super-120b-a12b:free",
-  "openai/gpt-oss-120b:free",
-  "openai/gpt-oss-20b:free",
-  "google/gemma-4-31b-it:free",
-  "google/gemma-4-26b-a4b-it:free",
-  "inclusionai/ling-3.0-flash:free",
-  "poolside/laguna-m.1:free",
-  "poolside/laguna-s-2.1:free",
-  "nvidia/nemotron-3-nano-30b-a3b:free",
-  "meta-llama/llama-3.2-3b-instruct:free",
+  // Meta Llama — flagship gratuito mais robusto
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "meta-llama/llama-3.1-8b-instruct:free",
+  // DeepSeek — excelente para texto longo e raciocínio
+  "deepseek/deepseek-chat-v3-0324:free",
+  "deepseek/deepseek-r1-0528:free",
+  // Google Gemma — modelos leves e confiáveis
+  "google/gemma-3-27b-it:free",
+  "google/gemma-3-12b-it:free",
+  "google/gemma-3-4b-it:free",
+  // Mistral — boa capacidade de texto em português
+  "mistralai/mistral-7b-instruct:free",
+  // Qwen — forte em multilíngue
+  "qwen/qwen3-8b:free",
+  "qwen/qwen3-14b:free",
+  // Microsoft Phi — modelo compacto de emergência
+  "microsoft/phi-3-mini-128k-instruct:free",
 ];
 
 const FALLBACK_IMAGE =
@@ -244,13 +253,13 @@ function reconstructJsonWithContent(text) {
   const result = {};
   for (const field of fields) {
     const strMatch = src.match(
-      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`, "s")
+      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`,"s")
     );
     if (strMatch) {
       try { result[field] = JSON.parse(`"${strMatch[1]}"`); } catch (_) { result[field] = strMatch[1]; }
       continue;
     }
-    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\\[\\{])`));
+    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\[\\{])`));
     if (arrObjMatch) {
       const opener = arrObjMatch[1];
       const closer = opener === "[" ? "]" : "}";
@@ -300,7 +309,7 @@ async function checkApiKey() {
     const configured = MODELS.filter(m => available.includes(m));
     const missing    = MODELS.filter(m => !available.includes(m));
     if (configured.length > 0) log(`✅ Modelos disponíveis: ${configured.join(", ")}`);
-    if (missing.length > 0)    log(`⚠️ Modelos INDISPONÍVEIS: ${missing.join(", ")}`);
+    if (missing.length > 0)    log(`⚠️ Modelos INDISPONÍVEIS (serão pulados): ${missing.join(", ")}`);
     return configured;
   } catch (err) {
     log(`⚠️ Erro ao verificar modelos: ${err.message}`);
@@ -385,7 +394,7 @@ async function searchJusbrasil(topic) {
     const text = stripHtml(html);
     return { source: "Jusbrasil", url, content: text.slice(0, 30000) };
   } catch (error) {
-    log(`⚠️ Jusbrasil indisponível: ${error.message}`);
+    log(`⚠️ Não foi possível consultar diretamente o Jusbrasil: ${error.message}`);
     return {
       source: "Jusbrasil", url,
       content: "Consulta ao Jusbrasil falhou. NÃO presumir resultados, jurisprudência ou decisões."
@@ -727,19 +736,23 @@ async function getUnsplashImage(topic) {
 // ─── Loop principal: curadoria → geração → auditoria (repete até aprovação) ───
 
 /**
- * Executa o ciclo completo para UN artigo.
- * Repete até MAX_ATTEMPTS vezes:
- *   1. Curadoria jurídica (pesquisa + validação de fontes)
- *   2. Geração do artigo
- *   3. Expansão se abaixo do mínimo de palavras
- *   4. Auditoria jurídica independente
- *   5. Verificação de links
- * Se reprovar em qualquer etapa após a geração, reinicia do passo 1
- * com novo tema sorteado para evitar repetição de contexto.
+ * Executa o ciclo completo para UM artigo.
+ *
+ * FLUXO DO LOOP (MAX_ATTEMPTS vezes):
+ *   1. Curadoria jurídica  → pesquisa + validação de fontes
+ *   2. Geração do artigo   → redação completa baseada na curadoria
+ *   3. Expansão (se necessário) → só se abaixo de MIN_WORDS
+ *   4. Validação estrutural → campos obrigatórios + contagem de palavras
+ *   5. Auditoria jurídica  → revisor independente, PASS ou FAIL
+ *   6. Verificação de links → links quebrados geram nova tentativa
+ *
+ * Se reprovar em qualquer etapa (4, 5 ou 6), o ciclo INTEIRO recomeça
+ * do passo 1 com um tema ligeiramente diferente para evitar que a IA
+ * reproduza os mesmos erros com o mesmo contexto.
  *
  * @param {string} baseTopic - Tema base escolhido para este slot
  * @param {number} slot      - Número do slot (1 ou 2), apenas para log
- * @returns {object}         - { article, imageUrl, slug }
+ * @returns {object}         - { article, imageUrl, slug, words, attempts }
  */
 async function runArticleLoop(baseTopic, slot) {
   let attempt = 0;
@@ -791,17 +804,17 @@ async function runArticleLoop(baseTopic, slot) {
         log(`✅ Etapa 3/4 — Expansão não necessária (${words} palavras).`);
       }
 
-      // Valida estrutura mínima antes de gastar tokens na auditoria
+      // ── Etapa 4: Validação estrutural ─────────────────────────────────────
       try {
         validateArticleStructure(article);
       } catch (structErr) {
         log(`❌ Estrutura inválida: ${structErr.message}`);
         lastRejectionReasons = [`Estrutura inválida: ${structErr.message}`];
-        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        log(`🔄 Reiniciando ciclo completo do zero (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
         continue;
       }
 
-      // ── Etapa 4: Auditoria jurídica ────────────────────────────────────────
+      // ── Etapa 5: Auditoria jurídica ────────────────────────────────────────
       log(`\n⚖️  [${attempt}/${MAX_ATTEMPTS}] Etapa 4/4 — Auditoria jurídica...`);
       const audit = await auditArticle(article, research);
 
@@ -810,13 +823,13 @@ async function runArticleLoop(baseTopic, slot) {
         log(`❌ Auditoria REPROVADA.`);
         issues.forEach(issue => log(`   ↳ ${issue}`));
         lastRejectionReasons = issues.length > 0 ? issues : ["Auditoria retornou FAIL sem detalhar motivos."];
-        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        log(`🔄 Reiniciando ciclo completo do zero (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
         continue;
       }
 
       log(`✅ Auditoria APROVADA.`);
 
-      // ── Verificação de links ───────────────────────────────────────────────
+      // ── Etapa 6: Verificação de links ─────────────────────────────────────
       const links = await verifyLinks(article.content);
       const brokenLinks = links.filter(item => !item.ok);
       if (brokenLinks.length > 0) {
@@ -824,7 +837,7 @@ async function runArticleLoop(baseTopic, slot) {
         log(`❌ ${reasons.length} link(s) quebrado(s).`);
         reasons.forEach(r => log(`   ↳ ${r}`));
         lastRejectionReasons = reasons;
-        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        log(`🔄 Reiniciando ciclo completo do zero (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
         continue;
       }
 
@@ -839,11 +852,11 @@ async function runArticleLoop(baseTopic, slot) {
       return { article, imageUrl: image, slug, words, attempts: attempt };
 
     } catch (err) {
-      // Erros inesperados (ex: falha total de API) — tenta de novo
+      // Erros inesperados (ex: falha total de API) — reinicia o ciclo do zero
       log(`💥 Erro inesperado na tentativa ${attempt}: ${err.message}`);
       lastRejectionReasons = [`Erro inesperado: ${err.message}`];
       if (attempt < MAX_ATTEMPTS) {
-        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        log(`🔄 Reiniciando ciclo completo do zero (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
       }
     }
   }
@@ -873,19 +886,21 @@ async function main() {
     log(`📅 Data: ${date}`);
     log(`🎰 Slot: ${slot}`);
     log(`🎯 Tema base: ${topic}`);
-    log(`🔁 Máx. tentativas: ${MAX_ATTEMPTS}`);
+    log(`🔁 Máx. tentativas por artigo: ${MAX_ATTEMPTS}`);
+    log(`📋 Loop: reprovar → regenerar do zero → nova curadoria → nova auditoria → repetir até passar`);
 
     await checkApiKey();
 
-    // Salva backups para rollback
+    // Salva backups para rollback em caso de falha
     originalBlog    = await readFile(BLOG_FILE,    "utf8");
     originalSitemap = await readFile(SITEMAP_FILE, "utf8");
 
-    // Executa o loop curadoria → geração → auditoria
+    // Executa o loop: curadoria → geração → expansão → validação → auditoria → links
+    // Repete do zero até aprovação ou MAX_ATTEMPTS
     const { article, imageUrl, slug, words, attempts } =
       await runArticleLoop(topic, slot);
 
-    // Persiste no blog e sitemap
+    // Persiste no blog e sitemap apenas após aprovação completa
     await updateBlogFile(article, imageUrl, date);
     await updateSitemap(slug, date);
 
@@ -902,15 +917,15 @@ async function main() {
   } catch (error) {
     log("");
     log("==========================================");
-    log("❌ ERRO CRÍTICO — WORKFLOW ABORTADO");
+    log("❌ ERRO NO WORKFLOW");
     log("==========================================");
     console.error(error);
 
-    // Rollback para não deixar arquivos corrompidos
+    // Rollback de segurança para não deixar arquivos corrompidos
     try {
       if (originalBlog    !== null) await writeFile(BLOG_FILE,    originalBlog,    "utf8");
       if (originalSitemap !== null) await writeFile(SITEMAP_FILE, originalSitemap, "utf8");
-      log("↩️  Rollback realizado com sucesso.");
+      log("↩️ Rollback de segurança realizado.");
     } catch (rollbackError) {
       console.error("❌ Falha no rollback:", rollbackError);
     }
