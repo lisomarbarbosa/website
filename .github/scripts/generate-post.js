@@ -19,10 +19,10 @@ const UNSPLASH_URL =
   "https://api.unsplash.com/photos/random";
 
 const DEFAULT_MODEL =
-  "meta-llama/llama-3.3-70b-instruct:free";
+  "google/gemma-3-27b-it:free";
 
 const FALLBACK_MODEL =
-  "mistralai/mistral-7b-instruct:free";
+  "meta-llama/llama-3.2-3b-instruct:free";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
