@@ -25,18 +25,18 @@ const UNSPLASH_URL =
  * Atualizado em ago/2026 — slugs verificados no OpenRouter.
  */
 const MODELS = [
-  "nvidia/nemotron-3-ultra-550b-a55b:free",           // titular – Nemotron 3 Ultra 550B (1M ctx)
-  "nvidia/nemotron-3-super-120b-a12b:free",           // fallback 1 – Nemotron 3 Super 120B (1M ctx)
-  "openai/gpt-oss-120b:free",                         // fallback 2 – GPT-OSS 120B
-  "google/gemma-4-31b-it:free",                       // fallback 3 – Gemma 4 31B
-  "google/gemma-4-26b-a4b-it:free",                   // fallback 4 – Gemma 4 26B
-  "openai/gpt-oss-20b:free",                          // fallback 5 – GPT-OSS 20B
-  "nvidia/nemotron-3-nano-30b-a3b:free",              // fallback 6 – Nemotron 3 Nano 30B
-  "inclusionai/ling-3.0-flash:free",                  // fallback 7 – Ling 3.0 Flash
-  "meta-llama/llama-3.3-70b-instruct:free",           // fallback 8 – Llama 3.3 70B (estável desde dez/2024)
-  "qwen/qwen3-next-80b-a3b-instruct:free",            // fallback 9 – Qwen3 Next 80B
-  "cohere/north-mini-code:free",                      // fallback 10 – North Mini Code
-  "mistralai/mistral-7b-instruct:free",               // fallback 11 – Mistral 7B
+  "meta-llama/llama-3.3-70b-instruct:free",           // titular – Llama 3.3 70B (estável)
+  "meta-llama/llama-3.1-8b-instruct:free",            // fallback 1 – Llama 3.1 8B
+  "google/gemma-3-27b-it:free",                        // fallback 2 – Gemma 3 27B
+  "google/gemma-3-12b-it:free",                        // fallback 3 – Gemma 3 12B
+  "google/gemma-2-9b-it:free",                         // fallback 4 – Gemma 2 9B
+  "mistralai/mistral-7b-instruct:free",                // fallback 5 – Mistral 7B
+  "mistralai/mistral-small-3.1-24b-instruct:free",    // fallback 6 – Mistral Small 3.1 24B
+  "qwen/qwen2.5-72b-instruct:free",                   // fallback 7 – Qwen 2.5 72B
+  "qwen/qwen2.5-7b-instruct:free",                    // fallback 8 – Qwen 2.5 7B
+  "deepseek/deepseek-r1-distill-llama-70b:free",      // fallback 9 – DeepSeek R1 Distill 70B
+  "deepseek/deepseek-chat-v3-0324:free",              // fallback 10 – DeepSeek Chat V3
+  "microsoft/phi-3-medium-128k-instruct:free",        // fallback 11 – Phi-3 Medium 128K
 ];
 
 const FALLBACK_IMAGE =
@@ -45,36 +45,36 @@ const FALLBACK_IMAGE =
 const MIN_WORDS = 1250;
 
 const TOPICS = [
-  "Direito digital e responsabilidade civil nas rela\u00e7\u00f5es online",
+  "Direito digital e responsabilidade civil nas relações online",
   "Responsabilidade civil por danos causados na internet",
-  "Direito ao esquecimento e os limites da remo\u00e7\u00e3o de conte\u00fado digital",
-  "Prote\u00e7\u00e3o de dados pessoais e responsabilidade no ambiente digital",
-  "Golpes digitais e responsabilidade jur\u00eddica das plataformas",
-  "Fraudes eletr\u00f4nicas e consequ\u00eancias no Direito Penal",
-  "Crimes digitais e os limites da responsabiliza\u00e7\u00e3o penal",
-  "Provas digitais e sua import\u00e2ncia em processos judiciais",
+  "Direito ao esquecimento e os limites da remoção de conteúdo digital",
+  "Proteção de dados pessoais e responsabilidade no ambiente digital",
+  "Golpes digitais e responsabilidade jurídica das plataformas",
+  "Fraudes eletrônicas e consequências no Direito Penal",
+  "Crimes digitais e os limites da responsabilização penal",
+  "Provas digitais e sua importância em processos judiciais",
   "Ataques virtuais e responsabilidade civil por danos causados",
   "Uso indevido de imagem na internet e responsabilidade civil",
-  "Liberdade de express\u00e3o na internet e seus limites jur\u00eddicos",
-  "Ofensas nas redes sociais e poss\u00edveis consequ\u00eancias jur\u00eddicas",
+  "Liberdade de expressão na internet e seus limites jurídicos",
+  "Ofensas nas redes sociais e possíveis consequências jurídicas",
   "Direito do consumidor nas compras realizadas pela internet",
-  "Responsabilidade de marketplaces em rela\u00e7\u00f5es de consumo",
-  "Contratos digitais e sua validade jur\u00eddica",
-  "Assinaturas eletr\u00f4nicas e validade dos neg\u00f3cios jur\u00eddicos",
-  "Fraudes banc\u00e1rias digitais e responsabilidade civil",
-  "Vazamento de dados e poss\u00edveis consequ\u00eancias jur\u00eddicas",
-  "LGPD e prote\u00e7\u00e3o de dados pessoais nas rela\u00e7\u00f5es digitais",
-  "Responsabilidade por publica\u00e7\u00e3o de conte\u00fado il\u00edcito na internet",
-  "Remo\u00e7\u00e3o de conte\u00fado online e responsabilidade das plataformas",
-  "Cyberbullying e consequ\u00eancias jur\u00eddicas no Brasil",
-  "Stalking virtual e suas consequ\u00eancias jur\u00eddicas",
-  "Persegui\u00e7\u00e3o digital e prote\u00e7\u00e3o jur\u00eddica da v\u00edtima",
-  "Estelionato eletr\u00f4nico e Direito Penal",
-  "Invas\u00e3o de dispositivo inform\u00e1tico e consequ\u00eancias jur\u00eddicas",
+  "Responsabilidade de marketplaces em relações de consumo",
+  "Contratos digitais e sua validade jurídica",
+  "Assinaturas eletrônicas e validade dos negócios jurídicos",
+  "Fraudes bancárias digitais e responsabilidade civil",
+  "Vazamento de dados e possíveis consequências jurídicas",
+  "LGPD e proteção de dados pessoais nas relações digitais",
+  "Responsabilidade por publicação de conteúdo ilícito na internet",
+  "Remoção de conteúdo online e responsabilidade das plataformas",
+  "Cyberbullying e consequências jurídicas no Brasil",
+  "Stalking virtual e suas consequências jurídicas",
+  "Perseguição digital e proteção jurídica da vítima",
+  "Estelionato eletrônico e Direito Penal",
+  "Invasão de dispositivo informático e consequências jurídicas",
   "Crimes contra a honra praticados pela internet",
-  "Difama\u00e7\u00e3o nas redes sociais e responsabilidade jur\u00eddica",
-  "Cal\u00fania e inj\u00faria praticadas no ambiente digital",
-  "Preserva\u00e7\u00e3o de provas digitais em conflitos jur\u00eddicos"
+  "Difamação nas redes sociais e responsabilidade jurídica",
+  "Calúnia e injúria praticadas no ambiente digital",
+  "Preservação de provas digitais em conflitos jurídicos"
 ];
 
 function log(message) {
@@ -173,7 +173,7 @@ function extractJson(text) {
   }
 
   throw new Error(
-    "A IA n\u00e3o retornou um JSON v\u00e1lido."
+    "A IA não retornou um JSON válido."
   );
 }
 
@@ -218,7 +218,7 @@ async function callModel(messages, model, temperature = 0.2) {
 
   if (!content) {
     throw new Error(
-      "OpenRouter n\u00e3o retornou conte\u00fado."
+      "OpenRouter não retornou conteúdo."
     );
   }
 
@@ -240,18 +240,18 @@ async function callOpenRouter(messages, temperature = 0.2) {
 
   for (const model of chain) {
     try {
-      log(`\uD83E\uDD16 Tentando modelo: ${model}`);
+      log(`🤖 Tentando modelo: ${model}`);
       const result = await callModel(messages, model, temperature);
-      log(`\u2705 Modelo usado com sucesso: ${model}`);
+      log(`✅ Modelo usado com sucesso: ${model}`);
       return result;
     } catch (error) {
-      log(`\u26A0\uFE0F Modelo ${model} falhou: ${error.message}`);
+      log(`⚠️ Modelo ${model} falhou: ${error.message}`);
       lastError = error;
     }
   }
 
   throw new Error(
-    `Todos os modelos falharam. \u00daltimo erro: ${lastError?.message}`
+    `Todos os modelos falharam. Último erro: ${lastError?.message}`
   );
 }
 
@@ -289,7 +289,7 @@ function stripHtml(html) {
 }
 
 async function searchJusbrasil(topic) {
-  log("\uD83D\uDD0E Pesquisando Jusbrasil...");
+  log("🔎 Pesquisando Jusbrasil...");
 
   const query = encodeURIComponent(topic);
 
@@ -308,66 +308,66 @@ async function searchJusbrasil(topic) {
     };
   } catch (error) {
     log(
-      `\u26A0\uFE0F N\u00e3o foi poss\u00edvel consultar diretamente o Jusbrasil: ${error.message}`
+      `⚠️ Não foi possível consultar diretamente o Jusbrasil: ${error.message}`
     );
 
     return {
       source: "Jusbrasil",
       url,
       content:
-        "A consulta autom\u00e1tica ao Jusbrasil falhou. N\u00C3O presumir resultados, jurisprud\u00eancia ou decis\u00f5es."
+        "A consulta automática ao Jusbrasil falhou. NÃO presumir resultados, jurisprudência ou decisões."
     };
   }
 }
 
 function buildLegalResearchInstructions(topic) {
   return `
-Voc\u00ea est\u00e1 realizando uma CURADORIA JUR\u00cdDICA preliminar para produ\u00e7\u00e3o editorial
-do escrit\u00f3rio Lisomar Barbosa Advogados.
+Você está realizando uma CURADORIA JURÍDICA preliminar para produção editorial
+do escritório Lisomar Barbosa Advogados.
 
 TEMA:
 ${topic}
 
 OBJETIVO:
-Identificar somente informa\u00e7\u00f5es jur\u00eddicas que possam ser verificadas.
+Identificar somente informações jurídicas que possam ser verificadas.
 
-FONTES PRIORIT\u00c1RIAS:
+FONTES PRIORITÁRIAS:
 
-1. Constitui\u00e7\u00e3o Federal do Brasil.
-2. Legisla\u00e7\u00e3o brasileira aplic\u00e1vel.
-3. C\u00f3digo Civil.
-4. C\u00f3digo de Defesa do Consumidor.
-5. C\u00f3digo Penal.
-6. Legisla\u00e7\u00e3o especificamente relacionada ao ambiente digital.
-7. Jurisprud\u00eancia e decis\u00f5es encontradas no Jusbrasil.
+1. Constituição Federal do Brasil.
+2. Legislação brasileira aplicável.
+3. Código Civil.
+4. Código de Defesa do Consumidor.
+5. Código Penal.
+6. Legislação especificamente relacionada ao ambiente digital.
+7. Jurisprudência e decisões encontradas no Jusbrasil.
 
 REGRAS ABSOLUTAS:
 
-- N\u00c3O invente lei.
-- N\u00c3O invente artigo de lei.
-- N\u00c3O invente n\u00famero de processo.
-- N\u00c3O invente tribunal.
-- N\u00c3O invente desembargador, ministro, juiz ou relator.
-- N\u00c3O invente ementa.
-- N\u00c3O atribua decis\u00e3o judicial a tribunal sem fonte verific\u00e1vel.
-- N\u00c3O transforme hip\u00f3tese em fato jur\u00eddico.
-- N\u00c3O trate interpreta\u00e7\u00e3o doutrin\u00e1ria como texto legal.
-- N\u00c3O invente orienta\u00e7\u00e3o jur\u00eddica.
-- N\u00c3O diga que determinada conduta "sempre" gera indeniza\u00e7\u00e3o.
-- N\u00c3O diga que determinada conduta "nunca" gera responsabilidade.
-- N\u00c3O fa\u00e7a promessa de resultado judicial.
-- N\u00c3O crie jurisprud\u00eancia apenas para tornar o artigo mais convincente.
+- NÃO invente lei.
+- NÃO invente artigo de lei.
+- NÃO invente número de processo.
+- NÃO invente tribunal.
+- NÃO invente desembargador, ministro, juiz ou relator.
+- NÃO invente ementa.
+- NÃO atribua decisão judicial a tribunal sem fonte verificável.
+- NÃO transforme hipótese em fato jurídico.
+- NÃO trate interpretação doutrinária como texto legal.
+- NÃO invente orientação jurídica.
+- NÃO diga que determinada conduta "sempre" gera indenização.
+- NÃO diga que determinada conduta "nunca" gera responsabilidade.
+- NÃO faça promessa de resultado judicial.
+- NÃO crie jurisprudência apenas para tornar o artigo mais convincente.
 
-Se uma informa\u00e7\u00e3o n\u00e3o puder ser confirmada, marque-a como:
-"INFORMA\u00c7\u00c3O N\u00c3O CONFIRMADA - N\u00c3O PUBLICAR".
+Se uma informação não puder ser confirmada, marque-a como:
+"INFORMAÇÃO NÃO CONFIRMADA - NÃO PUBLICAR".
 
-Jurisprud\u00eancia somente pode ser utilizada quando houver dados verific\u00e1veis
+Jurisprudência somente pode ser utilizada quando houver dados verificáveis
 e uma fonte correspondente.
 
-N\u00e3o utilizar blogs jur\u00eddicos desconhecidos como autoridade jur\u00eddica.
+Não utilizar blogs jurídicos desconhecidos como autoridade jurídica.
 
-O objetivo da pesquisa n\u00e3o \u00e9 produzir o artigo.
-\u00c9 produzir uma base de fatos verific\u00e1veis para posterior reda\u00e7\u00e3o e auditoria.
+O objetivo da pesquisa não é produzir o artigo.
+É produzir uma base de fatos verificáveis para posterior redação e auditoria.
 `;
 }
 
@@ -375,26 +375,26 @@ async function createResearch(topic) {
   const jusbrasil = await searchJusbrasil(topic);
 
   const system = `
-Voc\u00ea \u00e9 um pesquisador jur\u00eddico extremamente conservador.
+Você é um pesquisador jurídico extremamente conservador.
 
-Sua fun\u00e7\u00e3o \u00e9 fazer curadoria factual antes da produ\u00e7\u00e3o de um artigo sobre Direito Digital.
+Sua função é fazer curadoria factual antes da produção de um artigo sobre Direito Digital.
 
-Voc\u00ea N\u00c3O deve escrever o artigo.
+Você NÃO deve escrever o artigo.
 
-Voc\u00ea deve separar:
+Você deve separar:
 
-- legisla\u00e7\u00e3o;
+- legislação;
 - dispositivos legais;
-- princ\u00edpios constitucionais;
-- conceitos jur\u00eddicos;
-- jurisprud\u00eancia verific\u00e1vel;
-- informa\u00e7\u00f5es que n\u00e3o puderam ser confirmadas.
+- princípios constitucionais;
+- conceitos jurídicos;
+- jurisprudência verificável;
+- informações que não puderam ser confirmadas.
 
-N\u00e3o invente absolutamente nenhuma informa\u00e7\u00e3o.
+Não invente absolutamente nenhuma informação.
 
-Quando houver d\u00favida, diga que a informa\u00e7\u00e3o n\u00e3o foi confirmada.
+Quando houver dúvida, diga que a informação não foi confirmada.
 
-Nunca complete n\u00fameros de artigos, processos ou decis\u00f5es por mem\u00f3ria.
+Nunca complete números de artigos, processos ou decisões por memória.
 
 ${buildLegalResearchInstructions(topic)}
 `;
@@ -409,10 +409,10 @@ Material obtido do Jusbrasil:
 FONTE:
 ${jusbrasil.url}
 
-CONTE\u00daDO:
+CONTEÚDO:
 ${jusbrasil.content}
 
-Retorne exclusivamente JSON v\u00e1lido neste formato:
+Retorne exclusivamente JSON válido neste formato:
 
 {
   "topic": "...",
@@ -441,10 +441,10 @@ Retorne exclusivamente JSON v\u00e1lido neste formato:
   "warnings": []
 }
 
-Se n\u00e3o houver jurisprud\u00eancia suficientemente verific\u00e1vel,
+Se não houver jurisprudência suficientemente verificável,
 retorne "jurisprudence": [].
 
-N\u00e3o invente fontes.
+Não invente fontes.
 `;
 
   return extractJson(
@@ -460,26 +460,26 @@ N\u00e3o invente fontes.
 
 function buildArticleSystemPrompt() {
   return `
-Voc\u00ea \u00e9 o redator jur\u00eddico especializado em Direito Digital do escrit\u00f3rio
+Você é o redator jurídico especializado em Direito Digital do escritório
 Lisomar Barbosa Advogados.
 
 SITE:
 https://www.lisomarbarbosa.adv.br
 
-Seu trabalho \u00e9 produzir conte\u00fado jur\u00eddico informativo, rigoroso,
-respons\u00e1vel e verific\u00e1vel.
+Seu trabalho é produzir conteúdo jurídico informativo, rigoroso,
+responsável e verificável.
 
 ESPECIALIDADE CENTRAL:
 DIREITO DIGITAL.
 
-REGRA MAIS IMPORTANTE: N\u00c3O INVENTAR.
+REGRA MAIS IMPORTANTE: NÃO INVENTAR.
 
-N\u00e3o invente leis, artigos, incisos, jurisprud\u00eancia, n\u00fameros de processos,
-decis\u00f5es, tribunais, nomes de magistrados, datas de julgamentos, s\u00famulas,
-precedentes, entendimentos atribu\u00eddos a tribunais, obriga\u00e7\u00f5es que n\u00e3o
-estejam previstas em lei, direitos que n\u00e3o possam ser sustentados juridicamente.
+Não invente leis, artigos, incisos, jurisprudência, números de processos,
+decisões, tribunais, nomes de magistrados, datas de julgamentos, súmulas,
+precedentes, entendimentos atribuídos a tribunais, obrigações que não
+estejam previstas em lei, direitos que não possam ser sustentados juridicamente.
 
-SEO deve ser consequ\u00eancia da qualidade do conte\u00fado, n\u00e3o o contr\u00e1rio.
+SEO deve ser consequência da qualidade do conteúdo, não o contrário.
 `;
 }
 
@@ -492,15 +492,15 @@ https://www.lisomarbarbosa.adv.br
 TEMA:
 ${topic}
 
-O artigo precisa ter NO M\u00cdNIMO ${MIN_WORDS} palavras.
+O artigo precisa ter NO MÍNIMO ${MIN_WORDS} palavras.
 
 Antes de aceitar o artigo, conte as palavras.
 
 Se tiver menos de ${MIN_WORDS} palavras, reescreva e amplie.
 
-FORMATO DE SA\u00cdDA:
+FORMATO DE SAÍDA:
 
-Retorne exclusivamente JSON v\u00e1lido:
+Retorne exclusivamente JSON válido:
 
 {
   "title": "...",
@@ -512,14 +512,14 @@ Retorne exclusivamente JSON v\u00e1lido:
 
 O campo content deve conter Markdown puro.
 
-BASE DA CURADORIA JUR\u00cdDICA:
+BASE DA CURADORIA JURÍDICA:
 
 ${JSON.stringify(research, null, 2)}
 `;
 }
 
 async function generateArticle(topic, research) {
-  log("\uD83E\uDD16 Gerando artigo jur\u00eddico...");
+  log("🤖 Gerando artigo jurídico...");
 
   return extractJson(
     await callOpenRouter(
@@ -533,17 +533,17 @@ async function generateArticle(topic, research) {
 }
 
 async function expandArticle(article, research) {
-  log("\uD83E\uDD16 Artigo abaixo do m\u00ednimo. Solicitando expans\u00e3o...");
+  log("🤖 Artigo abaixo do mínimo. Solicitando expansão...");
 
   const prompt = `
 O artigo abaixo possui menos de ${MIN_WORDS} palavras.
 
-N\u00e3o altere a tese jur\u00eddica central.
+Não altere a tese jurídica central.
 
-N\u00e3o invente novas leis, jurisprud\u00eancia, decis\u00f5es ou processos.
+Não invente novas leis, jurisprudência, decisões ou processos.
 
-Amplie o artigo somente desenvolvendo explica\u00e7\u00f5es, fundamentos,
-distin\u00e7\u00f5es, exemplos hip\u00f3teticos e consequ\u00eancias poss\u00edveis.
+Amplie o artigo somente desenvolvendo explicações, fundamentos,
+distinções, exemplos hipotéticos e consequências possíveis.
 
 Base de pesquisa:
 
@@ -576,11 +576,11 @@ Retorne exclusivamente JSON:
 }
 
 async function auditArticle(article, research) {
-  log("\u2696\uFE0F Iniciando auditoria jur\u00eddica independente...");
+  log("⚖️ Iniciando auditoria jurídica independente...");
 
   const prompt = `
-Voc\u00ea \u00e9 o revisor jur\u00eddico respons\u00e1vel por impedir a publica\u00e7\u00e3o de
-informa\u00e7\u00f5es jur\u00eddicas falsas.
+Você é o revisor jurídico responsável por impedir a publicação de
+informações jurídicas falsas.
 
 Analise o artigo abaixo.
 
@@ -613,7 +613,7 @@ Retorne exclusivamente:
       [
         {
           role: "system",
-          content: `Voc\u00ea \u00e9 um auditor jur\u00eddico conservador. Quando n\u00e3o puder confirmar, marque como FAIL.`
+          content: `Você é um auditor jurídico conservador. Quando não puder confirmar, marque como FAIL.`
         },
         { role: "user", content: prompt }
       ],
@@ -633,7 +633,7 @@ async function verifyLinks(content) {
     return [];
   }
 
-  log(`\uD83D\uDD17 Verificando ${uniqueUrls.length} link(s)...`);
+  log(`🔗 Verificando ${uniqueUrls.length} link(s)...`);
 
   const results = [];
 
@@ -667,14 +667,14 @@ async function verifyLinks(content) {
 
 function validateArticleStructure(article) {
   if (!article || typeof article !== "object") {
-    throw new Error("Objeto de artigo inv\u00e1lido.");
+    throw new Error("Objeto de artigo inválido.");
   }
 
   const required = ["title", "excerpt", "slug", "category", "content"];
 
   for (const field of required) {
     if (!article[field] || typeof article[field] !== "string") {
-      throw new Error(`Campo obrigat\u00f3rio ausente ou inv\u00e1lido: ${field}`);
+      throw new Error(`Campo obrigatório ausente ou inválido: ${field}`);
     }
   }
 
@@ -682,7 +682,7 @@ function validateArticleStructure(article) {
 
   if (words < MIN_WORDS) {
     throw new Error(
-      `Artigo possui apenas ${words} palavras. M\u00ednimo: ${MIN_WORDS}.`
+      `Artigo possui apenas ${words} palavras. Mínimo: ${MIN_WORDS}.`
     );
   }
 
@@ -735,7 +735,7 @@ function buildPostObject(article, imageUrl, date) {
 }
 
 async function updateBlogFile(article, imageUrl, date) {
-  log("\uD83D\uDCDD Atualizando src/data/blog.ts...");
+  log("📝 Atualizando src/data/blog.ts...");
 
   const original = await readFile(BLOG_FILE, "utf8");
 
@@ -743,7 +743,7 @@ async function updateBlogFile(article, imageUrl, date) {
 
   if (removeExistingSlug(original, slug)) {
     throw new Error(
-      `O slug "${slug}" j\u00e1 existe em blog.ts. Publica\u00e7\u00e3o cancelada para evitar duplica\u00e7\u00e3o.`
+      `O slug "${slug}" já existe em blog.ts. Publicação cancelada para evitar duplicação.`
     );
   }
 
@@ -753,7 +753,7 @@ async function updateBlogFile(article, imageUrl, date) {
 
   if (arrayStart === -1) {
     throw new Error(
-      "N\u00e3o foi encontrado o in\u00edcio do array blogPosts."
+      "Não foi encontrado o início do array blogPosts."
     );
   }
 
@@ -764,11 +764,11 @@ async function updateBlogFile(article, imageUrl, date) {
 
   await writeFile(BLOG_FILE, updated, "utf8");
 
-  log("\u2705 blog.ts atualizado.");
+  log("✅ blog.ts atualizado.");
 }
 
 async function updateSitemap(slug, date) {
-  log("\uD83D\uDDFA\uFE0F Atualizando sitemap.xml...");
+  log("🗺️ Atualizando sitemap.xml...");
 
   const original = await readFile(SITEMAP_FILE, "utf8");
 
@@ -776,7 +776,7 @@ async function updateSitemap(slug, date) {
     `https://www.lisomarbarbosa.adv.br/blog/${slug}`;
 
   if (original.includes(`<loc>${loc}</loc>`)) {
-    log("\u26A0\uFE0F URL j\u00e1 existe no sitemap. Nenhuma duplica\u00e7\u00e3o ser\u00e1 criada.");
+    log("⚠️ URL já existe no sitemap. Nenhuma duplicação será criada.");
     return;
   }
 
@@ -794,7 +794,7 @@ async function updateSitemap(slug, date) {
   const index = original.lastIndexOf(closingTag);
 
   if (index === -1) {
-    throw new Error("Tag </urlset> n\u00e3o encontrada no sitemap.");
+    throw new Error("Tag </urlset> não encontrada no sitemap.");
   }
 
   const updated =
@@ -804,14 +804,14 @@ async function updateSitemap(slug, date) {
 
   await writeFile(SITEMAP_FILE, updated, "utf8");
 
-  log("\u2705 sitemap.xml atualizado.");
+  log("✅ sitemap.xml atualizado.");
 }
 
 async function getUnsplashImage(topic) {
-  log("\uD83D\uDDBC\uFE0F Buscando imagem no Unsplash...");
+  log("🖼️ Buscando imagem no Unsplash...");
 
   if (!process.env.UNSPLASH_ACCESS_KEY) {
-    log("\u26A0\uFE0F UNSPLASH_ACCESS_KEY ausente. Usando fallback.");
+    log("⚠️ UNSPLASH_ACCESS_KEY ausente. Usando fallback.");
     return FALLBACK_IMAGE;
   }
 
@@ -840,9 +840,9 @@ async function getUnsplashImage(topic) {
       return data.urls.regular;
     }
 
-    throw new Error("Unsplash n\u00e3o retornou urls.regular.");
+    throw new Error("Unsplash não retornou urls.regular.");
   } catch (error) {
-    log(`\u26A0\uFE0F Unsplash falhou: ${error.message}`);
+    log(`⚠️ Unsplash falhou: ${error.message}`);
     return FALLBACK_IMAGE;
   }
 }
@@ -853,57 +853,57 @@ async function main() {
 
   try {
     log("==========================================");
-    log("\u2696\uFE0F LISOMAR BARBOSA ADVOGADOS");
-    log("\uD83D\uDCBB GERADOR DE CONTE\u00daDO - DIREITO DIGITAL");
+    log("⚖️ LISOMAR BARBOSA ADVOGADOS");
+    log("💻 GERADOR DE CONTEÚDO - DIREITO DIGITAL");
     log("==========================================");
 
     const date = getToday();
     const topic = chooseTopic();
 
-    log(`\uD83D\uDCC5 Data: ${date}`);
-    log(`\uD83C\uDFAF Tema: ${topic}`);
+    log(`📅 Data: ${date}`);
+    log(`🎯 Tema: ${topic}`);
 
     originalBlog = await readFile(BLOG_FILE, "utf8");
     originalSitemap = await readFile(SITEMAP_FILE, "utf8");
 
     const research = await createResearch(topic);
 
-    log("\u2705 Curadoria jur\u00eddica conclu\u00edda.");
+    log("✅ Curadoria jurídica concluída.");
 
     let article = await generateArticle(topic, research);
 
     let words = validateArticleStructure(article);
 
-    log(`\uD83D\uDCCA Artigo inicial: ${words} palavras.`);
+    log(`📊 Artigo inicial: ${words} palavras.`);
 
     if (words < MIN_WORDS) {
       article = await expandArticle(article, research);
       words = validateArticleStructure(article);
-      log(`\uD83D\uDCCA Artigo ap\u00f3s expans\u00e3o: ${words} palavras.`);
+      log(`📊 Artigo após expansão: ${words} palavras.`);
     }
 
     if (words < MIN_WORDS) {
       throw new Error(
-        `Artigo rejeitado: ${words} palavras. M\u00ednimo exigido: ${MIN_WORDS}.`
+        `Artigo rejeitado: ${words} palavras. Mínimo exigido: ${MIN_WORDS}.`
       );
     }
 
     const audit = await auditArticle(article, research);
 
     if (!audit || audit.status !== "PASS") {
-      log("\u274C Auditoria jur\u00eddica reprovou o conte\u00fado.");
+      log("❌ Auditoria jurídica reprovou o conteúdo.");
       console.error(JSON.stringify(audit, null, 2));
-      throw new Error("O artigo n\u00e3o passou na auditoria jur\u00eddica.");
+      throw new Error("O artigo não passou na auditoria jurídica.");
     }
 
-    log("\u2705 Auditoria jur\u00eddica aprovada.");
+    log("✅ Auditoria jurídica aprovada.");
 
     const links = await verifyLinks(article.content);
     const brokenLinks = links.filter(item => !item.ok);
 
     if (brokenLinks.length > 0) {
       throw new Error(
-        `Existem ${brokenLinks.length} link(s) que n\u00e3o puderam ser verificados.`
+        `Existem ${brokenLinks.length} link(s) que não puderam ser verificados.`
       );
     }
 
@@ -913,16 +913,16 @@ async function main() {
     await updateBlogFile(article, image, date);
     await updateSitemap(slug, date);
 
-    log("\uD83D\uDE80 Conte\u00fado pronto para commit.");
-    log(`\uD83D\uDCCC T\u00edtulo: ${article.title}`);
-    log(`\uD83D\uDD17 Slug: ${slug}`);
-    log(`\uD83D\uDCCA Palavras: ${words}`);
+    log("🚀 Conteúdo pronto para commit.");
+    log(`📌 Título: ${article.title}`);
+    log(`🔗 Slug: ${slug}`);
+    log(`📊 Palavras: ${words}`);
     log("==========================================");
-    log("\u2705 PROCESSO CONCLU\u00cdDO COM SUCESSO");
+    log("✅ PROCESSO CONCLUÍDO COM SUCESSO");
     log("==========================================");
   } catch (error) {
     log("==========================================");
-    log("\u274C ERRO NO WORKFLOW");
+    log("❌ ERRO NO WORKFLOW");
     log("==========================================");
     console.error(error);
 
@@ -935,9 +935,9 @@ async function main() {
         await writeFile(SITEMAP_FILE, originalSitemap, "utf8");
       }
 
-      log("\u21A9\uFE0F Rollback de seguran\u00e7a realizado.");
+      log("↩️ Rollback de segurança realizado.");
     } catch (rollbackError) {
-      console.error("\u274C Falha durante rollback:", rollbackError);
+      console.error("❌ Falha durante rollback:", rollbackError);
     }
 
     process.exit(1);
