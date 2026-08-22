@@ -19,24 +19,22 @@ const UNSPLASH_URL =
   "https://api.unsplash.com/photos/random";
 
 /**
- * Cadeia de modelos gratuitos do OpenRouter.
- * O primeiro é o titular (maior capacidade).
- * Os demais são fallbacks acionados em sequência caso o anterior falhe.
- * Atualizado em ago/2026 — slugs verificados no OpenRouter.
+ * Cadeia de modelos do OpenRouter.
+ * Atualizada em ago/2026 — verificada na API de modelos disponíveis.
+ * Ordem: maior capacidade → menor capacidade.
+ * Todos testados como gratuitos ou de baixo custo.
  */
 const MODELS = [
-  "meta-llama/llama-3.3-70b-instruct:free",           // titular – Llama 3.3 70B (estável)
-  "meta-llama/llama-3.1-8b-instruct:free",            // fallback 1 – Llama 3.1 8B
-  "google/gemma-3-27b-it:free",                        // fallback 2 – Gemma 3 27B
-  "google/gemma-3-12b-it:free",                        // fallback 3 – Gemma 3 12B
-  "google/gemma-2-9b-it:free",                         // fallback 4 – Gemma 2 9B
-  "mistralai/mistral-7b-instruct:free",                // fallback 5 – Mistral 7B
-  "mistralai/mistral-small-3.1-24b-instruct:free",    // fallback 6 – Mistral Small 3.1 24B
-  "qwen/qwen2.5-72b-instruct:free",                   // fallback 7 – Qwen 2.5 72B
-  "qwen/qwen2.5-7b-instruct:free",                    // fallback 8 – Qwen 2.5 7B
-  "deepseek/deepseek-r1-distill-llama-70b:free",      // fallback 9 – DeepSeek R1 Distill 70B
-  "deepseek/deepseek-chat-v3-0324:free",              // fallback 10 – DeepSeek Chat V3
-  "microsoft/phi-3-medium-128k-instruct:free",        // fallback 11 – Phi-3 Medium 128K
+  "deepseek/deepseek-chat-v3-0324:free",              // DeepSeek Chat V3 (estável ago/2026)
+  "deepseek/deepseek-r1-distill-llama-70b:free",      // DeepSeek R1 Distill 70B
+  "meta-llama/llama-3.3-70b-instruct:free",           // Llama 3.3 70B
+  "meta-llama/llama-3.1-8b-instruct:free",            // Llama 3.1 8B
+  "qwen/qwen2.5-72b-instruct:free",                   // Qwen 2.5 72B
+  "qwen/qwen2.5-7b-instruct:free",                    // Qwen 2.5 7B
+  "mistralai/mistral-7b-instruct:free",               // Mistral 7B
+  "mistralai/mistral-small-3.1-24b-instruct:free",    // Mistral Small 3.1 24B
+  "microsoft/phi-3-medium-128k-instruct:free",        // Phi-3 Medium 128K
+  "google/gemma-2-9b-it:free",                        // Gemma 2 9B
 ];
 
 const FALLBACK_IMAGE =
@@ -178,6 +176,52 @@ function extractJson(text) {
 }
 
 /**
+ * Verifica disponibilidade da API antes de iniciar.
+ * Retorna lista de modelos disponíveis para diagnóstico.
+ */
+async function checkApiKey() {
+  if (!process.env.OPENROUTER_API_KEY) {
+    throw new Error("OPENROUTER_API_KEY não está definida nos secrets do repositório.");
+  }
+
+  log(`🔑 OPENROUTER_API_KEY encontrada (${process.env.OPENROUTER_API_KEY.length} chars).`);
+
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/models", {
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      log(`⚠️ Não foi possível listar modelos disponíveis: HTTP ${response.status}`);
+      return;
+    }
+
+    const data = await response.json();
+    const available = (data.data || []).map(m => m.id);
+    const freeAvailable = available.filter(id => id.endsWith(":free"));
+
+    log(`📋 Modelos gratuitos disponíveis na conta: ${freeAvailable.length}`);
+
+    const configured = MODELS.filter(m => available.includes(m));
+    const missing = MODELS.filter(m => !available.includes(m));
+
+    if (configured.length > 0) {
+      log(`✅ Modelos configurados e disponíveis: ${configured.join(", ")}`);
+    }
+    if (missing.length > 0) {
+      log(`⚠️ Modelos configurados mas INDISPONÍVEIS: ${missing.join(", ")}`);
+    }
+
+    return configured;
+  } catch (err) {
+    log(`⚠️ Erro ao verificar modelos disponíveis: ${err.message}`);
+  }
+}
+
+/**
  * Tenta a chamada no modelo fornecido.
  * Lança erro se HTTP não-ok ou sem conteúdo.
  */
@@ -232,26 +276,29 @@ async function callModel(messages, model, temperature = 0.2) {
  */
 async function callOpenRouter(messages, temperature = 0.2) {
   if (process.env.CUSTOM_MODEL) {
+    log(`🤖 Usando modelo customizado: ${process.env.CUSTOM_MODEL}`);
     return callModel(messages, process.env.CUSTOM_MODEL, temperature);
   }
 
   const chain = [...MODELS];
   let lastError;
+  let attemptCount = 0;
 
   for (const model of chain) {
+    attemptCount++;
     try {
-      log(`🤖 Tentando modelo: ${model}`);
+      log(`🤖 [${attemptCount}/${chain.length}] Tentando modelo: ${model}`);
       const result = await callModel(messages, model, temperature);
       log(`✅ Modelo usado com sucesso: ${model}`);
       return result;
     } catch (error) {
-      log(`⚠️ Modelo ${model} falhou: ${error.message}`);
+      log(`⚠️ Modelo ${model} falhou (${error.message.slice(0, 120)})`);
       lastError = error;
     }
   }
 
   throw new Error(
-    `Todos os modelos falharam. Último erro: ${lastError?.message}`
+    `Todos os ${chain.length} modelos falharam. Último erro: ${lastError?.message}`
   );
 }
 
@@ -862,6 +909,9 @@ async function main() {
 
     log(`📅 Data: ${date}`);
     log(`🎯 Tema: ${topic}`);
+
+    // Diagnóstico da API antes de iniciar
+    await checkApiKey();
 
     originalBlog = await readFile(BLOG_FILE, "utf8");
     originalSitemap = await readFile(SITEMAP_FILE, "utf8");
