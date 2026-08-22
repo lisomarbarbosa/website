@@ -28,25 +28,24 @@ const MAX_ATTEMPTS = 10;
  * Todos confirmados gratuitos em agosto/2026.
  * Ref: openrouter.ai/models?order=newest&supported_parameters=free
  *
- * IMPORTANTE: use sempre o sufixo :free para garantir acesso gratuito.
- * Modelos sem :free podem exigir créditos pagos.
+ * IMPORTANTE: use SEMPRE o sufixo :free para garantir acesso gratuito.
+ * Modelos sem :free podem exigir créditos pagos e retornar HTTP 404.
  */
 const MODELS = [
-  // Meta Llama — flagship gratuito mais robusto
+  // Meta Llama — flagship gratuito mais robusto (português excelente)
   "meta-llama/llama-3.3-70b-instruct:free",
   "meta-llama/llama-3.1-8b-instruct:free",
-  // DeepSeek — excelente para texto longo e raciocínio
+  // DeepSeek — excelente para texto longo e raciocínio jurídico
   "deepseek/deepseek-chat-v3-0324:free",
   "deepseek/deepseek-r1-0528:free",
-  // Google Gemma — modelos leves e confiáveis
-  "google/gemma-3-27b-it:free",
-  "google/gemma-3-12b-it:free",
-  "google/gemma-3-4b-it:free",
+  // Qwen — forte em multilíngue e textos longos
+  "qwen/qwen3-14b:free",
+  "qwen/qwen3-8b:free",
   // Mistral — boa capacidade de texto em português
   "mistralai/mistral-7b-instruct:free",
-  // Qwen — forte em multilíngue
-  "qwen/qwen3-8b:free",
-  "qwen/qwen3-14b:free",
+  // Google Gemma — apenas versões confirmadas gratuitas
+  "google/gemma-3-12b-it:free",
+  "google/gemma-3-4b-it:free",
   // Microsoft Phi — modelo compacto de emergência
   "microsoft/phi-3-mini-128k-instruct:free",
 ];
@@ -253,13 +252,13 @@ function reconstructJsonWithContent(text) {
   const result = {};
   for (const field of fields) {
     const strMatch = src.match(
-      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`,"s")
+      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`, "s")
     );
     if (strMatch) {
       try { result[field] = JSON.parse(`"${strMatch[1]}"`); } catch (_) { result[field] = strMatch[1]; }
       continue;
     }
-    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\[\\{])`));
+    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\\[\\{])`));
     if (arrObjMatch) {
       const opener = arrObjMatch[1];
       const closer = opener === "[" ? "]" : "}";
