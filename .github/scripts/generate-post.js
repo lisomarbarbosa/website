@@ -24,18 +24,17 @@ const UNSPLASH_URL =
  * Os demais são fallbacks acionados em sequência caso o anterior falhe.
  */
 const MODELS = [
-  "google/gemma-3-27b-it:free",           // titular  – melhor qualidade
-  "google/gemma-3-12b-it:free",           // fallback 1
-  "google/gemma-3-4b-it:free",            // fallback 2
-  "meta-llama/llama-3.3-70b-instruct:free", // fallback 3
-  "meta-llama/llama-3.1-8b-instruct:free",  // fallback 4
-  "meta-llama/llama-3.2-3b-instruct:free",  // fallback 5
-  "mistralai/mistral-7b-instruct:free",   // fallback 6
-  "microsoft/phi-3-mini-128k-instruct:free", // fallback 7
-  "deepseek/deepseek-r1-0528:free",       // fallback 8
-  "deepseek/deepseek-chat-v3-0324:free",  // fallback 9
-  "qwen/qwen3-8b:free",                   // fallback 10
-  "qwen/qwen3-14b:free",                  // fallback 11
+  "meta-llama/llama-3.3-70b-instruct:free",  // titular  – melhor qualidade gratuita
+  "meta-llama/llama-3.1-8b-instruct:free",   // fallback 1
+  "mistralai/mistral-7b-instruct:free",      // fallback 2
+  "deepseek/deepseek-r1-0528:free",          // fallback 3
+  "deepseek/deepseek-chat-v3-0324:free",     // fallback 4
+  "qwen/qwen3-14b:free",                     // fallback 5
+  "qwen/qwen3-8b:free",                      // fallback 6
+  "google/gemma-3-12b-it:free",              // fallback 7
+  "google/gemma-3-4b-it:free",               // fallback 8
+  "meta-llama/llama-3.2-3b-instruct:free",   // fallback 9
+  "microsoft/phi-3-mini-128k-instruct:free", // fallback 10
 ];
 
 const FALLBACK_IMAGE =
