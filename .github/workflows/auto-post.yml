@@ -11,9 +11,9 @@ on:
         required: false
         type: string
       modelo_ia:
-        description: "Modelo OpenRouter"
+        description: "Modelo OpenRouter (deixe vazio para usar cadeia de fallback automática)"
         required: false
-        default: "google/gemma-3-27b-it:free"
+        default: ""
         type: string
 
 permissions:
@@ -29,7 +29,8 @@ jobs:
       UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CUSTOM_TOPIC: ${{ inputs.tema }}
-      CUSTOM_MODEL: ${{ inputs.modelo_ia }}
+      # CUSTOM_MODEL só é definido se o usuário preencheu o campo — evita sobrescrever o fallback automático
+      CUSTOM_MODEL: ${{ inputs.modelo_ia != '' && inputs.modelo_ia || '' }}
 
     steps:
       - name: 📥 Checkout repository
