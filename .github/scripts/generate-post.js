@@ -32,22 +32,26 @@ const MAX_ATTEMPTS = 10;
  * Modelos sem :free podem exigir créditos pagos e retornar HTTP 404.
  */
 const MODELS = [
-  // Meta Llama — flagship gratuito mais robusto (português excelente)
+  // NVIDIA Nemotron 3 Ultra — maior capacidade gratuita disponível (1M ctx)
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
+  // NVIDIA Nemotron 3 Super — forte em raciocínio jurídico e JSON
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  // Google Gemma 4 31B — multilíngue, excelente para português
+  "google/gemma-4-31b-it:free",
+  // Google Gemma 4 26B MoE — versão menor, rápida e gratuita
+  "google/gemma-4-26b-a4b-it:free",
+  // OpenAI gpt-oss-120b — modelo open-weight de uso geral robusto
+  "openai/gpt-oss-120b:free",
+  // OpenAI gpt-oss-20b — fallback mais leve do gpt-oss
+  "openai/gpt-oss-20b:free",
+  // Qwen3 Next 80B — forte em RAG e workflows multilíngues longos
+  "qwen/qwen3-next-80b-a3b-instruct:free",
+  // Meta Llama 3.3 70B — modelo mais estável e estabelecido (desde dez/2024)
   "meta-llama/llama-3.3-70b-instruct:free",
-  "meta-llama/llama-3.1-8b-instruct:free",
-  // DeepSeek — excelente para texto longo e raciocínio jurídico
-  "deepseek/deepseek-chat-v3-0324:free",
-  "deepseek/deepseek-r1-0528:free",
-  // Qwen — forte em multilíngue e textos longos
-  "qwen/qwen3-14b:free",
-  "qwen/qwen3-8b:free",
-  // Mistral — boa capacidade de texto em português
-  "mistralai/mistral-7b-instruct:free",
-  // Google Gemma — apenas versões confirmadas gratuitas
-  "google/gemma-3-12b-it:free",
-  "google/gemma-3-4b-it:free",
-  // Microsoft Phi — modelo compacto de emergência
-  "microsoft/phi-3-mini-128k-instruct:free",
+  // Poolside Laguna S 2.1 — bom desempenho geral em texto estruturado
+  "poolside/laguna-s-2.1:free",
+  // NVIDIA Nemotron 3 Nano — fallback eficiente para tarefas gerais
+  "nvidia/nemotron-3-nano-30b-a3b:free",
 ];
 
 const FALLBACK_IMAGE =
@@ -258,7 +262,7 @@ function reconstructJsonWithContent(text) {
       try { result[field] = JSON.parse(`"${strMatch[1]}"`); } catch (_) { result[field] = strMatch[1]; }
       continue;
     }
-    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\\[\\{])`));
+    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\[{])`));
     if (arrObjMatch) {
       const opener = arrObjMatch[1];
       const closer = opener === "[" ? "]" : "}";
