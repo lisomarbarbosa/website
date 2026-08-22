@@ -146,35 +146,244 @@ function cleanMarkdown(text) {
   return value;
 }
 
+/**
+ * Sanitiza o conteúdo Markdown dentro de um objeto JSON bruto.
+ *
+ * Problema: modelos grandes (Nemotron 550B, etc.) frequentemente retornam
+ * o campo "content" com blocos de código Markdown que contêm backticks triplos
+ * (```), o que quebra o JSON porque esses backticks não são escapados.
+ *
+ * Estratégia:
+ * 1. Tenta JSON.parse direto (já funciona se o modelo retornou JSON limpo).
+ * 2. Remove envoltório de bloco de código (```json ... ```).
+ * 3. Extrai o primeiro { ... } balanceado do texto (robusto para prefixos e sufixos).
+ * 4. Aplica sanitização linha-a-linha: dentro do valor do campo "content",
+ *    escapa backticks e aspas duplas não escapadas.
+ * 5. Tenta reconstruir o JSON substituindo o valor do campo "content"
+ *    por uma versão segura extraída via regex não-greedy.
+ *
+ * @param {string} text - Resposta bruta do modelo.
+ * @returns {object} - Objeto JSON parseado.
+ * @throws {Error} - Se nenhuma estratégia funcionar.
+ */
 function extractJson(text) {
   const cleaned = normalizeText(text);
 
+  // Estratégia 1: parse direto
   try {
     return JSON.parse(cleaned);
   } catch (_) {}
 
-  const fenced = cleaned.match(
-    /```json\s*([\s\S]*?)```/i
-  );
-
+  // Estratégia 2: remover bloco de código ```json ... ```
+  const fenced = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fenced) {
     try {
-      return JSON.parse(fenced[1]);
+      return JSON.parse(fenced[1].trim());
     } catch (_) {}
   }
 
-  const start = cleaned.indexOf("{");
-  const end = cleaned.lastIndexOf("}");
-
-  if (start !== -1 && end !== -1 && end > start) {
+  // Estratégia 3: extrair { ... } balanceado
+  const balanced = extractBalancedJson(cleaned);
+  if (balanced !== null) {
     try {
-      return JSON.parse(cleaned.slice(start, end + 1));
+      return JSON.parse(balanced);
+    } catch (_) {}
+
+    // Estratégia 4: sanitizar o campo "content" e tentar novamente
+    try {
+      const sanitized = sanitizeContentField(balanced);
+      return JSON.parse(sanitized);
     } catch (_) {}
   }
+
+  // Estratégia 5: reconstrução cirúrgica do campo "content"
+  try {
+    return reconstructJsonWithContent(cleaned);
+  } catch (_) {}
 
   throw new Error(
     "A IA não retornou um JSON válido."
   );
+}
+
+/**
+ * Extrai o JSON balanceado mais externo de uma string.
+ * Conta abertura/fechamento de chaves para encontrar o objeto completo.
+ */
+function extractBalancedJson(text) {
+  const start = text.indexOf("{");
+  if (start === -1) return null;
+
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i];
+
+    if (escape) {
+      escape = false;
+      continue;
+    }
+
+    if (ch === "\\") {
+      escape = true;
+      continue;
+    }
+
+    if (ch === '"') {
+      inString = !inString;
+      continue;
+    }
+
+    if (inString) continue;
+
+    if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) {
+        return text.slice(start, i + 1);
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Sanitiza o campo "content" dentro de um JSON bruto.
+ *
+ * Identifica o valor do campo "content" (que pode conter Markdown com
+ * backticks e newlines literais) e o substitui por uma versão segura
+ * onde newlines são \n e backticks são escapados.
+ */
+function sanitizeContentField(jsonStr) {
+  // Localiza o início do valor de "content"
+  const contentKeyMatch = jsonStr.match(/"content"\s*:\s*"/);
+  if (!contentKeyMatch) return jsonStr;
+
+  const valueStart = jsonStr.indexOf(contentKeyMatch[0]) + contentKeyMatch[0].length;
+
+  // Encontra o fim da string do valor, respeitando escapes
+  let i = valueStart;
+  let escape = false;
+  while (i < jsonStr.length) {
+    const ch = jsonStr[i];
+    if (escape) {
+      escape = false;
+      i++;
+      continue;
+    }
+    if (ch === "\\") {
+      escape = true;
+      i++;
+      continue;
+    }
+    if (ch === '"') {
+      break;
+    }
+    i++;
+  }
+
+  const rawValue = jsonStr.slice(valueStart, i);
+
+  // Sanitiza: escapa caracteres problemáticos
+  const safeValue = rawValue
+    .replace(/\\/g, "\\\\")      // escapa backslashes primeiro
+    .replace(/"/g, '\\"')        // escapa aspas duplas internas
+    .replace(/\n/g, "\\n")       // newlines literais → \n
+    .replace(/\r/g, "\\r")       // CR literais → \r
+    .replace(/\t/g, "\\t");      // tabs literais → \t
+
+  return (
+    jsonStr.slice(0, valueStart) +
+    safeValue +
+    jsonStr.slice(i)
+  );
+}
+
+/**
+ * Reconstrução cirúrgica: extrai cada campo do JSON pelo nome
+ * e monta um objeto manualmente quando o JSON está malformado
+ * mas os campos ainda são identificáveis.
+ */
+function reconstructJsonWithContent(text) {
+  // Remove envoltório de bloco de código se existir
+  let src = text.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
+
+  const fields = ["title", "excerpt", "slug", "category", "content",
+                  "status", "issues", "verified_claims", "unverified_claims",
+                  "topic", "legal_basis", "jurisprudence", "consumer_law",
+                  "civil_law", "criminal_law", "digital_law",
+                  "constitutional_basis", "unverified_information", "warnings"];
+
+  const result = {};
+
+  for (const field of fields) {
+    // Tenta extrair valor de string simples: "field": "..."
+    const strMatch = src.match(
+      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`, "s")
+    );
+    if (strMatch) {
+      try {
+        result[field] = JSON.parse(`"${strMatch[1]}"`);
+      } catch (_) {
+        result[field] = strMatch[1];
+      }
+      continue;
+    }
+
+    // Tenta extrair valor de array ou objeto: "field": [ ... ] ou { ... }
+    const arrObjMatch = src.match(
+      new RegExp(`"${field}"\\s*:\\s*([\\[\\{])`)
+    );
+    if (arrObjMatch) {
+      const opener = arrObjMatch[1];
+      const closer = opener === "[" ? "]" : "}";
+      const startIdx = src.indexOf(arrObjMatch[0]) + arrObjMatch[0].length - 1;
+      const extracted = extractBalancedBracket(src, startIdx, opener, closer);
+      if (extracted !== null) {
+        try {
+          result[field] = JSON.parse(extracted);
+        } catch (_) {
+          result[field] = [];
+        }
+      }
+      continue;
+    }
+  }
+
+  if (Object.keys(result).length === 0) {
+    throw new Error("Nenhum campo identificado na reconstrução.");
+  }
+
+  return result;
+}
+
+/**
+ * Extrai uma estrutura balanceada (array ou objeto) a partir de um índice.
+ */
+function extractBalancedBracket(text, startIdx, opener, closer) {
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+
+  for (let i = startIdx; i < text.length; i++) {
+    const ch = text[i];
+
+    if (escape) { escape = false; continue; }
+    if (ch === "\\") { escape = true; continue; }
+    if (ch === '"') { inString = !inString; continue; }
+    if (inString) continue;
+
+    if (ch === opener) depth++;
+    else if (ch === closer) {
+      depth--;
+      if (depth === 0) return text.slice(startIdx, i + 1);
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -541,6 +750,13 @@ precedentes, entendimentos atribuídos a tribunais, obrigações que não
 estejam previstas em lei, direitos que não possam ser sustentados juridicamente.
 
 SEO deve ser consequência da qualidade do conteúdo, não o contrário.
+
+REGRA DE FORMATAÇÃO CRÍTICA:
+O campo "content" deve conter APENAS texto Markdown simples.
+NÃO use blocos de código (não use \`\`\` em nenhum momento dentro do content).
+NÃO use aspas duplas literais dentro do content sem escapá-las com \\.
+Use apenas # ## ### para títulos, * para itálico, ** para negrito,
+- para listas. Nada além disso.
 `;
 }
 
@@ -571,7 +787,11 @@ Retorne exclusivamente JSON válido:
   "content": "..."
 }
 
-O campo content deve conter Markdown puro.
+REGRAS DO CAMPO content:
+- Markdown puro, SEM blocos de código (sem \`\`\`).
+- Newlines representadas como \\n dentro da string JSON.
+- Aspas duplas dentro do texto devem ser escapadas como \\".
+- NÃO inclua o JSON dentro de um bloco de código.
 
 BASE DA CURADORIA JURÍDICA:
 
@@ -623,6 +843,11 @@ Retorne exclusivamente JSON:
   "category": "Direito Digital",
   "content": "..."
 }
+
+REGRAS DO CAMPO content:
+- Markdown puro, SEM blocos de código (sem \`\`\`).
+- Newlines representadas como \\n dentro da string JSON.
+- Aspas duplas dentro do texto devem ser escapadas como \\".
 `;
 
   return extractJson(
