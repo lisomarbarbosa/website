@@ -18,11 +18,25 @@ const OPENROUTER_URL =
 const UNSPLASH_URL =
   "https://api.unsplash.com/photos/random";
 
-const DEFAULT_MODEL =
-  "google/gemma-3-27b-it:free";
-
-const FALLBACK_MODEL =
-  "meta-llama/llama-3.2-3b-instruct:free";
+/**
+ * Cadeia de modelos gratuitos do OpenRouter.
+ * O primeiro é o titular (maior capacidade).
+ * Os demais são fallbacks acionados em sequência caso o anterior falhe.
+ */
+const MODELS = [
+  "google/gemma-3-27b-it:free",           // titular  – melhor qualidade
+  "google/gemma-3-12b-it:free",           // fallback 1
+  "google/gemma-3-4b-it:free",            // fallback 2
+  "meta-llama/llama-3.3-70b-instruct:free", // fallback 3
+  "meta-llama/llama-3.1-8b-instruct:free",  // fallback 4
+  "meta-llama/llama-3.2-3b-instruct:free",  // fallback 5
+  "mistralai/mistral-7b-instruct:free",   // fallback 6
+  "microsoft/phi-3-mini-128k-instruct:free", // fallback 7
+  "deepseek/deepseek-r1-0528:free",       // fallback 8
+  "deepseek/deepseek-chat-v3-0324:free",  // fallback 9
+  "qwen/qwen3-8b:free",                   // fallback 10
+  "qwen/qwen3-14b:free",                  // fallback 11
+];
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
@@ -162,7 +176,11 @@ function extractJson(text) {
   );
 }
 
-async function callOpenRouter(messages, model, temperature = 0.2) {
+/**
+ * Tenta a chamada no modelo fornecido.
+ * Lança erro se HTTP não-ok ou sem conteúdo.
+ */
+async function callModel(messages, model, temperature = 0.2) {
   const response = await fetch(OPENROUTER_URL, {
     method: "POST",
     headers: {
@@ -183,7 +201,6 @@ async function callOpenRouter(messages, model, temperature = 0.2) {
 
   if (!response.ok) {
     const errorText = await response.text();
-
     throw new Error(
       `OpenRouter HTTP ${response.status}: ${errorText}`
     );
@@ -205,6 +222,36 @@ async function callOpenRouter(messages, model, temperature = 0.2) {
   }
 
   return content;
+}
+
+/**
+ * Percorre a lista MODELS em ordem.
+ * Se CUSTOM_MODEL estiver definido, usa apenas ele (sem fallback).
+ * Caso contrário, tenta cada modelo até obter resposta.
+ */
+async function callOpenRouter(messages, temperature = 0.2) {
+  if (process.env.CUSTOM_MODEL) {
+    return callModel(messages, process.env.CUSTOM_MODEL, temperature);
+  }
+
+  const chain = [...MODELS];
+  let lastError;
+
+  for (const model of chain) {
+    try {
+      log(`\uD83E\uDD16 Tentando modelo: ${model}`);
+      const result = await callModel(messages, model, temperature);
+      log(`\u2705 Modelo usado com sucesso: ${model}`);
+      return result;
+    } catch (error) {
+      log(`\u26A0\uFE0F Modelo ${model} falhou: ${error.message}`);
+      lastError = error;
+    }
+  }
+
+  throw new Error(
+    `Todos os modelos falharam. \u00daltimo erro: ${lastError?.message}`
+  );
 }
 
 async function fetchUrl(url) {
@@ -399,37 +446,15 @@ retorne "jurisprudence": [].
 N\u00e3o invente fontes.
 `;
 
-  const model =
-    process.env.CUSTOM_MODEL ||
-    DEFAULT_MODEL;
-
-  let raw;
-
-  try {
-    raw = await callOpenRouter(
+  return extractJson(
+    await callOpenRouter(
       [
         { role: "system", content: system },
         { role: "user", content: user }
       ],
-      model,
       0.1
-    );
-  } catch (error) {
-    log(
-      `\u26A0\uFE0F Modelo principal falhou na pesquisa: ${error.message}`
-    );
-
-    raw = await callOpenRouter(
-      [
-        { role: "system", content: system },
-        { role: "user", content: user }
-      ],
-      FALLBACK_MODEL,
-      0.1
-    );
-  }
-
-  return extractJson(raw);
+    )
+  );
 }
 
 function buildArticleSystemPrompt() {
@@ -495,38 +520,15 @@ ${JSON.stringify(research, null, 2)}
 async function generateArticle(topic, research) {
   log("\uD83E\uDD16 Gerando artigo jur\u00eddico...");
 
-  const system = buildArticleSystemPrompt();
-  const user = buildArticleUserPrompt(topic, research);
-
-  const model =
-    process.env.CUSTOM_MODEL ||
-    DEFAULT_MODEL;
-
-  let raw;
-
-  try {
-    raw = await callOpenRouter(
+  return extractJson(
+    await callOpenRouter(
       [
-        { role: "system", content: system },
-        { role: "user", content: user }
+        { role: "system", content: buildArticleSystemPrompt() },
+        { role: "user", content: buildArticleUserPrompt(topic, research) }
       ],
-      model,
       0.35
-    );
-  } catch (error) {
-    log(`\u26A0\uFE0F Modelo principal falhou: ${error.message}`);
-
-    raw = await callOpenRouter(
-      [
-        { role: "system", content: system },
-        { role: "user", content: user }
-      ],
-      FALLBACK_MODEL,
-      0.35
-    );
-  }
-
-  return extractJson(raw);
+    )
+  );
 }
 
 async function expandArticle(article, research) {
@@ -561,16 +563,15 @@ Retorne exclusivamente JSON:
 }
 `;
 
-  const raw = await callOpenRouter(
-    [
-      { role: "system", content: buildArticleSystemPrompt() },
-      { role: "user", content: prompt }
-    ],
-    process.env.CUSTOM_MODEL || DEFAULT_MODEL,
-    0.25
+  return extractJson(
+    await callOpenRouter(
+      [
+        { role: "system", content: buildArticleSystemPrompt() },
+        { role: "user", content: prompt }
+      ],
+      0.25
+    )
   );
-
-  return extractJson(raw);
 }
 
 async function auditArticle(article, research) {
@@ -606,19 +607,18 @@ Retorne exclusivamente:
 }
 `;
 
-  const raw = await callOpenRouter(
-    [
-      {
-        role: "system",
-        content: `Voc\u00ea \u00e9 um auditor jur\u00eddico conservador. Quando n\u00e3o puder confirmar, marque como FAIL.`
-      },
-      { role: "user", content: prompt }
-    ],
-    process.env.CUSTOM_MODEL || DEFAULT_MODEL,
-    0.05
+  return extractJson(
+    await callOpenRouter(
+      [
+        {
+          role: "system",
+          content: `Voc\u00ea \u00e9 um auditor jur\u00eddico conservador. Quando n\u00e3o puder confirmar, marque como FAIL.`
+        },
+        { role: "user", content: prompt }
+      ],
+      0.05
+    )
   );
-
-  return extractJson(raw);
 }
 
 async function verifyLinks(content) {
