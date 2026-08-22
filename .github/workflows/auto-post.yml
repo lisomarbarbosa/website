@@ -82,8 +82,6 @@ jobs:
         run: |
           echo "🔍 Verificando alterações em src/data/blog.ts e public/sitemap.xml..."
 
-          git diff --check
-
           BLOG_CHANGED=$(git status --porcelain | grep 'src/data/blog.ts' | wc -l)
           SITEMAP_CHANGED=$(git status --porcelain | grep 'public/sitemap.xml' | wc -l)
 
@@ -97,6 +95,12 @@ jobs:
           fi
 
           echo "✅ Arquivos modificados corretamente."
+
+      - name: 🧹 Fix trailing whitespace
+        run: |
+          sed -i 's/[[:space:]]*$//' src/data/blog.ts
+          sed -i 's/[[:space:]]*$//' public/sitemap.xml
+          echo "✅ Trailing whitespace removido."
 
       - name: 📝 Show generated changes
         run: |
