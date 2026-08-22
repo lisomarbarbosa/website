@@ -22,20 +22,21 @@ const UNSPLASH_URL =
  * Cadeia de modelos gratuitos do OpenRouter.
  * O primeiro é o titular (maior capacidade).
  * Os demais são fallbacks acionados em sequência caso o anterior falhe.
- * Modelos Gemma removidos por instabilidade na camada gratuita (ago/2026).
+ * Atualizado em ago/2026 — slugs verificados no OpenRouter.
  */
 const MODELS = [
-  "meta-llama/llama-3.3-70b-instruct:free",  // titular  – melhor qualidade gratuita
-  "meta-llama/llama-3.1-8b-instruct:free",   // fallback 1
-  "mistralai/mistral-7b-instruct:free",      // fallback 2
-  "deepseek/deepseek-r1-0528:free",          // fallback 3
-  "deepseek/deepseek-chat-v3-0324:free",     // fallback 4
-  "qwen/qwen3-14b:free",                     // fallback 5
-  "qwen/qwen3-8b:free",                      // fallback 6
-  "qwen/qwen3-4b:free",                      // fallback 7
-  "meta-llama/llama-3.2-3b-instruct:free",   // fallback 8
-  "microsoft/phi-3-mini-128k-instruct:free", // fallback 9
-  "mistralai/mistral-nemo:free",             // fallback 10
+  "google/gemma-4-31b-it:free",                    // titular – Gemma 4 31B (novo)
+  "nvidia/nemotron-super-49b-v1:free",              // fallback 1 – Nemotron Super 49B
+  "nvidia/llama-3.1-nemotron-ultra-253b-v1:free",  // fallback 2 – Nemotron Ultra 253B
+  "meta-llama/llama-3.3-70b-instruct:free",        // fallback 3
+  "meta-llama/llama-3.1-8b-instruct:free",         // fallback 4
+  "deepseek/deepseek-r1-0528:free",                // fallback 5
+  "deepseek/deepseek-chat-v3-0324:free",           // fallback 6
+  "qwen/qwen3-14b:free",                           // fallback 7
+  "qwen/qwen3-8b:free",                            // fallback 8
+  "mistralai/mistral-7b-instruct:free",            // fallback 9
+  "microsoft/phi-3-mini-128k-instruct:free",       // fallback 10
+  "mistralai/mistral-nemo:free",                   // fallback 11
 ];
 
 const FALLBACK_IMAGE =
