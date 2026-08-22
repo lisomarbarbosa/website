@@ -1,0 +1,124 @@
+name: Auto Generate Digital Law Article
+
+on:
+  schedule:
+    - cron: "0 9 * * 1,3,5"
+
+  workflow_dispatch:
+    inputs:
+      tema:
+        description: "Tema personalizado para o artigo"
+        required: false
+        type: string
+      modelo_ia:
+        description: "Modelo OpenRouter"
+        required: false
+        default: "google/gemma-3-27b-it:free"
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate-legal-article:
+    name: Generate and Validate Legal Article
+    runs-on: ubuntu-latest
+
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CUSTOM_TOPIC: ${{ inputs.tema }}
+      CUSTOM_MODEL: ${{ inputs.modelo_ia }}
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🔎 Validate environment
+        run: |
+          echo "🔎 Validando ambiente..."
+
+          if [ -z "$OPENROUTER_API_KEY" ]; then
+            echo "❌ OPENROUTER_API_KEY não configurada."
+            exit 1
+          fi
+
+          if [ -z "$UNSPLASH_ACCESS_KEY" ]; then
+            echo "⚠️ UNSPLASH_ACCESS_KEY não configurada."
+            echo "O workflow continuará utilizando a imagem fallback."
+          fi
+
+          if [ ! -f "src/App.tsx" ]; then
+            echo "❌ src/App.tsx não encontrado."
+            exit 1
+          fi
+
+          if [ ! -f "public/sitemap.xml" ]; then
+            echo "❌ public/sitemap.xml não encontrado."
+            exit 1
+          fi
+
+          echo "✅ Ambiente validado."
+
+      - name: 🤖 Generate, research and audit article
+        run: |
+          node .github/scripts/generate-post.js
+
+      - name: 🔍 Validate generated files
+        run: |
+          echo "🔍 Verificando alterações..."
+
+          git diff --check
+
+          CHANGED=$(git status --porcelain | grep -E 'src/pages/articles/|src/App\.tsx|public/sitemap\.xml' | wc -l)
+          if [ "$CHANGED" -eq "0" ]; then
+            echo "❌ Nenhuma alteração foi detectada nos arquivos esperados."
+            exit 1
+          fi
+
+          echo "✅ Arquivos modificados corretamente."
+
+      - name: 📝 Show generated changes
+        run: |
+          echo "📝 Novos arquivos e alterações:"
+          git status --short
+
+          echo "\n🗺️ Alterações em sitemap.xml:"
+          git diff --stat -- public/sitemap.xml
+
+      - name: 🚀 Commit and push
+        run: |
+          set -e
+
+          TODAY=$(date -u +"%Y-%m-%d")
+
+          TITLE=$(node -e "
+          const fs = require('fs');
+          const files = fs.readdirSync('src/pages/articles');
+          const newest = files
+            .map(f => ({ f, t: fs.statSync('src/pages/articles/' + f).mtimeMs }))
+            .sort((a,b) => b.t - a.t)[0]?.f || '';
+          const content = newest ? fs.readFileSync('src/pages/articles/' + newest, 'utf8') : '';
+          const match = content.match(/<title>([^<|]+)/);
+          console.log(match ? match[1].trim() : 'novo artigo de direito digital');
+          ")
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add src/pages/articles/ src/App.tsx public/sitemap.xml
+
+          git commit -m "bot: novo post - ${TITLE} ${TODAY}"
+
+          git push origin main
+
+          echo "🚀 Artigo publicado no branch main."
