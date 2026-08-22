@@ -19,10 +19,10 @@ const UNSPLASH_URL =
   "https://api.unsplash.com/photos/random";
 
 const DEFAULT_MODEL =
-  "google/gemma-3-27b-it";
+  "meta-llama/llama-3.3-70b-instruct:free";
 
 const FALLBACK_MODEL =
-  "meta-llama/llama-3.1-8b-instruct";
+  "mistralai/mistral-7b-instruct:free";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
@@ -267,7 +267,7 @@ async function searchJusbrasil(topic) {
       source: "Jusbrasil",
       url,
       content:
-        "A consulta autom\u00e1tica ao Jusbrasil falhou. N\u00c3O presumir resultados, jurisprud\u00eancia ou decis\u00f5es."
+        "A consulta autom\u00e1tica ao Jusbrasil falhou. N\u00C3O presumir resultados, jurisprud\u00eancia ou decis\u00f5es."
     };
   }
 }
@@ -305,13 +305,13 @@ REGRAS ABSOLUTAS:
 - N\u00c3O transforme hip\u00f3tese em fato jur\u00eddico.
 - N\u00c3O trate interpreta\u00e7\u00e3o doutrin\u00e1ria como texto legal.
 - N\u00c3O invente orienta\u00e7\u00e3o jur\u00eddica.
-- N\u00c3O diga que determinada conduta \"sempre\" gera indeniza\u00e7\u00e3o.
-- N\u00c3O diga que determinada conduta \"nunca\" gera responsabilidade.
+- N\u00c3O diga que determinada conduta "sempre" gera indeniza\u00e7\u00e3o.
+- N\u00c3O diga que determinada conduta "nunca" gera responsabilidade.
 - N\u00c3O fa\u00e7a promessa de resultado judicial.
 - N\u00c3O crie jurisprud\u00eancia apenas para tornar o artigo mais convincente.
 
 Se uma informa\u00e7\u00e3o n\u00e3o puder ser confirmada, marque-a como:
-\"INFORMA\u00c7\u00c3O N\u00c3O CONFIRMADA - N\u00c3O PUBLICAR\".
+"INFORMA\u00c7\u00c3O N\u00c3O CONFIRMADA - N\u00c3O PUBLICAR".
 
 Jurisprud\u00eancia somente pode ser utilizada quando houver dados verific\u00e1veis
 e uma fonte correspondente.
@@ -394,7 +394,7 @@ Retorne exclusivamente JSON v\u00e1lido neste formato:
 }
 
 Se n\u00e3o houver jurisprud\u00eancia suficientemente verific\u00e1vel,
-retorne \"jurisprudence\": [].
+retorne "jurisprudence": [].
 
 N\u00e3o invente fontes.
 `;
@@ -742,7 +742,7 @@ async function updateBlogFile(article, imageUrl, date) {
 
   if (removeExistingSlug(original, slug)) {
     throw new Error(
-      `O slug \"${slug}\" j\u00e1 existe em blog.ts. Publica\u00e7\u00e3o cancelada para evitar duplica\u00e7\u00e3o.`
+      `O slug "${slug}" j\u00e1 existe em blog.ts. Publica\u00e7\u00e3o cancelada para evitar duplica\u00e7\u00e3o.`
     );
   }
 
