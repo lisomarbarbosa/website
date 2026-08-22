@@ -9,7 +9,7 @@ export interface BlogPost {
   content: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'invasao-dispositivo-informatico-consequencias-juridicas',
     title: 'Invasão de Dispositivo Informático: Análise Completa das Consequências Jurídicas no Ordenamento Brasileiro',
@@ -18,140 +18,8 @@ export const blogPosts: BlogPost[
     readTime: '11 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1756671994948-183e2d833da0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQxODI4fA&ixlib=rb-4.1.0&q=80&w=1080',
-    content: '# Invasão de Dispositivo Informático: Análise Completa das Consequências Jurídicas no Ordenamento Brasileiro
-
-## Introdução: A Proteção Constitucional do Espaço Digital
-
-A expansão das tecnologias da informação trouxe a necessidade imperativa de tutelar juridicamente o espaço digital. A Constituição Federal de 1988, em seu Art. 5º, estabelece os pilares dessa proteção: o inciso X garante a inviolabilidade da intimidade, vida privada, honra e imagem, assegurando indenização por dano material ou moral decorrente de sua violação; o inciso XII assegura o sigilo da correspondência e das comunicações telegráficas, de dados e telefônicas, salvo por ordem judicial; e o inciso LXXII concede o *habeas data* para garantir o conhecimento e a retificação de informações pessoais em bancos de dados. Esses dispositivos fundamentam a proteção constitucional dos dispositivos informáticos — smartphones, computadores, tablets, *wearables*, *smart TVs*, veículos conectados e quaisquer equipamentos que armazenem ou processem dados — e dos dados neles contidos, elevando a invasão indevida à condição de violação de direitos fundamentais.
-
-## 1. Esfera Penal: A Tipificação da Conduta (Lei nº 12.737/2012)
-
-A Lei nº 12.737/2012, conhecida como Lei Carolina Dieckmann, inseriu no Código Penal (Decreto-Lei nº 2.848/1940) tipos penais específicos para reprimir a invasão de dispositivos informáticos e condutas correlatas.
-
-### 1.1 Crime de Invasão de Dispositivo Informático (Art. 154-A do CP)
-
-O Art. 154-A tipifica a conduta de "invadir dispositivo informático alheio, conectado ou não à rede de computadores, mediante violação indevida de mecanismo de segurança". Trata-se de crime formal, que se consuma com a simples invasão, independentemente da obtenção de dados. A pena base é de detenção de 3 (três) meses a 1 (um) ano e multa.
-
-O § 2º do Art. 154-A estabelece causas de aumento de pena (qualificadoras), elevando a sanção para reclusão de 6 (seis) meses a 2 (dois) anos e multa, quando a invasão resulta em:
-
-*   Obtenção de conteúdo de comunicações eletrônicas privadas;
-*   Obtenção de segredo de justiça;
-*   Obtenção de segredo comercial ou industrial;
-*   Controle remoto não autorizado do dispositivo invadido.
-
-A ação penal é pública condicionada à representação do ofendido (prazo de 6 meses, nos termos do Art. 38 do CPP), exceto nas hipóteses do § 3º: se o crime for praticado contra a Administração Pública, menor de 18 anos, maior de 60 anos ou pessoa com deficiência, a ação é pública incondicionada.
-
-### 1.2 Divulgação de Segredo Obtido Mediante Invasão (Art. 154, § 1º do CP)
-
-O Art. 154, § 1º, tipifica crime autônomo: "divulgar, utilizar ou transmitir, indevidamente, segredo alheio, obtido mediante a invasão a que se refere o Art. 154-A". A pena é de reclusão de 1 (um) a 4 (quatro) anos e multa. A ação penal é pública incondicionada. Exige-se, para a configuração, que o segredo tenha sido obtido *exclusivamente* através do crime do Art. 154-A, caracterizando concurso material de crimes se o agente pratica ambas as condutas.
-
-### 1.3 Interrupção ou Perturbação de Serviço Telemático (Art. 266 do CP)
-
-Se a invasão tem por finalidade interromper ou perturbar serviço telegráfico, radiotelegráfico, telefônico, telemático ou de informação de utilidade pública, aplica-se o Art. 266 do CP (com redação da Lei nº 12.737/2012), com pena de detenção de 1 (um) a 3 (três) anos e multa.
-
-### 1.4 Crimes Correlatos e Concurso Material
-
-Frequentemente a invasão é meio para a prática de outros delitos, configurando concurso material (Art. 69 do CP):
-
-*   **Estelionato Eletrônico (Art. 171, § 2º do CP):** Obtenção de vantagem ilícita mediante fraude em operações bancárias, *Pix*, compras online.
-*   **Falsificação de Documento Particular (Art. 298 do CP) e Falsidade Ideológica (Art. 299 do CP):** Alteração de dados em documentos digitais ou inserção de dados falsos em sistemas.
-*   **Interceptação Ilícita de Comunicações (Lei nº 9.296/1996, Art. 1º, 2º e 10):** Se a invasão permite acesso a comunicações telefônicas ou telemáticas sem autorização judicial ou consentimento, pena de reclusão de 2 a 4 anos e multa.
-*   **Violação de Direitos Autorais de Software (Lei nº 9.609/1998, Art. 12) e Obras Protegidas (Lei nº 9.610/1998 c/c Art. 184 do CP):** Se a invasão visa cópia, distribuição ou modificação não autorizada de programas de computador ou obras intelectuais.
-
-## 2. Esfera Cível: Reparação Integral dos Danos
-
-A par da reprimenda estatal, o ordenamento garante à vítima a reparação integral dos danos sofridos, nos termos do Art. 944 do Código Civil (Lei nº 10.406/2002).
-
-### 2.1 Fundamentação: Responsabilidade Subjetiva e Objetiva
-
-A responsabilidade civil do invasor direto funda-se no Art. 186 c/c Art. 927 do CC (responsabilidade subjetiva: dolo ou culpa). Contudo, se a atividade de tratamento de dados ou prestação de serviço digital implicar risco inerente, aplica-se a responsabilidade objetiva (Art. 927, parágrafo único do CC), bastando a comprovação do nexo causal e do dano.
-
-### 2.2 Danos Morais: Presunção (*In Re Ipsa*)
-
-A jurisprudência do Superior Tribunal de Justiça (STJ) consolidou o entendimento de que a invasão de dispositivo informático, por violar diretamente a intimidade e a vida privada (dados sensíveis, conversas íntimas, imagens, localização), gera dano moral *in re ipsa* (presumido), dispensando a prova do sofrimento subjetivo. A violação do Art. 5º, X, da CF/88 e do Art. 12 do CC (direitos da personalidade) autoriza a fixação de indenização com função compensatória, punitiva e pedagógica.
-
-### 2.3 Danos Materiais: Danos Emergentes e Lucros Cessantes
-
-Exigem comprovação documental (Art. 402, 403, 944 do CC) e abrangem:
-
-*   Gastos com perícia forense, formatação de dispositivos, aquisição de soluções de segurança (antivírus, *firewalls*);
-*   Perda de arquivos de trabalho, propriedade intelectual, contratos;
-*   Prejuízos decorrentes de fraudes bancárias, empréstimos fraudulentos, compras indevidas;
-*   Lucros cessantes comprovados (ex.: paralisação de e-commerce, perda de contratos por vazamento de segredo comercial).
-
-### 2.4 Responsabilidade do Invasor Direto e de Terceiros
-
-**Autor Direto:** Responde por todos os danos (Art. 186, 927 CC). A condenação penal transitada em julgado prova a materialidade e autoria na esfera cível (Art. 935 CC).
-
-**Empregador/Comitente:** Responde objetivamente por atos de prepostos praticados no exercício da função ou em razão dela (Art. 932, III, e Art. 933 do CC).
-
-**Provedores de Aplicação (Marco Civil, Art. 19, 20, 21):** Não respondem por danos decorrentes de conteúdo gerado por terceiros, *exceto* se, após ordem judicial específica, não removerem o conteúdo ilícito (Art. 19). **Exceção crítica:** No caso de vazamento de conteúdo íntimo (nudez, ato sexual), a responsabilidade é solidária se não removerem após notificação extrajudicial (Art. 21). Importante distinguir: a responsabilidade por *falha de segurança* (vazamento de dados cadastrais/sensíveis) segue o regime da LGPD e CDC/CC, não o regime do Art. 19 do Marco Civil.
-
-## 3. Direito do Consumidor e Proteção de Dados: Deveres de Segurança
-
-Quando a vítima é consumidora e o invasor (ou o fornecedor do serviço vulnerável) insere-se na cadeia de consumo, aplicam-se o CDC (Lei nº 8.078/1990) e a LGPD (Lei nº 13.709/2018) de forma sistêmica.
-
-### 3.1 Responsabilidade Objetiva do Fornecedor (CDC Art. 14; Marco Civil Art. 20)
-
-O fornecedor de serviços online (bancos, *e-commerces*, redes sociais, provedores de e-mail, *apps*) responde independentemente de culpa pela falha na segurança que permita a invasão do dispositivo do consumidor ou o vazamento de seus dados, desde que comprovados o defeito do serviço (vício de segurança), o nexo causal e o dano. O Art. 6º, I, do CDC estabelece a proteção da vida, saúde e segurança contra riscos provocados por práticas no fornecimento de serviços.
-
-### 3.2 LGPD: Incidente de Segurança e Sanções Administrativas
-
-A invasão que atinge dados pessoais configura "incidente de segurança" (Art. 48 da LGPD). O controlador tem o dever de:
-
-1.  Adotar medidas técnicas e administrativas aptas a proteger os dados (Art. 46 — *security by design* e *by default*);
-2.  Comunicar à Autoridade Nacional de Proteção de Dados (ANPD) e ao titular a ocorrência, em prazo razoável, se houver risco ou dano relevante (Art. 48);
-3.  Arcar com sanções administrativas em caso de descumprimento (Art. 52): advertência, multa simples (até 2% do faturamento, limitado a R$ 50 milhões por infração), multa diária, publicização da infração, bloqueio/eliminação dos dados, suspensão ou proibição do exercício de atividade de tratamento.
-
-O titular de dados tem direitos assegurados no Art. 18 (confirmação, acesso, correção, anonimização, bloqueio, eliminação, portabilidade, informação sobre compartilhamento, revogação do consentimento).
-
-### 3.3 Inversão do Ônus da Prova (CDC Art. 6º, VIII; CPC Art. 373, § 1º)
-
-Em ações consumeristas, o juiz pode inverter o ônus da prova para que o fornecedor demonstre que adotou medidas de segurança adequadas (*due care*) ou que a invasão decorreu de caso fortuito/força maior exclusiva da vítima (ex.: negligência grave do próprio titular em expor credenciais).
-
-## 4. Marco Civil da Internet: Responsabilidade dos Provedores e Preservação de Provas
-
-A Lei nº 12.965/2014 estabelece marco regulatório essencial.
-
-### 4.1 Regra Geral: Ordem Judicial Prévia (Art. 19)
-
-Provedores de conexão não respondem por danos decorrentes de conteúdo gerado por terceiros. Provedores de aplicação só respondem civilmente se, após **ordem judicial específica** (identificação clara do conteúdo e localização), não promoverem a remoção no prazo assinalado. Não há dever de monitoramento prévio.
-
-### 4.2 Exceção: Conteúdo Íntimo (Art. 21)
-
-Para conteúdo que exponha nudez ou ato sexual de caráter privado, a responsabilidade é solidária se o provedor, após **notificação extrajudicial** do ofendido (com identificação de URL e comprovação de titularidade), não remover o conteúdo em tempo hábil. Não se exige ordem judicial prévia.
-
-### 4.3 Guarda de Registros e Preservação de Provas Digitais (Art. 10, 11, 13, 15, 22)
-
-*   **Registros de Conexão (Art. 13):** IP, data, hora, duração. Guarda obrigatória por **1 ano**, em sigilo.
-*   **Registros de Acesso a Aplicações (Art. 15):** IP, data, hora de cada operação. Guarda obrigatória por **6 meses**, em sigilo.
-*   **Fornecimento:** Apenas mediante ordem judicial (Art. 22), observado o devido processo legal (Art. 5º, LIV, CF/88).
-*   **Perícia Forense (Chain of Custody):** A prova digital deve seguir normas técnicas (ISO 27037, NIST SP 800-86) para garantir integridade, autenticidade e admissibilidade judicial (CPP Art. 158, 236-B). O acesso indevido a esses logs por terceiros também configura crime do Art. 154-A do CP.
-
-## 5. Orientação Prática: O Que Fazer em Caso de Invasão
-
-Diante de indícios de invasão (acessos não reconhecidos, mensagens enviadas sem autorização, alteração de senhas, notificações de login suspeitas, fraudes financeiras), recomenda-se:
-
-1.  **Isolamento Imediato:** Desconectar o dispositivo da internet (modo avião), não realizar *factory reset* antes da preservação de provas.
-2.  **Preservação de Evidências (Prova Antecipada):**
-    *   Registros de tela (*prints*) com data/hora visíveis;
-    *   *Logs* do sistema, navegador, antivírus;
-    *   Cópia forense (*bitstream image*) do disco/armazenamento por perito de confiança (observando *chain of custody*);
-    *   Ata notarial (Cartório de Notas) para constituir prova pré-constituída (CPC Art. 381).
-3.  **Boletim de Ocorrência (Polícia Civil / Delegacia de Crimes Cibernéticos):** Registrar a notícia-crime. Para o Art. 154-A (ação condicionada), é indispensável a **representação** expressa no BO (prazo de 6 meses). Solicitar instauração de Inquérito Policial.
-4.  **Notificação à ANPD (LGPD Art. 48):** Se houver vazamento de dados pessoais, o controlador deve notificar. O titular pode peticionar à ANPD.
-5.  **Medidas Cautelares Cíveis (CPC Art. 294 ss.):** Busca e apreensão de dispositivos do suspeito, bloqueio de contas/bens, determinação de remoção de conteúdo (Art. 21 Marco Civil), exibição de *logs* por provedores.
-6.  **Ação de Indenização (Danos Morais e Materiais):** Com pedido de tutela de urgência para cessação de vazamento e reparação. Acumulação com pedido de *habeas data* (CF Art. 5º, LXXII) para acesso/retificação de dados vazados.
-7.  **Medidas de Mitigação:** Troca de todas as senhas (gerenciador de senhas), ativação de autenticação em dois fatores (2FA/MFA), monitoramento de CPF/CNPJ (bureaus de crédito), comunicação a bancos/instituições financeiras.
-
-## Conclusão
-
-A invasão de dispositivo informático não é mero ilícito penal; é violação sistêmica de direitos fundamentais (intimidade, sigilo, proteção de dados) que desencadeia responsabilização em múltiplas esferas: penal (Arts. 154-A, 154 §1º, 266 CP), civil (Arts. 186, 927, 932, 933, 935 CC), consumerista (CDC Arts. 6º, 14, 27, 43), regulatória (LGPD Arts. 46, 48, 52) e processual (Marco Civil Arts. 13, 15, 19, 21, 22). A efetividade da tutela jurisdicional depende da atuação célere e coordenada da vítima e de seus advogados na preservação da prova digital (*chain of custody*), na representação criminal tempestiva e na propositura das ações civis e administrativas cabíveis. O escritório Lisomar Barbosa Advogados atua na defesa integral dos direitos digitais, desde a fase de resposta a incidentes e preservação forense até a obtenção de reparação integral nas esferas judicial e administrativa.
-
----
-
-*Este artigo possui caráter informativo e não substitui consulta jurídica personalizada. A legislação e a jurisprudência estão em constante evolução.*'
-  },] = [
+    content: '# Invasão de Dispositivo Informático: Análise Completa das Consequências Jurídicas no Ordenamento Brasileiro\n\n## Introdução: A Proteção Constitucional do Espaço Digital\n\nA expansão das tecnologias da informação trouxe a necessidade imperativa de tutelar juridicamente o espaço digital. A Constituição Federal de 1988, em seu Art. 5º, estabelece os pilares dessa proteção: o inciso X garante a inviolabilidade da intimidade, vida privada, honra e imagem, assegurando indenização por dano material ou moral decorrente de sua violação; o inciso XII assegura o sigilo da correspondência e das comunicações telegráficas, de dados e telefônicas, salvo por ordem judicial; e o inciso LXXII concede o *habeas data* para garantir o conhecimento e a retificação de informações pessoais em bancos de dados. Esses dispositivos fundamentam a proteção constitucional dos dispositivos informáticos — smartphones, computadores, tablets, *wearables*, *smart TVs*, veículos conectados e quaisquer equipamentos que armazenem ou processem dados — e dos dados neles contidos, elevando a invasão indevida à condição de violação de direitos fundamentais.\n\n## 1. Esfera Penal: A Tipificação da Conduta (Lei nº 12.737/2012)\n\nA Lei nº 12.737/2012, conhecida como Lei Carolina Dieckmann, inseriu no Código Penal (Decreto-Lei nº 2.848/1940) tipos penais específicos para reprimir a invasão de dispositivos informáticos e condutas correlatas.\n\n### 1.1 Crime de Invasão de Dispositivo Informático (Art. 154-A do CP)\n\nO Art. 154-A tipifica a conduta de \"invadir dispositivo informático alheio, conectado ou não à rede de computadores, mediante violação indevida de mecanismo de segurança\". Trata-se de crime formal, que se consuma com a simples invasão, independentemente da obtenção de dados. A pena base é de detenção de 3 (três) meses a 1 (um) ano e multa.\n\nO § 2º do Art. 154-A estabelece causas de aumento de pena (qualificadoras), elevando a sanção para reclusão de 6 (seis) meses a 2 (dois) anos e multa, quando a invasão resulta em:\n\n*   Obtenção de conteúdo de comunicações eletrônicas privadas;\n*   Obtenção de segredo de justiça;\n*   Obtenção de segredo comercial ou industrial;\n*   Controle remoto não autorizado do dispositivo invadido.\n\nA ação penal é pública condicionada à representação do ofendido (prazo de 6 meses, nos termos do Art. 38 do CPP), exceto nas hipóteses do § 3º: se o crime for praticado contra a Administração Pública, menor de 18 anos, maior de 60 anos ou pessoa com deficiência, a ação é pública incondicionada.\n\n### 1.2 Divulgação de Segredo Obtido Mediante Invasão (Art. 154, § 1º do CP)\n\nO Art. 154, § 1º, tipifica crime autônomo: \"divulgar, utilizar ou transmitir, indevidamente, segredo alheio, obtido mediante a invasão a que se refere o Art. 154-A\". A pena é de reclusão de 1 (um) a 4 (quatro) anos e multa. A ação penal é pública incondicionada. Exige-se, para a configuração, que o segredo tenha sido obtido *exclusivamente* através do crime do Art. 154-A, caracterizando concurso material de crimes se o agente pratica ambas as condutas.\n\n### 1.3 Interrupção ou Perturbação de Serviço Telemático (Art. 266 do CP)\n\nSe a invasão tem por finalidade interromper ou perturbar serviço telegráfico, radiotelegráfico, telefônico, telemático ou de informação de utilidade pública, aplica-se o Art. 266 do CP (com redação da Lei nº 12.737/2012), com pena de detenção de 1 (um) a 3 (três) anos e multa.\n\n### 1.4 Crimes Correlatos e Concurso Material\n\nFrequentemente a invasão é meio para a prática de outros delitos, configurando concurso material (Art. 69 do CP):\n\n*   **Estelionato Eletrônico (Art. 171, § 2º do CP):** Obtenção de vantagem ilícita mediante fraude em operações bancárias, *Pix*, compras online.\n*   **Falsificação de Documento Particular (Art. 298 do CP) e Falsidade Ideológica (Art. 299 do CP):** Alteração de dados em documentos digitais ou inserção de dados falsos em sistemas.\n*   **Interceptação Ilícita de Comunicações (Lei nº 9.296/1996, Art. 1º, 2º e 10):** Se a invasão permite acesso a comunicações telefônicas ou telemáticas sem autorização judicial ou consentimento, pena de reclusão de 2 a 4 anos e multa.\n*   **Violação de Direitos Autorais de Software (Lei nº 9.609/1998, Art. 12) e Obras Protegidas (Lei nº 9.610/1998 c/c Art. 184 do CP):** Se a invasão visa cópia, distribuição ou modificação não autorizada de programas de computador ou obras intelectuais.\n\n## 2. Esfera Cível: Reparação Integral dos Danos\n\nA par da reprimenda estatal, o ordenamento garante à vítima a reparação integral dos danos sofridos, nos termos do Art. 944 do Código Civil (Lei nº 10.406/2002).\n\n### 2.1 Fundamentação: Responsabilidade Subjetiva e Objetiva\n\nA responsabilidade civil do invasor direto funda-se no Art. 186 c/c Art. 927 do CC (responsabilidade subjetiva: dolo ou culpa). Contudo, se a atividade de tratamento de dados ou prestação de serviço digital implicar risco inerente, aplica-se a responsabilidade objetiva (Art. 927, parágrafo único do CC), bastando a comprovação do nexo causal e do dano.\n\n### 2.2 Danos Morais: Presunção (*In Re Ipsa*)\n\nA jurisprudência do Superior Tribunal de Justiça (STJ) consolidou o entendimento de que a invasão de dispositivo informático, por violar diretamente a intimidade e a vida privada (dados sensíveis, conversas íntimas, imagens, localização), gera dano moral *in re ipsa* (presumido), dispensando a prova do sofrimento subjetivo. A violação do Art. 5º, X, da CF/88 e do Art. 12 do CC (direitos da personalidade) autoriza a fixação de indenização com função compensatória, punitiva e pedagógica.\n\n### 2.3 Danos Materiais: Danos Emergentes e Lucros Cessantes\n\nExigem comprovação documental (Art. 402, 403, 944 do CC) e abrangem:\n\n*   Gastos com perícia forense, formatação de dispositivos, aquisição de soluções de segurança (antivírus, *firewalls*);\n*   Perda de arquivos de trabalho, propriedade intelectual, contratos;\n*   Prejuízos decorrentes de fraudes bancárias, empréstimos fraudulentos, compras indevidas;\n*   Lucros cessantes comprovados (ex.: paralisação de e-commerce, perda de contratos por vazamento de segredo comercial).\n\n### 2.4 Responsabilidade do Invasor Direto e de Terceiros\n\n**Autor Direto:** Responde por todos os danos (Art. 186, 927 CC). A condenação penal transitada em julgado prova a materialidade e autoria na esfera cível (Art. 935 CC).\n\n**Empregador/Comitente:** Responde objetivamente por atos de prepostos praticados no exercício da função ou em razão dela (Art. 932, III, e Art. 933 do CC).\n\n**Provedores de Aplicação (Marco Civil, Art. 19, 20, 21):** Não respondem por danos decorrentes de conteúdo gerado por terceiros, *exceto* se, após ordem judicial específica, não removerem o conteúdo ilícito (Art. 19). **Exceção crítica:** No caso de vazamento de conteúdo íntimo (nudez, ato sexual), a responsabilidade é solidária se não removerem após notificação extrajudicial (Art. 21). Importante distinguir: a responsabilidade por *falha de segurança* (vazamento de dados cadastrais/sensíveis) segue o regime da LGPD e CDC/CC, não o regime do Art. 19 do Marco Civil.\n\n## 3. Direito do Consumidor e Proteção de Dados: Deveres de Segurança\n\nQuando a vítima é consumidora e o invasor (ou o fornecedor do serviço vulnerável) insere-se na cadeia de consumo, aplicam-se o CDC (Lei nº 8.078/1990) e a LGPD (Lei nº 13.709/2018) de forma sistêmica.\n\n### 3.1 Responsabilidade Objetiva do Fornecedor (CDC Art. 14; Marco Civil Art. 20)\n\nO fornecedor de serviços online (bancos, *e-commerces*, redes sociais, provedores de e-mail, *apps*) responde independentemente de culpa pela falha na segurança que permita a invasão do dispositivo do consumidor ou o vazamento de seus dados, desde que comprovados o defeito do serviço (vício de segurança), o nexo causal e o dano. O Art. 6º, I, do CDC estabelece a proteção da vida, saúde e segurança contra riscos provocados por práticas no fornecimento de serviços.\n\n### 3.2 LGPD: Incidente de Segurança e Sanções Administrativas\n\nA invasão que atinge dados pessoais configura \"incidente de segurança\" (Art. 48 da LGPD). O controlador tem o dever de:\n\n1.  Adotar medidas técnicas e administrativas aptas a proteger os dados (Art. 46 — *security by design* e *by default*);\n2.  Comunicar à Autoridade Nacional de Proteção de Dados (ANPD) e ao titular a ocorrência, em prazo razoável, se houver risco ou dano relevante (Art. 48);\n3.  Arcar com sanções administrativas em caso de descumprimento (Art. 52): advertência, multa simples (até 2% do faturamento, limitado a R$ 50 milhões por infração), multa diária, publicização da infração, bloqueio/eliminação dos dados, suspensão ou proibição do exercício de atividade de tratamento.\n\nO titular de dados tem direitos assegurados no Art. 18 (confirmação, acesso, correção, anonimização, bloqueio, eliminação, portabilidade, informação sobre compartilhamento, revogação do consentimento).\n\n### 3.3 Inversão do Ônus da Prova (CDC Art. 6º, VIII; CPC Art. 373, § 1º)\n\nEm ações consumeristas, o juiz pode inverter o ônus da prova para que o fornecedor demonstre que adotou medidas de segurança adequadas (*due care*) ou que a invasão decorreu de caso fortuito/força maior exclusiva da vítima (ex.: negligência grave do próprio titular em expor credenciais).\n\n## 4. Marco Civil da Internet: Responsabilidade dos Provedores e Preservação de Provas\n\nA Lei nº 12.965/2014 estabelece marco regulatório essencial.\n\n### 4.1 Regra Geral: Ordem Judicial Prévia (Art. 19)\n\nProvedores de conexão não respondem por danos decorrentes de conteúdo gerado por terceiros. Provedores de aplicação só respondem civilmente se, após **ordem judicial específica** (identificação clara do conteúdo e localização), não promoverem a remoção no prazo assinalado. Não há dever de monitoramento prévio.\n\n### 4.2 Exceção: Conteúdo Íntimo (Art. 21)\n\nPara conteúdo que exponha nudez ou ato sexual de caráter privado, a responsabilidade é solidária se o provedor, após **notificação extrajudicial** do ofendido (com identificação de URL e comprovação de titularidade), não remover o conteúdo em tempo hábil. Não se exige ordem judicial prévia.\n\n### 4.3 Guarda de Registros e Preservação de Provas Digitais (Art. 10, 11, 13, 15, 22)\n\n*   **Registros de Conexão (Art. 13):** IP, data, hora, duração. Guarda obrigatória por **1 ano**, em sigilo.\n*   **Registros de Acesso a Aplicações (Art. 15):** IP, data, hora de cada operação. Guarda obrigatória por **6 meses**, em sigilo.\n*   **Fornecimento:** Apenas mediante ordem judicial (Art. 22), observado o devido processo legal (Art. 5º, LIV, CF/88).\n*   **Perícia Forense (Chain of Custody):** A prova digital deve seguir normas técnicas (ISO 27037, NIST SP 800-86) para garantir integridade, autenticidade e admissibilidade judicial (CPP Art. 158, 236-B). O acesso indevido a esses logs por terceiros também configura crime do Art. 154-A do CP.\n\n## 5. Orientação Prática: O Que Fazer em Caso de Invasão\n\nDiante de indícios de invasão (acessos não reconhecidos, mensagens enviadas sem autorização, alteração de senhas, notificações de login suspeitas, fraudes financeiras), recomenda-se:\n\n1.  **Isolamento Imediato:** Desconectar o dispositivo da internet (modo avião), não realizar *factory reset* antes da preservação de provas.\n2.  **Preservação de Evidências (Prova Antecipada):**\n    *   Registros de tela (*prints*) com data/hora visíveis;\n    *   *Logs* do sistema, navegador, antivírus;\n    *   Cópia forense (*bitstream image*) do disco/armazenamento por perito de confiança (observando *chain of custody*);\n    *   Ata notarial (Cartório de Notas) para constituir prova pré-constituída (CPC Art. 381).\n3.  **Boletim de Ocorrência (Polícia Civil / Delegacia de Crimes Cibernéticos):** Registrar a notícia-crime. Para o Art. 154-A (ação condicionada), é indispensável a **representação** expressa no BO (prazo de 6 meses). Solicitar instauração de Inquérito Policial.\n4.  **Notificação à ANPD (LGPD Art. 48):** Se houver vazamento de dados pessoais, o controlador deve notificar. O titular pode peticionar à ANPD.\n5.  **Medidas Cautelares Cíveis (CPC Art. 294 ss.):** Busca e apreensão de dispositivos do suspeito, bloqueio de contas/bens, determinação de remoção de conteúdo (Art. 21 Marco Civil), exibição de *logs* por provedores.\n6.  **Ação de Indenização (Danos Morais e Materiais):** Com pedido de tutela de urgência para cessação de vazamento e reparação. Acumulação com pedido de *habeas data* (CF Art. 5º, LXXII) para acesso/retificação de dados vazados.\n7.  **Medidas de Mitigação:** Troca de todas as senhas (gerenciador de senhas), ativação de autenticação em dois fatores (2FA/MFA), monitoramento de CPF/CNPJ (bureaus de crédito), comunicação a bancos/instituições financeiras.\n\n## Conclusão\n\nA invasão de dispositivo informático não é mero ilícito penal; é violação sistêmica de direitos fundamentais (intimidade, sigilo, proteção de dados) que desencadeia responsabilização em múltiplas esferas: penal (Arts. 154-A, 154 §1º, 266 CP), civil (Arts. 186, 927, 932, 933, 935 CC), consumerista (CDC Arts. 6º, 14, 27, 43), regulatória (LGPD Arts. 46, 48, 52) e processual (Marco Civil Arts. 13, 15, 19, 21, 22). A efetividade da tutela jurisdicional depende da atuação célere e coordenada da vítima e de seus advogados na preservação da prova digital (*chain of custody*), na representação criminal tempestiva e na propositura das ações civis e administrativas cabíveis. O escritório Lisomar Barbosa Advogados atua na defesa integral dos direitos digitais, desde a fase de resposta a incidentes e preservação forense até a obtenção de reparação integral nas esferas judicial e administrativa.\n\n---\n\n*Este artigo possui caráter informativo e não substitui consulta jurídica personalizada. A legislação e a jurisprudência estão em constante evolução.*'
+  },
   {
     slug: 'stalking-virtual-consequencias-juridicas-lei-14132-2021',
     title: 'Stalking Virtual e suas Consequências Jurídicas: Análise Completa à Luz da Lei 14.132/2021, Marco Civil, LGPD e Jurisprudência',
