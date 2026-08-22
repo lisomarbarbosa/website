@@ -22,19 +22,21 @@ const UNSPLASH_URL =
  * Cadeia de modelos do OpenRouter.
  * Atualizada em ago/2026 — verificada na API de modelos disponíveis.
  * Ordem: maior capacidade → menor capacidade.
- * Todos testados como gratuitos ou de baixo custo.
+ * Todos confirmados gratuitos em agosto/2026.
+ * Ref: openrouter.ai/collections/free-models
  */
 const MODELS = [
-  "deepseek/deepseek-chat-v3-0324:free",              // DeepSeek Chat V3 (estável ago/2026)
-  "deepseek/deepseek-r1-distill-llama-70b:free",      // DeepSeek R1 Distill 70B
-  "meta-llama/llama-3.3-70b-instruct:free",           // Llama 3.3 70B
-  "meta-llama/llama-3.1-8b-instruct:free",            // Llama 3.1 8B
-  "qwen/qwen2.5-72b-instruct:free",                   // Qwen 2.5 72B
-  "qwen/qwen2.5-7b-instruct:free",                    // Qwen 2.5 7B
-  "mistralai/mistral-7b-instruct:free",               // Mistral 7B
-  "mistralai/mistral-small-3.1-24b-instruct:free",    // Mistral Small 3.1 24B
-  "microsoft/phi-3-medium-128k-instruct:free",        // Phi-3 Medium 128K
-  "google/gemma-2-9b-it:free",                        // Gemma 2 9B
+  "nvidia/nemotron-3-ultra-550b-a55b:free",         // Nemotron 3 Ultra 550B — melhor modelo gratuito atual (1M ctx)
+  "nvidia/nemotron-3-super-120b-a12b:free",          // Nemotron 3 Super 120B (1M ctx)
+  "openai/gpt-oss-120b:free",                        // GPT-OSS 120B — open-weight Apache 2.0 (131K ctx)
+  "openai/gpt-oss-20b:free",                         // GPT-OSS 20B — mais rápido (131K ctx)
+  "google/gemma-4-31b-it:free",                      // Gemma 4 31B — multimodal, bom para textos (262K ctx)
+  "google/gemma-4-26b-a4b-it:free",                  // Gemma 4 26B (262K ctx)
+  "inclusionai/ling-3.0-flash:free",                 // Ling 3.0 Flash — instrução rápida (262K ctx)
+  "poolside/laguna-m.1:free",                        // Laguna M.1 — coding/agent (262K ctx)
+  "poolside/laguna-s-2.1:free",                      // Laguna S 2.1 (262K ctx)
+  "nvidia/nemotron-3-nano-30b-a3b:free",             // Nemotron 3 Nano 30B — eficiente (256K ctx)
+  "meta-llama/llama-3.2-3b-instruct:free",           // Llama 3.2 3B — fallback leve (131K ctx)
 ];
 
 const FALLBACK_IMAGE =
@@ -271,16 +273,28 @@ async function callModel(messages, model, temperature = 0.2) {
 
 /**
  * Percorre a lista MODELS em ordem.
- * Se CUSTOM_MODEL estiver definido, usa apenas ele (sem fallback).
- * Caso contrário, tenta cada modelo até obter resposta.
+ * Se CUSTOM_MODEL estiver definido, tenta ele PRIMEIRO,
+ * mas faz fallback automático para a lista MODELS em caso de erro.
+ * Isso evita falha total quando o modelo customizado sai da camada gratuita.
  */
 async function callOpenRouter(messages, temperature = 0.2) {
+  const chain = [...MODELS];
+
+  // Se CUSTOM_MODEL definido, insere no início como preferência
   if (process.env.CUSTOM_MODEL) {
-    log(`🤖 Usando modelo customizado: ${process.env.CUSTOM_MODEL}`);
-    return callModel(messages, process.env.CUSTOM_MODEL, temperature);
+    const customModel = process.env.CUSTOM_MODEL.trim();
+    log(`🤖 Modelo customizado configurado: ${customModel} (com fallback automático)`);
+    // Insere no início apenas se ainda não estiver na lista
+    if (!chain.includes(customModel)) {
+      chain.unshift(customModel);
+    } else {
+      // Move para o início
+      const idx = chain.indexOf(customModel);
+      chain.splice(idx, 1);
+      chain.unshift(customModel);
+    }
   }
 
-  const chain = [...MODELS];
   let lastError;
   let attemptCount = 0;
 
