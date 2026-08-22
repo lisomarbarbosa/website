@@ -29,7 +29,6 @@ jobs:
       UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CUSTOM_TOPIC: ${{ inputs.tema }}
-      # CUSTOM_MODEL só é definido se o usuário preencheu o campo — evita sobrescrever o fallback automático
       CUSTOM_MODEL: ${{ inputs.modelo_ia != '' && inputs.modelo_ia || '' }}
 
     steps:
@@ -68,6 +67,11 @@ jobs:
             exit 1
           fi
 
+          if [ ! -f "src/data/blog.ts" ]; then
+            echo "❌ src/data/blog.ts não encontrado."
+            exit 1
+          fi
+
           echo "✅ Ambiente validado."
 
       - name: 🤖 Generate, research and audit article
@@ -76,14 +80,20 @@ jobs:
 
       - name: 🔍 Validate generated files
         run: |
-          echo "🔍 Verificando alterações..."
+          echo "🔍 Verificando alterações em src/data/blog.ts e public/sitemap.xml..."
 
           git diff --check
 
-          CHANGED=$(git status --porcelain | grep -E 'src/pages/articles/|src/App\.tsx|public/sitemap\.xml' | wc -l)
-          if [ "$CHANGED" -eq "0" ]; then
-            echo "❌ Nenhuma alteração foi detectada nos arquivos esperados."
+          BLOG_CHANGED=$(git status --porcelain | grep 'src/data/blog.ts' | wc -l)
+          SITEMAP_CHANGED=$(git status --porcelain | grep 'public/sitemap.xml' | wc -l)
+
+          if [ "$BLOG_CHANGED" -eq "0" ]; then
+            echo "❌ src/data/blog.ts não foi modificado. O post não foi gravado."
             exit 1
+          fi
+
+          if [ "$SITEMAP_CHANGED" -eq "0" ]; then
+            echo "⚠️ public/sitemap.xml não foi modificado."
           fi
 
           echo "✅ Arquivos modificados corretamente."
@@ -93,7 +103,12 @@ jobs:
           echo "📝 Novos arquivos e alterações:"
           git status --short
 
-          echo "\n🗺️ Alterações em sitemap.xml:"
+          echo ""
+          echo "📋 Alterações em src/data/blog.ts (primeiras 60 linhas do diff):"
+          git diff -- src/data/blog.ts | head -60
+
+          echo ""
+          echo "🗺️ Alterações em sitemap.xml:"
           git diff --stat -- public/sitemap.xml
 
       - name: 🚀 Commit and push
@@ -104,19 +119,15 @@ jobs:
 
           TITLE=$(node -e "
           const fs = require('fs');
-          const files = fs.readdirSync('src/pages/articles');
-          const newest = files
-            .map(f => ({ f, t: fs.statSync('src/pages/articles/' + f).mtimeMs }))
-            .sort((a,b) => b.t - a.t)[0]?.f || '';
-          const content = newest ? fs.readFileSync('src/pages/articles/' + newest, 'utf8') : '';
-          const match = content.match(/<title>([^<|]+)/);
+          const content = fs.readFileSync('src/data/blog.ts', 'utf8');
+          const match = content.match(/title:\s*'([^']+)'/);
           console.log(match ? match[1].trim() : 'novo artigo de direito digital');
           ")
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add src/pages/articles/ src/App.tsx public/sitemap.xml
+          git add src/data/blog.ts public/sitemap.xml
 
           git commit -m "bot: novo post - ${TITLE} ${TODAY}"
 
