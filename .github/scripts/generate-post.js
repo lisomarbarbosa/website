@@ -25,18 +25,18 @@ const UNSPLASH_URL =
  * Atualizado em ago/2026 — slugs verificados no OpenRouter.
  */
 const MODELS = [
-  "google/gemma-4-31b-it:free",                    // titular – Gemma 4 31B (novo)
-  "nvidia/nemotron-super-49b-v1:free",              // fallback 1 – Nemotron Super 49B
-  "nvidia/llama-3.1-nemotron-ultra-253b-v1:free",  // fallback 2 – Nemotron Ultra 253B
-  "meta-llama/llama-3.3-70b-instruct:free",        // fallback 3
-  "meta-llama/llama-3.1-8b-instruct:free",         // fallback 4
-  "deepseek/deepseek-r1-0528:free",                // fallback 5
-  "deepseek/deepseek-chat-v3-0324:free",           // fallback 6
-  "qwen/qwen3-14b:free",                           // fallback 7
-  "qwen/qwen3-8b:free",                            // fallback 8
-  "mistralai/mistral-7b-instruct:free",            // fallback 9
-  "microsoft/phi-3-mini-128k-instruct:free",       // fallback 10
-  "mistralai/mistral-nemo:free",                   // fallback 11
+  "nvidia/nemotron-3-ultra-550b-a55b:free",           // titular – Nemotron 3 Ultra 550B (1M ctx)
+  "nvidia/nemotron-3-super-120b-a12b:free",           // fallback 1 – Nemotron 3 Super 120B (1M ctx)
+  "openai/gpt-oss-120b:free",                         // fallback 2 – GPT-OSS 120B
+  "google/gemma-4-31b-it:free",                       // fallback 3 – Gemma 4 31B
+  "google/gemma-4-26b-a4b-it:free",                   // fallback 4 – Gemma 4 26B
+  "openai/gpt-oss-20b:free",                          // fallback 5 – GPT-OSS 20B
+  "nvidia/nemotron-3-nano-30b-a3b:free",              // fallback 6 – Nemotron 3 Nano 30B
+  "inclusionai/ling-3.0-flash:free",                  // fallback 7 – Ling 3.0 Flash
+  "meta-llama/llama-3.3-70b-instruct:free",           // fallback 8 – Llama 3.3 70B (estável desde dez/2024)
+  "qwen/qwen3-next-80b-a3b-instruct:free",            // fallback 9 – Qwen3 Next 80B
+  "cohere/north-mini-code:free",                      // fallback 10 – North Mini Code
+  "mistralai/mistral-7b-instruct:free",               // fallback 11 – Mistral 7B
 ];
 
 const FALLBACK_IMAGE =
