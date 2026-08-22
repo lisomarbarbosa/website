@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,19 +20,46 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { label: "Início", href: "#inicio" },
-    { label: "Sobre", href: "#sobre" },
-    { label: "Áreas", href: "#areas" },
-    { label: "Artigos", href: "#artigos" },
-    { label: "Depoimentos", href: "#depoimentos" },
-    { label: "Contato", href: "#contato" },
+    { label: "Início", href: "#inicio", type: "hash" },
+    { label: "Sobre", href: "#sobre", type: "hash" },
+    { label: "Áreas", href: "#areas", type: "hash" },
+    { label: "Depoimentos", href: "#depoimentos", type: "hash" },
+    { label: "Contato", href: "#contato", type: "hash" },
+    { label: "Blog", href: "/blog", type: "page" },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
+  const handleNavClick = (e: React.MouseEvent, item: { href: string; type: string }) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    if (item.type === "page") {
+      navigate(item.href);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    // hash navigation
+    if (location.pathname !== "/") {
+      navigate("/");
+      // wait for route render then scroll
+      setTimeout(() => {
+        const element = document.querySelector(item.href);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const element = document.querySelector(item.href);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.querySelector("#inicio");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -43,11 +73,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a
-            href="#inicio"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("#inicio");
-            }}
+            href="/"
+            onClick={handleLogoClick}
             className="flex items-center space-x-3 group"
           >
             <img src={logo} alt="Lisomar Barbosa Advocacia" className="h-24 lg:h-24 md:h-32 sm:h-32 w-auto transition-smooth group-hover:scale-105" />
@@ -59,11 +86,12 @@ const Header = () => {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-smooth relative group"
+                onClick={(e) => handleNavClick(e, item)}
+                className={`text-sm font-medium transition-smooth relative group ${
+                  item.type === "page" && location.pathname === item.href
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary"
+                }`}
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-accent group-hover:w-full transition-smooth"></span>
@@ -95,11 +123,12 @@ const Header = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className="text-base font-medium text-foreground/80 hover:text-primary transition-smooth px-2 py-1 text-center"
+                  onClick={(e) => handleNavClick(e, item)}
+                  className={`text-base font-medium transition-smooth px-2 py-1 text-center ${
+                    item.type === "page" && location.pathname === item.href
+                      ? "text-primary"
+                      : "text-foreground/80 hover:text-primary"
+                  }`}
                 >
                   {item.label}
                 </a>
