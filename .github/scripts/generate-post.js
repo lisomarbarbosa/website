@@ -1,5 +1,4 @@
 import { readFile, writeFile } from "fs/promises";
-import { copyFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -12,11 +11,15 @@ const ROOT = process.cwd();
 const BLOG_FILE = join(ROOT, "src/data/blog.ts");
 const SITEMAP_FILE = join(ROOT, "public/sitemap.xml");
 
-const OPENROUTER_URL =
-  "https://openrouter.ai/api/v1/chat/completions";
+const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
+const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
-const UNSPLASH_URL =
-  "https://api.unsplash.com/photos/random";
+/**
+ * Número máximo de tentativas do loop curadoria → geração → auditoria.
+ * Não há limite de tempo — a qualidade é o que importa.
+ * O GitHub Actions tem timeout de 6h por job, o que é mais que suficiente.
+ */
+const MAX_ATTEMPTS = 10;
 
 /**
  * Cadeia de modelos do OpenRouter.
@@ -26,17 +29,17 @@ const UNSPLASH_URL =
  * Ref: openrouter.ai/collections/free-models
  */
 const MODELS = [
-  "nvidia/nemotron-3-ultra-550b-a55b:free",         // Nemotron 3 Ultra 550B — melhor modelo gratuito atual (1M ctx)
-  "nvidia/nemotron-3-super-120b-a12b:free",          // Nemotron 3 Super 120B (1M ctx)
-  "openai/gpt-oss-120b:free",                        // GPT-OSS 120B — open-weight Apache 2.0 (131K ctx)
-  "openai/gpt-oss-20b:free",                         // GPT-OSS 20B — mais rápido (131K ctx)
-  "google/gemma-4-31b-it:free",                      // Gemma 4 31B — multimodal, bom para textos (262K ctx)
-  "google/gemma-4-26b-a4b-it:free",                  // Gemma 4 26B (262K ctx)
-  "inclusionai/ling-3.0-flash:free",                 // Ling 3.0 Flash — instrução rápida (262K ctx)
-  "poolside/laguna-m.1:free",                        // Laguna M.1 — coding/agent (262K ctx)
-  "poolside/laguna-s-2.1:free",                      // Laguna S 2.1 (262K ctx)
-  "nvidia/nemotron-3-nano-30b-a3b:free",             // Nemotron 3 Nano 30B — eficiente (256K ctx)
-  "meta-llama/llama-3.2-3b-instruct:free",           // Llama 3.2 3B — fallback leve (131K ctx)
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "openai/gpt-oss-120b:free",
+  "openai/gpt-oss-20b:free",
+  "google/gemma-4-31b-it:free",
+  "google/gemma-4-26b-a4b-it:free",
+  "inclusionai/ling-3.0-flash:free",
+  "poolside/laguna-m.1:free",
+  "poolside/laguna-s-2.1:free",
+  "nvidia/nemotron-3-nano-30b-a3b:free",
+  "meta-llama/llama-3.2-3b-instruct:free",
 ];
 
 const FALLBACK_IMAGE =
@@ -74,7 +77,23 @@ const TOPICS = [
   "Crimes contra a honra praticados pela internet",
   "Difamação nas redes sociais e responsabilidade jurídica",
   "Calúnia e injúria praticadas no ambiente digital",
-  "Preservação de provas digitais em conflitos jurídicos"
+  "Preservação de provas digitais em conflitos jurídicos",
+  // Tópicos extras para o slot 2 (índices 30+)
+  "Direito à privacidade e proteção contra vigilância digital",
+  "Responsabilidade dos provedores de internet no Brasil",
+  "Marco Civil da Internet e seus reflexos práticos",
+  "Phishing e engenharia social: aspectos jurídicos",
+  "Deepfake e responsabilidade civil e penal",
+  "Criptomoedas e regulamentação jurídica no Brasil",
+  "NFTs e propriedade intelectual no ambiente digital",
+  "Inteligência artificial e responsabilidade civil",
+  "Direito ao anonimato na internet e seus limites",
+  "Proteção de menores na internet: obrigações legais",
+  "Assédio digital e responsabilidade jurídica das plataformas",
+  "Revenge porn e tutela jurídica da vítima",
+  "Monitoramento de empregados e proteção de dados",
+  "E-commerce e direito de arrependimento",
+  "Contratos de software e licenças de uso",
 ];
 
 function log(message) {
@@ -121,7 +140,12 @@ function getToday() {
   return new Date().toISOString().slice(0, 10);
 }
 
-function chooseTopic() {
+/**
+ * Escolhe o tema baseado no slot do artigo.
+ * Slot 1: índice por dia do mês (par)
+ * Slot 2: índice deslocado +15 para garantir tema diferente
+ */
+function chooseTopic(slot = 1) {
   if (
     process.env.CUSTOM_TOPIC &&
     process.env.CUSTOM_TOPIC.trim()
@@ -132,271 +156,137 @@ function chooseTopic() {
   const now = new Date();
   const dayIndex = now.getUTCDate() % TOPICS.length;
 
-  return TOPICS[dayIndex];
+  // Slot 2 usa índice deslocado para não repetir o mesmo tema do slot 1
+  const offset = slot === 2 ? 15 : 0;
+  return TOPICS[(dayIndex + offset) % TOPICS.length];
 }
 
 function cleanMarkdown(text) {
   let value = normalizeText(text);
-
   value = value
     .replace(/^```(?:markdown|md)?/i, "")
     .replace(/```$/i, "")
     .trim();
-
   return value;
 }
 
-/**
- * Sanitiza o conteúdo Markdown dentro de um objeto JSON bruto.
- *
- * Problema: modelos grandes (Nemotron 550B, etc.) frequentemente retornam
- * o campo "content" com blocos de código Markdown que contêm backticks triplos
- * (```), o que quebra o JSON porque esses backticks não são escapados.
- *
- * Estratégia:
- * 1. Tenta JSON.parse direto (já funciona se o modelo retornou JSON limpo).
- * 2. Remove envoltório de bloco de código (```json ... ```).
- * 3. Extrai o primeiro { ... } balanceado do texto (robusto para prefixos e sufixos).
- * 4. Aplica sanitização linha-a-linha: dentro do valor do campo "content",
- *    escapa backticks e aspas duplas não escapadas.
- * 5. Tenta reconstruir o JSON substituindo o valor do campo "content"
- *    por uma versão segura extraída via regex não-greedy.
- *
- * @param {string} text - Resposta bruta do modelo.
- * @returns {object} - Objeto JSON parseado.
- * @throws {Error} - Se nenhuma estratégia funcionar.
- */
+// ─── Extração de JSON ─────────────────────────────────────────────────────────
+
 function extractJson(text) {
   const cleaned = normalizeText(text);
 
-  // Estratégia 1: parse direto
-  try {
-    return JSON.parse(cleaned);
-  } catch (_) {}
+  try { return JSON.parse(cleaned); } catch (_) {}
 
-  // Estratégia 2: remover bloco de código ```json ... ```
   const fenced = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fenced) {
-    try {
-      return JSON.parse(fenced[1].trim());
-    } catch (_) {}
+    try { return JSON.parse(fenced[1].trim()); } catch (_) {}
   }
 
-  // Estratégia 3: extrair { ... } balanceado
   const balanced = extractBalancedJson(cleaned);
   if (balanced !== null) {
-    try {
-      return JSON.parse(balanced);
-    } catch (_) {}
-
-    // Estratégia 4: sanitizar o campo "content" e tentar novamente
+    try { return JSON.parse(balanced); } catch (_) {}
     try {
       const sanitized = sanitizeContentField(balanced);
       return JSON.parse(sanitized);
     } catch (_) {}
   }
 
-  // Estratégia 5: reconstrução cirúrgica do campo "content"
-  try {
-    return reconstructJsonWithContent(cleaned);
-  } catch (_) {}
+  try { return reconstructJsonWithContent(cleaned); } catch (_) {}
 
-  throw new Error(
-    "A IA não retornou um JSON válido."
-  );
+  throw new Error("A IA não retornou um JSON válido.");
 }
 
-/**
- * Extrai o JSON balanceado mais externo de uma string.
- * Conta abertura/fechamento de chaves para encontrar o objeto completo.
- */
 function extractBalancedJson(text) {
   const start = text.indexOf("{");
   if (start === -1) return null;
-
-  let depth = 0;
-  let inString = false;
-  let escape = false;
-
+  let depth = 0, inString = false, escape = false;
   for (let i = start; i < text.length; i++) {
     const ch = text[i];
-
-    if (escape) {
-      escape = false;
-      continue;
-    }
-
-    if (ch === "\\") {
-      escape = true;
-      continue;
-    }
-
-    if (ch === '"') {
-      inString = !inString;
-      continue;
-    }
-
+    if (escape) { escape = false; continue; }
+    if (ch === "\\") { escape = true; continue; }
+    if (ch === '"') { inString = !inString; continue; }
     if (inString) continue;
-
     if (ch === "{") depth++;
-    else if (ch === "}") {
-      depth--;
-      if (depth === 0) {
-        return text.slice(start, i + 1);
-      }
-    }
+    else if (ch === "}") { depth--; if (depth === 0) return text.slice(start, i + 1); }
   }
-
   return null;
 }
 
-/**
- * Sanitiza o campo "content" dentro de um JSON bruto.
- *
- * Identifica o valor do campo "content" (que pode conter Markdown com
- * backticks e newlines literais) e o substitui por uma versão segura
- * onde newlines são \n e backticks são escapados.
- */
 function sanitizeContentField(jsonStr) {
-  // Localiza o início do valor de "content"
   const contentKeyMatch = jsonStr.match(/"content"\s*:\s*"/);
   if (!contentKeyMatch) return jsonStr;
-
   const valueStart = jsonStr.indexOf(contentKeyMatch[0]) + contentKeyMatch[0].length;
-
-  // Encontra o fim da string do valor, respeitando escapes
-  let i = valueStart;
-  let escape = false;
+  let i = valueStart, escape = false;
   while (i < jsonStr.length) {
     const ch = jsonStr[i];
-    if (escape) {
-      escape = false;
-      i++;
-      continue;
-    }
-    if (ch === "\\") {
-      escape = true;
-      i++;
-      continue;
-    }
-    if (ch === '"') {
-      break;
-    }
+    if (escape) { escape = false; i++; continue; }
+    if (ch === "\\") { escape = true; i++; continue; }
+    if (ch === '"') break;
     i++;
   }
-
   const rawValue = jsonStr.slice(valueStart, i);
-
-  // Sanitiza: escapa caracteres problemáticos
   const safeValue = rawValue
-    .replace(/\\/g, "\\\\")      // escapa backslashes primeiro
-    .replace(/"/g, '\\"')        // escapa aspas duplas internas
-    .replace(/\n/g, "\\n")       // newlines literais → \n
-    .replace(/\r/g, "\\r")       // CR literais → \r
-    .replace(/\t/g, "\\t");      // tabs literais → \t
-
-  return (
-    jsonStr.slice(0, valueStart) +
-    safeValue +
-    jsonStr.slice(i)
-  );
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, "\\n")
+    .replace(/\r/g, "\\r")
+    .replace(/\t/g, "\\t");
+  return jsonStr.slice(0, valueStart) + safeValue + jsonStr.slice(i);
 }
 
-/**
- * Reconstrução cirúrgica: extrai cada campo do JSON pelo nome
- * e monta um objeto manualmente quando o JSON está malformado
- * mas os campos ainda são identificáveis.
- */
 function reconstructJsonWithContent(text) {
-  // Remove envoltório de bloco de código se existir
   let src = text.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
-
   const fields = ["title", "excerpt", "slug", "category", "content",
                   "status", "issues", "verified_claims", "unverified_claims",
                   "topic", "legal_basis", "jurisprudence", "consumer_law",
                   "civil_law", "criminal_law", "digital_law",
                   "constitutional_basis", "unverified_information", "warnings"];
-
   const result = {};
-
   for (const field of fields) {
-    // Tenta extrair valor de string simples: "field": "..."
     const strMatch = src.match(
       new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`, "s")
     );
     if (strMatch) {
-      try {
-        result[field] = JSON.parse(`"${strMatch[1]}"`);
-      } catch (_) {
-        result[field] = strMatch[1];
-      }
+      try { result[field] = JSON.parse(`"${strMatch[1]}"`); } catch (_) { result[field] = strMatch[1]; }
       continue;
     }
-
-    // Tenta extrair valor de array ou objeto: "field": [ ... ] ou { ... }
-    const arrObjMatch = src.match(
-      new RegExp(`"${field}"\\s*:\\s*([\\[\\{])`)
-    );
+    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\\[\\{])`));
     if (arrObjMatch) {
       const opener = arrObjMatch[1];
       const closer = opener === "[" ? "]" : "}";
       const startIdx = src.indexOf(arrObjMatch[0]) + arrObjMatch[0].length - 1;
       const extracted = extractBalancedBracket(src, startIdx, opener, closer);
       if (extracted !== null) {
-        try {
-          result[field] = JSON.parse(extracted);
-        } catch (_) {
-          result[field] = [];
-        }
+        try { result[field] = JSON.parse(extracted); } catch (_) { result[field] = []; }
       }
       continue;
     }
   }
-
-  if (Object.keys(result).length === 0) {
-    throw new Error("Nenhum campo identificado na reconstrução.");
-  }
-
+  if (Object.keys(result).length === 0) throw new Error("Nenhum campo identificado na reconstrução.");
   return result;
 }
 
-/**
- * Extrai uma estrutura balanceada (array ou objeto) a partir de um índice.
- */
 function extractBalancedBracket(text, startIdx, opener, closer) {
-  let depth = 0;
-  let inString = false;
-  let escape = false;
-
+  let depth = 0, inString = false, escape = false;
   for (let i = startIdx; i < text.length; i++) {
     const ch = text[i];
-
     if (escape) { escape = false; continue; }
     if (ch === "\\") { escape = true; continue; }
     if (ch === '"') { inString = !inString; continue; }
     if (inString) continue;
-
     if (ch === opener) depth++;
-    else if (ch === closer) {
-      depth--;
-      if (depth === 0) return text.slice(startIdx, i + 1);
-    }
+    else if (ch === closer) { depth--; if (depth === 0) return text.slice(startIdx, i + 1); }
   }
-
   return null;
 }
 
-/**
- * Verifica disponibilidade da API antes de iniciar.
- * Retorna lista de modelos disponíveis para diagnóstico.
- */
+// ─── API OpenRouter ───────────────────────────────────────────────────────────
+
 async function checkApiKey() {
   if (!process.env.OPENROUTER_API_KEY) {
     throw new Error("OPENROUTER_API_KEY não está definida nos secrets do repositório.");
   }
-
   log(`🔑 OPENROUTER_API_KEY encontrada (${process.env.OPENROUTER_API_KEY.length} chars).`);
-
   try {
     const response = await fetch("https://openrouter.ai/api/v1/models", {
       headers: {
@@ -404,141 +294,71 @@ async function checkApiKey() {
         "Content-Type": "application/json"
       }
     });
-
-    if (!response.ok) {
-      log(`⚠️ Não foi possível listar modelos disponíveis: HTTP ${response.status}`);
-      return;
-    }
-
+    if (!response.ok) { log(`⚠️ Não foi possível listar modelos: HTTP ${response.status}`); return; }
     const data = await response.json();
     const available = (data.data || []).map(m => m.id);
-    const freeAvailable = available.filter(id => id.endsWith(":free"));
-
-    log(`📋 Modelos gratuitos disponíveis na conta: ${freeAvailable.length}`);
-
     const configured = MODELS.filter(m => available.includes(m));
-    const missing = MODELS.filter(m => !available.includes(m));
-
-    if (configured.length > 0) {
-      log(`✅ Modelos configurados e disponíveis: ${configured.join(", ")}`);
-    }
-    if (missing.length > 0) {
-      log(`⚠️ Modelos configurados mas INDISPONÍVEIS: ${missing.join(", ")}`);
-    }
-
+    const missing    = MODELS.filter(m => !available.includes(m));
+    if (configured.length > 0) log(`✅ Modelos disponíveis: ${configured.join(", ")}`);
+    if (missing.length > 0)    log(`⚠️ Modelos INDISPONÍVEIS: ${missing.join(", ")}`);
     return configured;
   } catch (err) {
-    log(`⚠️ Erro ao verificar modelos disponíveis: ${err.message}`);
+    log(`⚠️ Erro ao verificar modelos: ${err.message}`);
   }
 }
 
-/**
- * Tenta a chamada no modelo fornecido.
- * Lança erro se HTTP não-ok ou sem conteúdo.
- */
 async function callModel(messages, model, temperature = 0.2) {
   const response = await fetch(OPENROUTER_URL, {
     method: "POST",
     headers: {
-      "Authorization":
-        `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
       "Content-Type": "application/json",
-      "HTTP-Referer":
-        "https://www.lisomarbarbosa.adv.br",
-      "X-Title":
-        "Lisomar Barbosa Advogados - Direito Digital"
+      "HTTP-Referer": "https://www.lisomarbarbosa.adv.br",
+      "X-Title": "Lisomar Barbosa Advogados - Direito Digital"
     },
-    body: JSON.stringify({
-      model,
-      temperature,
-      messages
-    })
+    body: JSON.stringify({ model, temperature, messages })
   });
-
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(
-      `OpenRouter HTTP ${response.status}: ${errorText}`
-    );
+    throw new Error(`OpenRouter HTTP ${response.status}: ${errorText}`);
   }
-
   const data = await response.json();
-
-  const content =
-    data &&
-    data.choices &&
-    data.choices[0] &&
-    data.choices[0].message &&
-    data.choices[0].message.content;
-
-  if (!content) {
-    throw new Error(
-      "OpenRouter não retornou conteúdo."
-    );
-  }
-
+  const content = data?.choices?.[0]?.message?.content;
+  if (!content) throw new Error("OpenRouter não retornou conteúdo.");
   return content;
 }
 
-/**
- * Percorre a lista MODELS em ordem.
- * Se CUSTOM_MODEL estiver definido, tenta ele PRIMEIRO,
- * mas faz fallback automático para a lista MODELS em caso de erro.
- * Isso evita falha total quando o modelo customizado sai da camada gratuita.
- */
 async function callOpenRouter(messages, temperature = 0.2) {
   const chain = [...MODELS];
-
-  // Se CUSTOM_MODEL definido, insere no início como preferência
   if (process.env.CUSTOM_MODEL) {
     const customModel = process.env.CUSTOM_MODEL.trim();
-    log(`🤖 Modelo customizado configurado: ${customModel} (com fallback automático)`);
-    // Insere no início apenas se ainda não estiver na lista
-    if (!chain.includes(customModel)) {
-      chain.unshift(customModel);
-    } else {
-      // Move para o início
-      const idx = chain.indexOf(customModel);
-      chain.splice(idx, 1);
-      chain.unshift(customModel);
-    }
+    log(`🤖 Modelo customizado: ${customModel} (com fallback automático)`);
+    if (!chain.includes(customModel)) chain.unshift(customModel);
+    else { const idx = chain.indexOf(customModel); chain.splice(idx, 1); chain.unshift(customModel); }
   }
-
   let lastError;
-  let attemptCount = 0;
-
-  for (const model of chain) {
-    attemptCount++;
+  for (let i = 0; i < chain.length; i++) {
+    const model = chain[i];
     try {
-      log(`🤖 [${attemptCount}/${chain.length}] Tentando modelo: ${model}`);
+      log(`🤖 [${i + 1}/${chain.length}] Tentando: ${model}`);
       const result = await callModel(messages, model, temperature);
-      log(`✅ Modelo usado com sucesso: ${model}`);
+      log(`✅ Sucesso: ${model}`);
       return result;
     } catch (error) {
-      log(`⚠️ Modelo ${model} falhou (${error.message.slice(0, 120)})`);
+      log(`⚠️ ${model} falhou: ${error.message.slice(0, 120)}`);
       lastError = error;
     }
   }
-
-  throw new Error(
-    `Todos os ${chain.length} modelos falharam. Último erro: ${lastError?.message}`
-  );
+  throw new Error(`Todos os ${chain.length} modelos falharam. Último erro: ${lastError?.message}`);
 }
+
+// ─── Pesquisa / Curadoria ─────────────────────────────────────────────────────
 
 async function fetchUrl(url) {
   const response = await fetch(url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (compatible; LisomarBarbosaLegalResearchBot/1.0)"
-    }
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; LisomarBarbosaLegalResearchBot/1.0)" }
   });
-
-  if (!response.ok) {
-    throw new Error(
-      `HTTP ${response.status} ao acessar ${url}`
-    );
-  }
-
+  if (!response.ok) throw new Error(`HTTP ${response.status} ao acessar ${url}`);
   return await response.text();
 }
 
@@ -550,42 +370,25 @@ function stripHtml(html) {
       .replace(/<noscript[\s\S]*?<\/noscript>/gi, " ")
       .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
       .replace(/<[^>]+>/g, " ")
-      .replace(/&nbsp;/gi, " ")
-      .replace(/&amp;/gi, "&")
-      .replace(/&quot;/gi, '"')
-      .replace(/&#39;/gi, "'")
+      .replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&")
+      .replace(/&quot;/gi, '"').replace(/&#39;/gi, "'")
       .replace(/\s+/g, " ")
   );
 }
 
 async function searchJusbrasil(topic) {
   log("🔎 Pesquisando Jusbrasil...");
-
   const query = encodeURIComponent(topic);
-
-  const url =
-    `https://www.jusbrasil.com.br/busca?q=${query}`;
-
+  const url = `https://www.jusbrasil.com.br/busca?q=${query}`;
   try {
     const html = await fetchUrl(url);
-
     const text = stripHtml(html);
-
-    return {
-      source: "Jusbrasil",
-      url,
-      content: text.slice(0, 30000)
-    };
+    return { source: "Jusbrasil", url, content: text.slice(0, 30000) };
   } catch (error) {
-    log(
-      `⚠️ Não foi possível consultar diretamente o Jusbrasil: ${error.message}`
-    );
-
+    log(`⚠️ Jusbrasil indisponível: ${error.message}`);
     return {
-      source: "Jusbrasil",
-      url,
-      content:
-        "A consulta automática ao Jusbrasil falhou. NÃO presumir resultados, jurisprudência ou decisões."
+      source: "Jusbrasil", url,
+      content: "Consulta ao Jusbrasil falhou. NÃO presumir resultados, jurisprudência ou decisões."
     };
   }
 }
@@ -595,113 +398,55 @@ function buildLegalResearchInstructions(topic) {
 Você está realizando uma CURADORIA JURÍDICA preliminar para produção editorial
 do escritório Lisomar Barbosa Advogados.
 
-TEMA:
-${topic}
-
-OBJETIVO:
-Identificar somente informações jurídicas que possam ser verificadas.
+TEMA: ${topic}
 
 FONTES PRIORITÁRIAS:
-
 1. Constituição Federal do Brasil.
 2. Legislação brasileira aplicável.
 3. Código Civil.
 4. Código de Defesa do Consumidor.
 5. Código Penal.
-6. Legislação especificamente relacionada ao ambiente digital.
-7. Jurisprudência e decisões encontradas no Jusbrasil.
+6. Legislação específica do ambiente digital.
+7. Jurisprudência verificável do Jusbrasil.
 
-REGRAS ABSOLUTAS:
+REGRAS ABSOLUTAS — PROIBIDO:
+- Inventar lei, artigo, inciso ou parágrafo.
+- Inventar número de processo judicial.
+- Inventar tribunal, magistrado, relator ou ementa.
+- Atribuir decisão a tribunal sem fonte verificável.
+- Transformar hipótese em fato jurídico.
+- Tratar interpretação doutrinária como texto legal.
+- Afirmar que conduta "sempre" gera indenização ou "nunca" gera responsabilidade.
+- Criar jurisprudência para tornar o artigo mais convincente.
 
-- NÃO invente lei.
-- NÃO invente artigo de lei.
-- NÃO invente número de processo.
-- NÃO invente tribunal.
-- NÃO invente desembargador, ministro, juiz ou relator.
-- NÃO invente ementa.
-- NÃO atribua decisão judicial a tribunal sem fonte verificável.
-- NÃO transforme hipótese em fato jurídico.
-- NÃO trate interpretação doutrinária como texto legal.
-- NÃO invente orientação jurídica.
-- NÃO diga que determinada conduta "sempre" gera indenização.
-- NÃO diga que determinada conduta "nunca" gera responsabilidade.
-- NÃO faça promessa de resultado judicial.
-- NÃO crie jurisprudência apenas para tornar o artigo mais convincente.
-
-Se uma informação não puder ser confirmada, marque-a como:
+Se uma informação não puder ser confirmada, marque como:
 "INFORMAÇÃO NÃO CONFIRMADA - NÃO PUBLICAR".
-
-Jurisprudência somente pode ser utilizada quando houver dados verificáveis
-e uma fonte correspondente.
-
-Não utilizar blogs jurídicos desconhecidos como autoridade jurídica.
-
-O objetivo da pesquisa não é produzir o artigo.
-É produzir uma base de fatos verificáveis para posterior redação e auditoria.
 `;
 }
 
 async function createResearch(topic) {
   const jusbrasil = await searchJusbrasil(topic);
-
   const system = `
 Você é um pesquisador jurídico extremamente conservador.
-
 Sua função é fazer curadoria factual antes da produção de um artigo sobre Direito Digital.
-
-Você NÃO deve escrever o artigo.
-
-Você deve separar:
-
-- legislação;
-- dispositivos legais;
-- princípios constitucionais;
-- conceitos jurídicos;
-- jurisprudência verificável;
-- informações que não puderam ser confirmadas.
-
+Você NÃO deve escrever o artigo — apenas separar e validar informações.
 Não invente absolutamente nenhuma informação.
-
-Quando houver dúvida, diga que a informação não foi confirmada.
-
-Nunca complete números de artigos, processos ou decisões por memória.
-
+Quando houver dúvida, marque como não confirmado.
 ${buildLegalResearchInstructions(topic)}
 `;
-
   const user = `
 Realize a curadoria preliminar sobre:
-
 ${topic}
 
 Material obtido do Jusbrasil:
+FONTE: ${jusbrasil.url}
+CONTEÚDO: ${jusbrasil.content}
 
-FONTE:
-${jusbrasil.url}
-
-CONTEÚDO:
-${jusbrasil.content}
-
-Retorne exclusivamente JSON válido neste formato:
-
+Retorne exclusivamente JSON válido:
 {
   "topic": "...",
-  "legal_basis": [
-    {
-      "name": "...",
-      "reference": "...",
-      "explanation": "...",
-      "source": "..."
-    }
-  ],
-  "jurisprudence": [
-    {
-      "court": "...",
-      "case": "...",
-      "summary": "...",
-      "source": "..."
-    }
-  ],
+  "legal_basis": [{"name":"...","reference":"...","explanation":"...","source":"..."}],
+  "jurisprudence": [{"court":"...","case":"...","summary":"...","source":"..."}],
   "consumer_law": [],
   "civil_law": [],
   "criminal_law": [],
@@ -710,75 +455,46 @@ Retorne exclusivamente JSON válido neste formato:
   "unverified_information": [],
   "warnings": []
 }
-
-Se não houver jurisprudência suficientemente verificável,
-retorne "jurisprudence": [].
-
-Não invente fontes.
+Se não houver jurisprudência verificável, retorne "jurisprudence": [].
 `;
-
   return extractJson(
-    await callOpenRouter(
-      [
-        { role: "system", content: system },
-        { role: "user", content: user }
-      ],
-      0.1
-    )
+    await callOpenRouter([{ role: "system", content: system }, { role: "user", content: user }], 0.1)
   );
 }
 
+// ─── Geração do artigo ────────────────────────────────────────────────────────
+
 function buildArticleSystemPrompt() {
   return `
-Você é o redator jurídico especializado em Direito Digital do escritório
-Lisomar Barbosa Advogados.
+Você é o redator jurídico especializado em Direito Digital do escritório Lisomar Barbosa Advogados.
+SITE: https://www.lisomarbarbosa.adv.br
 
-SITE:
-https://www.lisomarbarbosa.adv.br
-
-Seu trabalho é produzir conteúdo jurídico informativo, rigoroso,
-responsável e verificável.
-
-ESPECIALIDADE CENTRAL:
-DIREITO DIGITAL.
+Seu trabalho é produzir conteúdo jurídico informativo, rigoroso, responsável e verificável.
 
 REGRA MAIS IMPORTANTE: NÃO INVENTAR.
-
-Não invente leis, artigos, incisos, jurisprudência, números de processos,
-decisões, tribunais, nomes de magistrados, datas de julgamentos, súmulas,
-precedentes, entendimentos atribuídos a tribunais, obrigações que não
-estejam previstas em lei, direitos que não possam ser sustentados juridicamente.
-
-SEO deve ser consequência da qualidade do conteúdo, não o contrário.
+Não invente leis, artigos, incisos, jurisprudência, números de processos, decisões,
+tribunais, nomes de magistrados, datas de julgamentos, súmulas, precedentes,
+obrigações não previstas em lei, direitos juridicamente insustentáveis.
 
 REGRA DE FORMATAÇÃO CRÍTICA:
 O campo "content" deve conter APENAS texto Markdown simples.
-NÃO use blocos de código (não use \`\`\` em nenhum momento dentro do content).
+NÃO use blocos de código (sem \`\`\` em nenhum momento dentro do content).
 NÃO use aspas duplas literais dentro do content sem escapá-las com \\.
-Use apenas # ## ### para títulos, * para itálico, ** para negrito,
-- para listas. Nada além disso.
+Use apenas # ## ### para títulos, * para itálico, ** para negrito, - para listas.
 `;
 }
 
 function buildArticleUserPrompt(topic, research) {
   return `
-Escreva um artigo completo para o blog do site:
-
+Escreva um artigo completo para o blog:
 https://www.lisomarbarbosa.adv.br
 
-TEMA:
-${topic}
+TEMA: ${topic}
 
 O artigo precisa ter NO MÍNIMO ${MIN_WORDS} palavras.
-
-Antes de aceitar o artigo, conte as palavras.
-
-Se tiver menos de ${MIN_WORDS} palavras, reescreva e amplie.
-
-FORMATO DE SAÍDA:
+Conte as palavras antes de finalizar. Se tiver menos de ${MIN_WORDS}, reescreva e amplie.
 
 Retorne exclusivamente JSON válido:
-
 {
   "title": "...",
   "excerpt": "...",
@@ -789,53 +505,40 @@ Retorne exclusivamente JSON válido:
 
 REGRAS DO CAMPO content:
 - Markdown puro, SEM blocos de código (sem \`\`\`).
-- Newlines representadas como \\n dentro da string JSON.
-- Aspas duplas dentro do texto devem ser escapadas como \\".
-- NÃO inclua o JSON dentro de um bloco de código.
+- Newlines como \\n dentro da string JSON.
+- Aspas duplas escapadas como \\".
+- NÃO inclua o JSON dentro de bloco de código.
 
 BASE DA CURADORIA JURÍDICA:
-
 ${JSON.stringify(research, null, 2)}
 `;
 }
 
 async function generateArticle(topic, research) {
   log("🤖 Gerando artigo jurídico...");
-
   return extractJson(
     await callOpenRouter(
-      [
-        { role: "system", content: buildArticleSystemPrompt() },
-        { role: "user", content: buildArticleUserPrompt(topic, research) }
-      ],
+      [{ role: "system", content: buildArticleSystemPrompt() }, { role: "user", content: buildArticleUserPrompt(topic, research) }],
       0.35
     )
   );
 }
 
 async function expandArticle(article, research) {
-  log("🤖 Artigo abaixo do mínimo. Solicitando expansão...");
-
+  log("🤖 Artigo abaixo do mínimo — solicitando expansão...");
   const prompt = `
 O artigo abaixo possui menos de ${MIN_WORDS} palavras.
-
 Não altere a tese jurídica central.
-
 Não invente novas leis, jurisprudência, decisões ou processos.
-
-Amplie o artigo somente desenvolvendo explicações, fundamentos,
-distinções, exemplos hipotéticos e consequências possíveis.
+Amplie desenvolvendo explicações, fundamentos, distinções, exemplos hipotéticos e consequências.
 
 Base de pesquisa:
-
 ${JSON.stringify(research, null, 2)}
 
 Artigo atual:
-
 ${JSON.stringify(article)}
 
 Retorne exclusivamente JSON:
-
 {
   "title": "...",
   "excerpt": "...",
@@ -843,170 +546,111 @@ Retorne exclusivamente JSON:
   "category": "Direito Digital",
   "content": "..."
 }
-
 REGRAS DO CAMPO content:
 - Markdown puro, SEM blocos de código (sem \`\`\`).
-- Newlines representadas como \\n dentro da string JSON.
-- Aspas duplas dentro do texto devem ser escapadas como \\".
+- Newlines como \\n.
+- Aspas duplas escapadas como \\".
 `;
-
   return extractJson(
     await callOpenRouter(
-      [
-        { role: "system", content: buildArticleSystemPrompt() },
-        { role: "user", content: prompt }
-      ],
+      [{ role: "system", content: buildArticleSystemPrompt() }, { role: "user", content: prompt }],
       0.25
     )
   );
 }
 
+// ─── Auditoria jurídica ───────────────────────────────────────────────────────
+
 async function auditArticle(article, research) {
   log("⚖️ Iniciando auditoria jurídica independente...");
-
   const prompt = `
-Você é o revisor jurídico responsável por impedir a publicação de
-informações jurídicas falsas.
+Você é o revisor jurídico responsável por impedir a publicação de informações jurídicas falsas.
 
-Analise o artigo abaixo.
+Analise o artigo abaixo com máximo rigor.
 
 ARTIGO:
-
 ${JSON.stringify(article, null, 2)}
 
-PESQUISA:
-
+PESQUISA DE BASE:
 ${JSON.stringify(research, null, 2)}
 
-Retorne exclusivamente:
+CRITÉRIOS DE REPROVAÇÃO (status: "FAIL"):
+- Qualquer lei, artigo ou inciso inventado ou não verificável.
+- Qualquer número de processo judicial inventado.
+- Qualquer decisão atribuída a tribunal sem fonte verificável.
+- Qualquer afirmação categórica sobre resultado judicial ("sempre gera indenização", etc.).
+- Qualquer informação que contradiga a base de pesquisa fornecida.
+- Qualquer jurisprudência que não possa ser verificada.
 
+Retorne exclusivamente JSON:
 {
   "status": "PASS" ou "FAIL",
-  "issues": [
-    {
-      "severity": "critical",
-      "text": "...",
-      "location": "..."
-    }
-  ],
+  "issues": [{"severity": "critical", "text": "...", "location": "..."}],
   "verified_claims": [],
   "unverified_claims": []
 }
 `;
-
   return extractJson(
     await callOpenRouter(
-      [
-        {
-          role: "system",
-          content: `Você é um auditor jurídico conservador. Quando não puder confirmar, marque como FAIL.`
-        },
-        { role: "user", content: prompt }
-      ],
+      [{ role: "system", content: "Você é um auditor jurídico conservador. Quando não puder confirmar, marque como FAIL." }, { role: "user", content: prompt }],
       0.05
     )
   );
 }
 
+// ─── Verificação de links ─────────────────────────────────────────────────────
+
 async function verifyLinks(content) {
-  const urls = content.match(
-    /https?:\/\/[^\s)"'>]+/g
-  ) || [];
-
+  const urls = content.match(/https?:\/\/[^\s)"'>]+/g) || [];
   const uniqueUrls = [...new Set(urls)];
-
-  if (!uniqueUrls.length) {
-    return [];
-  }
-
+  if (!uniqueUrls.length) return [];
   log(`🔗 Verificando ${uniqueUrls.length} link(s)...`);
-
   const results = [];
-
   for (const url of uniqueUrls) {
     try {
       const response = await fetch(url, {
-        method: "HEAD",
-        redirect: "follow",
-        headers: {
-          "User-Agent": "Mozilla/5.0 LisomarBarbosaLegalBot"
-        }
+        method: "HEAD", redirect: "follow",
+        headers: { "User-Agent": "Mozilla/5.0 LisomarBarbosaLegalBot" }
       });
-
-      results.push({
-        url,
-        status: response.status,
-        ok: response.ok
-      });
+      results.push({ url, status: response.status, ok: response.ok });
     } catch (error) {
-      results.push({
-        url,
-        status: null,
-        ok: false,
-        error: error.message
-      });
+      results.push({ url, status: null, ok: false, error: error.message });
     }
   }
-
   return results;
 }
 
+// ─── Validação estrutural ─────────────────────────────────────────────────────
+
 function validateArticleStructure(article) {
-  if (!article || typeof article !== "object") {
-    throw new Error("Objeto de artigo inválido.");
-  }
-
+  if (!article || typeof article !== "object") throw new Error("Objeto de artigo inválido.");
   const required = ["title", "excerpt", "slug", "category", "content"];
-
   for (const field of required) {
-    if (!article[field] || typeof article[field] !== "string") {
+    if (!article[field] || typeof article[field] !== "string")
       throw new Error(`Campo obrigatório ausente ou inválido: ${field}`);
-    }
   }
-
   const words = countWords(article.content);
-
-  if (words < MIN_WORDS) {
-    throw new Error(
-      `Artigo possui apenas ${words} palavras. Mínimo: ${MIN_WORDS}.`
-    );
-  }
-
-  if (!/^Direito Digital$/i.test(article.category)) {
-    article.category = "Direito Digital";
-  }
-
+  if (words < MIN_WORDS)
+    throw new Error(`Artigo possui apenas ${words} palavras. Mínimo: ${MIN_WORDS}.`);
+  if (!/^Direito Digital$/i.test(article.category)) article.category = "Direito Digital";
   return words;
 }
 
-function removeExistingSlug(blogContent, slug) {
-  const escaped = slug.replace(
-    /[.*+?^${}()|[\]\\]/g,
-    "\\$&"
-  );
+// ─── Blog e Sitemap ───────────────────────────────────────────────────────────
 
-  const regex = new RegExp(
-    `slug:\\s*['"]${escaped}['"]`,
-    "i"
-  );
-
-  return regex.test(blogContent);
+function slugAlreadyExists(blogContent, slug) {
+  const escaped = slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`slug:\\s*['"]${escaped}['"]`, "i").test(blogContent);
 }
 
 function buildPostObject(article, imageUrl, date) {
   const words = countWords(article.content);
-
-  const safeContent = escapeTypeScriptString(article.content);
-  const safeTitle = escapeTypeScriptString(article.title);
-  const safeExcerpt = escapeTypeScriptString(article.excerpt);
-  const safeSlug = escapeTypeScriptString(
-    slugify(article.slug || article.title)
-  );
-  const safeCategory = escapeTypeScriptString(
-    article.category || "Direito Digital"
-  );
-  const safeImage = escapeTypeScriptString(imageUrl);
-
+  const safeContent  = escapeTypeScriptString(article.content);
+  const safeTitle    = escapeTypeScriptString(article.title);
+  const safeExcerpt  = escapeTypeScriptString(article.excerpt);
+  const safeSlug     = escapeTypeScriptString(slugify(article.slug || article.title));
+  const safeCategory = escapeTypeScriptString(article.category || "Direito Digital");
+  const safeImage    = escapeTypeScriptString(imageUrl);
   return `
   {
     slug: '${safeSlug}',
@@ -1022,50 +666,26 @@ function buildPostObject(article, imageUrl, date) {
 
 async function updateBlogFile(article, imageUrl, date) {
   log("📝 Atualizando src/data/blog.ts...");
-
   const original = await readFile(BLOG_FILE, "utf8");
-
   const slug = slugify(article.slug || article.title);
-
-  if (removeExistingSlug(original, slug)) {
-    throw new Error(
-      `O slug "${slug}" já existe em blog.ts. Publicação cancelada para evitar duplicação.`
-    );
-  }
-
+  if (slugAlreadyExists(original, slug))
+    throw new Error(`Slug "${slug}" já existe. Publicação cancelada para evitar duplicação.`);
   const post = buildPostObject(article, imageUrl, date);
-
   const arrayStart = original.indexOf("[");
-
-  if (arrayStart === -1) {
-    throw new Error(
-      "Não foi encontrado o início do array blogPosts."
-    );
-  }
-
-  const updated =
-    original.slice(0, arrayStart + 1) +
-    post +
-    original.slice(arrayStart + 1);
-
+  if (arrayStart === -1) throw new Error("Início do array blogPosts não encontrado.");
+  const updated = original.slice(0, arrayStart + 1) + post + original.slice(arrayStart + 1);
   await writeFile(BLOG_FILE, updated, "utf8");
-
   log("✅ blog.ts atualizado.");
 }
 
 async function updateSitemap(slug, date) {
   log("🗺️ Atualizando sitemap.xml...");
-
   const original = await readFile(SITEMAP_FILE, "utf8");
-
-  const loc =
-    `https://www.lisomarbarbosa.adv.br/blog/${slug}`;
-
+  const loc = `https://www.lisomarbarbosa.adv.br/blog/${slug}`;
   if (original.includes(`<loc>${loc}</loc>`)) {
-    log("⚠️ URL já existe no sitemap. Nenhuma duplicação será criada.");
+    log("⚠️ URL já existe no sitemap. Sem duplicação.");
     return;
   }
-
   const entry = `
   <url>
     <loc>${loc}</loc>
@@ -1074,58 +694,29 @@ async function updateSitemap(slug, date) {
     <priority>0.8</priority>
   </url>
 `;
-
   const closingTag = "</urlset>";
-
   const index = original.lastIndexOf(closingTag);
-
-  if (index === -1) {
-    throw new Error("Tag </urlset> não encontrada no sitemap.");
-  }
-
-  const updated =
-    original.slice(0, index) +
-    entry +
-    original.slice(index);
-
+  if (index === -1) throw new Error("Tag </urlset> não encontrada no sitemap.");
+  const updated = original.slice(0, index) + entry + original.slice(index);
   await writeFile(SITEMAP_FILE, updated, "utf8");
-
   log("✅ sitemap.xml atualizado.");
 }
 
 async function getUnsplashImage(topic) {
   log("🖼️ Buscando imagem no Unsplash...");
-
   if (!process.env.UNSPLASH_ACCESS_KEY) {
     log("⚠️ UNSPLASH_ACCESS_KEY ausente. Usando fallback.");
     return FALLBACK_IMAGE;
   }
-
-  const query = encodeURIComponent(
-    `${topic} law technology digital`
-  );
-
-  const url =
-    `${UNSPLASH_URL}?query=${query}&orientation=landscape&content_filter=high`;
-
+  const query = encodeURIComponent(`${topic} law technology digital`);
+  const url = `${UNSPLASH_URL}?query=${query}&orientation=landscape&content_filter=high`;
   try {
     const response = await fetch(url, {
-      headers: {
-        "Authorization":
-          `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`
-      }
+      headers: { "Authorization": `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}` }
     });
-
-    if (!response.ok) {
-      throw new Error(`Unsplash HTTP ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`Unsplash HTTP ${response.status}`);
     const data = await response.json();
-
-    if (data && data.urls && data.urls.regular) {
-      return data.urls.regular;
-    }
-
+    if (data?.urls?.regular) return data.urls.regular;
     throw new Error("Unsplash não retornou urls.regular.");
   } catch (error) {
     log(`⚠️ Unsplash falhou: ${error.message}`);
@@ -1133,100 +724,195 @@ async function getUnsplashImage(topic) {
   }
 }
 
+// ─── Loop principal: curadoria → geração → auditoria (repete até aprovação) ───
+
+/**
+ * Executa o ciclo completo para UN artigo.
+ * Repete até MAX_ATTEMPTS vezes:
+ *   1. Curadoria jurídica (pesquisa + validação de fontes)
+ *   2. Geração do artigo
+ *   3. Expansão se abaixo do mínimo de palavras
+ *   4. Auditoria jurídica independente
+ *   5. Verificação de links
+ * Se reprovar em qualquer etapa após a geração, reinicia do passo 1
+ * com novo tema sorteado para evitar repetição de contexto.
+ *
+ * @param {string} baseTopic - Tema base escolhido para este slot
+ * @param {number} slot      - Número do slot (1 ou 2), apenas para log
+ * @returns {object}         - { article, imageUrl, slug }
+ */
+async function runArticleLoop(baseTopic, slot) {
+  let attempt = 0;
+  let lastRejectionReasons = [];
+
+  while (attempt < MAX_ATTEMPTS) {
+    attempt++;
+
+    // A cada nova tentativa usa um tema ligeiramente diferente para evitar
+    // que a IA reproduza os mesmos erros com o mesmo contexto.
+    const topic = attempt === 1
+      ? baseTopic
+      : TOPICS[(TOPICS.indexOf(baseTopic) + attempt) % TOPICS.length];
+
+    log("");
+    log(`${'='.repeat(50)}`);
+    log(`🔄 SLOT ${slot} | TENTATIVA ${attempt}/${MAX_ATTEMPTS}`);
+    log(`🎯 Tema: ${topic}`);
+    if (lastRejectionReasons.length > 0) {
+      log(`📋 Motivos da reprovação anterior:`);
+      lastRejectionReasons.forEach(r => log(`   • ${r}`));
+    }
+    log(`${'='.repeat(50)}`);
+
+    try {
+      // ── Etapa 1: Curadoria ────────────────────────────────────────────────
+      log(`\n📚 [${attempt}/${MAX_ATTEMPTS}] Etapa 1/4 — Curadoria jurídica...`);
+      const research = await createResearch(topic);
+
+      if (research.warnings && research.warnings.length > 0) {
+        log(`⚠️ Avisos da curadoria: ${research.warnings.join("; ")}`);
+      }
+
+      log(`✅ Curadoria concluída. Bases legais: ${(research.legal_basis || []).length}`);
+
+      // ── Etapa 2: Geração ──────────────────────────────────────────────────
+      log(`\n✍️  [${attempt}/${MAX_ATTEMPTS}] Etapa 2/4 — Geração do artigo...`);
+      let article = await generateArticle(topic, research);
+      let words = countWords(article.content || "");
+      log(`📊 Palavras geradas: ${words}`);
+
+      // ── Etapa 3: Expansão (se necessário) ────────────────────────────────
+      if (words < MIN_WORDS) {
+        log(`\n📏 [${attempt}/${MAX_ATTEMPTS}] Etapa 3/4 — Expandindo artigo (${words} < ${MIN_WORDS})...`);
+        article = await expandArticle(article, research);
+        words = countWords(article.content || "");
+        log(`📊 Palavras após expansão: ${words}`);
+      } else {
+        log(`✅ Etapa 3/4 — Expansão não necessária (${words} palavras).`);
+      }
+
+      // Valida estrutura mínima antes de gastar tokens na auditoria
+      try {
+        validateArticleStructure(article);
+      } catch (structErr) {
+        log(`❌ Estrutura inválida: ${structErr.message}`);
+        lastRejectionReasons = [`Estrutura inválida: ${structErr.message}`];
+        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        continue;
+      }
+
+      // ── Etapa 4: Auditoria jurídica ────────────────────────────────────────
+      log(`\n⚖️  [${attempt}/${MAX_ATTEMPTS}] Etapa 4/4 — Auditoria jurídica...`);
+      const audit = await auditArticle(article, research);
+
+      if (!audit || audit.status !== "PASS") {
+        const issues = (audit?.issues || []).map(i => i.text || JSON.stringify(i));
+        log(`❌ Auditoria REPROVADA.`);
+        issues.forEach(issue => log(`   ↳ ${issue}`));
+        lastRejectionReasons = issues.length > 0 ? issues : ["Auditoria retornou FAIL sem detalhar motivos."];
+        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        continue;
+      }
+
+      log(`✅ Auditoria APROVADA.`);
+
+      // ── Verificação de links ───────────────────────────────────────────────
+      const links = await verifyLinks(article.content);
+      const brokenLinks = links.filter(item => !item.ok);
+      if (brokenLinks.length > 0) {
+        const reasons = brokenLinks.map(l => `Link quebrado: ${l.url}`);
+        log(`❌ ${reasons.length} link(s) quebrado(s).`);
+        reasons.forEach(r => log(`   ↳ ${r}`));
+        lastRejectionReasons = reasons;
+        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+        continue;
+      }
+
+      // ── Tudo aprovado ─────────────────────────────────────────────────────
+      log(`\n🎉 Artigo APROVADO após ${attempt} tentativa(s)!`);
+      log(`📌 Título: ${article.title}`);
+      log(`📊 Palavras: ${words}`);
+
+      const image = await getUnsplashImage(topic);
+      const slug  = slugify(article.slug || article.title);
+
+      return { article, imageUrl: image, slug, words, attempts: attempt };
+
+    } catch (err) {
+      // Erros inesperados (ex: falha total de API) — tenta de novo
+      log(`💥 Erro inesperado na tentativa ${attempt}: ${err.message}`);
+      lastRejectionReasons = [`Erro inesperado: ${err.message}`];
+      if (attempt < MAX_ATTEMPTS) {
+        log(`🔄 Reiniciando ciclo completo (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
+      }
+    }
+  }
+
+  throw new Error(
+    `Slot ${slot}: artigo rejeitado após ${MAX_ATTEMPTS} tentativas. ` +
+    `Últimos motivos: ${lastRejectionReasons.join(" | ")}`
+  );
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
 async function main() {
-  let originalBlog = null;
-  let originalSitemap = null;
+  let originalBlog     = null;
+  let originalSitemap  = null;
 
   try {
     log("==========================================");
-    log("⚖️ LISOMAR BARBOSA ADVOGADOS");
-    log("💻 GERADOR DE CONTEÚDO - DIREITO DIGITAL");
+    log("⚖️  LISOMAR BARBOSA ADVOGADOS");
+    log("💻 GERADOR DE CONTEÚDO — DIREITO DIGITAL");
     log("==========================================");
 
     const date = getToday();
-    const topic = chooseTopic();
+    const slot = parseInt(process.env.ARTICLE_SLOT || "1", 10);
+    const topic = chooseTopic(slot);
 
     log(`📅 Data: ${date}`);
-    log(`🎯 Tema: ${topic}`);
+    log(`🎰 Slot: ${slot}`);
+    log(`🎯 Tema base: ${topic}`);
+    log(`🔁 Máx. tentativas: ${MAX_ATTEMPTS}`);
 
-    // Diagnóstico da API antes de iniciar
     await checkApiKey();
 
-    originalBlog = await readFile(BLOG_FILE, "utf8");
+    // Salva backups para rollback
+    originalBlog    = await readFile(BLOG_FILE,    "utf8");
     originalSitemap = await readFile(SITEMAP_FILE, "utf8");
 
-    const research = await createResearch(topic);
+    // Executa o loop curadoria → geração → auditoria
+    const { article, imageUrl, slug, words, attempts } =
+      await runArticleLoop(topic, slot);
 
-    log("✅ Curadoria jurídica concluída.");
-
-    let article = await generateArticle(topic, research);
-
-    let words = validateArticleStructure(article);
-
-    log(`📊 Artigo inicial: ${words} palavras.`);
-
-    if (words < MIN_WORDS) {
-      article = await expandArticle(article, research);
-      words = validateArticleStructure(article);
-      log(`📊 Artigo após expansão: ${words} palavras.`);
-    }
-
-    if (words < MIN_WORDS) {
-      throw new Error(
-        `Artigo rejeitado: ${words} palavras. Mínimo exigido: ${MIN_WORDS}.`
-      );
-    }
-
-    const audit = await auditArticle(article, research);
-
-    if (!audit || audit.status !== "PASS") {
-      log("❌ Auditoria jurídica reprovou o conteúdo.");
-      console.error(JSON.stringify(audit, null, 2));
-      throw new Error("O artigo não passou na auditoria jurídica.");
-    }
-
-    log("✅ Auditoria jurídica aprovada.");
-
-    const links = await verifyLinks(article.content);
-    const brokenLinks = links.filter(item => !item.ok);
-
-    if (brokenLinks.length > 0) {
-      throw new Error(
-        `Existem ${brokenLinks.length} link(s) que não puderam ser verificados.`
-      );
-    }
-
-    const image = await getUnsplashImage(topic);
-    const slug = slugify(article.slug || article.title);
-
-    await updateBlogFile(article, image, date);
+    // Persiste no blog e sitemap
+    await updateBlogFile(article, imageUrl, date);
     await updateSitemap(slug, date);
 
-    log("🚀 Conteúdo pronto para commit.");
+    log("");
+    log("==========================================");
+    log("✅ PROCESSO CONCLUÍDO COM SUCESSO");
+    log(`🎰 Slot: ${slot}`);
     log(`📌 Título: ${article.title}`);
     log(`🔗 Slug: ${slug}`);
     log(`📊 Palavras: ${words}`);
+    log(`🔁 Tentativas necessárias: ${attempts}`);
     log("==========================================");
-    log("✅ PROCESSO CONCLUÍDO COM SUCESSO");
-    log("==========================================");
+
   } catch (error) {
+    log("");
     log("==========================================");
-    log("❌ ERRO NO WORKFLOW");
+    log("❌ ERRO CRÍTICO — WORKFLOW ABORTADO");
     log("==========================================");
     console.error(error);
 
+    // Rollback para não deixar arquivos corrompidos
     try {
-      if (originalBlog !== null) {
-        await writeFile(BLOG_FILE, originalBlog, "utf8");
-      }
-
-      if (originalSitemap !== null) {
-        await writeFile(SITEMAP_FILE, originalSitemap, "utf8");
-      }
-
-      log("↩️ Rollback de segurança realizado.");
+      if (originalBlog    !== null) await writeFile(BLOG_FILE,    originalBlog,    "utf8");
+      if (originalSitemap !== null) await writeFile(SITEMAP_FILE, originalSitemap, "utf8");
+      log("↩️  Rollback realizado com sucesso.");
     } catch (rollbackError) {
-      console.error("❌ Falha durante rollback:", rollbackError);
+      console.error("❌ Falha no rollback:", rollbackError);
     }
 
     process.exit(1);

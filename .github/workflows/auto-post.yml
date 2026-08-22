@@ -2,7 +2,11 @@ name: Auto Generate Digital Law Article
 
 on:
   schedule:
-    - cron: "0 9 * * 1,3,5"
+    # Artigo 1 — todos os dias às 08h UTC (05h Brasília)
+    - cron: "0 8 * * *"
+    # Artigo 2 — todos os dias às 14h UTC (11h Brasília)
+    # Só executa se o artigo 1 tiver sido publicado no mesmo dia
+    - cron: "0 14 * * *"
 
   workflow_dispatch:
     inputs:
@@ -14,6 +18,11 @@ on:
         description: "Modelo OpenRouter (deixe vazio para usar cadeia de fallback automática)"
         required: false
         default: ""
+        type: string
+      artigo_slot:
+        description: "Slot do artigo (1 ou 2). Slot 2 só publica se slot 1 já existir hoje."
+        required: false
+        default: "1"
         type: string
 
 permissions:
@@ -74,11 +83,49 @@ jobs:
 
           echo "✅ Ambiente validado."
 
-      - name: 🤖 Generate, research and audit article
+      - name: 🕐 Verificar slot e condição de publicação
+        id: slot_check
+        run: |
+          HOUR=$(date -u +"%H")
+          TODAY=$(date -u +"%Y-%m-%d")
+
+          # Determina o slot pelo horário ou pelo input manual
+          if [ -n "${{ inputs.artigo_slot }}" ]; then
+            SLOT="${{ inputs.artigo_slot }}"
+          elif [ "$HOUR" -ge "8" ] && [ "$HOUR" -lt "14" ]; then
+            SLOT="1"
+          else
+            SLOT="2"
+          fi
+
+          echo "📌 Slot detectado: $SLOT"
+          echo "slot=$SLOT" >> $GITHUB_OUTPUT
+
+          # Se for slot 2, verifica se já existe um post publicado hoje
+          if [ "$SLOT" = "2" ]; then
+            POSTS_TODAY=$(grep -c "date: '$TODAY'" src/data/blog.ts 2>/dev/null || echo "0")
+            echo "📊 Posts publicados hoje ($TODAY): $POSTS_TODAY"
+
+            if [ "$POSTS_TODAY" -eq "0" ]; then
+              echo "⏭️ Slot 2 ignorado: nenhum artigo publicado hoje ainda."
+              echo "skip=true" >> $GITHUB_OUTPUT
+            else
+              echo "✅ Slot 2 liberado: $POSTS_TODAY post(s) publicado(s) hoje."
+              echo "skip=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🤖 Generate, research and audit article (com loop de reescrita)
+        if: steps.slot_check.outputs.skip != 'true'
+        env:
+          ARTICLE_SLOT: ${{ steps.slot_check.outputs.slot }}
         run: |
           node .github/scripts/generate-post.js
 
       - name: 🔍 Validate generated files
+        if: steps.slot_check.outputs.skip != 'true'
         run: |
           echo "🔍 Verificando alterações em src/data/blog.ts e public/sitemap.xml..."
 
@@ -97,12 +144,14 @@ jobs:
           echo "✅ Arquivos modificados corretamente."
 
       - name: 🧹 Fix trailing whitespace
+        if: steps.slot_check.outputs.skip != 'true'
         run: |
           sed -i 's/[[:space:]]*$//' src/data/blog.ts
           sed -i 's/[[:space:]]*$//' public/sitemap.xml
           echo "✅ Trailing whitespace removido."
 
       - name: 📝 Show generated changes
+        if: steps.slot_check.outputs.skip != 'true'
         run: |
           echo "📝 Novos arquivos e alterações:"
           git status --short
@@ -116,10 +165,12 @@ jobs:
           git diff --stat -- public/sitemap.xml
 
       - name: 🚀 Commit and push
+        if: steps.slot_check.outputs.skip != 'true'
         run: |
           set -e
 
           TODAY=$(date -u +"%Y-%m-%d")
+          SLOT="${{ steps.slot_check.outputs.slot }}"
 
           TITLE=$(node -e "
           const fs = require('fs');
@@ -133,8 +184,8 @@ jobs:
 
           git add src/data/blog.ts public/sitemap.xml
 
-          git commit -m "bot: novo post - ${TITLE} ${TODAY}"
+          git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
 
           git push origin main
 
-          echo "🚀 Artigo publicado no branch main."
+          echo "🚀 Artigo slot ${SLOT} publicado no branch main."
