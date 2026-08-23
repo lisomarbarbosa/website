@@ -96,7 +96,7 @@ O contrato digital não é o futuro — é o presente. A legislação brasileira
 Seja você um consumidor assinando um termo de adesão no aplicativo do banco, um freelancer fechando um projeto por e-mail, ou um gestor implementando assinatura eletrônica na sua empresa, o princípio é o mesmo: a tecnologia serve à vontade, não a substitui. Conhecer os limites da forma eletrônica, os direitos que o CDC e a LGPD garantem, e os cuidados com a prova digital é o melhor seguro contra surpresas desagradáveis.
 
 Caso tenha dúvidas sobre a validade de um contrato já assinado, precise redigir termos seguros para o seu negócio ou esteja diante de uma disputa envolvendo assinatura digital, procure assessoria jurídica especializada em Direito Digital. A prevenção, no mundo dos bits, continua sendo o melhor remédio — e o mais barato.`
-  },] = [
+  },
   {
     slug: 'ofensas-redes-sociais-consequencias-juridicas',
     title: 'Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir',
