@@ -182,7 +182,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add src/data/blog.ts public/sitemap.xml
+          # Adiciona todos os arquivos gerados/modificados pelo script:
+          # blog.ts, sitemap.xml, componente .tsx e rota no App.tsx
+          git add src/data/blog.ts public/sitemap.xml src/pages/articles/ src/App.tsx
 
           git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
 
