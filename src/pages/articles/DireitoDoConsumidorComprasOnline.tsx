@@ -7,10 +7,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const pageTitle =
-  "Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado | Lisomar Barbosa | Direito Digital";
+  "Compras online: quais são os seus direitos quando o produto não chega ou chega errado?";
 
 const pageDescription =
-  "Comprar pela internet virou rotina, mas poucos sabem exatamente o que a lei protege quando algo dá errado. Este artigo explica, em linguagem clara, os principais direitos do consumidor digital, do arrependimento em sete dias à responsabilidade solidária dos marketplaces, e ensina como se prevenir e reagir diante de problemas reais.";
+  "Saiba o que a lei garante nas compras pela internet: prazo de arrependimento, vício do produto, responsabilidade do marketplace e proteção de dados pela LGPD. Guia prático com base no CDC e Decreto nº 7.962/2013.";
 
 const pageUrl =
   "https://www.lisomarbarbosa.adv.br/artigos/direito-do-consumidor-compras-online";
@@ -45,6 +45,32 @@ const DireitoDoConsumidorComprasOnline = () => {
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={pageImage} />
+
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "${pageTitle}",
+            "description": "${pageDescription}",
+            "image": "${pageImage}",
+            "datePublished": "2026-08-23",
+            "dateModified": "2026-08-23",
+            "author": {
+              "@type": "Person",
+              "name": "Lisomar Barbosa",
+              "url": "https://www.lisomarbarbosa.adv.br"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lisomar Barbosa | Direito Digital",
+              "url": "https://www.lisomarbarbosa.adv.br"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "${pageUrl}"
+            }
+          }
+        `}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -66,11 +92,11 @@ const DireitoDoConsumidorComprasOnline = () => {
               <article className="animate-fade-in">
                 <header className="mb-12">
                   <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent">
-                    Direito Digital
+                    Direito do Consumidor Digital
                   </span>
 
                   <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-                    Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado
+                    Compras online: quais são os seus direitos quando o produto não chega ou chega errado?
                   </h1>
 
                   <div className="mb-8 flex items-center gap-4 text-sm text-foreground/60">
@@ -81,150 +107,179 @@ const DireitoDoConsumidorComprasOnline = () => {
 
                   <img
                     src={pageImage}
-                    alt="Consumidora realizando compra online pelo celular"
+                    alt="Pessoa realizando compra online pelo celular com cartão na mão"
                     className="mb-8 h-[400px] w-full rounded-lg object-cover"
                     loading="eager"
                   />
                 </header>
 
                 <div className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-foreground/80 prose-p:leading-relaxed prose-li:text-foreground/80">
+
+                  {/* Resposta direta nos dois primeiros parágrafos — padrão GEO/SEO */}
                   <p>
-                    Você entra no site, escolhe o produto, paga com cartão ou Pix e aguarda a entrega. Dias depois, a caixa chega amassada, o tamanho não serve, o aparelho não liga ou, pior, o pacote nunca sai do centro de distribuição. Situações assim são cada vez mais comuns no cotidiano digital brasileiro. O que nem todo mundo sabe é que a legislação consumerista também se aplica integralmente às relações de consumo eletrônicas, impondo deveres claros a quem vende e garantias efetivas a quem compra.
+                    Quando uma compra online dá errado, o consumidor tem direitos claros garantidos pelo <strong>Código de Defesa do Consumidor (Lei nº 8.078/1990)</strong> e pelo <strong>Decreto nº 7.962/2013</strong>. Isso inclui o direito de arrependimento em até sete dias, substituição ou reembolso em caso de vício do produto e, em muitos casos, responsabilização direta da plataforma intermediadora, como marketplaces.
                   </p>
 
                   <p>
-                    O ponto de partida é o <strong>Código de Defesa do Consumidor (Lei nº 8.078/1990)</strong>. O artigo 2º define consumidor como toda pessoa física ou jurídica que adquire produto ou serviço como destinatário final, enquanto fornecedor é quem o coloca no mercado. Não há distinção entre loja física e virtual: a proteção é a mesma. No comércio eletrônico, essas obrigações foram detalhadas pelo <strong>Decreto nº 7.962/2013</strong>, que exige informações ostensivas como nome empresarial, CNPJ, endereço físico, canais de atendimento, características essenciais do produto, preço total com frete e prazo de entrega.
+                    A proteção consumerista não distingue loja física de loja virtual. O que muda são as regras operacionais aplicadas ao comércio eletrônico, que impõem ao fornecedor obrigações específicas de informação, transparência e atendimento. Conhecer cada uma dessas garantias é o primeiro passo para agir com segurança quando a compra não sai como prometido.
                   </p>
 
-                  <h2>Direito de arrependimento: sete dias para mudar de ideia</h2>
+                  <h2>Qual lei protege o consumidor nas compras online?</h2>
 
                   <p>
-                    Uma das garantias mais relevantes, e ainda pouco conhecidas, é o <strong>direito de arrependimento</strong>, previsto no artigo 49 do CDC. Como a compra online ocorre fora do estabelecimento comercial, sem a possibilidade de tocar, experimentar ou testar o produto antes do pagamento, a lei concede ao consumidor <strong>sete dias corridos</strong>, contados da assinatura do contrato ou do recebimento do bem, para desistir da aquisição <strong>sem necessidade de justificativa</strong>.
+                    O ponto de partida é o <strong>CDC</strong>, que define consumidor como toda pessoa física ou jurídica que adquire produto ou serviço como destinatário final, e fornecedor como quem o coloca no mercado. O <strong>Decreto nº 7.962/2013</strong> regulamentou o comércio eletrônico especificamente, tornando obrigatória a exibição ostensiva de nome empresarial, CNPJ, endereço físico, canais de atendimento, características do produto, preço total com frete e prazo de entrega antes da finalização do pedido.
                   </p>
 
                   <p>
-                    Na prática, isso significa que, se você comprou uma camisa e não gostou do caimento, ou adquiriu um eletrodoméstico e percebeu que ele não cabe no espaço planejado, pode devolvê-lo e receber <strong>o valor integral pago</strong>, inclusive o frete. Nessas hipóteses, o custo da devolução também é do fornecedor. Muitos sites ainda tentam impor restrições abusivas, como negar devolução de produtos abertos ou transferir o frete de retorno ao cliente, mas essas cláusulas são <strong>nulas de pleno direito</strong>, nos termos do artigo 51 do CDC.
+                    Em complemento, a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> e o <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong> completam o arcabouço de proteção digital, regulando o tratamento de dados pessoais e a responsabilidade de plataformas online.
+                  </p>
+
+                  <h2>Posso desistir da compra online? Qual é o prazo?</h2>
+
+                  <p>
+                    Sim. O artigo 49 do CDC garante o <strong>direito de arrependimento</strong>: o consumidor tem <strong>sete dias corridos</strong>, contados da assinatura do contrato ou do recebimento do produto, para desistir da compra <strong>sem precisar justificar o motivo</strong>. Essa regra existe porque, nas compras online, não é possível tocar, experimentar ou verificar o produto antes do pagamento.
+                  </p>
+
+                  <p>
+                    Exercendo esse direito, o consumidor recebe o <strong>valor integral pago, inclusive o frete de ida</strong>. O custo de devolução também é do fornecedor. Cláusulas contrárias, como "não aceitamos devolução de produtos abertos" ou "frete de retorno por conta do cliente", são <strong>nulas de pleno direito</strong> por violarem o artigo 51 do CDC.
                   </p>
 
                   <blockquote>
                     <p>
-                      <strong>Dica prática:</strong> guarde prints da tela de compra, e-mails de confirmação, código de rastreio e, ao receber o produto, faça um vídeo curto abrindo a embalagem. Esses registros facilitam a comprovação do prazo e do estado do item caso seja necessário acionar o arrependimento.
+                      <strong>Dica prática:</strong> ao receber qualquer produto, grave um vídeo curto abrindo a embalagem. Esse registro é prova válida do estado do item e do prazo de recebimento, fundamental caso precise exercer o arrependimento ou reclamar vício.
                     </p>
                   </blockquote>
 
-                  <h2>Informação adequada: o dever de transparência antes do clique</h2>
+                  <h2>O site é obrigado a informar tudo antes da compra?</h2>
 
                   <p>
-                    O artigo 6º, inciso III, do CDC assegura o direito à <strong>informação adequada e clara</strong> sobre produtos e serviços. No ambiente digital, isso se traduz em obrigações concretas: descrição fiel, indicação de cor, voltagem, dimensões, composição, disponibilidade em estoque, prazo de entrega estimado e formas de pagamento. O Decreto nº 7.962/2013 reforça que essas informações devem estar <strong>disponíveis de forma ostensiva</strong> antes da finalização do pedido.
+                    Sim. O artigo 6º, inciso III, do CDC assegura o direito à <strong>informação adequada e clara</strong>. No e-commerce, isso significa descrição fiel do produto, indicação de cor, voltagem, dimensões e composição, disponibilidade em estoque, prazo de entrega estimado e formas de pagamento. Essas informações devem estar visíveis <strong>antes</strong> da finalização do pedido, não apenas na nota fiscal.
                   </p>
 
                   <p>
-                    Se o site promete entrega em dois dias úteis e o produto leva três semanas, se a foto mostra um item diferente do que foi entregue, ou se taxas só aparecem no checkout, há violação do dever de informação. Nesses casos, o consumidor pode exigir o cumprimento forçado da oferta, aceitar produto equivalente ou rescindir o contrato com devolução integral dos valores pagos, sem prejuízo de eventuais perdas e danos.
+                    Se o site anunciou "entrega em 2 dias" e o produto levou três semanas, se a foto mostrou material diferente do entregue, ou se taxas apareceram apenas no checkout, há violação do dever de informação. Nesses casos, o consumidor pode exigir o cumprimento da oferta como anunciada, aceitar produto equivalente ou rescindir o contrato com reembolso integral — e, dependendo do dano, pleitear indenização.
                   </p>
 
-                  <h2>Vício do produto ou do serviço: quem responde?</h2>
+                  <h2>O produto chegou com defeito: quem responde e qual é o prazo?</h2>
 
                   <p>
-                    Quando o produto chega com defeito, não liga, rasga na primeira lavagem ou apresenta erro de fabricação, estamos diante de <strong>vício de qualidade</strong>. O CDC estabelece responsabilidade <strong>solidária</strong> entre os integrantes da cadeia de fornecimento, o que inclui fabricante, importador, distribuidor e varejista. Isso permite ao consumidor reclamar diretamente com a loja onde comprou, sem depender de contato com fabricante estrangeiro ou intermediários difíceis de localizar.
-                  </p>
-
-                  <p>
-                    O prazo para reclamar é de <strong>30 dias</strong> para produtos não duráveis, como alimentos e cosméticos, e de <strong>90 dias</strong> para produtos duráveis, como eletrônicos, móveis e eletrodomésticos, contados da entrega efetiva. O fornecedor tem <strong>30 dias</strong> para sanar o vício. Se isso não ocorrer, o consumidor pode escolher entre a substituição do produto, a restituição imediata da quantia paga, com correção monetária, ou o abatimento proporcional do preço.
+                    Produto que chega com defeito configura <strong>vício de qualidade</strong>, previsto nos artigos 12 a 18 do CDC. A responsabilidade é <strong>solidária</strong> entre todos os integrantes da cadeia de fornecimento: fabricante, importador, distribuidor e loja. Isso significa que você pode reclamar diretamente com o vendedor, sem precisar acionar fabricante estrangeiro ou intermediários.
                   </p>
 
                   <p>
-                    Para serviços digitais, como assinaturas de streaming, cursos online e hospedagem de sites, a lógica é semelhante. O serviço deve corresponder ao que foi prometido. Se a plataforma anuncia acesso ilimitado e impõe bloqueios indevidos, ou promete suporte contínuo e não responde, pode haver vício de serviço.
+                    Os prazos para reclamar são:
                   </p>
 
-                  <h2>Marketplaces e a responsabilidade do intermediador</h2>
+                  <ul>
+                    <li><strong>30 dias</strong> para produtos não duráveis (alimentos, cosméticos, descartáveis)</li>
+                    <li><strong>90 dias</strong> para produtos duráveis (eletrônicos, eletrodomésticos, móveis)</li>
+                  </ul>
 
                   <p>
-                    Hoje, grande parte das compras ocorre em <em>marketplaces</em>, como Mercado Livre, Amazon, Shopee e Magalu. A dúvida mais comum é: se o vendedor é terceiro, a plataforma responde? Em regra, a resposta tende a ser positiva, especialmente quando o marketplace participa ativamente da cadeia de fornecimento, lucra com a intermediação, controla o ambiente de negociação, processa pagamentos e, em muitos casos, interfere na logística.
+                    Após a reclamação, o fornecedor tem <strong>30 dias</strong> para sanar o defeito. Se não o fizer, o consumidor pode escolher entre: (1) substituição por produto idêntico; (2) restituição imediata do valor pago, com correção monetária; ou (3) abatimento proporcional do preço.
+                  </p>
+
+                  <h2>Marketplace responde quando o vendedor é terceiro?</h2>
+
+                  <p>
+                    Essa é uma das dúvidas mais frequentes nas compras em plataformas como Mercado Livre, Amazon, Shopee e Magalu. A resposta, na maioria dos casos, tende a ser <strong>sim</strong>. Quando o marketplace participa ativamente da cadeia de fornecimento, lucra com a intermediação, processa pagamentos e controla o ambiente de negociação, ele integra a relação de consumo e pode responder solidariamente pelos vícios e pelo descumprimento da entrega.
                   </p>
 
                   <p>
-                    Nessas situações, o consumidor não deve ser empurrado para uma negociação isolada com vendedor anônimo ou sem identificação adequada. A plataforma precisa oferecer canais efetivos de atendimento, intermediar a solução do conflito e, conforme o caso concreto, responder solidariamente pelos prejuízos causados.
+                    O consumidor não deve ser obrigado a negociar sozinho com um vendedor sem identificação adequada ou que simplesmente deixa de responder após o pagamento. A plataforma precisa disponibilizar canais efetivos de atendimento e, conforme o caso concreto, mediar ou assumir a solução do problema.
                   </p>
 
-                  <h2>Proteção de dados: o que a LGPD tem a ver com sua compra</h2>
+                  <h2>A LGPD protege meus dados quando compro online?</h2>
 
                   <p>
-                    Ao comprar online, você fornece nome, CPF, endereço, telefone, e-mail e, muitas vezes, dados de pagamento. A <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> exige que esse tratamento tenha <strong>finalidade específica</strong>, seja <strong>necessário</strong> para a execução da compra e ocorra com <strong>segurança</strong>, evitando coleta excessiva e exposição indevida de informações pessoais.
+                    Sim. Ao finalizar uma compra, você fornece nome, CPF, endereço, telefone, e-mail e dados de pagamento. A <strong>Lei nº 13.709/2018 (LGPD)</strong> exige que esse tratamento tenha finalidade específica, seja limitado ao necessário para executar a compra e ocorra com medidas de segurança adequadas. Pedir dados excessivos ou usar informações para fins diferentes do declarado é prática irregular.
                   </p>
 
                   <p>
-                    O consumidor tem direito de saber quais dados são coletados, corrigir informações incorretas, solicitar a exclusão de dados desnecessários após o término da relação contratual e pedir a portabilidade quando cabível. Em casos de vazamento de dados em e-commerce, pode haver dever de notificação à Autoridade Nacional de Proteção de Dados e ao titular afetado, além da possibilidade de responsabilização civil por danos materiais e morais.
+                    Você tem direito de saber quais dados são coletados, corrigi-los, solicitar a exclusão após o fim da relação contratual e ser notificado em caso de vazamento. Incidentes de segurança em e-commerce podem gerar responsabilização civil por danos morais e materiais, além de obrigação de notificação à Autoridade Nacional de Proteção de Dados (ANPD).
                   </p>
 
-                  <h2>O que fazer quando o problema acontece</h2>
+                  <h2>O que fazer quando o problema acontece: passo a passo</h2>
 
                   <ol>
                     <li>
-                      <strong>Reúna provas:</strong> guarde prints da oferta, e-mails, comprovantes de pagamento, código de rastreio, fotos, vídeos e protocolos de atendimento.
+                      <strong>Reúna provas:</strong> prints da oferta original, e-mails de confirmação, código de rastreio, fotos ou vídeo do produto recebido e todos os protocolos de atendimento.
                     </li>
                     <li>
-                      <strong>Registre a reclamação nos canais oficiais da loja ou plataforma:</strong> sempre anote e preserve o número de protocolo.
+                      <strong>Registre reclamação formal na loja ou plataforma</strong> e guarde o número de protocolo gerado.
                     </li>
                     <li>
-                      <strong>Sem solução em prazo razoável:</strong> procure o Procon do seu estado e registre manifestação no Consumidor.gov.br.
+                      <strong>Sem solução em até 5 a 10 dias úteis:</strong> registre ocorrência no Procon do seu estado e na plataforma federal <strong>Consumidor.gov.br</strong>, que costuma gerar resposta mais rápida das empresas.
                     </li>
                     <li>
-                      <strong>Para valores menores:</strong> avalie o Juizado Especial Cível, que admite ações de até 20 salários mínimos sem advogado, embora o acompanhamento jurídico continue recomendável.
+                      <strong>Para valores até 20 salários mínimos:</strong> o Juizado Especial Cível permite ajuizar ação sem advogado. O processo é gratuito nas primeiras instâncias e mais célere do que a Justiça comum.
                     </li>
                     <li>
-                      <strong>Havendo dano moral ou material relevante:</strong> a via judicial pode incluir pedido indenizatório, sobretudo em casos de negativação indevida, recusa abusiva ou exposição indevida de dados.
+                      <strong>Com dano moral ou material comprovado</strong> (negativação indevida, exposição de dados, recusa abusiva de direito claro), a ação judicial pode incluir pedido de indenização.
                     </li>
                   </ol>
 
-                  <h2>Hábitos de prevenção</h2>
+                  <h2>Como se proteger antes de comprar</h2>
 
                   <ul>
                     <li>
-                      <strong>Prefira sites confiáveis</strong> ou plataformas que exibam claramente CNPJ, endereço físico e canais reais de contato.
+                      <strong>Compre de lojas que exibem CNPJ, endereço físico e canais reais de contato.</strong> Desconfie de preços muito abaixo do mercado.
                     </li>
                     <li>
-                      <strong>Use cartão virtual ou intermediadores de pagamento</strong> para ampliar a segurança e facilitar eventual contestação.
+                      <strong>Prefira cartão de crédito virtual ou intermediadores de pagamento</strong> como Mercado Pago, PayPal ou PagSeguro. Facilitam o estorno em caso de problema.
                     </li>
                     <li>
-                      <strong>Evite transferências diretas para pessoas físicas desconhecidas</strong>, especialmente em ofertas muito abaixo do preço de mercado.
+                      <strong>Evite transferências por Pix ou TED para pessoas físicas desconhecidas</strong> em compras de valor relevante. A reversão é difícil.
                     </li>
                     <li>
-                      <strong>Leia os termos essenciais</strong> sobre troca, devolução, garantia e tratamento de dados pessoais.
+                      <strong>Leia as políticas de troca, devolução e garantia</strong> antes de finalizar o pedido. Cláusulas abusivas podem ser contestadas, mas é mais simples evitá-las.
                     </li>
                     <li>
-                      <strong>Ative autenticação em dois fatores</strong> nas contas de e-commerce e no e-mail vinculado ao cadastro.
+                      <strong>Ative autenticação em dois fatores</strong> nas contas de e-commerce e no e-mail vinculado ao cadastro para reduzir risco de fraude.
                     </li>
                   </ul>
 
                   <h2>Considerações finais</h2>
 
                   <p>
-                    Comprar pela internet não é um ato de fé, mas uma relação jurídica regulada por normas claras. O ordenamento brasileiro oferece mecanismos de proteção que abrangem direito de arrependimento, dever de informação, responsabilidade por vícios, proteção de dados e responsabilização de integrantes da cadeia de fornecimento.
+                    O ordenamento brasileiro oferece um conjunto robusto de proteções para o consumidor digital: do CDC à LGPD, passando pelo Marco Civil da Internet e pelo Decreto do e-commerce. Conhecer esses mecanismos transforma o consumidor de vítima passiva em agente capaz de exigir cumprimento, reparação e respeito.
                   </p>
 
                   <p>
-                    Conhecer esses direitos ajuda o consumidor a agir com mais segurança e a reagir com estratégia quando a compra não sai como prometido. Diante de negativa automática, silêncio do fornecedor ou resposta abusiva, a recomendação é documentar tudo, reclamar pelos canais formais e buscar orientação jurídica quando o caso exigir análise individualizada.
+                    Se você foi lesado em uma compra online e a loja se recusa a resolver, não aceite o "não" do chatbot como resposta final. Documente, acione os canais formais e, quando necessário, busque orientação jurídica especializada. A lei está do seu lado — o primeiro passo é conhecê-la e saber como aplicá-la.
                   </p>
 
                   <hr />
 
                   <p>
                     <em>
-                      Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.
+                      Este artigo tem caráter informativo e não substitui consulta jurídica individualizada. Para análise do seu caso concreto, entre em contato com nossa equipe.
                     </em>
                   </p>
                 </div>
 
+                {/* CTA jurídico com copy de conversão */}
                 <div className="mt-16 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-accent/10 p-8 text-center">
-                  <h3 className="mb-4 text-2xl font-bold">Precisa de orientação jurídica?</h3>
+                  <p className="mb-2 text-sm font-medium uppercase tracking-wider text-accent">
+                    Está com problema em uma compra online?
+                  </p>
+                  <h3 className="mb-4 text-2xl font-bold">
+                    Avalie seu caso com um especialista em Direito Digital
+                  </h3>
                   <p className="mx-auto mb-6 max-w-2xl text-foreground/80">
-                    Nossa equipe especializada em Direito Digital está pronta para analisar o seu caso e indicar as melhores estratégias jurídicas.
+                    Plataforma que não reembolsa, produto com defeito sem solução, dados vazados ou negativação indevida — cada situação tem estratégia jurídica própria. Nossa equipe analisa seu caso e indica o caminho mais rápido e efetivo.
                   </p>
                   <Link to="/#contato">
-                    <Button size="lg" className="bg-gradient-accent font-semibold text-background shadow-cyber">
-                      Fale Conosco
+                    <Button
+                      size="lg"
+                      className="bg-gradient-accent font-semibold text-background shadow-cyber transition-transform hover:scale-105"
+                    >
+                      Consultar agora →
                     </Button>
                   </Link>
+                  <p className="mt-4 text-xs text-foreground/50">
+                    Atendimento online · Resposta em até 24h úteis
+                  </p>
                 </div>
               </article>
             </div>
