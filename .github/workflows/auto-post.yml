@@ -114,12 +114,10 @@ jobs:
               echo "skip=false" >> $GITHUB_OUTPUT
 
               # Extrai os títulos dos posts publicados hoje para repassar ao script
-              # como ARTICLE_USED_TOPICS — evita que slot 2 sorteie o mesmo tema do slot 1
               TITLES_TODAY=$(node -e "
                 const fs = require('fs');
                 const content = fs.readFileSync('src/data/blog.ts', 'utf8');
                 const today = '$TODAY';
-                // Extrai blocos que contenham a data de hoje
                 const blocks = content.split(/(?=\s*\{)/);
                 const titles = [];
                 for (const block of blocks) {
@@ -144,7 +142,6 @@ jobs:
         id: generate
         env:
           ARTICLE_SLOT: ${{ steps.slot_check.outputs.slot }}
-          # Temas já usados hoje (slot 1 → slot 2): impede repetição de tema no mesmo dia
           ARTICLE_USED_TOPICS: ${{ steps.slot_check.outputs.used_topics }}
         run: |
           node .github/scripts/generate-post.js
@@ -157,9 +154,7 @@ jobs:
           BLOG_CHANGED=$(git status --porcelain | grep 'src/data/blog.ts' | wc -l)
           SITEMAP_CHANGED=$(git status --porcelain | grep 'public/sitemap.xml' | wc -l)
 
-          # Se o blog.ts não foi modificado, verifica se é porque o slug já existia (deduplicação legítima)
           if [ "$BLOG_CHANGED" -eq "0" ]; then
-            # Tenta extrair o slug gerado pelo script (salvo em .generated_slug se disponível)
             if [ -f ".generated_slug" ]; then
               GENERATED_SLUG=$(cat .generated_slug)
               SLUG_EXISTS=$(grep -c "slug: '$GENERATED_SLUG'" src/data/blog.ts 2>/dev/null || echo "0")
@@ -183,6 +178,95 @@ jobs:
           fi
 
           echo "✅ Validação concluída."
+
+      - name: 🔍 Auditoria de integridade do artigo
+        if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
+        run: |
+          echo "🔍 Iniciando auditoria de integridade do artigo gerado..."
+          ERRORS=0
+
+          # Localiza o arquivo .tsx gerado mais recente em src/pages/articles/
+          ARTICLE_FILE=$(git diff --name-only --diff-filter=A -- 'src/pages/articles/*.tsx' | head -1)
+
+          if [ -z "$ARTICLE_FILE" ]; then
+            # Fallback: arquivo modificado mais recente
+            ARTICLE_FILE=$(git diff --name-only -- 'src/pages/articles/*.tsx' | head -1)
+          fi
+
+          if [ -z "$ARTICLE_FILE" ]; then
+            echo "⚠️ Nenhum arquivo .tsx encontrado em src/pages/articles/ neste commit."
+            echo "   Pulando auditoria de integridade."
+            exit 0
+          fi
+
+          echo "📄 Arquivo auditado: $ARTICLE_FILE"
+          echo "---"
+
+          # 1. canonical
+          if grep -q 'rel="canonical"' "$ARTICLE_FILE"; then
+            echo "✅ canonical: presente"
+          else
+            echo "❌ canonical: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 2. og:title
+          if grep -q 'property="og:title"' "$ARTICLE_FILE"; then
+            echo "✅ og:title: presente"
+          else
+            echo "❌ og:title: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 3. og:description
+          if grep -q 'property="og:description"' "$ARTICLE_FILE"; then
+            echo "✅ og:description: presente"
+          else
+            echo "❌ og:description: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 4. og:image
+          if grep -q 'property="og:image"' "$ARTICLE_FILE"; then
+            echo "✅ og:image: presente"
+          else
+            echo "❌ og:image: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 5. twitter:card
+          if grep -q 'name="twitter:card"' "$ARTICLE_FILE"; then
+            echo "✅ twitter:card: presente"
+          else
+            echo "❌ twitter:card: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 6. export default
+          if grep -q 'export default' "$ARTICLE_FILE"; then
+            echo "✅ export default: presente"
+          else
+            echo "❌ export default: AUSENTE — componente não será importável pelo React Router"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 7. window.scrollTo
+          if grep -q 'window.scrollTo' "$ARTICLE_FILE"; then
+            echo "✅ window.scrollTo: presente"
+          else
+            echo "❌ window.scrollTo: AUSENTE — página não volta ao topo ao navegar"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          echo "---"
+
+          if [ "$ERRORS" -gt "0" ]; then
+            echo "🚨 Auditoria de integridade FALHOU com $ERRORS erro(s)."
+            echo "   Commit abortado. Corrija os problemas acima no script de geração."
+            exit 1
+          else
+            echo "🎉 Auditoria de integridade APROVADA — todos os 7 campos obrigatórios presentes."
+          fi
 
       - name: 🧹 Fix trailing whitespace
         if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
@@ -223,13 +307,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Adiciona todos os arquivos gerados/modificados pelo script:
-          # blog.ts, sitemap.xml, componente .tsx e rota no App.tsx
           git add src/data/blog.ts public/sitemap.xml src/pages/articles/ src/App.tsx
 
           git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
 
-          # Sincroniza com o main remoto antes de enviar (evita deploy de SHA antigo)
           git pull --rebase origin main
 
           git push origin main
