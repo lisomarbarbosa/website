@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import BlogPage from "./pages/BlogPage";
 import NotFound from "./pages/NotFound";
+import ContratosSoftwareLicencasUsoDireitosDeveres from "./pages/articles/ContratosSoftwareLicencasUsoDireitosDeveres";
 import CrimesContraHonraInternetGuiaCompleto from "./pages/articles/CrimesContraHonraInternetGuiaCompleto";
 import LGPDErrosComuns from "./pages/articles/LGPDErrosComuns";
 import GolpesCriptomoedas from "./pages/articles/GolpesCriptomoedas";
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/artigos/invasao-dispositivo-informatico-consequencias-juridicas" element={<InvasaoDispositivo />} />
             <Route path="/artigos/perseguicao-digital-protecao-juridica-vitima" element={<PerseguicaoDigital />} />
                         <Route path="/artigos/crimes-contra-honra-internet-guia-completo" element={<CrimesContraHonraInternetGuiaCompleto />} />
+                        <Route path="/artigos/contratos-software-licencas-uso-direitos-deveres" element={<ContratosSoftwareLicencasUsoDireitosDeveres />} />
             {/* Rota padrão (404) */}
             <Route path="*" element={<NotFound />} />
           </Routes>
