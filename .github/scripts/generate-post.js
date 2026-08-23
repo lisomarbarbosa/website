@@ -381,19 +381,22 @@ async function searchJusbrasil(topic) {
 
 function buildLegalResearchInstructions(topic) {
   return `
-Você está realizando uma CURADORIA JURÍDICA preliminar para produção editorial
-do escritório Lisomar Barbosa Advogados.
+Você está realizando uma CURADORIA JURÍDICA MÍNIMA para subsidiar a produção de um
+artigo editorial do escritório Lisomar Barbosa Advogados.
 
 TEMA: ${topic}
 
-FONTES PRIORITÁRIAS:
-1. Constituição Federal do Brasil.
-2. Legislação brasileira aplicável.
-3. Código Civil.
-4. Código de Defesa do Consumidor.
-5. Código Penal.
-6. Legislação específica do ambiente digital.
-7. Jurisprudência verificável do Jusbrasil.
+OBJETIVO DA CURADORIA:
+Identificar apenas os dispositivos legais CENTRAIS e indiscutíveis do tema.
+Não é necessário listar muitos artigos — prefira qualidade e certeza a quantidade.
+A jurisprudência é OPCIONAL: inclua somente se houver decisão clara e verificável.
+O foco do artigo final será na produção textual, não na listagem de normas.
+
+FONTES PRIORITÁRIAS (apenas o essencial):
+1. Constituição Federal do Brasil — somente se diretamente aplicável.
+2. Legislação brasileira central do tema (1 a 3 leis no máximo).
+3. Código Civil, Penal ou CDC — somente os artigos diretamente relevantes.
+4. Marco Civil da Internet / LGPD — se o tema envolver ambiente digital.
 
 REGRAS ABSOLUTAS — PROIBIDO:
 - Inventar lei, artigo, inciso ou parágrafo.
@@ -402,7 +405,6 @@ REGRAS ABSOLUTAS — PROIBIDO:
 - Atribuir decisão a tribunal sem fonte verificável.
 - Transformar hipótese em fato jurídico.
 - Tratar interpretação doutrinária como texto legal.
-- Afirmar que conduta "sempre" gera indenização ou "nunca" gera responsabilidade.
 - Criar jurisprudência para tornar o artigo mais convincente.
 
 Se uma informação não puder ser confirmada, marque como:
@@ -413,26 +415,27 @@ Se uma informação não puder ser confirmada, marque como:
 async function createResearch(topic) {
   const jusbrasil = await searchJusbrasil(topic);
   const system = `
-Você é um pesquisador jurídico extremamente conservador.
-Sua função é fazer curadoria factual antes da produção de um artigo sobre Direito Digital.
-Você NÃO deve escrever o artigo — apenas separar e validar informações.
+Você é um pesquisador jurídico criterioso e conservador.
+Sua função é fazer uma curadoria MÍNIMA e FACTUAL antes da produção de um artigo sobre Direito Digital.
+Você NÃO deve escrever o artigo — apenas separar os dispositivos legais centrais e verificáveis.
 Não invente absolutamente nenhuma informação.
-Quando houver dúvida, marque como não confirmado.
+A jurisprudência é opcional — só inclua se houver decisão clara e verificável no material fornecido.
+Quando houver dúvida, marque como não confirmado ou omita.
 ${buildLegalResearchInstructions(topic)}
 `;
   const user = `
-Realize a curadoria preliminar sobre:
+Realize a curadoria preliminar MÍNIMA sobre:
 ${topic}
 
 Material obtido do Jusbrasil:
 FONTE: ${jusbrasil.url}
 CONTEÚDO: ${jusbrasil.content}
 
-Retorne exclusivamente JSON válido:
+Retorne exclusivamente JSON válido com apenas o essencial verificável:
 {
   "topic": "...",
   "legal_basis": [{"name":"...","reference":"...","explanation":"...","source":"..."}],
-  "jurisprudence": [{"court":"...","case":"...","summary":"...","source":"..."}],
+  "jurisprudence": [],
   "consumer_law": [],
   "civil_law": [],
   "criminal_law": [],
@@ -441,7 +444,7 @@ Retorne exclusivamente JSON válido:
   "unverified_information": [],
   "warnings": []
 }
-Se não houver jurisprudência verificável, retorne "jurisprudence": [].
+IMPORTANTE: Prefira "legal_basis" com 2 a 4 itens sólidos. "jurisprudence" deve permanecer [] salvo decisão verificável no material fornecido.
 `;
   return extractJson(
     await callOpenRouter([{ role: "system", content: system }, { role: "user", content: user }], 0.1)
@@ -452,15 +455,31 @@ Se não houver jurisprudência verificável, retorne "jurisprudence": [].
 
 function buildArticleSystemPrompt() {
   return `
-Você é o redator jurídico especializado em Direito Digital do escritório Lisomar Barbosa Advogados.
+Você é o redator principal do escritório Lisomar Barbosa Advogados, especializado em Direito Digital.
 SITE: https://www.lisomarbarbosa.adv.br
 
-Seu trabalho é produzir conteúdo jurídico informativo, rigoroso, responsável e verificável.
+Seu objetivo é produzir um artigo jurídico de alta qualidade textual — bem escrito, fluido,
+acessível ao público leigo sem perder o rigor jurídico.
+
+PRIORIDADE MÁXIMA: QUALIDADE DA ESCRITA.
+O artigo deve ter introdução envolvente, desenvolvimento claro com raciocínio bem construído,
+exemplos práticos do cotidiano digital, linguagem acessível e conclusão orientadora.
+Evite listas longas de artigos de lei. Prefira explicar o direito em forma de texto corrido.
+Use no máximo 3 referências legais ao longo do artigo — cite-as naturalmente no texto, sem
+transformar o artigo em um catálogo de normas.
+Não mencione jurisprudência, a menos que já conste da curadoria fornecida.
 
 REGRA MAIS IMPORTANTE: NÃO INVENTAR.
 Não invente leis, artigos, incisos, jurisprudência, números de processos, decisões,
 tribunais, nomes de magistrados, datas de julgamentos, súmulas, precedentes,
 obrigações não previstas em lei, direitos juridicamente insustentáveis.
+
+ESTRUTURA ESPERADA DO ARTIGO:
+1. Introdução — contextualiza o tema com situação do cotidiano digital do leitor.
+2. O que diz o direito — explica em texto corrido o enquadramento jurídico central (sem listar artigos em sequência).
+3. Desenvolvimento — aprofunda com subseções temáticas, exemplos práticos, distinções importantes.
+4. O que o leitor pode fazer — orientações práticas e preventivas.
+5. Conclusão — encerra com reflexão e convite à consulta profissional.
 
 REGRA DE FORMATAÇÃO CRÍTICA:
 O campo "content" deve conter APENAS texto Markdown simples.
@@ -472,13 +491,20 @@ Use apenas # ## ### para títulos, * para itálico, ** para negrito, - para list
 
 function buildArticleUserPrompt(topic, research) {
   return `
-Escreva um artigo completo para o blog:
+Escreva um artigo completo e bem redigido para o blog:
 https://www.lisomarbarbosa.adv.br
 
 TEMA: ${topic}
 
-O artigo precisa ter NO MÍNIMO ${MIN_WORDS} palavras.
-Conte as palavras antes de finalizar. Se tiver menos de ${MIN_WORDS}, reescreva e amplie.
+DIRETRIZES DE ESCRITA:
+- Foque na QUALIDADE TEXTUAL: texto fluido, bem articulado, envolvente.
+- Explique o direito em prosa — evite enumerar artigos de lei em sequência.
+- Use exemplos práticos e situações do cotidiano digital para ilustrar os conceitos.
+- Escreva para o público leigo: quem lê é a pessoa que sofreu ou teme sofrer o problema, não um jurista.
+- Mencione no máximo 2 ou 3 dispositivos legais ao longo de todo o artigo, sempre em contexto.
+- Não inclua listas de jurisprudência. Se a curadoria trouxer alguma decisão verificável, mencione-a
+  de forma integrada ao texto, não em tópico separado.
+- O artigo precisa ter NO MÍNIMO ${MIN_WORDS} palavras — alcance isso com profundidade textual, não com listas.
 
 Retorne exclusivamente JSON válido:
 {
@@ -495,7 +521,7 @@ REGRAS DO CAMPO content:
 - Aspas duplas escapadas como \\".
 - NÃO inclua o JSON dentro de bloco de código.
 
-BASE DA CURADORIA JURÍDICA:
+BASE DA CURADORIA JURÍDICA (use como referência mínima, não como roteiro):
 ${JSON.stringify(research, null, 2)}
 `;
 }
@@ -505,7 +531,7 @@ async function generateArticle(topic, research) {
   return extractJson(
     await callOpenRouter(
       [{ role: "system", content: buildArticleSystemPrompt() }, { role: "user", content: buildArticleUserPrompt(topic, research) }],
-      0.35
+      0.45
     )
   );
 }
@@ -514,11 +540,13 @@ async function expandArticle(article, research) {
   log("🤖 Artigo abaixo do mínimo — solicitando expansão...");
   const prompt = `
 O artigo abaixo possui menos de ${MIN_WORDS} palavras.
-Não altere a tese jurídica central.
-Não invente novas leis, jurisprudência, decisões ou processos.
-Amplie desenvolvendo explicações, fundamentos, distinções, exemplos hipotéticos e consequências.
+Amplie-o com mais profundidade textual: desenvolva melhor os argumentos, adicione
+exemplos práticos do cotidiano digital, explore nuances e situações concretas.
+Não inclua novas leis ou jurisprudência além das já presentes.
+Não invente novas leis, decisões ou processos.
+A expansão deve enriquecer a narrativa e a clareza, não aumentar listas de normas.
 
-Base de pesquisa:
+Base de pesquisa (apenas referência):
 ${JSON.stringify(research, null, 2)}
 
 Artigo atual:
@@ -540,7 +568,7 @@ REGRAS DO CAMPO content:
   return extractJson(
     await callOpenRouter(
       [{ role: "system", content: buildArticleSystemPrompt() }, { role: "user", content: prompt }],
-      0.25
+      0.35
     )
   );
 }
@@ -568,6 +596,10 @@ CRITÉRIOS DE REPROVAÇÃO (status: "FAIL"):
 - Qualquer informação que contradiga a base de pesquisa fornecida.
 - Qualquer jurisprudência que não possa ser verificada.
 
+OBSERVAÇÃO: É ESPERADO que o artigo cite poucas leis e pouca jurisprudência.
+Isso NÃO é motivo de reprovação — é o estilo editorial adotado.
+Aprove artigos que sejam factualmente corretos mesmo que sejam mais textuais e menos técnico-legais.
+
 Retorne exclusivamente JSON:
 {
   "status": "PASS" ou "FAIL",
@@ -578,7 +610,7 @@ Retorne exclusivamente JSON:
 `;
   return extractJson(
     await callOpenRouter(
-      [{ role: "system", content: "Você é um auditor jurídico conservador. Quando não puder confirmar, marque como FAIL." }, { role: "user", content: prompt }],
+      [{ role: "system", content: "Você é um auditor jurídico criterioso. Reprove apenas o que for factualmente incorreto. Artigos com poucas citações legais são aceitáveis se o conteúdo for correto." }, { role: "user", content: prompt }],
       0.05
     )
   );
@@ -700,7 +732,7 @@ function markdownToJsx(markdown) {
 
 /**
  * Gera o conteúdo completo do arquivo .tsx para um artigo.
- * Segue o mesmo padrão visual dos artigos já existentes (ex: StalkingVirtual.tsx).
+ * Segue o mesmo padrão visual dos artigos já existentes.
  */
 function generateTsxContent(article, imageUrl, slug, date, words) {
   const componentName = slugToComponentName(slug);
@@ -835,8 +867,6 @@ async function writeArticleTsx(article, imageUrl, slug, date, words) {
 
 /**
  * Insere o import e a rota do novo artigo no App.tsx.
- * Estratégia segura: insere o import antes do último import existente de artigo,
- * e a rota antes do comentário de rota padrão (404).
  */
 async function registerRouteInApp(slug, componentName) {
   log("🗺️  Registrando rota no App.tsx...");
@@ -845,7 +875,6 @@ async function registerRouteInApp(slug, componentName) {
   const importLine = `import ${componentName} from "./pages/articles/${componentName}";`;
   const routeLine  = `            <Route path="/artigos/${slug}" element={<${componentName} />} />`;
 
-  // Verifica se já existe
   if (original.includes(importLine)) {
     log(`⚠️ Rota para "${slug}" já existe no App.tsx. Sem duplicação.`);
     return;
@@ -853,12 +882,10 @@ async function registerRouteInApp(slug, componentName) {
 
   let updated = original;
 
-  // 1. Injeta o import: logo antes da linha do NotFound import (último import fixo)
   const notFoundImport = 'import NotFound from "./pages/NotFound";';
   if (updated.includes(notFoundImport)) {
     updated = updated.replace(notFoundImport, `${notFoundImport}\n${importLine}`);
   } else {
-    // Fallback: insere antes do último import
     const lastImportMatch = [...updated.matchAll(/^import .+;$/gm)].pop();
     if (lastImportMatch) {
       const pos = lastImportMatch.index + lastImportMatch[0].length;
@@ -866,12 +893,10 @@ async function registerRouteInApp(slug, componentName) {
     }
   }
 
-  // 2. Injeta a rota: logo antes do comentário de rota 404
   const notFoundComment = "{/* Rota padrão (404) */}";
   if (updated.includes(notFoundComment)) {
     updated = updated.replace(notFoundComment, `${routeLine}\n            ${notFoundComment}`);
   } else {
-    // Fallback: insere antes do <Route path="*"
     const wildcardRoute = '<Route path="*"';
     if (updated.includes(wildcardRoute)) {
       updated = updated.replace(wildcardRoute, `${routeLine}\n            ${wildcardRoute}`);
