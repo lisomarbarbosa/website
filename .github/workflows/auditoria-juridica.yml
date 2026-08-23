@@ -1,0 +1,294 @@
+name: Auditoria Jurídica de Artigos
+
+on:
+  workflow_dispatch:
+    inputs:
+      artigo:
+        description: "Caminho do arquivo (ex: src/pages/articles/meu-artigo.tsx). Vazio = todos."
+        required: false
+        type: string
+
+  push:
+    branches:
+      - main
+    paths:
+      - "src/pages/articles/**"
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  auditoria-juridica:
+    name: Auditoria Jurídica
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📋 Determinar arquivos a auditar
+        id: arquivos
+        run: |
+          if [ -n "${{ inputs.artigo }}" ]; then
+            FILES="${{ inputs.artigo }}"
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            FILES=$(git diff --name-only HEAD~1 HEAD -- 'src/pages/articles/*.tsx' | tr '\n' ' ')
+          fi
+
+          if [ -z "$FILES" ]; then
+            FILES=$(find src/pages/articles -name '*.tsx' | tr '\n' ' ')
+          fi
+
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+          echo "📄 Arquivos a auditar: $FILES"
+
+      - name: ⚖️ Executar auditoria jurídica
+        id: auditoria
+        run: |
+          node << 'NODESCRIPT'
+          const fs   = require('fs');
+          const path = require('path');
+
+          // ─── Base de leis brasileiras conhecidas ───────────────────────────────
+          // Formato: { pattern, lei, status, obs }
+          // status: 'vigente' | 'revogada' | 'parcialmente_revogada'
+          const LEIS = [
+            // CDC
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?8[.,]?078/i,        lei: 'Lei nº 8.078/1990 (CDC)',                  status: 'vigente' },
+            // LGPD
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?13[.,]?709/i,       lei: 'Lei nº 13.709/2018 (LGPD)',                 status: 'vigente' },
+            // Marco Civil da Internet
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?12[.,]?965/i,       lei: 'Lei nº 12.965/2014 (Marco Civil)',          status: 'vigente' },
+            // Lei de Direitos Autorais
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?9[.,]?610/i,        lei: 'Lei nº 9.610/1998 (LDA)',                   status: 'vigente' },
+            // Crime Informático
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?12[.,]?737/i,       lei: 'Lei nº 12.737/2012 (Lei Carolina Dieckmann)', status: 'vigente' },
+            // Lei de Acesso à Informação
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?12[.,]?527/i,       lei: 'Lei nº 12.527/2011 (LAI)',                  status: 'vigente' },
+            // Decreto e-commerce
+            { pattern: /Decreto\s+(?:n[oº°]?\.?\s*)?7[.,]?962/i,    lei: 'Decreto nº 7.962/2013 (E-commerce)',        status: 'vigente' },
+            // Código Civil
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?10[.,]?406/i,       lei: 'Lei nº 10.406/2002 (Código Civil)',         status: 'vigente' },
+            // Código Penal
+            { pattern: /Decreto-Lei\s+(?:n[oº°]?\.?\s*)?2[.,]?848/i, lei: 'Decreto-Lei nº 2.848/1940 (CP)',           status: 'vigente' },
+            // Lei Geral de Telecomunicações
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?9[.,]?472/i,        lei: 'Lei nº 9.472/1997 (LGT)',                   status: 'vigente' },
+            // Lei do Governo Digital
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?14[.,]?129/i,       lei: 'Lei nº 14.129/2021 (Governo Digital)',      status: 'vigente' },
+            // ANPD Resolução CD/ANPD 2
+            { pattern: /Resolução\s+(?:CD\/ANPD\s+)?(?:n[oº°]?\.?\s*)?2/i, lei: 'Resolução CD/ANPD nº 2/2022',       status: 'vigente' },
+            // Leis revogadas / atenção
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?8[.,]?159/i,        lei: 'Lei nº 8.159/1991 (Arquivos Públicos)',     status: 'parcialmente_revogada', obs: 'Parcialmente revogada pela LAI (Lei 12.527/2011). Verifique o contexto.' },
+            { pattern: /Lei\s+(?:n[oº°]?\.?\s*)?9[.,]?507/i,        lei: 'Lei nº 9.507/1997 (Habeas Data)',           status: 'vigente', obs: 'Ainda vigente mas tem aplicabilidade restrita com a LGPD.' },
+          ];
+
+          // ─── Detecta números de lei potencialmente inválidos ──────────────────
+          // Padrão genérico: Lei nº XXXXX/YYYY onde o ano parece futuro ou muito antigo
+          const CURRENT_YEAR = new Date().getFullYear();
+
+          function detectarNumerosInvalidos(content) {
+            const alertas = [];
+            const generico = /Lei\s+(?:n[oº°]?\.?\s*)?(\d{4,6})[\/\,\.](\d{4})/gi;
+            let m;
+            while ((m = generico.exec(content)) !== null) {
+              const ano = parseInt(m[2], 10);
+              if (ano > CURRENT_YEAR) {
+                alertas.push(`Lei/Decreto com ano futuro detectado: ${m[0].trim()} (ano ${ano})`);
+              }
+              if (ano < 1824) {
+                alertas.push(`Lei/Decreto com ano improvável: ${m[0].trim()} (ano ${ano})`);
+              }
+            }
+            return alertas;
+          }
+
+          // ─── Processar arquivos ───────────────────────────────────────────────
+          const filesList = process.env.AUDIT_FILES
+            ? process.env.AUDIT_FILES.trim().split(/\s+/).filter(Boolean)
+            : [];
+
+          const relatorio = [];
+          const problemasGlobais = [];
+          let totalArquivos = 0;
+          let totalLeis = 0;
+          let totalProblemas = 0;
+
+          const hoje = new Date().toISOString().slice(0, 10);
+          relatorio.push(`# Relatório de Auditoria Jurídica`);
+          relatorio.push(``);
+          relatorio.push(`**Data:** ${hoje}`);
+          relatorio.push(`**Repositório:** lisomarbarbosa/website`);
+          relatorio.push(`**Branch:** main`);
+          relatorio.push(``);
+          relatorio.push(`---`);
+          relatorio.push(``);
+
+          for (const filePath of filesList) {
+            if (!fs.existsSync(filePath)) {
+              relatorio.push(`## ⚠️ Arquivo não encontrado: \`${filePath}\``);
+              relatorio.push(``);
+              continue;
+            }
+
+            const content = fs.readFileSync(filePath, 'utf8');
+            // Extrai apenas texto legível (remove JSX tags e imports)
+            const textoLimpo = content
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/import\s+.+?from\s+['"][^'"]+['"];?/g, '')
+              .replace(/\/\/.*$/gm, '')
+              .replace(/\/\*[\s\S]*?\*\//g, '');
+
+            const nomeArquivo = path.basename(filePath);
+            totalArquivos++;
+
+            relatorio.push(`## 📄 ${nomeArquivo}`);
+            relatorio.push(``);
+            relatorio.push(`**Caminho:** \`${filePath}\``);
+            relatorio.push(``);
+            relatorio.push(`| Lei / Norma | Status | Observação |`);
+            relatorio.push(`|---|---|---|`);
+
+            let leisEncontradas = 0;
+            let problemasArquivo = 0;
+
+            for (const item of LEIS) {
+              if (item.pattern.test(textoLimpo)) {
+                leisEncontradas++;
+                totalLeis++;
+
+                let statusEmoji = '✅ Vigente';
+                if (item.status === 'revogada') {
+                  statusEmoji = '❌ REVOGADA';
+                  problemasArquivo++;
+                  totalProblemas++;
+                  problemasGlobais.push({ arquivo: filePath, lei: item.lei, problema: 'Lei revogada', obs: item.obs || '' });
+                } else if (item.status === 'parcialmente_revogada') {
+                  statusEmoji = '⚠️ Parcialmente revogada';
+                  problemasArquivo++;
+                  totalProblemas++;
+                  problemasGlobais.push({ arquivo: filePath, lei: item.lei, problema: 'Lei parcialmente revogada', obs: item.obs || '' });
+                }
+
+                const obs = item.obs || '—';
+                relatorio.push(`| ${item.lei} | ${statusEmoji} | ${obs} |`);
+              }
+            }
+
+            // Detectar números inválidos
+            const invalidos = detectarNumerosInvalidos(textoLimpo);
+            for (const alerta of invalidos) {
+              problemasArquivo++;
+              totalProblemas++;
+              problemasGlobais.push({ arquivo: filePath, lei: alerta, problema: 'Número/ano inválido', obs: '' });
+              relatorio.push(`| ⚠️ ${alerta} | ❓ Verificar | Número ou ano potencialmente inválido |`);
+            }
+
+            if (leisEncontradas === 0 && invalidos.length === 0) {
+              relatorio.push(`| — | — | Nenhuma referência legislativa detectada neste arquivo |`);
+            }
+
+            relatorio.push(``);
+            relatorio.push(`**Leis detectadas:** ${leisEncontradas} | **Problemas:** ${problemasArquivo}`);
+            relatorio.push(``);
+            relatorio.push(`---`);
+            relatorio.push(``);
+          }
+
+          // ─── Resumo executivo ─────────────────────────────────────────────────
+          relatorio.push(`## 📊 Resumo Executivo`);
+          relatorio.push(``);
+          relatorio.push(`| Métrica | Valor |`);
+          relatorio.push(`|---|---|`);
+          relatorio.push(`| Arquivos auditados | ${totalArquivos} |`);
+          relatorio.push(`| Referências legislativas encontradas | ${totalLeis} |`);
+          relatorio.push(`| Problemas identificados | ${totalProblemas} |`);
+          relatorio.push(`| Status geral | ${totalProblemas === 0 ? '✅ Aprovado' : '🚨 Requer atenção'} |`);
+          relatorio.push(``);
+
+          // ─── Gravar relatório ─────────────────────────────────────────────────
+          const outPath = `.github/auditoria-juridica-${hoje}.md`;
+          fs.writeFileSync(outPath, relatorio.join('\n'), 'utf8');
+          console.log(`✅ Relatório gerado: ${outPath}`);
+
+          // ─── Saída para próximas etapas ───────────────────────────────────────
+          const outProblemas = JSON.stringify(problemasGlobais);
+          fs.writeFileSync('.github/_auditoria_problemas.json', outProblemas, 'utf8');
+          console.log(`📋 Problemas exportados para .github/_auditoria_problemas.json`);
+
+          // Exit code
+          process.exit(0); // Não abortamos o workflow aqui — a Issue é criada no próximo step
+          NODESCRIPT
+        env:
+          AUDIT_FILES: ${{ steps.arquivos.outputs.files }}
+
+      - name: 💾 Commit do relatório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          HOJE=$(date -u +"%Y-%m-%d")
+          REPORT=".github/auditoria-juridica-${HOJE}.md"
+
+          if [ -f "$REPORT" ]; then
+            git add "$REPORT"
+            git diff --cached --quiet || git commit -m "chore: relatório de auditoria jurídica $HOJE"
+            git push origin main || echo "⚠️ Push falhou (possível conflito). O relatório foi gerado localmente."
+            echo "✅ Relatório commitado: $REPORT"
+          else
+            echo "⚠️ Relatório não encontrado. Nada a commitar."
+          fi
+
+      - name: 🚨 Criar Issue se houver problemas jurídicos
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const problemasPath = '.github/_auditoria_problemas.json';
+
+            if (!fs.existsSync(problemasPath)) {
+              console.log('Nenhum arquivo de problemas encontrado. Nada a reportar.');
+              return;
+            }
+
+            const problemas = JSON.parse(fs.readFileSync(problemasPath, 'utf8'));
+
+            if (problemas.length === 0) {
+              console.log('✅ Nenhum problema jurídico encontrado. Issue não criada.');
+              return;
+            }
+
+            const hoje = new Date().toISOString().slice(0, 10);
+
+            let body = `## 🚨 Auditoria Jurídica — Problemas Detectados em ${hoje}\n\n`;
+            body += `A auditoria automática identificou **${problemas.length} problema(s)** nos artigos do blog.\n\n`;
+            body += `| Arquivo | Lei / Norma | Problema | Observação |\n`;
+            body += `|---|---|---|---|\n`;
+
+            for (const p of problemas) {
+              const arq = p.arquivo.replace('src/pages/articles/', '');
+              body += `| \`${arq}\` | ${p.lei} | ${p.problema} | ${p.obs || '—'} |\n`;
+            }
+
+            body += `\n---\n`;
+            body += `> Esta issue foi criada automaticamente pelo workflow **Auditoria Jurídica**.\n`;
+            body += `> Revise os artigos afetados e atualize as referências legislativas conforme necessário.\n`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `⚖️ [Auditoria Jurídica ${hoje}] ${problemas.length} problema(s) detectado(s)`,
+              body,
+              labels: ['auditoria-juridica', 'direito-digital']
+            });
+
+            console.log(`🚨 Issue criada com ${problemas.length} problema(s).`);
