@@ -12,6 +12,7 @@ const BLOG_FILE    = join(ROOT, "src/data/blog.ts");
 const SITEMAP_FILE = join(ROOT, "public/sitemap.xml");
 const APP_FILE     = join(ROOT, "src/App.tsx");
 const ARTICLES_DIR = join(ROOT, "src/pages/articles");
+const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
@@ -1148,6 +1149,10 @@ async function main() {
 
     const { article, imageUrl, slug, words, attempts } =
       await runArticleLoop(topic, slot);
+
+    // ─── Persiste o slug gerado para uso pelo workflow ───────────────────────
+    await writeFile(GENERATED_SLUG_FILE, slug, "utf8");
+    log(`✅ Slug gravado em .generated_slug: ${slug}`);
 
     // 1. Gera o arquivo .tsx do artigo
     log("\n📄 Gerando arquivo de página do artigo...");
