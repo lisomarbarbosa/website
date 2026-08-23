@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import BlogPage from "./pages/BlogPage";
 import NotFound from "./pages/NotFound";
+import DireitoAnonimatoInternetLimites from "./pages/articles/DireitoAnonimatoInternetLimites";
 import ContratosSoftwareLicencasUsoDireitosDeveres from "./pages/articles/ContratosSoftwareLicencasUsoDireitosDeveres";
 import CrimesContraHonraInternetGuiaCompleto from "./pages/articles/CrimesContraHonraInternetGuiaCompleto";
 import LGPDErrosComuns from "./pages/articles/LGPDErrosComuns";
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/artigos/perseguicao-digital-protecao-juridica-vitima" element={<PerseguicaoDigital />} />
                         <Route path="/artigos/crimes-contra-honra-internet-guia-completo" element={<CrimesContraHonraInternetGuiaCompleto />} />
                         <Route path="/artigos/contratos-software-licencas-uso-direitos-deveres" element={<ContratosSoftwareLicencasUsoDireitosDeveres />} />
+                        <Route path="/artigos/direito-anonimato-internet-limites" element={<DireitoAnonimatoInternetLimites />} />
             {/* Rota padrão (404) */}
             <Route path="*" element={<NotFound />} />
           </Routes>
