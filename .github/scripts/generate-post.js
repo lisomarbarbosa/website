@@ -551,6 +551,21 @@ O campo "content" deve conter APENAS texto Markdown simples.
 NÃO use blocos de código (sem \`\`\` em nenhum momento dentro do content).
 NÃO use aspas duplas literais dentro do content sem escapá-las com \\.
 Use apenas # ## ### para títulos, * para itálico, ** para negrito, - para listas.
+REGRA TIPOGRÁFICA — USO DE PONTUAÇÃO:
+
+Evite o uso excessivo de travessão (—) e hífen (-) como recurso estilístico em textos corridos.
+
+Substituições obrigatórias:
+- Quando o travessão (—) separar uma explicação, complemento ou aposto dentro de uma frase, substitua por vírgula.
+- Quando dois travessões marcarem um inciso (—...—), substitua por vírgulas antes e depois do trecho.
+- Hífen (-) usado como conector entre ideias em prosa deve ser substituído por vírgula ou ponto e vírgula.
+
+Exceções permitidas (travessão pode ser mantido):
+- Diálogos e citações diretas.
+- Ênfase dramática isolada em apenas uma ocorrência por parágrafo.
+- Listas com marcadores (—) no estilo jornalístico, quando expressamente solicitado.
+
+Meta: máximo de 1 travessão por parágrafo. Preferir sempre vírgula, ponto e vírgula ou reescrita da frase.
 `;
 }
 
