@@ -6,16 +6,18 @@
 
 ---
 
-## 📄 OfensasRedesSociaisConsequenciasJuridicas.tsx
+## 📄 DireitoDoConsumidorComprasOnline.tsx
 
-**Caminho:** `src/pages/articles/OfensasRedesSociaisConsequenciasJuridicas.tsx`
+**Caminho:** `src/pages/articles/DireitoDoConsumidorComprasOnline.tsx`
 
 | Lei / Norma | Status | Observação |
 |---|---|---|
+| Lei nº 8.078/1990 (CDC) | ✅ Vigente | — |
 | Lei nº 13.709/2018 (LGPD) | ✅ Vigente | — |
+| Lei nº 12.965/2014 (Marco Civil) | ✅ Vigente | — |
 | Decreto nº 7.962/2013 (E-commerce) | ✅ Vigente | — |
 
-**Leis detectadas:** 2 | **Problemas:** 0
+**Leis detectadas:** 4 | **Problemas:** 0
 
 ---
 
@@ -24,6 +26,6 @@
 | Métrica | Valor |
 |---|---|
 | Arquivos auditados | 1 |
-| Referências legislativas encontradas | 2 |
+| Referências legislativas encontradas | 4 |
 | Problemas identificados | 0 |
 | Status geral | ✅ Aprovado |
