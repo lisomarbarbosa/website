@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import BlogPage from "./pages/BlogPage";
 import NotFound from "./pages/NotFound";
+import ContratosDigitaisValidadeJuridicaAssinaturasDireitos from "./pages/articles/ContratosDigitaisValidadeJuridicaAssinaturasDireitos";
 import OfensasRedesSociaisConsequenciasJuridicas from "./pages/articles/OfensasRedesSociaisConsequenciasJuridicas";
 import DireitoDoConsumidorComprasOnline from "./pages/articles/DireitoDoConsumidorComprasOnline";
 import DireitoAnonimatoInternetLimites from "./pages/articles/DireitoAnonimatoInternetLimites";
@@ -55,6 +56,7 @@ const App = () => (
                         <Route path="/artigos/direito-anonimato-internet-limites" element={<DireitoAnonimatoInternetLimites />} />
                         <Route path="/artigos/direito-do-consumidor-compras-online" element={<DireitoDoConsumidorComprasOnline />} />
                         <Route path="/artigos/ofensas-redes-sociais-consequencias-juridicas" element={<OfensasRedesSociaisConsequenciasJuridicas />} />
+                        <Route path="/artigos/contratos-digitais-validade-juridica-assinaturas-direitos" element={<ContratosDigitaisValidadeJuridicaAssinaturasDireitos />} />
             {/* Rota padrão (404) */}
             <Route path="*" element={<NotFound />} />
           </Routes>
