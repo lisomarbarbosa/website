@@ -144,34 +144,63 @@ function getToday() {
 }
 
 /**
- * Retorna o número de dias completos desde 2024-01-01 (época fixa).
- * Garante progressão contínua entre meses e anos, sem repetir o mesmo
- * índice no mesmo dia de meses diferentes.
+ * Lê os temas já publicados no blog.ts extraindo os títulos/slugs dos posts.
+ * Usa slugify para normalizar e comparar com os TOPICS.
  */
-function absoluteDayIndex() {
-  const EPOCH = Date.UTC(2024, 0, 1); // 2024-01-01
-  const now   = Date.now();
-  return Math.floor((now - EPOCH) / 86_400_000);
+async function getUsedTopics() {
+  try {
+    const content = await readFile(BLOG_FILE, "utf8");
+    // Extrai todos os valores de title presentes no blog.ts
+    const titles = [...content.matchAll(/title:\s*'([^']+)'/g)].map(m => m[1]);
+    return titles.map(t => slugify(t));
+  } catch (_) {
+    return [];
+  }
 }
 
 /**
- * Escolhe o tema do artigo de forma determinística mas única por execução.
- *
- * - Slot 1: índice = dias absolutos desde 2024-01-01
- * - Slot 2: índice = dias absolutos + metade do array (garante tema diferente do slot 1)
- * - CUSTOM_TOPIC: sempre tem precedência
- *
- * O índice é baseado em dias absolutos (não apenas getUTCDate), então o tema
- * avança a cada dia e nunca repete no mesmo dia de meses/anos diferentes.
+ * Embaralha um array usando Fisher-Yates (in-place).
  */
-function chooseTopic(slot = 1) {
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/**
+ * Escolhe um tema de forma aleatória, evitando temas já publicados.
+ *
+ * - CUSTOM_TOPIC sempre tem precedência.
+ * - Embaralha TOPICS a cada execução (aleatoriedade real).
+ * - Remove temas cujo slugify é similar a algum título já publicado.
+ * - Se todos já foram usados, sorteia de todos (começa novo ciclo).
+ * - usedTopicSlugs: lista de slugs já sorteados NA MESMA execução
+ *   (para que slots 1 e 2 nunca recebam o mesmo tema).
+ */
+async function chooseTopic(usedTopicSlugs = []) {
   if (process.env.CUSTOM_TOPIC && process.env.CUSTOM_TOPIC.trim()) {
     return process.env.CUSTOM_TOPIC.trim();
   }
-  const base   = absoluteDayIndex();
-  const half   = Math.floor(TOPICS.length / 2);
-  const offset = slot === 2 ? half : 0;
-  return TOPICS[(base + offset) % TOPICS.length];
+
+  const publishedSlugs = await getUsedTopics();
+  const allUsed = [...publishedSlugs, ...usedTopicSlugs];
+
+  const available = TOPICS.filter(t => {
+    const ts = slugify(t);
+    // Considera "usado" se o slug do tema aparece como substring de algum título publicado
+    return !allUsed.some(used => used.includes(ts.slice(0, 20)) || ts.includes(used.slice(0, 20)));
+  });
+
+  const pool = available.length > 0 ? available : TOPICS;
+  const shuffled = shuffleArray(pool);
+
+  log(`🎲 Pool de temas disponíveis: ${pool.length} (${TOPICS.length - pool.length} já publicados)`);
+  const chosen = shuffled[0];
+  log(`🎯 Tema sorteado: ${chosen}`);
+  return chosen;
 }
 
 function cleanMarkdown(text) {
@@ -252,7 +281,7 @@ function reconstructJsonWithContent(text) {
   const result = {};
   for (const field of fields) {
     const strMatch = src.match(
-      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`, "s")
+      new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\[\\s\\S])*)"`,"s")
     );
     if (strMatch) {
       try { result[field] = JSON.parse(`"${strMatch[1]}"`); } catch (_) { result[field] = strMatch[1]; }
@@ -1037,21 +1066,23 @@ async function getUnsplashImage(topic) {
 
 // ─── Loop principal ───────────────────────────────────────────────────────────
 
-async function runArticleLoop(baseTopic, slot) {
+async function runArticleLoop(baseTopic, slot, usedTopicSlugs) {
   let attempt = 0;
   let lastRejectionReasons = [];
+  let currentTopic = baseTopic;
 
   while (attempt < MAX_ATTEMPTS) {
     attempt++;
 
-    const topic = attempt === 1
-      ? baseTopic
-      : TOPICS[(TOPICS.indexOf(baseTopic) + attempt) % TOPICS.length];
+    // A partir da 2ª tentativa, sorteia novo tema aleatório (excluindo os já usados)
+    if (attempt > 1) {
+      currentTopic = await chooseTopic([...usedTopicSlugs, slugify(currentTopic)]);
+    }
 
     log("");
     log(`${"=".repeat(50)}`);
     log(`🔄 SLOT ${slot} | TENTATIVA ${attempt}/${MAX_ATTEMPTS}`);
-    log(`🎯 Tema: ${topic}`);
+    log(`🎯 Tema: ${currentTopic}`);
     if (lastRejectionReasons.length > 0) {
       log(`📋 Motivos da reprovação anterior:`);
       lastRejectionReasons.forEach(r => log(`   • ${r}`));
@@ -1060,7 +1091,7 @@ async function runArticleLoop(baseTopic, slot) {
 
     try {
       log(`\n📚 [${attempt}/${MAX_ATTEMPTS}] Etapa 1/4 — Curadoria jurídica...`);
-      const research = await createResearch(topic);
+      const research = await createResearch(currentTopic);
 
       if (research.warnings && research.warnings.length > 0) {
         log(`⚠️ Avisos da curadoria: ${research.warnings.join("; ")}`);
@@ -1068,7 +1099,7 @@ async function runArticleLoop(baseTopic, slot) {
       log(`✅ Curadoria concluída. Bases legais: ${(research.legal_basis || []).length}`);
 
       log(`\n✍️  [${attempt}/${MAX_ATTEMPTS}] Etapa 2/4 — Geração do artigo...`);
-      let article = await generateArticle(topic, research);
+      let article = await generateArticle(currentTopic, research);
       let words = countWords(article.content || "");
       log(`📊 Palavras geradas: ${words}`);
 
@@ -1118,10 +1149,10 @@ async function runArticleLoop(baseTopic, slot) {
       log(`📌 Título: ${article.title}`);
       log(`📊 Palavras: ${words}`);
 
-      const image = await getUnsplashImage(topic);
+      const image = await getUnsplashImage(currentTopic);
       const slug  = slugify(article.slug || article.title);
 
-      return { article, imageUrl: image, slug, words, attempts: attempt };
+      return { article, imageUrl: image, slug, words, attempts: attempt, topic: currentTopic };
 
     } catch (err) {
       log(`💥 Erro inesperado na tentativa ${attempt}: ${err.message}`);
@@ -1151,13 +1182,24 @@ async function main() {
     log("💻 GERADOR DE CONTEÚDO — DIREITO DIGITAL");
     log("==========================================");
 
-    const date  = getToday();
-    const slot  = parseInt(process.env.ARTICLE_SLOT || "1", 10);
-    const topic = chooseTopic(slot);
+    const date = getToday();
+    const slot = parseInt(process.env.ARTICLE_SLOT || "1", 10);
+
+    // Temas já usados nesta execução (para slots múltiplos no mesmo workflow)
+    // O ARTICLE_USED_TOPICS env é uma lista separada por | passada pelo workflow
+    const usedInRun = (process.env.ARTICLE_USED_TOPICS || "")
+      .split("|")
+      .map(t => t.trim())
+      .filter(Boolean)
+      .map(t => slugify(t));
+
+    const topic = process.env.CUSTOM_TOPIC?.trim()
+      ? process.env.CUSTOM_TOPIC.trim()
+      : await chooseTopic(usedInRun);
 
     log(`📅 Data: ${date}`);
     log(`🎰 Slot: ${slot}`);
-    log(`🎯 Tema base: ${topic}`);
+    log(`🎯 Tema sorteado: ${topic}`);
     log(`🔁 Máx. tentativas por artigo: ${MAX_ATTEMPTS}`);
     log(`📋 Loop: reprovar → regenerar do zero → nova curadoria → nova auditoria → repetir até passar`);
 
@@ -1168,10 +1210,10 @@ async function main() {
     originalSitemap = await readFile(SITEMAP_FILE, "utf8");
     originalApp     = await readFile(APP_FILE,     "utf8");
 
-    const { article, imageUrl, slug, words, attempts } =
-      await runArticleLoop(topic, slot);
+    const { article, imageUrl, slug, words, attempts, topic: finalTopic } =
+      await runArticleLoop(topic, slot, usedInRun);
 
-    // ─── Persiste o slug gerado para uso pelo workflow ───────────────────────
+    // ─── Persiste o slug e o tema gerado para uso pelo workflow ──────────────
     await writeFile(GENERATED_SLUG_FILE, slug, "utf8");
     log(`✅ Slug gravado em .generated_slug: ${slug}`);
 
@@ -1194,6 +1236,7 @@ async function main() {
     log("✅ PROCESSO CONCLUÍDO COM SUCESSO");
     log(`🎰 Slot: ${slot}`);
     log(`📌 Título: ${article.title}`);
+    log(`🎯 Tema final: ${finalTopic}`);
     log(`🔗 Slug: ${slug}`);
     log(`🧩 Componente: ${componentName}.tsx`);
     log(`🛣️  Rota: /artigos/${slug}`);
