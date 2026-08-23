@@ -16,6 +16,7 @@ import ProtecaoDadosPessoais from "./pages/articles/ProtecaoDadosPessoais";
 import FakeNewsDifamacao from "./pages/articles/FakeNewsDifamacao";
 import ComplianceLGPD from "./pages/articles/ComplianceLGPD";
 import RegulamentacaoCriptomoedas from "./pages/articles/RegulamentacaoCriptomoedas";
+import StalkingVirtual from "./pages/articles/StalkingVirtual";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/artigos/fake-news-difamacao" element={<FakeNewsDifamacao />} />
             <Route path="/artigos/compliance-lgpd" element={<ComplianceLGPD />} />
             <Route path="/artigos/regulamentacao-criptomoedas" element={<RegulamentacaoCriptomoedas />} />
+            <Route path="/artigos/stalking-virtual-consequencias-juridicas" element={<StalkingVirtual />} />
             {/* Rota padrão (404) */}
             <Route path="*" element={<NotFound />} />
           </Routes>
