@@ -119,6 +119,7 @@ jobs:
 
       - name: 🤖 Generate, research and audit article (com loop de reescrita)
         if: steps.slot_check.outputs.skip != 'true'
+        id: generate
         env:
           ARTICLE_SLOT: ${{ steps.slot_check.outputs.slot }}
         run: |
@@ -132,26 +133,42 @@ jobs:
           BLOG_CHANGED=$(git status --porcelain | grep 'src/data/blog.ts' | wc -l)
           SITEMAP_CHANGED=$(git status --porcelain | grep 'public/sitemap.xml' | wc -l)
 
+          # Se o blog.ts não foi modificado, verifica se é porque o slug já existia (deduplicação legítima)
           if [ "$BLOG_CHANGED" -eq "0" ]; then
-            echo "❌ src/data/blog.ts não foi modificado. O post não foi gravado."
-            exit 1
+            # Tenta extrair o slug gerado pelo script (salvo em .generated_slug se disponível)
+            if [ -f ".generated_slug" ]; then
+              GENERATED_SLUG=$(cat .generated_slug)
+              SLUG_EXISTS=$(grep -c "slug: '$GENERATED_SLUG'" src/data/blog.ts 2>/dev/null || echo "0")
+              if [ "$SLUG_EXISTS" -gt "0" ]; then
+                echo "⚠️ Slug '$GENERATED_SLUG' já existia no blog.ts — deduplicação correta, nada a fazer."
+                echo "skip_commit=true" >> $GITHUB_ENV
+              else
+                echo "❌ src/data/blog.ts não foi modificado e o slug não foi encontrado. O post não foi gravado."
+                exit 1
+              fi
+            else
+              echo "❌ src/data/blog.ts não foi modificado. O post não foi gravado."
+              exit 1
+            fi
+          else
+            echo "skip_commit=false" >> $GITHUB_ENV
           fi
 
-          if [ "$SITEMAP_CHANGED" -eq "0" ]; then
+          if [ "$SITEMAP_CHANGED" -eq "0" ] && [ "${skip_commit:-false}" != "true" ]; then
             echo "⚠️ public/sitemap.xml não foi modificado."
           fi
 
-          echo "✅ Arquivos modificados corretamente."
+          echo "✅ Validação concluída."
 
       - name: 🧹 Fix trailing whitespace
-        if: steps.slot_check.outputs.skip != 'true'
+        if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
         run: |
           sed -i 's/[[:space:]]*$//' src/data/blog.ts
           sed -i 's/[[:space:]]*$//' public/sitemap.xml
           echo "✅ Trailing whitespace removido."
 
       - name: 📝 Show generated changes
-        if: steps.slot_check.outputs.skip != 'true'
+        if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
         run: |
           echo "📝 Novos arquivos e alterações:"
           git status --short
@@ -165,7 +182,7 @@ jobs:
           git diff --stat -- public/sitemap.xml
 
       - name: 🚀 Commit and push
-        if: steps.slot_check.outputs.skip != 'true'
+        if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
         run: |
           set -e
 
