@@ -186,6 +186,9 @@ jobs:
 
           git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
 
+          # Sincroniza com o main remoto antes de enviar (evita deploy de SHA antigo)
+          git pull --rebase origin main
+
           git push origin main
 
           echo "🚀 Artigo slot ${SLOT} publicado no branch main."
