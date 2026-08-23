@@ -5,7 +5,6 @@ on:
     # Artigo 1 — todos os dias às 08h UTC (05h Brasília)
     - cron: "0 8 * * *"
     # Artigo 2 — todos os dias às 14h UTC (11h Brasília)
-    # Só executa se o artigo 1 tiver sido publicado no mesmo dia
     - cron: "0 14 * * *"
 
   workflow_dispatch:
@@ -109,12 +108,35 @@ jobs:
             if [ "$POSTS_TODAY" -eq "0" ]; then
               echo "⏭️ Slot 2 ignorado: nenhum artigo publicado hoje ainda."
               echo "skip=true" >> $GITHUB_OUTPUT
+              echo "used_topics=" >> $GITHUB_OUTPUT
             else
               echo "✅ Slot 2 liberado: $POSTS_TODAY post(s) publicado(s) hoje."
               echo "skip=false" >> $GITHUB_OUTPUT
+
+              # Extrai os títulos dos posts publicados hoje para repassar ao script
+              # como ARTICLE_USED_TOPICS — evita que slot 2 sorteie o mesmo tema do slot 1
+              TITLES_TODAY=$(node -e "
+                const fs = require('fs');
+                const content = fs.readFileSync('src/data/blog.ts', 'utf8');
+                const today = '$TODAY';
+                // Extrai blocos que contenham a data de hoje
+                const blocks = content.split(/(?=\s*\{)/);
+                const titles = [];
+                for (const block of blocks) {
+                  if (block.includes(\"date: '\" + today + \"'\")) {
+                    const m = block.match(/title:\s*'([^']+)'/);
+                    if (m) titles.push(m[1]);
+                  }
+                }
+                console.log(titles.join('|'));
+              " 2>/dev/null || echo "")
+
+              echo "📋 Temas já publicados hoje: $TITLES_TODAY"
+              echo "used_topics=$TITLES_TODAY" >> $GITHUB_OUTPUT
             fi
           else
             echo "skip=false" >> $GITHUB_OUTPUT
+            echo "used_topics=" >> $GITHUB_OUTPUT
           fi
 
       - name: 🤖 Generate, research and audit article (com loop de reescrita)
@@ -122,6 +144,8 @@ jobs:
         id: generate
         env:
           ARTICLE_SLOT: ${{ steps.slot_check.outputs.slot }}
+          # Temas já usados hoje (slot 1 → slot 2): impede repetição de tema no mesmo dia
+          ARTICLE_USED_TOPICS: ${{ steps.slot_check.outputs.used_topics }}
         run: |
           node .github/scripts/generate-post.js
 
