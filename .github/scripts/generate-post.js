@@ -262,7 +262,7 @@ function reconstructJsonWithContent(text) {
       try { result[field] = JSON.parse(`"${strMatch[1]}"`); } catch (_) { result[field] = strMatch[1]; }
       continue;
     }
-    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\[{])`));
+    const arrObjMatch = src.match(new RegExp(`"${field}"\\s*:\\s*([\\[{])`));
     if (arrObjMatch) {
       const opener = arrObjMatch[1];
       const closer = opener === "[" ? "]" : "}";
@@ -680,38 +680,56 @@ async function updateBlogFile(article, imageUrl, date) {
   log("📝 Atualizando src/data/blog.ts...");
   const original = await readFile(BLOG_FILE, "utf8");
   const slug = slugify(article.slug || article.title);
-  if (slugAlreadyExists(original, slug))
-    throw new Error(`Slug "${slug}" já existe. Publicação cancelada para evitar duplicação.`);
+
+  if (slugAlreadyExists(original, slug)) {
+    log(`⚠️ Slug "${slug}" já existe no blog.ts. Sem duplicação.`);
+    return false;
+  }
+
   const post = buildPostObject(article, imageUrl, date);
   const arrayStart = original.indexOf("[");
   if (arrayStart === -1) throw new Error("Início do array blogPosts não encontrado.");
   const updated = original.slice(0, arrayStart + 1) + post + original.slice(arrayStart + 1);
   await writeFile(BLOG_FILE, updated, "utf8");
   log("✅ blog.ts atualizado.");
+  return true;
 }
 
-async function updateSitemap(slug, date) {
+async function updateSitemap(slug, date, blogTsContent) {
   log("🗺️ Atualizando sitemap.xml...");
   const original = await readFile(SITEMAP_FILE, "utf8");
-  const loc = `https://www.lisomarbarbosa.adv.br/blog/${slug}`;
-  if (original.includes(`<loc>${loc}</loc>`)) {
-    log("⚠️ URL já existe no sitemap. Sem duplicação.");
+  const postUrl = `https://www.lisomarbarbosa.adv.br/blog/${slug}`;
+
+  const urlExistsInSitemap = original.includes(`<loc>${postUrl}</loc>`);
+  const postExistsInBlog = blogTsContent.includes(`slug: '${slug}'`);
+
+  if (urlExistsInSitemap && postExistsInBlog) {
+    log("⚠️ Post já existe no sitemap e no blog.ts. Sem duplicação.");
     return;
   }
-  const entry = `
+
+  if (!urlExistsInSitemap) {
+    const entry = `
   <url>
-    <loc>${loc}</loc>
+    <loc>${postUrl}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 `;
-  const closingTag = "</urlset>";
-  const index = original.lastIndexOf(closingTag);
-  if (index === -1) throw new Error("Tag </urlset> não encontrada no sitemap.");
-  const updated = original.slice(0, index) + entry + original.slice(index);
-  await writeFile(SITEMAP_FILE, updated, "utf8");
-  log("✅ sitemap.xml atualizado.");
+    const closingTag = "</urlset>";
+    const index = original.lastIndexOf(closingTag);
+    if (index === -1) throw new Error("Tag </urlset> não encontrada no sitemap.");
+    const updated = original.slice(0, index) + entry + original.slice(index);
+    await writeFile(SITEMAP_FILE, updated, "utf8");
+    log("✅ sitemap.xml atualizado.");
+  } else {
+    log("ℹ️ URL já existia no sitemap — mantida sem alteração.");
+  }
+
+  if (!postExistsInBlog) {
+    log("⚠️ Atenção: URL no sitemap mas slug ausente no blog.ts — verifique manualmente.");
+  }
 }
 
 async function getUnsplashImage(topic) {
@@ -905,7 +923,10 @@ async function main() {
 
     // Persiste no blog e sitemap apenas após aprovação completa
     await updateBlogFile(article, imageUrl, date);
-    await updateSitemap(slug, date);
+
+    // Lê blog.ts atualizado para checar presença do slug no sitemap
+    const updatedBlogContent = await readFile(BLOG_FILE, "utf8");
+    await updateSitemap(slug, date, updatedBlogContent);
 
     log("");
     log("==========================================");
