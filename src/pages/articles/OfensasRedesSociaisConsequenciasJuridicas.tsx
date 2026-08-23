@@ -1,113 +1,227 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useEffect } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const OfensasRedesSociaisConsequenciasJuridicas = () => {
+const pageTitle =
+  "Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado | Lisomar Barbosa | Direito Digital";
+
+const pageDescription =
+  "Comprar pela internet virou rotina, mas poucos sabem exatamente o que a lei protege quando algo dá errado. Este artigo explica, em linguagem clara, os principais direitos do consumidor digital, do arrependimento em sete dias à responsabilidade solidária dos marketplaces, e ensina como se prevenir e reagir diante de problemas reais.";
+
+const pageUrl =
+  "https://www.lisomarbarbosa.adv.br/artigos/direito-do-consumidor-compras-online";
+
+const pageImage =
+  "https://images.unsplash.com/photo-1697545806029-f22eb0f36bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTA3NjgyfA&ixlib=rb-4.1.0&q=80&w=1080";
+
+const DireitoDoConsumidorComprasOnline = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   return (
     <>
       <Helmet>
-        <title>Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir | Lisomar Barbosa | Direito Digital</title>
-        <meta name="description" content="Um comentário cruel, um print fora de contexto, uma fake news compartilhada em segundos. O ambiente digital potencializa danos à honra e à imagem, mas a lei não ficou para trás. Saiba o que configura crime, como funciona a reparação civil e quais passos dar para se proteger." />
-        <link rel="canonical" href="https://www.lisomarbarbosa.adv.br/artigos/ofensas-redes-sociais-consequencias-juridicas" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={pageUrl} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
 
         <meta property="og:site_name" content="Lisomar Barbosa | Direito Digital" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.lisomarbarbosa.adv.br/artigos/ofensas-redes-sociais-consequencias-juridicas" />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200" />
-        <meta property="og:title" content="Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir | Lisomar Barbosa | Direito Digital" />
-        <meta property="og:description" content="Um comentário cruel, um print fora de contexto, uma fake news compartilhada em segundos. O ambiente digital potencializa danos à honra e à imagem, mas a lei não ficou para trás. Saiba o que configura crime, como funciona a reparação civil e quais passos dar para se proteger." />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={pageImage} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir | Lisomar Barbosa | Direito Digital" />
-        <meta name="twitter:description" content="Um comentário cruel, um print fora de contexto, uma fake news compartilhada em segundos. O ambiente digital potencializa danos à honra e à imagem, mas a lei não ficou para trás. Saiba o que configura crime, como funciona a reparação civil e quais passos dar para se proteger." />
-        <meta name="twitter:image" content="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={pageImage} />
       </Helmet>
+
       <div className="min-h-screen bg-background">
         <Header />
 
         <main className="pt-32 pb-20">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <Link to="/blog">
-                <Button variant="ghost" className="mb-6 group">
-                  <ArrowLeft className="mr-2 group-hover:-translate-x-1 transition-smooth" size={18} />
+            <div className="mx-auto max-w-4xl">
+              <Link to="/blog" aria-label="Voltar aos artigos">
+                <Button variant="ghost" className="group mb-6">
+                  <ArrowLeft
+                    className="mr-2 size-[18px] transition-transform duration-300 group-hover:-translate-x-1"
+                    aria-hidden="true"
+                  />
                   Voltar aos Artigos
                 </Button>
               </Link>
 
               <article className="animate-fade-in">
                 <header className="mb-12">
-                  <span className="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
+                  <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent">
                     Direito Digital
                   </span>
-                  <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                    Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir
+
+                  <h1 className="mb-6 text-4xl font-bold md:text-5xl">
+                    Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado
                   </h1>
-                  <div className="flex items-center gap-4 text-sm text-foreground/60 mb-8">
-                    <span>23 de ago de 2026</span>
-                    <span>•</span>
-                    <span>11 min de leitura</span>
+
+                  <div className="mb-8 flex items-center gap-4 text-sm text-foreground/60">
+                    <span>23 de ago. de 2026</span>
+                    <span aria-hidden="true">•</span>
+                    <span>8 min de leitura</span>
                   </div>
+
                   <img
-                    src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200"
-                    alt="Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir"
-                    className="w-full h-[400px] object-cover rounded-lg mb-8"
+                    src={pageImage}
+                    alt="Consumidora realizando compra online pelo celular"
+                    className="mb-8 h-[400px] w-full rounded-lg object-cover"
+                    loading="eager"
                   />
                 </header>
 
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-foreground/80 mb-6 leading-relaxed">A notificação acende na tela do celular. Você abre, lê uma vez, lê de novo, e o estômago revira. Alguém — conhecido ou anônimo escondido atrás de um perfil genérico — acabou de publicar algo que ataca sua honra, distorce um fato seu ou expõe sua intimidade sem consentimento. Nos primeiros minutos, a sensação é de impotência: a internet é rápida, o alcance é imenso e o &quot;print&quot; já circula em grupos de WhatsApp antes mesmo de você terminar o café.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Essa cena, infelizmente, deixou de ser exceção para se tornar rotina. As redes sociais amplificaram a voz de todos, mas não trouxeram, junto com o microfone, a responsabilidade que ele exige. Muitos ainda acreditam que o ambiente virtual é uma &quot;terra de ninguém&quot;, onde se pode dizer o que quiser sob a desculpa de &quot;liberdade de expressão&quot; ou &quot;só foi uma brincadeira&quot;. A realidade jurídica, porém, é outra: a Constituição Federal, no artigo 5º, inciso X, garante a inviolabilidade da intimidade, da vida privada, da honra e da imagem das pessoas, assegurando o direito a indenização pelo dano material ou moral decorrente de sua violação. Esse princípio não perde validade porque a ofensa foi digitada em vez de falada, ou porque foi publicada no Instagram em vez de impressa em jornal.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">O que o direito entende por ofensa no ambiente digital</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Quando falamos em ofensas nas redes sociais, o ordenamento jurídico brasileiro trabalha em duas frentes paralelas e independentes: a esfera penal e a cível. Na esfera penal, o Código Penal tipifica três condutas principais contra a honra — calúnia, difamação e injúria —, e todas elas se aplicam integralmente ao que é escrito, postado, compartilhado ou transmitido ao vivo nas plataformas digitais. A calúnia (artigo 138) ocorre quando alguém imputa falsamente a outrem fato definido como crime — por exemplo, acusar publicamente uma pessoa de ter cometido um furto que nunca aconteceu. A difamação (artigo 139) atinge a reputação: é ofender a dignidade ou o decoro de alguém, espalhando informações vexatórias, ainda que não sejam crimes, como divulgar que alguém foi demitido por justa causa por conduta imoral, se isso não for verdade. Já a injúria (artigo 140) ofende a dignidade ou o decoro através de xingamentos, adjetivos pejorativos ou gestos — o clássico &quot;você é um ladrão&quot; dito nos comentários de uma publicação, sem imputar um fato criminoso específico, mas atacando a honra subjetiva da vítima.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Um detalhe crucial que muita gente desconhece: desde a reforma trazida pela Lei nº 13.964/2019 (conhecida como Pacote Anticrime), o artigo 141, parágrafo 2º, do Código Penal prevê causa de aumento de pena — de um terço até a metade — se qualquer desses crimes for cometido &quot;mediante divulgação em rede social ou meio que facilite a divulgação&quot;. O legislador entendeu que o potencial lesivo da ofensa se multiplica exponencialmente quando ela ganha a viralização própria das redes sociais. Não é mais uma ofensa dita no ouvido de alguém; é uma ofensa potencialmente vista por milhares, arquivada nos servidores, replicada em prints e difícil de ser totalmente apagada.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Paralelamente, na esfera cível, o Código Civil (artigos 186, 187 e 927) estabelece que quem, por ação ou omissão voluntária, negligência ou imprudência, violar direito e causar dano a outrem, ainda que exclusivamente moral, comete ato ilícito e deve repará-lo. No contexto digital, isso significa que, independentemente de haver processo criminal ou de o ofensor ser condenado na justiça penal, a vítima pode — e deve — ingressar com ação de indenização por danos morais (e materiais, se houver prejuízo financeiro comprovado, como perda de contrato de trabalho ou cliente). O valor da indenização não segue tabela fixa; o juiz analisa a gravidade da ofensa, o alcance da publicação, a intenção do ofensor, a situação econômica das partes e precedentes de casos semelhantes para fixar quantia que sirva de reparação e de desestímulo (função punitivo-pedagógica).</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">A linha tênue entre opinião, crítica e crime</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Nem toda fala desagradável é crime ou ilícito civil. A liberdade de expressão e de pensamento (CF/88, art. 5º, IV e IX) é direito fundamental e convive com a proteção à honra. O desafio jurídico — e humano — está em traçar a fronteira. Criticar a atuação profissional de um médico, de um político, de um influenciador, de forma fundamentada, ainda que dura, costuma ser exercício legítimo de opinião. O problema surge quando a crítica abandona o campo das ideias e parte para o ataque pessoal, a mentira deliberada, a exposição de dados sensíveis (orientação sexual, saúde, vida íntima) ou o discurso de ódio.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Imagine um cenário: um cliente insatisfeito posta no Google Maps: &quot;Péssimo atendimento, esperei 40 minutos e o doutor nem olhou no meu rosto. Não recomendo&quot;. Isso é avaliação de serviço, protegida. Agora, se o mesmo cliente escreve: &quot;Esse médico é um charlatão que mata pacientes por negligência e desvia dinheiro do SUS&quot;, temos calúnia (imputação de crimes) e difamação (ofensa à reputação profissional). Se ele chama o médico de &quot;lixo humano&quot;, &quot;incompetente nojento&quot;, temos injúria. A plataforma onde isso foi escrito — Google, Instagram, Facebook, X (antigo Twitter), TikTok — guarda os registros de conexão (IP, data, hora, dispositivo) por determinação do Marco Civil da Internet (Lei nº 12.965/2014, artigo 13). Esses dados são a &quot;digital&quot; do ofensor e só podem ser fornecidos mediante ordem judicial, o que garante que a identificação do autor não ocorra de forma arbitrária, mas também impede que o anonimato seja escudo para a impunidade.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">O papel das plataformas e a remoção de conteúdo</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Muitas vítimas correm para o &quot;denunciar&quot; da rede social esperando que o post suma em minutos. A regra geral do Marco Civil da Internet (artigo 19) é de que o provedor de aplicações (a rede social) não responde civilmente por danos decorrentes de conteúdo gerado por terceiros <em>se</em> não houver ordem judicial específica determinando a remoção. Ou seja: a plataforma não é obrigada a julgar se aquele conteúdo é crime ou ilícito; ela remove mediante decisão do Poder Judiciário. Existe, contudo, uma exceção importante: conteúdos que exponham nudez ou ato sexual de caráter privado sem autorização do participante (o chamado &quot;revenge porn&quot; ou vazamento de nudes) devem ser removidos pela plataforma tão logo notificada, independentemente de ordem judicial, sob pena de responsabilização solidária (artigo 21, parágrafo 1º).</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Na prática, isso significa que a via mais eficaz para tirar o conteúdo do ar costuma ser o pedido de tutela de urgência (liminar) em ação cível, solicitando a remoção ao provedor e a quebra de sigilo dos dados cadastrais e de conexão do autor do perfil ofensivo. O Judiciário tem concedido essas liminares com relativa celeridade quando demonstrado o perigo da demora — o &quot;dano viral&quot; que se espalha a cada hora que o post permanece no ar.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Provas: o que fazer (e não fazer) na hora do susto</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">A reação imediata diante da ofensa costuma ser emocional: responder com xingamentos, ameaçar processar nos comentários, apagar o print com raiva ou, pior, confrontar o ofensor por mensagem privada. Juridicamente, nada disso ajuda — e pode atrapalhar. O primeiro passo técnico é a <strong>preservação da prova com fé pública</strong>. Prints de tela feitos pelo próprio usuário têm valor probante relativo; a parte contrária pode alegar adulteração. O padrão-ouro é a <strong>ata notarial</strong>: um tabelião de notas acessa o link, documenta o conteúdo, a URL, a data, a hora, os comentários, o número de visualizações/compartilhamentos e lavra uma escritura pública que faz prova plena do que estava na rede naquele momento. Outra opção, mais acessível, é o uso de ferramentas de certificação digital de páginas web (como o <em>WebPreserver</em> ou serviços similares), que geram um hash criptográfico do conteúdo, embora a ata notarial ainda tenha aceitação mais universal nos tribunais.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Registre também o Boletim de Ocorrência (BO). Para os crimes contra a honra (calúnia, difamação, injúria), a ação penal é de <strong>iniciativa privada</strong> (exceto se houver elemento de discriminação racial, homofóbica, etc., que torna a ação pública incondicionada). Isso significa que a vítima tem o prazo de <strong>seis meses</strong>, contados da data em que tomou conhecimento da autoria, para oferecer <em>queixa-crime</em> perante o Juizado Especial Criminal. O BO não é a queixa-crime em si, mas é o registro oficial que inicia a contagem do prazo e documenta o fato perante a autoridade policial. Sem BO e sem identificação do autor (obtida via quebra de sigilo judicial), o processo criminal não anda.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">A reparação do dano moral: como o juiz decide o valor</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Muita gente pergunta: &quot;Quanto vou ganhar?&quot;. Não há tabela. O Superior Tribunal de Justiça (STJ) firmou entendimento de que a fixação do dano moral deve observar os princípios da proporcionalidade e da razoabilidade, considerando a capacidade econômica do ofensor e da vítima, a gravidade do ato, a repercussão da ofensa, o grau de dolo ou culpa, e a função pedagógica da sanção. Ofensas com grande viralização, que geraram linchamento virtual, perda de emprego, abalo psicológico comprovado por laudo médico, tendem a receber indenizações mais elevadas. Ofensas pontuais, em perfis pequenos, rapidamente removidas, com pedido de desculpas público, tendem a valores menores. O importante é entender que o dano moral <strong>não exige prova de prejuízo financeiro</strong> — a dor, a angústia, a humilhação, a exposição indevida <em>são</em> o dano. Laudos psicológicos, prints de mensagens de apoio de amigos/familiares preocupados, atestados médicos de afastamento por estresse, tudo isso compõe o conjunto probatório.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Linchamento virtual, cancelamento e a responsabilidade de quem compartilha</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Um fenômeno contemporâneo é o &quot;cancelamento&quot; ou linchamento virtual: uma ofensa inicial (às vezes um vídeo editado, uma frase tirada de contexto) dispara uma onda de ódio coletivo. Centenas, milhares de pessoas passam a ofender, ameaçar, expor dados pessoais (doxxing), invadir perfis profissionais da vítima. Juridicamente, <strong>quem compartilha a ofensa original, quem comete novos xingamentos, quem ameaça, quem vaza dados</strong> — todos podem responder individualmente, tanto na esfera penal (concurso de agentes) quanto na cível (responsabilidade solidária pelo dano moral agravado). A &quot;corrente&quot; não dilui a responsabilidade; ela a multiplica. O Marco Civil da Internet, em seu artigo 19, ao exigir ordem judicial para remoção, visa evitar a censura privada, mas não impede que cada autor de nova ofensa seja processado.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Passos práticos: um roteiro para a vítima</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Se você está lendo isso porque acabou de ser vítima, respire. Aqui está um roteiro objetivo:</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">1.  <strong>Não responda à ofensa no mesmo tom.</strong> Qualquer coisa que você escreva pode ser usada contra você (injurias recíprocas, por exemplo).</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">2.  <strong>Faça a ata notarial</strong> o mais rápido possível. Se não puder ir ao cartório imediatamente, faça prints detalhados (tela cheia, mostrando URL, data/hora do sistema, perfil do autor, conteúdo, comentários, compartilhamentos) e grave a tela em vídeo narrando o que vê.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">3.  <strong>Registre o Boletim de Ocorrência</strong> (pode ser online na maioria dos estados). Guarde o número do protocolo.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">4.  <strong>Denuncie na plataforma</strong> (botão &quot;denunciar&quot;). Guarde o comprovante da denúncia (print do &quot;sua denúncia foi enviada&quot;).</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">5.  <strong>Procure um advogado especializado em Direito Digital</strong>. Ele avaliará se cabe pedido de liminar para remoção imediata + quebra de sigilo dos dados do autor + indenização por danos morais (e materiais, se houver).</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">6.  <strong>Cuide da sua saúde mental</strong>. Ofensa virtual adoece. Busque apoio psicológico; o laudo será prova importante no processo cível.</p>
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Conclusão: a tela não apaga a responsabilidade</h2>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">A internet não é um território sem lei. A Constituição, o Código Penal, o Código Civil e o Marco Civil da Internet formam um arcabouço robusto para proteger a dignidade humana também no ambiente digital. O anonimato aparente das redes sociais é frágil diante de uma ordem judicial de quebra de sigilo de registros de conexão. A viralização não é detalhe: ela agrava a pena penal e eleva o dano moral.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">Se você sofreu uma ofensa, não se cale por vergonha ou medo de &quot;dar ibope&quot;. O silêncio costuma ser interpretado como aceitação. A lei lhe dá ferramentas para fazer cessar a violação, identificar o autor, remover o conteúdo e ser reparado. O primeiro passo é documentar com rigor técnico; o segundo, buscar orientação jurídica especializada para transformar o direito abstrato em resultado concreto.</p>
-                  <p className="text-foreground/80 mb-6 leading-relaxed">No escritório Lisomar Barbosa Advogados, atuamos diariamente na defesa da honra, da imagem e da privacidade no ambiente digital. Se você passa por isso, entre em contato. A justiça também tem endereço na internet — e ele pode ser o do seu advogado.</p>
-                  <p className="text-sm text-foreground/50 italic mt-12">
-                    Este artigo tem caráter informativo e não substitui consulta a advogado especializado para análise do caso concreto.
+                <div className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-foreground/80 prose-p:leading-relaxed prose-li:text-foreground/80">
+                  <p>
+                    Você entra no site, escolhe o produto, paga com cartão ou Pix e aguarda a entrega. Dias depois, a caixa chega amassada, o tamanho não serve, o aparelho não liga ou, pior, o pacote nunca sai do centro de distribuição. Situações assim são cada vez mais comuns no cotidiano digital brasileiro. O que nem todo mundo sabe é que a legislação consumerista também se aplica integralmente às relações de consumo eletrônicas, impondo deveres claros a quem vende e garantias efetivas a quem compra.
+                  </p>
+
+                  <p>
+                    O ponto de partida é o <strong>Código de Defesa do Consumidor (Lei nº 8.078/1990)</strong>. O artigo 2º define consumidor como toda pessoa física ou jurídica que adquire produto ou serviço como destinatário final, enquanto fornecedor é quem o coloca no mercado. Não há distinção entre loja física e virtual: a proteção é a mesma. No comércio eletrônico, essas obrigações foram detalhadas pelo <strong>Decreto nº 7.962/2013</strong>, que exige informações ostensivas como nome empresarial, CNPJ, endereço físico, canais de atendimento, características essenciais do produto, preço total com frete e prazo de entrega.
+                  </p>
+
+                  <h2>Direito de arrependimento: sete dias para mudar de ideia</h2>
+
+                  <p>
+                    Uma das garantias mais relevantes, e ainda pouco conhecidas, é o <strong>direito de arrependimento</strong>, previsto no artigo 49 do CDC. Como a compra online ocorre fora do estabelecimento comercial, sem a possibilidade de tocar, experimentar ou testar o produto antes do pagamento, a lei concede ao consumidor <strong>sete dias corridos</strong>, contados da assinatura do contrato ou do recebimento do bem, para desistir da aquisição <strong>sem necessidade de justificativa</strong>.
+                  </p>
+
+                  <p>
+                    Na prática, isso significa que, se você comprou uma camisa e não gostou do caimento, ou adquiriu um eletrodoméstico e percebeu que ele não cabe no espaço planejado, pode devolvê-lo e receber <strong>o valor integral pago</strong>, inclusive o frete. Nessas hipóteses, o custo da devolução também é do fornecedor. Muitos sites ainda tentam impor restrições abusivas, como negar devolução de produtos abertos ou transferir o frete de retorno ao cliente, mas essas cláusulas são <strong>nulas de pleno direito</strong>, nos termos do artigo 51 do CDC.
+                  </p>
+
+                  <blockquote>
+                    <p>
+                      <strong>Dica prática:</strong> guarde prints da tela de compra, e-mails de confirmação, código de rastreio e, ao receber o produto, faça um vídeo curto abrindo a embalagem. Esses registros facilitam a comprovação do prazo e do estado do item caso seja necessário acionar o arrependimento.
+                    </p>
+                  </blockquote>
+
+                  <h2>Informação adequada: o dever de transparência antes do clique</h2>
+
+                  <p>
+                    O artigo 6º, inciso III, do CDC assegura o direito à <strong>informação adequada e clara</strong> sobre produtos e serviços. No ambiente digital, isso se traduz em obrigações concretas: descrição fiel, com indicação de cor, voltagem, dimensões e composição, disponibilidade em estoque, prazo de entrega estimado e formas de pagamento aceitas. O Decreto nº 7.962/2013 reforça que essas informações devem estar <strong>disponíveis de forma ostensiva</strong> antes da finalização do pedido.
+                  </p>
+
+                  <p>
+                    Se o site promete entrega em dois dias úteis e o produto leva três semanas, se a foto mostra um item diferente do que foi entregue, ou se taxas só aparecem no checkout, há violação do dever de informação. Nesses casos, o consumidor pode exigir o cumprimento forçado da oferta, aceitar produto equivalente ou rescindir o contrato com devolução integral dos valores pagos, sem prejuízo de eventuais perdas e danos.
+                  </p>
+
+                  <h2>Vício do produto ou do serviço: quem responde?</h2>
+
+                  <p>
+                    Quando o produto chega com defeito, não liga, rasga na primeira lavagem ou apresenta erro de fabricação, estamos diante de <strong>vício de qualidade</strong>. O CDC estabelece responsabilidade <strong>solidária</strong> entre os integrantes da cadeia de fornecimento, incluindo fabricante, importador, distribuidor e varejista. Isso permite ao consumidor reclamar diretamente com a loja onde comprou, sem depender de contato com fabricante estrangeiro ou intermediários difíceis de localizar.
+                  </p>
+
+                  <p>
+                    O prazo para reclamar é de <strong>30 dias</strong> para produtos não duráveis, como alimentos e cosméticos, e de <strong>90 dias</strong> para produtos duráveis, como eletrônicos, móveis e eletrodomésticos, contados da entrega efetiva. O fornecedor tem <strong>30 dias</strong> para sanar o vício. Se isso não ocorrer, o consumidor pode escolher entre a substituição do produto, a restituição imediata da quantia paga com correção monetária, ou o abatimento proporcional do preço.
+                  </p>
+
+                  <p>
+                    Para serviços digitais, como assinaturas de streaming, cursos online e hospedagem de sites, a lógica é semelhante. O serviço deve corresponder ao que foi prometido. Se a plataforma anuncia acesso ilimitado e impõe bloqueios indevidos, ou promete suporte contínuo e não responde, pode haver vício de serviço.
+                  </p>
+
+                  <h2>Marketplaces e a responsabilidade do intermediador</h2>
+
+                  <p>
+                    Hoje, grande parte das compras ocorre em <em>marketplaces</em>, como Mercado Livre, Amazon, Shopee e Magalu. A dúvida mais comum é: se o vendedor é terceiro, a plataforma responde? Em regra, a resposta tende a ser positiva, especialmente quando o marketplace participa ativamente da cadeia de fornecimento, lucra com a intermediação, controla o ambiente de negociação, processa pagamentos e, em muitos casos, interfere na logística.
+                  </p>
+
+                  <p>
+                    Nessas situações, o consumidor não deve ser encaminhado para uma negociação isolada com vendedor anônimo ou sem identificação adequada. A plataforma precisa oferecer canais efetivos de atendimento, intermediar a solução do conflito e, conforme o caso concreto, responder solidariamente pelos prejuízos causados.
+                  </p>
+
+                  <h2>Proteção de dados: o que a LGPD tem a ver com sua compra</h2>
+
+                  <p>
+                    Ao comprar online, você fornece nome, CPF, endereço, telefone, e-mail e, muitas vezes, dados de pagamento. A <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> exige que esse tratamento tenha <strong>finalidade específica</strong>, seja <strong>necessário</strong> para a execução da compra e ocorra com <strong>segurança</strong>, evitando coleta excessiva e exposição indevida de informações pessoais.
+                  </p>
+
+                  <p>
+                    O consumidor tem direito de saber quais dados são coletados, corrigir informações incorretas, solicitar a exclusão de dados desnecessários após o término da relação contratual e pedir a portabilidade quando cabível. Em casos de vazamento de dados em e-commerce, pode haver dever de notificação à Autoridade Nacional de Proteção de Dados e ao titular afetado, além da possibilidade de responsabilização civil por danos materiais e morais.
+                  </p>
+
+                  <h2>O que fazer quando o problema acontece</h2>
+
+                  <ol>
+                    <li>
+                      <strong>Reúna provas:</strong> guarde prints da oferta, e-mails, comprovantes de pagamento, código de rastreio, fotos, vídeos e protocolos de atendimento.
+                    </li>
+                    <li>
+                      <strong>Registre a reclamação nos canais oficiais da loja ou plataforma</strong> e preserve sempre o número de protocolo gerado.
+                    </li>
+                    <li>
+                      <strong>Sem solução em prazo razoável,</strong> procure o Procon do seu estado e registre manifestação no Consumidor.gov.br.
+                    </li>
+                    <li>
+                      <strong>Para valores menores,</strong> avalie o Juizado Especial Cível, que admite ações de até 20 salários mínimos sem advogado, embora o acompanhamento jurídico continue recomendável.
+                    </li>
+                    <li>
+                      <strong>Havendo dano moral ou material relevante,</strong> a via judicial pode incluir pedido indenizatório, sobretudo em casos de negativação indevida, recusa abusiva ou exposição indevida de dados.
+                    </li>
+                  </ol>
+
+                  <h2>Hábitos de prevenção</h2>
+
+                  <ul>
+                    <li>
+                      <strong>Prefira sites confiáveis</strong> ou plataformas que exibam claramente CNPJ, endereço físico e canais reais de contato.
+                    </li>
+                    <li>
+                      <strong>Use cartão virtual ou intermediadores de pagamento</strong> para ampliar a segurança e facilitar eventual contestação.
+                    </li>
+                    <li>
+                      <strong>Evite transferências diretas para pessoas físicas desconhecidas,</strong> especialmente em ofertas muito abaixo do preço de mercado.
+                    </li>
+                    <li>
+                      <strong>Leia os termos essenciais</strong> sobre troca, devolução, garantia e tratamento de dados pessoais.
+                    </li>
+                    <li>
+                      <strong>Ative autenticação em dois fatores</strong> nas contas de e-commerce e no e-mail vinculado ao cadastro.
+                    </li>
+                  </ul>
+
+                  <h2>Considerações finais</h2>
+
+                  <p>
+                    Comprar pela internet não é um ato de fé, mas uma relação jurídica regulada por normas claras. O ordenamento brasileiro oferece mecanismos de proteção que abrangem direito de arrependimento, dever de informação, responsabilidade por vícios, proteção de dados e responsabilização de integrantes da cadeia de fornecimento.
+                  </p>
+
+                  <p>
+                    Conhecer esses direitos ajuda o consumidor a agir com mais segurança e a reagir com estratégia quando a compra não sai como prometido. Diante de negativa automática, silêncio do fornecedor ou resposta abusiva, a recomendação é documentar tudo, reclamar pelos canais formais e buscar orientação jurídica quando o caso exigir análise individualizada.
+                  </p>
+
+                  <hr />
+
+                  <p>
+                    <em>
+                      Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.
+                    </em>
                   </p>
                 </div>
 
-                <div className="mt-16 p-8 rounded-2xl gradient-cyber border border-primary/20 text-center">
-                  <h3 className="text-2xl font-bold mb-4">Precisa de Orientação Jurídica?</h3>
-                  <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
-                    Nossa equipe especializada em Direito Digital está pronta para analisar o seu caso e orientar as melhores estratégias jurídicas.
+                <div className="mt-16 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-accent/10 p-8 text-center">
+                  <h3 className="mb-4 text-2xl font-bold">Precisa de orientação jurídica?</h3>
+                  <p className="mx-auto mb-6 max-w-2xl text-foreground/80">
+                    Nossa equipe especializada em Direito Digital está pronta para analisar o seu caso e indicar as melhores estratégias jurídicas.
                   </p>
                   <Link to="/#contato">
-                    <Button size="lg" className="bg-gradient-accent text-background font-semibold shadow-cyber">
+                    <Button size="lg" className="bg-gradient-accent font-semibold text-background shadow-cyber">
                       Fale Conosco
                     </Button>
                   </Link>
@@ -123,4 +237,4 @@ const OfensasRedesSociaisConsequenciasJuridicas = () => {
   );
 };
 
-export default OfensasRedesSociaisConsequenciasJuridicas;
+export default DireitoDoConsumidorComprasOnline;
