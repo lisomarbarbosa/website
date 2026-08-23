@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "fs/promises";
+import { readFile, writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -8,49 +8,29 @@ const __dirname = dirname(__filename);
 
 const ROOT = process.cwd();
 
-const BLOG_FILE = join(ROOT, "src/data/blog.ts");
+const BLOG_FILE    = join(ROOT, "src/data/blog.ts");
 const SITEMAP_FILE = join(ROOT, "public/sitemap.xml");
+const APP_FILE     = join(ROOT, "src/App.tsx");
+const ARTICLES_DIR = join(ROOT, "src/pages/articles");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
 /**
  * Número máximo de tentativas do loop curadoria → geração → auditoria.
- * Não há limite de tempo — a qualidade é o que importa.
- * O GitHub Actions tem timeout de 6h por job, o que é mais que suficiente.
  */
 const MAX_ATTEMPTS = 10;
 
-/**
- * Cadeia de modelos do OpenRouter.
- * Atualizada em ago/2026 — verificada na API de modelos disponíveis.
- * Ordem: maior capacidade → menor capacidade.
- * Todos confirmados gratuitos em agosto/2026.
- * Ref: openrouter.ai/models?order=newest&supported_parameters=free
- *
- * IMPORTANTE: use SEMPRE o sufixo :free para garantir acesso gratuito.
- * Modelos sem :free podem exigir créditos pagos e retornar HTTP 404.
- */
 const MODELS = [
-  // NVIDIA Nemotron 3 Ultra — maior capacidade gratuita disponível (1M ctx)
   "nvidia/nemotron-3-ultra-550b-a55b:free",
-  // NVIDIA Nemotron 3 Super — forte em raciocínio jurídico e JSON
   "nvidia/nemotron-3-super-120b-a12b:free",
-  // Google Gemma 4 31B — multilíngue, excelente para português
   "google/gemma-4-31b-it:free",
-  // Google Gemma 4 26B MoE — versão menor, rápida e gratuita
   "google/gemma-4-26b-a4b-it:free",
-  // OpenAI gpt-oss-120b — modelo open-weight de uso geral robusto
   "openai/gpt-oss-120b:free",
-  // OpenAI gpt-oss-20b — fallback mais leve do gpt-oss
   "openai/gpt-oss-20b:free",
-  // Qwen3 Next 80B — forte em RAG e workflows multilíngues longos
   "qwen/qwen3-next-80b-a3b-instruct:free",
-  // Meta Llama 3.3 70B — modelo mais estável e estabelecido (desde dez/2024)
   "meta-llama/llama-3.3-70b-instruct:free",
-  // Poolside Laguna S 2.1 — bom desempenho geral em texto estruturado
   "poolside/laguna-s-2.1:free",
-  // NVIDIA Nemotron 3 Nano — fallback eficiente para tarefas gerais
   "nvidia/nemotron-3-nano-30b-a3b:free",
 ];
 
@@ -90,7 +70,6 @@ const TOPICS = [
   "Difamação nas redes sociais e responsabilidade jurídica",
   "Calúnia e injúria praticadas no ambiente digital",
   "Preservação de provas digitais em conflitos jurídicos",
-  // Tópicos extras para o slot 2 (índices 30+)
   "Direito à privacidade e proteção contra vigilância digital",
   "Responsabilidade dos provedores de internet no Brasil",
   "Marco Civil da Internet e seus reflexos práticos",
@@ -137,6 +116,17 @@ function slugify(text) {
     .replace(/^-|-$/g, "");
 }
 
+/**
+ * Converte slug "meu-artigo-incrivel" → "MeuArtigoIncrivel"
+ * para uso como nome do componente React.
+ */
+function slugToComponentName(slug) {
+  return slug
+    .split("-")
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
 function escapeTypeScriptString(text) {
   return String(text)
     .replace(/\\/g, "\\\\")
@@ -152,23 +142,12 @@ function getToday() {
   return new Date().toISOString().slice(0, 10);
 }
 
-/**
- * Escolhe o tema baseado no slot do artigo.
- * Slot 1: índice por dia do mês (par)
- * Slot 2: índice deslocado +15 para garantir tema diferente
- */
 function chooseTopic(slot = 1) {
-  if (
-    process.env.CUSTOM_TOPIC &&
-    process.env.CUSTOM_TOPIC.trim()
-  ) {
+  if (process.env.CUSTOM_TOPIC && process.env.CUSTOM_TOPIC.trim()) {
     return process.env.CUSTOM_TOPIC.trim();
   }
-
   const now = new Date();
   const dayIndex = now.getUTCDate() % TOPICS.length;
-
-  // Slot 2 usa índice deslocado para não repetir o mesmo tema do slot 1
   const offset = slot === 2 ? 15 : 0;
   return TOPICS[(dayIndex + offset) % TOPICS.length];
 }
@@ -186,14 +165,11 @@ function cleanMarkdown(text) {
 
 function extractJson(text) {
   const cleaned = normalizeText(text);
-
   try { return JSON.parse(cleaned); } catch (_) {}
-
   const fenced = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fenced) {
     try { return JSON.parse(fenced[1].trim()); } catch (_) {}
   }
-
   const balanced = extractBalancedJson(cleaned);
   if (balanced !== null) {
     try { return JSON.parse(balanced); } catch (_) {}
@@ -202,9 +178,7 @@ function extractJson(text) {
       return JSON.parse(sanitized);
     } catch (_) {}
   }
-
   try { return reconstructJsonWithContent(cleaned); } catch (_) {}
-
   throw new Error("A IA não retornou um JSON válido.");
 }
 
@@ -308,7 +282,7 @@ async function checkApiKey() {
     });
     if (!response.ok) { log(`⚠️ Não foi possível listar modelos: HTTP ${response.status}`); return; }
     const data = await response.json();
-    const available = (data.data || []).map(m => m.id);
+    const available  = (data.data || []).map(m => m.id);
     const configured = MODELS.filter(m => available.includes(m));
     const missing    = MODELS.filter(m => !available.includes(m));
     if (configured.length > 0) log(`✅ Modelos disponíveis: ${configured.join(", ")}`);
@@ -648,6 +622,266 @@ function validateArticleStructure(article) {
   return words;
 }
 
+// ─── Gerador de arquivo .tsx ──────────────────────────────────────────────────
+
+/**
+ * Converte o conteúdo Markdown do artigo em JSX inline (parágrafo por parágrafo)
+ * para ser embutido diretamente no componente React — sem necessidade de biblioteca
+ * de parsing de Markdown em runtime.
+ */
+function markdownToJsx(markdown) {
+  const lines = markdown.split(/\n/).map(l => l.trimEnd());
+  const jsxLines = [];
+  let listOpen = false;
+
+  const escapeJsx = str =>
+    str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\{/g, "&#123;")
+      .replace(/\}/g, "&#125;")
+      .replace(/"/g, "&quot;");
+
+  const inlineFormat = str => {
+    let s = escapeJsx(str);
+    // **bold**
+    s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    // *italic*
+    s = s.replace(/\*(.+?)\*/g, "<em>$1</em>");
+    // `code`
+    s = s.replace(/`(.+?)`/g, "<code>$1</code>");
+    return s;
+  };
+
+  for (const line of lines) {
+    if (line === "") {
+      if (listOpen) { jsxLines.push("</ul>"); listOpen = false; }
+      continue;
+    }
+
+    // Headings
+    const h3 = line.match(/^### (.+)/);
+    const h2 = line.match(/^## (.+)/);
+    const h1 = line.match(/^# (.+)/);
+
+    if (h1) {
+      if (listOpen) { jsxLines.push("</ul>"); listOpen = false; }
+      jsxLines.push(`<h2 className="text-3xl font-bold mt-12 mb-6">${inlineFormat(h1[1])}</h2>`);
+      continue;
+    }
+    if (h2) {
+      if (listOpen) { jsxLines.push("</ul>"); listOpen = false; }
+      jsxLines.push(`<h2 className="text-3xl font-bold mt-12 mb-6">${inlineFormat(h2[1])}</h2>`);
+      continue;
+    }
+    if (h3) {
+      if (listOpen) { jsxLines.push("</ul>"); listOpen = false; }
+      jsxLines.push(`<h3 className="text-xl font-bold mt-8 mb-4">${inlineFormat(h3[1])}</h3>`);
+      continue;
+    }
+
+    // List items
+    const li = line.match(/^[-*] (.+)/);
+    if (li) {
+      if (!listOpen) { jsxLines.push('<ul className="list-disc pl-6 mb-6 space-y-2">'); listOpen = true; }
+      jsxLines.push(`  <li className="text-foreground/80">${inlineFormat(li[1])}</li>`);
+      continue;
+    }
+
+    // Regular paragraph
+    if (listOpen) { jsxLines.push("</ul>"); listOpen = false; }
+    jsxLines.push(`<p className="text-foreground/80 mb-6 leading-relaxed">${inlineFormat(line)}</p>`);
+  }
+
+  if (listOpen) jsxLines.push("</ul>");
+  return jsxLines.join("\n                  ");
+}
+
+/**
+ * Gera o conteúdo completo do arquivo .tsx para um artigo.
+ * Segue o mesmo padrão visual dos artigos já existentes (ex: StalkingVirtual.tsx).
+ */
+function generateTsxContent(article, imageUrl, slug, date, words) {
+  const componentName = slugToComponentName(slug);
+  const readTime = calculateReadTime(words);
+  const canonicalUrl = `https://www.lisomarbarbosa.adv.br/artigos/${slug}`;
+  const jsxBody = markdownToJsx(article.content);
+
+  // Formata a data em português (ex: "22 Ago 2026")
+  const dateObj = new Date(date + "T12:00:00Z");
+  const formattedDate = dateObj.toLocaleDateString("pt-BR", {
+    day: "2-digit", month: "short", year: "numeric", timeZone: "UTC"
+  }).replace(".", "").replace(/(\d{2}) (\w{3}) (\d{4})/, (_, d, m, y) =>
+    `${d} ${m.charAt(0).toUpperCase() + m.slice(1)} ${y}`
+  );
+
+  const safeTitle   = article.title.replace(/"/g, "&quot;").replace(/'/g, "\\'");
+  const safeExcerpt = article.excerpt.replace(/"/g, "&quot;").replace(/'/g, "\\'");
+  const safeImage   = imageUrl.replace(/"/g, "&quot;");
+
+  return `import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { useEffect } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
+const ${componentName} = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <>
+      <Helmet>
+        <title>${safeTitle} | Lisomar Barbosa | Direito Digital</title>
+        <meta name="description" content="${safeExcerpt}" />
+        <link rel="canonical" href="${canonicalUrl}" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+        <meta property="og:site_name" content="Lisomar Barbosa | Direito Digital" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="${canonicalUrl}" />
+        <meta property="og:image" content="${safeImage}" />
+        <meta property="og:title" content="${safeTitle} | Lisomar Barbosa | Direito Digital" />
+        <meta property="og:description" content="${safeExcerpt}" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="${safeTitle} | Lisomar Barbosa | Direito Digital" />
+        <meta name="twitter:description" content="${safeExcerpt}" />
+        <meta name="twitter:image" content="${safeImage}" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
+        <Header />
+
+        <main className="pt-32 pb-20">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <Link to="/blog">
+                <Button variant="ghost" className="mb-6 group">
+                  <ArrowLeft className="mr-2 group-hover:-translate-x-1 transition-smooth" size={18} />
+                  Voltar aos Artigos
+                </Button>
+              </Link>
+
+              <article className="animate-fade-in">
+                <header className="mb-12">
+                  <span className="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
+                    Direito Digital
+                  </span>
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                    ${safeTitle}
+                  </h1>
+                  <div className="flex items-center gap-4 text-sm text-foreground/60 mb-8">
+                    <span>${formattedDate}</span>
+                    <span>•</span>
+                    <span>${readTime} de leitura</span>
+                  </div>
+                  <img
+                    src="${safeImage}"
+                    alt="${safeTitle}"
+                    className="w-full h-[400px] object-cover rounded-lg mb-8"
+                  />
+                </header>
+
+                <div className="prose prose-lg max-w-none">
+                  ${jsxBody}
+                  <p className="text-sm text-foreground/50 italic mt-12">
+                    Este artigo tem caráter informativo e não substitui consulta a advogado especializado para análise do caso concreto.
+                  </p>
+                </div>
+
+                <div className="mt-16 p-8 rounded-2xl gradient-cyber border border-primary/20 text-center">
+                  <h3 className="text-2xl font-bold mb-4">Precisa de Orientação Jurídica?</h3>
+                  <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
+                    Nossa equipe especializada em Direito Digital está pronta para analisar o seu caso e orientar as melhores estratégias jurídicas.
+                  </p>
+                  <Link to="/#contato">
+                    <Button size="lg" className="bg-gradient-accent text-background font-semibold shadow-cyber">
+                      Fale Conosco
+                    </Button>
+                  </Link>
+                </div>
+              </article>
+            </div>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default ${componentName};
+`;
+}
+
+// ─── Escrita do arquivo .tsx ──────────────────────────────────────────────────
+
+async function writeArticleTsx(article, imageUrl, slug, date, words) {
+  await mkdir(ARTICLES_DIR, { recursive: true });
+  const componentName = slugToComponentName(slug);
+  const filePath = join(ARTICLES_DIR, `${componentName}.tsx`);
+  const content = generateTsxContent(article, imageUrl, slug, date, words);
+  await writeFile(filePath, content, "utf8");
+  log(`✅ Arquivo gerado: src/pages/articles/${componentName}.tsx`);
+  return componentName;
+}
+
+// ─── Registro da rota no App.tsx ──────────────────────────────────────────────
+
+/**
+ * Insere o import e a rota do novo artigo no App.tsx.
+ * Estratégia segura: insere o import antes do último import existente de artigo,
+ * e a rota antes do comentário de rota padrão (404).
+ */
+async function registerRouteInApp(slug, componentName) {
+  log("🗺️  Registrando rota no App.tsx...");
+  const original = await readFile(APP_FILE, "utf8");
+
+  const importLine = `import ${componentName} from "./pages/articles/${componentName}";`;
+  const routeLine  = `            <Route path="/artigos/${slug}" element={<${componentName} />} />`;
+
+  // Verifica se já existe
+  if (original.includes(importLine)) {
+    log(`⚠️ Rota para "${slug}" já existe no App.tsx. Sem duplicação.`);
+    return;
+  }
+
+  let updated = original;
+
+  // 1. Injeta o import: logo antes da linha do NotFound import (último import fixo)
+  const notFoundImport = 'import NotFound from "./pages/NotFound";';
+  if (updated.includes(notFoundImport)) {
+    updated = updated.replace(notFoundImport, `${notFoundImport}\n${importLine}`);
+  } else {
+    // Fallback: insere antes do último import
+    const lastImportMatch = [...updated.matchAll(/^import .+;$/gm)].pop();
+    if (lastImportMatch) {
+      const pos = lastImportMatch.index + lastImportMatch[0].length;
+      updated = updated.slice(0, pos) + "\n" + importLine + updated.slice(pos);
+    }
+  }
+
+  // 2. Injeta a rota: logo antes do comentário de rota 404
+  const notFoundComment = "{/* Rota padrão (404) */}";
+  if (updated.includes(notFoundComment)) {
+    updated = updated.replace(notFoundComment, `${routeLine}\n            ${notFoundComment}`);
+  } else {
+    // Fallback: insere antes do <Route path="*"
+    const wildcardRoute = '<Route path="*"';
+    if (updated.includes(wildcardRoute)) {
+      updated = updated.replace(wildcardRoute, `${routeLine}\n            ${wildcardRoute}`);
+    }
+  }
+
+  await writeFile(APP_FILE, updated, "utf8");
+  log(`✅ App.tsx atualizado — rota "/artigos/${slug}" registrada.`);
+}
+
 // ─── Blog e Sitemap ───────────────────────────────────────────────────────────
 
 function slugAlreadyExists(blogContent, slug) {
@@ -698,10 +932,10 @@ async function updateBlogFile(article, imageUrl, date) {
 async function updateSitemap(slug, date, blogTsContent) {
   log("🗺️ Atualizando sitemap.xml...");
   const original = await readFile(SITEMAP_FILE, "utf8");
-  const postUrl = `https://www.lisomarbarbosa.adv.br/blog/${slug}`;
+  const postUrl = `https://www.lisomarbarbosa.adv.br/artigos/${slug}`;
 
   const urlExistsInSitemap = original.includes(`<loc>${postUrl}</loc>`);
-  const postExistsInBlog = blogTsContent.includes(`slug: '${slug}'`);
+  const postExistsInBlog   = blogTsContent.includes(`slug: '${slug}'`);
 
   if (urlExistsInSitemap && postExistsInBlog) {
     log("⚠️ Post já existe no sitemap e no blog.ts. Sem duplicação.");
@@ -754,27 +988,8 @@ async function getUnsplashImage(topic) {
   }
 }
 
-// ─── Loop principal: curadoria → geração → auditoria (repete até aprovação) ───
+// ─── Loop principal ───────────────────────────────────────────────────────────
 
-/**
- * Executa o ciclo completo para UM artigo.
- *
- * FLUXO DO LOOP (MAX_ATTEMPTS vezes):
- *   1. Curadoria jurídica  → pesquisa + validação de fontes
- *   2. Geração do artigo   → redação completa baseada na curadoria
- *   3. Expansão (se necessário) → só se abaixo de MIN_WORDS
- *   4. Validação estrutural → campos obrigatórios + contagem de palavras
- *   5. Auditoria jurídica  → revisor independente, PASS ou FAIL
- *   6. Verificação de links → links quebrados geram nova tentativa
- *
- * Se reprovar em qualquer etapa (4, 5 ou 6), o ciclo INTEIRO recomeça
- * do passo 1 com um tema ligeiramente diferente para evitar que a IA
- * reproduza os mesmos erros com o mesmo contexto.
- *
- * @param {string} baseTopic - Tema base escolhido para este slot
- * @param {number} slot      - Número do slot (1 ou 2), apenas para log
- * @returns {object}         - { article, imageUrl, slug, words, attempts }
- */
 async function runArticleLoop(baseTopic, slot) {
   let attempt = 0;
   let lastRejectionReasons = [];
@@ -782,40 +997,34 @@ async function runArticleLoop(baseTopic, slot) {
   while (attempt < MAX_ATTEMPTS) {
     attempt++;
 
-    // A cada nova tentativa usa um tema ligeiramente diferente para evitar
-    // que a IA reproduza os mesmos erros com o mesmo contexto.
     const topic = attempt === 1
       ? baseTopic
       : TOPICS[(TOPICS.indexOf(baseTopic) + attempt) % TOPICS.length];
 
     log("");
-    log(`${'='.repeat(50)}`);
+    log(`${"=".repeat(50)}`);
     log(`🔄 SLOT ${slot} | TENTATIVA ${attempt}/${MAX_ATTEMPTS}`);
     log(`🎯 Tema: ${topic}`);
     if (lastRejectionReasons.length > 0) {
       log(`📋 Motivos da reprovação anterior:`);
       lastRejectionReasons.forEach(r => log(`   • ${r}`));
     }
-    log(`${'='.repeat(50)}`);
+    log(`${"=".repeat(50)}`);
 
     try {
-      // ── Etapa 1: Curadoria ────────────────────────────────────────────────
       log(`\n📚 [${attempt}/${MAX_ATTEMPTS}] Etapa 1/4 — Curadoria jurídica...`);
       const research = await createResearch(topic);
 
       if (research.warnings && research.warnings.length > 0) {
         log(`⚠️ Avisos da curadoria: ${research.warnings.join("; ")}`);
       }
-
       log(`✅ Curadoria concluída. Bases legais: ${(research.legal_basis || []).length}`);
 
-      // ── Etapa 2: Geração ──────────────────────────────────────────────────
       log(`\n✍️  [${attempt}/${MAX_ATTEMPTS}] Etapa 2/4 — Geração do artigo...`);
       let article = await generateArticle(topic, research);
       let words = countWords(article.content || "");
       log(`📊 Palavras geradas: ${words}`);
 
-      // ── Etapa 3: Expansão (se necessário) ────────────────────────────────
       if (words < MIN_WORDS) {
         log(`\n📏 [${attempt}/${MAX_ATTEMPTS}] Etapa 3/4 — Expandindo artigo (${words} < ${MIN_WORDS})...`);
         article = await expandArticle(article, research);
@@ -825,7 +1034,6 @@ async function runArticleLoop(baseTopic, slot) {
         log(`✅ Etapa 3/4 — Expansão não necessária (${words} palavras).`);
       }
 
-      // ── Etapa 4: Validação estrutural ─────────────────────────────────────
       try {
         validateArticleStructure(article);
       } catch (structErr) {
@@ -835,7 +1043,6 @@ async function runArticleLoop(baseTopic, slot) {
         continue;
       }
 
-      // ── Etapa 5: Auditoria jurídica ────────────────────────────────────────
       log(`\n⚖️  [${attempt}/${MAX_ATTEMPTS}] Etapa 4/4 — Auditoria jurídica...`);
       const audit = await auditArticle(article, research);
 
@@ -847,10 +1054,8 @@ async function runArticleLoop(baseTopic, slot) {
         log(`🔄 Reiniciando ciclo completo do zero (tentativa ${attempt + 1}/${MAX_ATTEMPTS})...\n`);
         continue;
       }
-
       log(`✅ Auditoria APROVADA.`);
 
-      // ── Etapa 6: Verificação de links ─────────────────────────────────────
       const links = await verifyLinks(article.content);
       const brokenLinks = links.filter(item => !item.ok);
       if (brokenLinks.length > 0) {
@@ -862,7 +1067,6 @@ async function runArticleLoop(baseTopic, slot) {
         continue;
       }
 
-      // ── Tudo aprovado ─────────────────────────────────────────────────────
       log(`\n🎉 Artigo APROVADO após ${attempt} tentativa(s)!`);
       log(`📌 Título: ${article.title}`);
       log(`📊 Palavras: ${words}`);
@@ -873,7 +1077,6 @@ async function runArticleLoop(baseTopic, slot) {
       return { article, imageUrl: image, slug, words, attempts: attempt };
 
     } catch (err) {
-      // Erros inesperados (ex: falha total de API) — reinicia o ciclo do zero
       log(`💥 Erro inesperado na tentativa ${attempt}: ${err.message}`);
       lastRejectionReasons = [`Erro inesperado: ${err.message}`];
       if (attempt < MAX_ATTEMPTS) {
@@ -891,8 +1094,9 @@ async function runArticleLoop(baseTopic, slot) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  let originalBlog     = null;
-  let originalSitemap  = null;
+  let originalBlog    = null;
+  let originalSitemap = null;
+  let originalApp     = null;
 
   try {
     log("==========================================");
@@ -900,8 +1104,8 @@ async function main() {
     log("💻 GERADOR DE CONTEÚDO — DIREITO DIGITAL");
     log("==========================================");
 
-    const date = getToday();
-    const slot = parseInt(process.env.ARTICLE_SLOT || "1", 10);
+    const date  = getToday();
+    const slot  = parseInt(process.env.ARTICLE_SLOT || "1", 10);
     const topic = chooseTopic(slot);
 
     log(`📅 Data: ${date}`);
@@ -912,19 +1116,25 @@ async function main() {
 
     await checkApiKey();
 
-    // Salva backups para rollback em caso de falha
+    // Backups para rollback
     originalBlog    = await readFile(BLOG_FILE,    "utf8");
     originalSitemap = await readFile(SITEMAP_FILE, "utf8");
+    originalApp     = await readFile(APP_FILE,     "utf8");
 
-    // Executa o loop: curadoria → geração → expansão → validação → auditoria → links
-    // Repete do zero até aprovação ou MAX_ATTEMPTS
     const { article, imageUrl, slug, words, attempts } =
       await runArticleLoop(topic, slot);
 
-    // Persiste no blog e sitemap apenas após aprovação completa
+    // 1. Gera o arquivo .tsx do artigo
+    log("\n📄 Gerando arquivo de página do artigo...");
+    const componentName = await writeArticleTsx(article, imageUrl, slug, date, words);
+
+    // 2. Registra a rota no App.tsx
+    await registerRouteInApp(slug, componentName);
+
+    // 3. Atualiza blog.ts
     await updateBlogFile(article, imageUrl, date);
 
-    // Lê blog.ts atualizado para checar presença do slug no sitemap
+    // 4. Atualiza sitemap
     const updatedBlogContent = await readFile(BLOG_FILE, "utf8");
     await updateSitemap(slug, date, updatedBlogContent);
 
@@ -934,6 +1144,8 @@ async function main() {
     log(`🎰 Slot: ${slot}`);
     log(`📌 Título: ${article.title}`);
     log(`🔗 Slug: ${slug}`);
+    log(`🧩 Componente: ${componentName}.tsx`);
+    log(`🛣️  Rota: /artigos/${slug}`);
     log(`📊 Palavras: ${words}`);
     log(`🔁 Tentativas necessárias: ${attempts}`);
     log("==========================================");
@@ -945,11 +1157,12 @@ async function main() {
     log("==========================================");
     console.error(error);
 
-    // Rollback de segurança para não deixar arquivos corrompidos
+    // Rollback de segurança
     try {
       if (originalBlog    !== null) await writeFile(BLOG_FILE,    originalBlog,    "utf8");
       if (originalSitemap !== null) await writeFile(SITEMAP_FILE, originalSitemap, "utf8");
-      log("↩️ Rollback de segurança realizado.");
+      if (originalApp     !== null) await writeFile(APP_FILE,     originalApp,     "utf8");
+      log("↩️ Rollback de segurança realizado (blog.ts, sitemap.xml e App.tsx restaurados).");
     } catch (rollbackError) {
       console.error("❌ Falha no rollback:", rollbackError);
     }
