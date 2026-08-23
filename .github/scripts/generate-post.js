@@ -128,10 +128,24 @@ function slugToComponentName(slug) {
     .join("");
 }
 
+/**
+ * Escapa caracteres especiais para uso em template literals (backtick strings) TypeScript.
+ * Escapa: backslashes, backticks e ${} para evitar interpolação indesejada.
+ */
 function escapeTypeScriptString(text) {
   return String(text)
     .replace(/\\/g, "\\\\")
     .replace(/`/g, "\\`")
+    .replace(/\$\{/g, "\\${");
+}
+
+/**
+ * Escapa para uso em strings de aspas simples TypeScript (usado em campos
+ * curtos como title, excerpt, slug, category, image, date, readTime).
+ */
+function escapeSimpleQuoteString(text) {
+  return String(text)
+    .replace(/\\/g, "\\\\")
     .replace(/'/g, "\\'");
 }
 
@@ -178,7 +192,7 @@ function shuffleArray(arr) {
  * - Remove temas cujo slugify é similar a algum título já publicado.
  * - Se todos já foram usados, sorteia de todos (começa novo ciclo).
  * - usedTopicSlugs: lista de slugs já sorteados NA MESMA execução
- *   (para que slots 1 e 2 nunca recebam o mesmo tema).
+ *   (para que slots 1 e 2 nunca recebam o mesmo tema)
  */
 async function chooseTopic(usedTopicSlugs = []) {
   if (process.env.CUSTOM_TOPIC && process.env.CUSTOM_TOPIC.trim()) {
@@ -967,12 +981,14 @@ function slugAlreadyExists(blogContent, slug) {
 
 function buildPostObject(article, imageUrl, date) {
   const words = countWords(article.content);
+  // content usa template literal (backtick) para suportar texto com acentos,
+  // apóstrofos e quebras de linha sem causar "Unterminated string literal".
   const safeContent  = escapeTypeScriptString(article.content);
-  const safeTitle    = escapeTypeScriptString(article.title);
-  const safeExcerpt  = escapeTypeScriptString(article.excerpt);
-  const safeSlug     = escapeTypeScriptString(slugify(article.slug || article.title));
-  const safeCategory = escapeTypeScriptString(article.category || "Direito Digital");
-  const safeImage    = escapeTypeScriptString(imageUrl);
+  const safeTitle    = escapeSimpleQuoteString(article.title);
+  const safeExcerpt  = escapeSimpleQuoteString(article.excerpt);
+  const safeSlug     = escapeSimpleQuoteString(slugify(article.slug || article.title));
+  const safeCategory = escapeSimpleQuoteString(article.category || "Direito Digital");
+  const safeImage    = escapeSimpleQuoteString(imageUrl);
   return `
   {
     slug: '${safeSlug}',
@@ -982,7 +998,7 @@ function buildPostObject(article, imageUrl, date) {
     readTime: '${calculateReadTime(words)}',
     category: '${safeCategory}',
     image: '${safeImage}',
-    content: '${safeContent}'
+    content: \`${safeContent}\`
   },`;
 }
 
