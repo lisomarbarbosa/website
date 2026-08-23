@@ -9,556 +9,328 @@ export interface BlogPost {
   content: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'direito-do-consumidor-compras-online',
-    title: 'Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado',
-    excerpt: 'Comprar pela internet virou rotina, mas poucos sabem exatamente o que a lei protege quando algo dá errado. Este artigo explica, em linguagem clara, os principais direitos do consumidor digital — do arrependimento em sete dias à responsabilidade solidária de marketplaces — e ensina como se prevenir e reagir diante de problemas reais.',
+    title:
+      'Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado',
+    excerpt:
+      'Comprar pela internet virou rotina, mas poucos sabem exatamente o que a lei protege quando algo dá errado. Este artigo explica, em linguagem clara, os principais direitos do consumidor digital e como agir diante de problemas reais.',
     date: '2026-08-23',
     readTime: '8 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1697545806029-f22eb0f36bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTA3NjgyfA&ixlib=rb-4.1.0&q=80&w=1080',
+    image:
+      'https://images.unsplash.com/photo-1697545806029-f22eb0f36bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTA3NjgyfA&ixlib=rb-4.1.0&q=80&w=1080',
     content: `# Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado
 
-Você entra no site, escolhe o produto, paga com cartão ou Pix e aguarda a entrega. Dias depois, a caixa chega amassada, o tamanho não serve, o aparelho não liga — ou, pior, o pacote nunca sai do centro de distribuição. Situações assim são corriqueiras no cotidiano digital brasileiro. O que nem todo mundo sabe é que a legislação consumerista não ficou no mundo analógico: ela alcança integralmente as relações de consumo eletrônicas, impondo deveres claros a quem vende e garantias efetivas a quem compra.
+Comprar pela internet virou rotina, mas problemas de entrega, defeito e informação enganosa continuam frequentes. O Código de Defesa do Consumidor protege o comprador também no ambiente digital.
 
-O ponto de partida é o **Código de Defesa do Consumidor (Lei nº 8.078/1990)**. Seu artigo 2º define consumidor como toda pessoa física ou jurídica que adquire produtos ou serviços como destinatário final, e fornecedor como quem os coloca no mercado. Não há distinção entre loja física e virtual: a proteção é a mesma. O que muda são as regras de operacionalização, detalhadas no **Decreto nº 7.962/2013**, que regulamentou o comércio eletrônico e tornou obrigatórias informações que, no mundo físico, estão visíveis na vitrine — nome empresarial, CNPJ, endereço físico, canais de atendimento, características essenciais do produto, preço total com frete e prazo de entrega.
+## Direito de arrependimento
 
-## O direito de arrependimento: sete dias para mudar de ideia
+Nas compras feitas fora do estabelecimento comercial, o consumidor pode desistir em até sete dias corridos, contados da assinatura do contrato ou do recebimento do produto.
 
-Uma das garantias mais valiosas — e ainda pouco conhecidas — é o **direito de arrependimento** previsto no artigo 49 do CDC. Como a compra online ocorre fora do estabelecimento comercial, sem a possibilidade de tocar, experimentar ou testar o produto antes de pagar, a lei concede ao consumidor **sete dias corridos**, contados da assinatura do contrato ou do recebimento do bem, para desistir da aquisição **sem precisar justificar o motivo**.
+## Dever de informação
 
-Na prática, isso significa que, se você comprou uma camisa e, ao provar, não gostou do caimento; ou adquiriu um eletrodoméstico e percebeu que não cabe no espaço planejado, pode devolvê-lo e receber **o valor integral pago**, inclusive o frete de ida. O custo do retorno, nessas hipóteses, é do fornecedor. Muitos sites tentam impor políticas restritivas — "não aceitamos devolução de produtos abertos" ou "frete de volta por conta do cliente" —, mas tais cláusulas são **nulas de pleno direito**, por violarem o artigo 51 do CDC, que veda cláusulas abusivas em contratos de adesão.
+A loja deve informar com clareza preço, frete, prazo de entrega, características do produto e canais de atendimento.
 
-> **Dica prática:** guarde prints da tela de compra, e-mails de confirmação, código de rastreio e, ao receber, faça um vídeo curto abrindo a embalagem. Esses registros facilitam enormemente a comprovação do prazo e do estado do produto caso precise acionar o arrependimento.
+## Vício do produto
 
-## Informação adequada: o dever de transparência antes do clique
+Se o item chega com defeito, a cadeia de fornecimento pode responder, e o consumidor pode exigir reparo, troca, abatimento proporcional ou devolução do valor, conforme o caso.
 
-O artigo 6º, inciso III, do CDC assegura o direito à **informação adequada e clara** sobre produtos e serviços. No ambiente digital, isso se traduz em obrigações concretas: descrição fiel (cor, voltagem, dimensões, composição), fotos reais (não apenas ilustrativas), disponibilidade em estoque, prazo de entrega estimado e formas de pagamento. O Decreto nº 7.962/2013 reforça que essas informações devem estar **disponíveis de forma ostensiva** antes da finalização do pedido.
+## Marketplaces
 
-Quando o site anuncia "entrega em 2 dias úteis" e o produto leva três semanas; quando a foto mostra um tecido de algodão e chega poliéster; quando o preço do anúncio não inclui taxas que só aparecem no checkout — há violação do dever de informação. O consumidor pode exigir o cumprimento forçado da oferta (entrega do produto nas condições anunciadas), aceitar outro equivalente ou rescindir o contrato com devolução integral e eventuais perdas e danos.
+Quando a plataforma participa da cadeia de fornecimento, pode haver responsabilidade conforme as circunstâncias do caso concreto.
 
-## Vício do produto ou do serviço: quem responde?
+## LGPD
 
-Se o produto chega com defeito — não liga, rasga na primeira lavagem, apresenta erro de fábrica —, estamos diante de **vício de qualidade**. O CDC (artigos 12 a 14) estabelece responsabilidade **solidária** de toda a cadeia de fornecimento: fabricante, importador, distribuidor e varejista. Na prática, você pode reclamar diretamente com a loja onde comprou, sem precisar acionar o fabricante na China ou nos Estados Unidos.
+Os dados pessoais fornecidos na compra devem ser tratados com finalidade legítima, necessidade e segurança.
 
-O prazo para reclamar é de **30 dias** para produtos não duráveis (alimentos, cosméticos) e **90 dias** para duráveis (eletrônicos, móveis, eletrodomésticos), contados da entrega efetiva. O fornecedor tem **30 dias** para sanar o vício. Se não o fizer, o consumidor escolhe entre: substituição por produto idêntico, restituição imediata da quantia paga (corrigida monetariamente) ou abatimento proporcional do preço.
+## O que fazer
 
-Para serviços — assinaturas de streaming, cursos online, hospedagem de sites —, a lógica é a mesma: o serviço deve cumprir o prometido. Se a plataforma promete "acesso ilimitado" e bloqueia após certo volume, ou garante "suporte 24h" e não responde, há vício de serviço.
-
-## Marketplaces e a responsabilidade do intermediador
-
-Hoje, grande parte das compras ocorre em *marketplaces* (Mercado Livre, Amazon, Shopee, Magalu, entre outros). A dúvida frequente: "Se o vendedor é terceiro, o site responde?" A resposta jurisprudencial majoritária e a melhor doutrina consumerista apontam que **sim**. O marketplace exerce atividade econômica, aufere lucro com a intermediação, controla o ambiente de negociação, processa pagamentos e, muitas vezes, a logística. Portanto, integra a cadeia de fornecimento e responde solidariamente pelos vícios e pela entrega.
-
-O consumidor não precisa — e não deve — ser obrigado a negociar com um vendedor anônimo, sem CNPJ visível, que some após a venda. A plataforma deve garantir canais efetivos de atendimento, mediar a solução e, se necessário, arcar com o prejuízo.
-
-## Proteção de dados: o que a LGPD tem a ver com sua compra
-
-Ao comprar online, você entrega nome, CPF, endereço, telefone, e-mail, dados de cartão. A **Lei Geral de Proteção de Dados (Lei nº 13.709/2018)** impõe que esse tratamento tenha **finalidade específica** (processar o pedido, emitir nota, entregar), seja **necessário** (não pode pedir dados excessivos, como RG da mãe para comprar um livro), e ocorra com **segurança** (criptografia, controle de acesso).
-
-Você tem direito a **saber** quais dados são coletados, **corrigir** os incorretos, **excluir** os desnecessários após o fim da relação contratual e **portar** seu histórico para outro fornecedor. Vazamento de dados em e-commerce — infelizmente comum — gera dever de notificação à Autoridade Nacional de Proteção de Dados (ANPD) e ao titular, além de possível indenização por danos morais e materiais.
-
-## O que fazer quando o problema acontece: roteiro prático
-
-1. **Reúna provas**: prints de tela, e-mails, comprovantes de pagamento, código de rastreio, fotos/vídeos do produto recebido, protocolos de atendimento (chat, e-mail, 0800).
-2. **Registre a reclamação nos canais oficiais da loja/plataforma** e guarde o número de protocolo. O CDC exige que o fornecedor mantenha serviço de atendimento ao consumidor (SAC) gratuito e eficaz.
-3. **Se não houver solução em prazo razoável (até 5 a 10 dias úteis)**, registre queixa no **Procon** de seu estado (muitos têm formulário online) e no **Consumidor.gov.br**, plataforma federal que costuma gerar respostas mais rápidas.
-4. **Para valores até 20 salários mínimos**, o **Juizado Especial Cível** permite ingressar sem advogado (embora a assistência jurídica seja recomendada). O processo é célere, gratuito nas primeiras instâncias e não exige formalismos excessivos.
-5. **Se houver dano moral comprovado** (ex.: exposição indevida de dados, recusa abusiva de direito claro, cobrança indevida com negativação), a via judicial pode incluir pedido de indenização.
-
-## Prevenção: hábitos que evitam dores de cabeça
-
-- **Compre de sites conhecidos** ou que exibam CNPJ, endereço físico e canais de contato reais. Desconfie de preços absurdamente baixos.
-- **Use cartão de crédito virtual** ou intermediadores de pagamento (Mercado Pago, PayPal, PagSeguro) — eles oferecem mediação e estorno facilitado.
-- **Evite transferências diretas (Pix/TED) para contas de pessoas físicas** em compras de desconhecidos; a rastreabilidade e a reversão são difíceis.
-- **Leia os termos de uso e a política de privacidade** — ao menos as partes sobre troca, devolução, garantia e uso de dados.
-- **Ative autenticação em dois fatores** nas contas de e-commerce e no e-mail cadastrado.
-
-## Conclusão
-
-Comprar pela internet não é um ato de fé — é uma relação jurídica regida por normas claras, que equilibram a facilidade do clique com a segurança de quem consome. O ordenamento brasileiro, do CDC à LGPD, passando pelo Marco Civil da Internet, construiu uma rede de proteção que cobre arrependimento, vício, informação, dados pessoais e responsabilidade solidária. Conhecer esses direitos transforma o consumidor de vítima passiva em agente ativo, capaz de exigir cumprimento, reparação e respeito.
-
-Se você enfrentou — ou teme enfrentar — problemas em uma compra online, não aceite a negativa automática do chatbot. Documente, reclame nos canais oficiais, busque o Procon ou o Juizado Especial e, se necessário, procure orientação jurídica especializada. A lei está do seu lado; o primeiro passo é conhecê-la.
+Guarde provas, registre reclamação formal, procure Procon ou Consumidor.gov.br e, se necessário, avalie medida judicial.
 
 ---
 
-*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar seu caso concreto, entre em contato com nossa equipe.*`
-  },
- {
-  slug: 'direito-anonimato-internet-limites',
-  title: 'Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade',
-  excerpt: 'Entenda como a Constituição, o Marco Civil da Internet e a LGPD equilibram a proteção da identidade digital com a necessidade de responsabilização por abusos. Saiba o que fazer se você é vítima de perfis falsos, ofensas anônimas ou vazamento de dados.',
-  date: '2026-08-23',
-  readTime: '10 min',
-  category: 'Direito Digital',
-  image: 'https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDk1ODE1fA&ixlib=rb-4.1.0&q=80&w=1080',
-  content: `# Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade
-  
-A tela do celular acende no escuro do quarto. Uma notificação chega: um comentário agressivo em uma foto antiga, uma mensagem privada com ameaças veladas, um perfil falso usando seu nome e sua imagem para aplicar golpes. O coração acelera. A primeira pergunta que vem à mente é quase sempre a mesma: "quem está por trás disso?". A segunda, mais urgente: "o que eu posso fazer para parar?".
-
-Essa angústia é real e cada vez mais comum. Vivemos em um ambiente onde a facilidade de criar contas, usar VPNs, navegadores anônimos e números virtuais faz com que a identificação do autor de um ato ilícito pareça uma missão impossível. Mas o direito não deixou de existir só porque a tecnologia tornou o rastro mais difícil de seguir. O ordenamento jurídico brasileiro construiu, ao longo dos anos, um sistema de freios e contrapesos que protege a privacidade de quem usa a rede de boa-fé, mas abre caminho para identificar quem a usa como escudo para praticar crimes ou causar danos.
-
-## A tensão constitucional: vedação do anonimato versus proteção da intimidade
-
-A Constituição Federal de 1988, em seu artigo 5º, traz dois incisos que, à primeira vista, parecem se chocar. O inciso IV estabelece que "é livre a manifestação do pensamento, sendo vedado o anonimato". O inciso X, por sua vez, garante que "são invioláveis a intimidade, a vida privada, a honra e a imagem das pessoas".
-
-Essa aparente contradição é, na verdade, a chave para entender o equilíbrio pretendido pelo legislador constituinte. A vedação do anonimato não significa que você é obrigado a andar com um crachá digital o tempo todo. Ela se refere à **manifestação pública de pensamento**: se você vai a público opinar, criticar, denunciar ou criar conteúdo que atinge terceiros, não pode se esconder atrás de um manto de invisibilidade para evitar as consequências jurídicas do que disse. Por outro lado, a inviolabilidade da intimidade protege justamente o seu direito de navegar, ler, pesquisar, conversar em grupos privados e existir no ambiente digital sem ser vigiado ou exposto sem justa causa.
-
-O Marco Civil da Internet (Lei nº 12.965/2014) traduziu esse equilíbrio em regras práticas. A lei não exige identificação prévia para acessar a rede — o que seria um absurdo técnico e uma violação massiva de privacidade. O que ela faz é determinar que os provedores de conexão e de aplicações guardem registros (logs) de quem acessou o quê e quando. Esses registros ficam sob a guarda das empresas por prazos definidos (um ano para conexão, seis meses para aplicações) e **só podem ser acessados mediante ordem judicial fundamentada**. É o que prevê o artigo 22 da lei: a quebra de sigilo não é automática, não é feita a pedido da parte interessada diretamente à plataforma, e não pode ser usada para fins de investigação genérica. Existe um devido processo legal digital.
-
-## O que é anonimato, pseudonimato e identificação relativa
-
-No dia a dia, as pessoas confundem três conceitos distintos. **Anonimato absoluto** é quando ninguém — nem a plataforma, nem o provedor de internet, nem o Estado — consegue saber quem você é. Na prática, isso quase não existe no Brasil para o usuário comum, porque o acesso à internet exige um contrato com provedor (CPF, endereço, pagamento). **Pseudonimato** é o uso de um apelido, um *username* ou um avatar que não revela o nome civil, mas que está atrelado a um cadastro (e-mail, telefone) e a um endereço IP conhecido pela plataforma. **Identificação relativa** é o estado normal: você tem uma identidade civil, mas exerce seu direito de não a expor publicamente, revelando-a apenas se uma autoridade judicial determinar, diante de indícios de ilicitude.
-
-A jurisprudência brasileira tem caminhado no sentido de reconhecer que o pseudônimo é uma extensão da personalidade. O Código Civil, em seu artigo 12, protege o nome, a imagem e também o pseudônimo quando este se torna conhecido socialmente. Isso significa que, se alguém cria um perfil falso usando *seu* pseudônimo consolidado — seu nome artístico, seu *handle* profissional —, isso também viola sua identidade e pode gerar dever de indenizar.
-
-## Quando o anonimato vira arma: os limites da tolerância
-
-A liberdade de expressão não é um salvo-conduto para a prática de ilícitos. O anonimato deixa de ser direito protegido e passa a ser obstáculo à justiça quando serve para:
-
-*   **Praticar crimes contra a honra** (calúnia, difamação, injúria), previstos nos artigos 138 a 140 do Código Penal.
-*   **Ameaçar ou perseguir** alguém (artigo 147 do Código Penal e Lei de Stalking, Lei nº 14.132/2021).
-*   **Cometer fraudes, golpes ou estelionato** usando identidade alheia ou perfis falsos.
-*   **Vazar dados sensíveis, imagens íntimas ou informações privadas** (violação do artigo 5º, X, da CF; artigos 12 e 20 do Código Civil; e LGPD).
-*   **Incitar crimes ou atos de violência** (artigo 286 do Código Penal).
-
-Nesses casos, o direito da vítima à reparação e à cessação da conduta prevalece sobre o interesse do agressor em permanecer oculto. O caminho processual, porém, exige calma e estratégia. Não adianta ir à delegacia ou ao fórum apenas com um *print* de tela e pedir "que descubram quem é". O juiz precisa de indícios mínimos de autoria e materialidade para deferir a quebra de sigilo telemático (o famoso pedido de "IP").
-
-## O passo a passo prático para a vítima
-
-Se você está sofrendo um ataque anônimo, a primeira atitude deve ser **preservar a prova com valor jurídico**. *Prints* de tela feitos pelo próprio interessado têm valor probante reduzido, pois podem ser contestados (alegação de montagem, edição, recorte). O ideal é registrar a ocorrência em **ata notarial** — um documento público lavrado por um tabelião de notas que atesta o conteúdo da página, a data, a hora, a URL, o código-fonte e os metadados visíveis. A ata notarial tem presunção de veracidade (fé pública) e costuma ser aceita pelos juízes como base para deferir a quebra de sigilo.
-
-Em paralelo, faça o **registro de boletim de ocorrência** (pode ser eletrônico na maioria dos estados). O BO formaliza a notícia-crime e permite que a autoridade policial, se entender cabível, requisite a quebra de sigilo no inquérito policial. No entanto, a via judicial costuma ser mais célere para obter a identificação do autor quando o objetivo principal é a remoção do conteúdo e a indenização cível.
-
-Com a ata notarial e o BO em mãos, procura-se um advogado para ingressar com a medida judicial cabível. Pode ser uma **ação de obrigação de fazer com pedido de tutela de urgência** (para derrubar o conteúdo ofensivo e determinar a preservação dos logs pelo provedor) cumulada com **indenização por danos morais e materiais**. Ou, se houver indícios de crime, uma **queixa-crime** ou representação criminal, onde o advogado atua como assistente de acusação.
-
-O juiz, ao receber o pedido, analisará se há **fumus boni iuris** (fumaça do bom direito — indícios de que o direito da vítima foi violado) e **periculum in mora** (perigo da demora — o conteúdo continua no ar, a ameaça persiste, os logs podem ser apagados ao fim do prazo legal de guarda). Preenchidos os requisitos, ele expede a ordem para que o provedor de aplicação (Instagram, WhatsApp, Google, X/Twitter, TikTok) ou o provedor de conexão (operadora de internet) informe o IP, a porta lógica, a data/hora e, se houver, os dados cadastrais do usuário que praticou o ato.
-
-## A responsabilidade das plataformas: o que elas devem e não devem fazer
-
-Muita gente acha que processar o Instagram ou o WhatsApp resolve o problema. Não é bem assim. O Marco Civil da Internet (artigo 19) estabelece um regime de **responsabilidade subjetiva** para provedores de aplicação: eles só respondem por danos decorrentes de conteúdo gerado por terceiros se, **após ordem judicial específica**, não tomarem as providências para tornar o conteúdo indisponível no prazo assinalado. Ou seja: a plataforma não tem o dever de monitorar preventivamente tudo o que é postado (o que seria censura prévia e tecnicamente inviável), mas tem o dever de obedecer à ordem judicial.
-
-Exceção importante: a lei prevê que, no caso de **conteúdo que exponha nudez, sexo ou pornografia não consentida** (o chamado *revenge porn*), a plataforma deve remover o material **mediante notificação extrajudicial da vítima ou seu representante legal**, sem necessidade de ordem judicial prévia, sob pena de responder solidariamente pelos danos. É uma proteção especial, dada a gravidade e a urgência desse tipo de violação.
-
-## A LGPD e o controle dos seus dados de identificação
-
-A Lei Geral de Proteção de Dados (Lei nº 13.709/2018) adiciona outra camada de proteção. Seus dados de identificação — nome, CPF, endereço, IP, geolocalização, identificadores de dispositivo — são **dados pessoais**. O tratamento desses dados por provedores e plataformas precisa de **base legal** (consentimento, cumprimento de obrigação legal, exercício regular de direitos em processo judicial, etc.).
-
-Quando um juiz determina a quebra de sigilo, a base legal é o "cumprimento de obrigação legal ou regulatória" e o "exercício regular de direitos em processo judicial" (artigo 7º, II e VI, da LGPD). Mas isso não dá carta branca: a entrega dos dados deve ser **restrita ao necessário** (princípio da minimização), **segura** e **confidencial**. O provedor não pode entregar o histórico completo de navegação do usuário, nem dados de terceiros alheios à investigação, nem usar esses dados para finalidades diversas. A Autoridade Nacional de Proteção de Dados (ANPD) tem poder de fiscalizar e sancionar vazamentos ou abusos nesse processo.
-
-## O que você pode fazer hoje, de forma preventiva
-
-Não espere ser vítima para cuidar da sua identidade digital. Algumas atitudes simples reduzem drasticamente o risco:
-
-*   **Ative a verificação em duas etapas (2FA)** em *todas* as contas importantes (e-mail, redes sociais, banco, WhatsApp). Prefira autenticadores (Google Authenticator, Authy) a SMS, que pode ser clonado.
-*   **Não use a mesma senha** em serviços diferentes. Use um gerenciador de senhas (Bitwarden, 1Password, KeePass) para criar e armazenar senhas longas e únicas.
-*   **Revise periodicamente** os dispositivos conectados e sessões ativas nas configurações de cada plataforma. Remova o que não reconhecer.
-*   **Cuidado com o que compartilha** em perfis públicos: data de nascimento, nome da mãe, nome do pet, escola onde estudou — tudo isso serve para engenharia social e recuperação de conta por golpistas.
-*   **Desconfie de links encurtados**, QR codes em locais públicos, e-mails urgentes pedindo "validação de conta" ou "atualização de cadastro". Phishing continua sendo a porta de entrada para a maioria dos sequestros de identidade.
-*   **Registre sua marca, nome artístico ou pseudônimo** no INPI se ele tiver valor profissional. O registro fortalece a proteção contra uso indevido por terceiros.
-
-## Conclusão: a rede não é terra sem lei
-
-O anonimato na internet não é um direito absoluto, nem um cheque em branco para a impunidade. A arquitetura jurídica brasileira — Constituição, Marco Civil, Código Civil, Código Penal, LGPD — foi desenhada para garantir que **quem usa a rede com responsabilidade tenha sua privacidade respeitada**, enquanto **quem a usa para ferir direitos alheios possa ser identificado e responsabilizado**, sempre com o crivo do Poder Judiciário.
-
-Se você está do lado de quem sofre o ataque, saiba que o caminho existe, é juridicamente sólido e tem funcionado diariamente nos tribunais do país. A tecnologia deixa rastros; o direito sabe como segui-los sem violar a intimidade de inocentes. O segredo está em agir com método: provas bem feitas (ata notarial), assessoria jurídica especializada e paciência para que o devido processo corra seu curso.
-
-Não aceite a sensação de impotência. O anonimato do agressor tem prazo de validade — e ele costuma acabar no momento em que uma ordem judicial bate à porta do provedor.
-
----
-
-*Este artigo tem caráter informativo e educativo, não substitui consulta jurídica personalizada. Se você é vítima de crimes digitais, violação de imagem, perfis falsos ou vazamento de dados, procure um advogado especializado em Direito Digital para avaliar seu caso concreto.*'
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
   },
   {
-    slug: 'contratos-software-licencas-uso-direitos-deveres',
-    title: 'Contratos de software e licenças de uso: o que você precisa saber antes de clicar em "concordo"',
-    excerpt: 'Entenda como a lei brasileira regula a relação entre quem desenvolve e quem usa software. Da licença de uso ao SaaS, passando por desenvolvimento por encomenda e proteção de dados, este artigo explica seus direitos e deveres em linguagem acessível.',
-    date: '2026-08-23',
-    readTime: '9 min',
-    category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1783547351290-e3c2cb1cb1a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDg0NDIyfA&ixlib=rb-4.1.0&q=80&w=1080',
-    content: '# Contratos de software e licenças de uso: o que você precisa saber antes de clicar em "concordo"
-
-Você já perdeu a conta de quantas vezes rolou a tela até o final de um termo de uso apenas para clicar no botão "aceito"? Seja ao instalar um aplicativo no celular, assinar um sistema de gestão na nuvem para sua empresa ou contratar um programador para criar uma solução sob medida, você está celebrando um contrato de software. E, embora a pressa do dia a dia nos leve a tratar esses documentos como formalidades burocráticas, eles definem direitos e obrigações que podem impactar seu bolso, sua privacidade e a continuidade do seu negócio.
-
-A legislação brasileira não possui um "código do software" único, mas um conjunto de normas que, juntas, desenham o cenário jurídico dessas relações. A **Lei de Software (Lei nº 9.609/1998)** é a espinha dorsal: ela reconhece o programa de computador como obra intelectual protegida, equiparando-o, para efeitos legais, a uma obra literária. Isso significa que, ao adquirir um software, você não está comprando o código — está recebendo uma **licença de uso**, uma autorização para utilizá-lo dentro de limites definidos pelo titular dos direitos. O Código Civil complementa o regime geral dos contratos, o Código de Defesa do Consumidor (CDC) protege o elo mais fraco nas relações de adesão e a LGPD impõe regras rígidas quando o software trata dados pessoais.
-
-## Licença de uso não é venda: entenda a diferença
-
-Imagine que você compra um livro físico. Você pode lê-lo, emprestá-lo, vendê-lo ou até rasgar as páginas — a propriedade do exemplar é sua. Com o software, a lógica é outra. A Lei de Software estabelece que a licença de uso **não transfere a propriedade** do programa; ela apenas concede o direito de usá-lo segundo condições específicas: número de instalações, número de usuários, prazo de vigência, finalidade permitida (pessoal, comercial, educacional) e restrições à engenharia reversa.
-
-Na prática, isso explica por que você não pode simplesmente copiar o instalador do seu antivírus e passar para o vizinho, nem alugar o acesso ao seu CRM para terceiros. A licença **perpétua** (pagamento único, uso indefinido) e a licença **por assinatura** (pagamento recorrente, uso enquanto paga) são os modelos mais comuns. No modelo SaaS — *Software as a Service* —, a licença costuma ser atrelada à prestação de serviço: hospedagem, manutenção, atualizações e suporte. Se o pagamento cessa, o acesso costuma ser bloqueado, e seus dados podem ficar retidos na nuvem do fornecedor se o contrato não previr portabilidade.
-
-## Contratos de desenvolvimento por encomenda: de quem é o código?
-
-Muitas empresas contratam desenvolvedores ou fábricas de software para criar sistemas personalizados — um ERP adaptado ao fluxo interno, um aplicativo de delivery exclusivo, uma integração entre plataformas. Aqui surge uma dúvida frequente: **quem é o autor do programa resultante?**
-
-A Lei de Software diz que o autor é a pessoa física que criou a obra. Se o desenvolvedor é funcionário com cláusula de cessão de direitos no contrato de trabalho, a titularidade costuma pertencer ao empregador. Mas, se a contratação é por **prestação de serviços (pessoa jurídica ou autônomo)**, a regra geral é que o autor permanece sendo o programador — salvo se houver **cessão expressa e por escrito** dos direitos patrimoniais no contrato de desenvolvimento.
-
-Sem essa cláusula, a empresa contratante pode ter apenas uma licença de uso do software, não a propriedade. Isso impede a revenda, a modificação profunda ou o licenciamento a terceiros. Além disso, os **direitos morais** (reivindicação da autoria, oposição a alterações que prejudiquem a reputação do autor) são **irrenunciáveis e inalienáveis** — pertencem sempre ao programador pessoa física, ainda que os direitos patrimoniais tenham sido cedidos.
-
-Outro ponto sensível: **customizações e módulos adicionais**. Se o contrato não definir claramente a titularidade das melhorias feitas durante a vigência, surgem disputas quando a relação termina. Quem leva o código-fonte? Quem pode explorar comercialmente aquela funcionalidade inovadora criada a pedido do cliente? A resposta deve estar no papel, não na boa-fé.
-
-## SaaS, nuvem e a armadilha do *vendor lock-in*
-
-O modelo SaaS trouxe agilidade: nada de instalar servidores, aplicar patches ou fazer backup manual. Mas trouxe também dependência. Seus dados — clientes, financeiro, estoque, comunicações — residem na infraestrutura do fornecedor. O contrato (muitas vezes um *Terms of Service* padronizado, de adesão) dita as regras de **disponibilidade (SLA)**, **suporte**, **segurança da informação** e **portabilidade de dados**.
-
-Cláusulas que preveem **multa por rescisão antecipada**, **aviso-prévio de 90 ou 180 dias**, **foro exclusivo no exterior** ou **limitação drástica de responsabilidade** ("o fornecedor não responde por lucros cessantes, perda de dados ou danos morais") são comuns. O CDC, quando o licenciado se enquadra como consumidor (pessoa física ou microempresa hipossuficiente), considera nulas de pleno direito cláusulas que **impossibilitem a revisão judicial**, **transfiram ônus indevidos** ou **estabeleçam obrigações desproporcionais**.
-
-O **vendor lock-in** (aprisionamento tecnológico) ocorre quando migrar para outro fornecedor torna-se tecnicamente inviável ou economicamente proibitivo — formatos proprietários, APIs não documentadas, ausência de ferramentas de exportação em massa. Um contrato bem redigido deve prever **formato aberto de exportação**, **prazo razoável para migração assistida** e **eliminação segura dos dados** após o término, em conformidade com a LGPD.
-
-## Cláusulas abusivas em contratos de adesão: o que o CDC veda
-
-A grande maioria dos contratos de software destinados ao público geral — EULAs (*End User License Agreements*), Termos de Uso de plataformas, contratos de SaaS *self-service* — são **contratos de adesão**: redigidos unilateralmente pelo fornecedor, sem margem de negociação. O CDC (Art. 54, §§ 3º e 4º; Art. 51) estabelece que cláusulas que:
-
-- limitem responsabilidade do fornecedor por vícios de qualidade ou segurança;
-- imponham foro distante do domicílio do consumidor;
-- autorizem alteração unilateral de preço ou condições sem prévia notificação e direito de recusa;
-- vedem a revisão judicial do contrato;
-- transfiram ao consumidor ônus da prova que lhe seria impossível produzir;
-
-são **nulas de pleno direito**. Na prática, isso significa que, se um update automático corrompe seu banco de dados e o termo diz "o fornecedor não se responsabiliza por perdas de dados", essa cláusula pode ser afastada pelo Judiciário — desde que o usuário seja consumidor final. Para empresas de grande porte em negociação paritária (B2B entre iguais), a liberdade contratual prevalece, e a análise recai sobre a **boa-fé objetiva** e a **função social do contrato** (Art. 421 e 422 do Código Civil).
-
-## Dados pessoais: o contrato precisa falar de LGPD
-
-Se o software processa dados pessoais — nomes, CPFs, e-mails, geolocalização, histórico de compras, biometria —, a **LGPD (Lei nº 13.709/2018)** entra em cena. O contrato deve definir claramente quem é **controlador** (quem decide *por que* e *para que* trata os dados) e quem é **operador** (quem trata *em nome* do controlador). No SaaS, o fornecedor costuma ser operador; a empresa cliente, controladora.
-
-É indispensável um **DPA (*Data Processing Addendum*)** ou cláusulas específicas prevendo: finalidades permitidas, suboperadores (subprocessadores), medidas técnicas e organizacionais de segurança (criptografia, controle de acesso, logs), **notificação de incidente de segurança** em prazo razoável, **direitos dos titulares** (acesso, retificação, exclusão, portabilidade) e **eliminação dos dados** ao final da prestação. A ausência dessas previsões expõe ambas as partes a sanções da ANPD e a ações de indenização.
-
-## Escrow de código-fonte: seguro para o negócio crítico
-
-Para sistemas *mission-critical* — aquele ERP que roda a fábrica, o *core banking* do banco, o prontuário eletrônico do hospital —, a dependência do fornecedor é um risco existencial. E se a empresa desenvolvedora falir? Se o suporte for descontinuado? Se houver disputa judicial e o acesso for bloqueado?
-
-O **escrow de código-fonte** (depósito em terceiro de confiança) é uma cláusula de proteção: o código-fonte atualizado é depositado periodicamente em um agente fiduciário (escrow agent). O contrato define **eventos de liberação** (*release events*): falência, descumprimento grave de SLA, encerramento das atividades, falecimento do desenvolvedor *chave* (no caso de *sole developer*). Ao ocorrer o evento, o licenciado recebe o código para dar continuidade própria ou contratar outro mantenedor. Não é cláusula padrão; deve ser negociada e custeada — mas pode salvar a operação.
-
-## O que você pode fazer hoje: checklist prático
-
-1. **Leia antes de clicar**. Parece óbvio, mas a pressa é inimiga do direito. Reserve tempo para ler as cláusulas de limitação de responsabilidade, foro, vigência, rescisão e tratamento de dados.
-2. **Identifique seu papel**. Você é consumidor final (CDC se aplica plenamente) ou empresa em negociação B2B (liberdade contratual, mas boa-fé e função social vigem)?
-3. **Exija clareza na licença**. Quantas instalações? Quantos usuários simultâneos? Pode instalar em nuvem própria? Pode fazer backup? Pode integrar via API? Tudo o que não está expressamente permitido costuma ser vedado.
-4. **No desenvolvimento por encomenda**, inclua cláusula de **cessão total de direitos patrimoniais** (código-fonte, documentação, direitos de exploração) e previsão de **entrega de código-fonte comentado e compilável**.
-5. **Em SaaS**, negocie **SLA com penalidades reais** (créditos na fatura, não apenas "desculpas"), **portabilidade de dados em formato aberto** (CSV, JSON, SQL) e **prazo de retenção/eliminação pós-contrato**.
-6. **Verifique a LGPD**. Peça o DPA, pergunte onde os data centers ficam (transferência internacional?), quais subprocessadores são usados e qual o plano de resposta a incidente.
-7. **Guarde tudo**. Versões assinadas, trocas de e-mail que alteram prazos ou escopo, *prints* de telas de aceite, comprovantes de pagamento. A prova documental é sua melhor aliada.
-8. **Consulte um advogado especializado** antes de assinar contratos de alto valor, longa duração ou impacto estratégico. O custo da assessoria preventiva é ínfimo frente ao prejuízo de uma cláusula mal redigida descoberta tarde demais.
-
-## Conclusão: o contrato é a arquitetura da confiança digital
-
-Software não é apenas código; é relação jurídica. Cada *clique* em "aceito", cada assinatura digital, cada *purchase order* emitido tece uma teia de direitos e deveres que vai muito além da funcionalidade da tela. A lei brasileira oferece ferramentas robustas — da Lei de Software ao CDC, do Código Civil à LGPD — para equilibrar essa relação, mas elas só funcionam se **conhecidas** e **invocadas**.
-
-Não trate o contrato como um obstáculo burocrático a ser contornado com o *scroll* rápido do mouse. Trate-o como a **arquitetura da confiança** que sustenta seu ativo digital. Seja você um desenvolvedor protegendo sua propriedade intelectual, uma startup negociando seu primeiro *enterprise deal* ou um gestor de TI renovando o ERP da corporação: a clareza contratual hoje evita o litígio amanhã.
-
-Se este artigo trouxe dúvidas sobre sua situação concreta — um contrato em análise, uma notificação extrajudicial recebida, uma migração de nuvem planejada —, **converse com quem entende do assunto**. O escritório Lisomar Barbosa Advogados atua na redação, revisão e negociação de contratos de software, licenças, SaaS, desenvolvimento por encomenda, escrow e adequação à LGPD. **Agende uma consulta** e transforme a incerteza jurídica em segurança estratégica para o seu negócio digital.'
-`,
-},
-{
-    slug: 'perseguicao-digital-protecao-juridica-vitima',
-    title: 'Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você',
-    excerpt: 'O stalking digital não é "coisa de internet" — é crime, viola direitos fundamentais e deixa cicatrizes profundas. Entenda como a legislação brasileira (Lei 14.132/2021, Lei Maria da Penha, LGPD e Código Civil) ampara a vítima e quais passos práticos tomar hoje para recuperar sua segurança e tranquilidade.',
+    slug: 'direito-anonimato-internet-limites',
+    title:
+      'Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade',
+    excerpt:
+      'Entenda como a Constituição, o Marco Civil da Internet e a LGPD equilibram privacidade, liberdade de expressão e responsabilização por abusos no ambiente digital.',
     date: '2026-08-23',
     readTime: '10 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1768637757717-3e47abf07422?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQ3NTM3fA&ixlib=rb-4.1.0&q=80&w=1080',
-    content: `# Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você
+    image:
+      'https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDk1ODE1fA&ixlib=rb-4.1.0&q=80&w=1080',
+    content: `# Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade
 
-O som de uma notificação que antes trazia alegria — uma mensagem de um amigo, um e-mail esperado — passa a gelar a espinha. O coração acelera antes mesmo de você olhar a tela. Quem está do outro lado? O que essa pessoa sabe sobre a sua rotina? Quantas vezes hoje ela tentou te contatar depois que você pediu, implorou, bloqueou, para que parasse?
+A internet não é espaço sem lei. O ordenamento jurídico brasileiro protege a privacidade de quem usa a rede de boa-fé, mas também admite a identificação de quem pratica ilícitos.
 
-Essa sensação de vigilância constante, de invasão que não respeita o bloqueio, de presença indesejada que atravessa a barreira do digital para o psicológico, tem nome: **perseguição digital**, ou *stalking*. E, ao contrário do que ainda se ouve por aí, não é "drama", não é "exagero" e certamente não é "coisa que a polícia não resolve". Desde 2021, o Código Penal brasileiro tipificou a conduta como crime autônomo. A Lei Maria da Penha prevê medidas protetivas que alcançam o ambiente virtual. A LGPD garante que seus dados não sejam combustível para o perseguidor. E o Código Civil assegura o direito à reparação pelos danos sofridos.
+## Constituição e anonimato
 
-Este artigo existe para traduzir esse arcabouço jurídico em linguagem clara, mostrar o que você pode fazer **agora** e reforçar: você não está sozinho, e a lei está do seu lado.
+A Constituição assegura liberdade de manifestação, mas veda o anonimato quando ele serve para impedir responsabilização por abusos.
 
-## O que a lei entende por perseguição (e por que o digital mudou tudo)
+## Marco Civil da Internet
 
-Até pouco tempo, o ordenamento jurídico brasileiro tratava condutas de perseguição como contravenção penal — "perturbação da tranquilidade" —, com penas brandas e pouca efetividade. A **Lei nº 14.132, de 2021**, alterou o Código Penal para inserir o **artigo 147-A**, criando o crime de **perseguição (stalking)**. A norma pune quem, de forma reiterada, persegue alguém, ameaça sua integridade física ou psicológica, restringe sua capacidade de locomoção ou invade sua esfera de liberdade e privacidade — **inclusive por meios virtuais**.
+Os registros de acesso e de aplicação podem ser preservados e fornecidos mediante ordem judicial, nos limites legais.
 
-A palavra-chave aqui é **reiterada**. Um único episódio de abordagem indesejada pode configurar ameaça (art. 147 do CP) ou outro ilícito, mas o *stalking* exige um padrão: mensagens sucessivas, criação de perfis falsos para burlar bloqueios, monitoramento de *stories* e localização, envio de presentes não solicitados, aparecimento "coincidente" nos mesmos lugares que a vítima frequenta após ver seus *check-ins*. No ambiente digital, a reiteração ganha escala: o agressor pode estar a quilômetros de distância, mas a sensação de proximidade forçada é imediata e constante.
+## Pseudonimato e responsabilidade
 
-A pena prevista é de reclusão de seis meses a dois anos, e multa. Ela aumenta se o crime for cometido contra mulher por razões de gênero, contra criança, adolescente, idoso ou pessoa com deficiência, ou mediante concurso de agentes ou uso de arma. Importante: a ação penal é **pública incondicionada** — o Ministério Público pode (e deve) agir mesmo sem representação da vítima, embora o relato dela seja o ponto de partida.
+Usar apelido, nome artístico ou identificador público não impede responsabilização quando houver ato ilícito.
 
-## Quando a perseguição nasce ou se agrava no contexto doméstico
+## O que a vítima pode fazer
 
-Muitas vezes, o perseguidor não é um estranho. É o ex-companheiro que não aceita o fim do relacionamento, o familiar que exerce controle coercitivo, o parceiro que usa a tecnologia como extensão do poder. Nesses casos, a **Lei Maria da Penha (Lei nº 11.340/2006)** é instrumento poderoso. O artigo 7º autoriza o juiz a decretar **medidas protetivas de urgência** que incluem: afastamento do lar, proibição de aproximação da vítima e de seus familiares — **e proibição de contato por qualquer meio de comunicação**, o que abrange WhatsApp, e-mail, redes sociais, ligações, SMS e até interações indiretas (pedir a terceiros que transmitam recados).
+Em caso de perfil falso, ameaça, golpe ou ofensa, é importante preservar provas, registrar boletim de ocorrência e buscar orientação jurídica para pedido de remoção, preservação de logs e eventual identificação do autor.
 
-O descumprimento de medida protetiva é crime autônomo (art. 24-A da mesma lei), com pena de detenção de três meses a dois anos. Na prática, isso significa que, se o agressor manda uma única mensagem após a intimação judicial, ele comete novo delito, o que facilita a prisão em flagrante e reforça a proteção da vítima.
+## Proteção de dados
 
-Não é necessário aguardar o fim do processo criminal para obter a medida. O pedido pode ser feito na delegacia (preferencialmente na Delegacia da Mulher), no Ministério Público ou diretamente ao juiz, com base no relato da vítima e em indícios de risco. A urgência é presumida quando há violência doméstica.
-
-## Seus dados pessoais não são munição para o agressor: a LGPD como escudo
-
-Perseguição digital frequentemente envolve **uso indevido de dados pessoais**. O agressor acessa e-mail, nuvem, localização em tempo real, histórico de compras, cadastros em aplicativos de entrega, até prontuários médicos. Muitas vezes, ele obtém essas informações porque, em algum momento, a vítima compartilhou senhas, deixou o celular desbloqueado, usou dispositivos compartilhados — ou porque o próprio agressor instalou *spyware* (software espião) no aparelho.
-
-A **Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)** estabelece que todo tratamento de dados pessoais exige **base legal**, **finalidade determinada** e **consentimento livre, informado e inequívoco** (salvo exceções legais). O uso de dados para monitorar, perseguir, humilhar ou ameaçar alguém viola frontalmente os princípios da **finalidade**, **adequação**, **necessidade**, **segurança** e **não discriminação** (art. 6º).
-
-A vítima tem direito a:
-- **Solicitar a eliminação** de dados que estejam sendo usados para a perseguição (art. 18, VI);
-- **Revogar o consentimento** a qualquer momento (art. 8º, § 5º);
-- **Opor-se ao tratamento** quando este descumpre a lei (art. 18, § 2º);
-- **Exigir bloqueio** de acesso indevido e notificação de incidente de segurança (art. 48).
-
-Plataformas e controladores de dados (Google, Meta, Apple, operadoras, apps de entrega, bancos) têm o dever de adotar medidas técnicas e administrativas para proteger esses dados (art. 46). Se houver vazamento ou acesso não autorizado facilitado por falha de segurança, a vítima pode buscar reparação civil com base na LGPD e no Código Civil.
-
-## O lado civil: indenização por danos morais e materiais
-
-Independentemente do desfecho do processo penal, a vítima pode — e deve — ingressar com **ação de indenização por danos morais e materiais** no Juizado Especial Cível ou na Vara Cível comum. O **Código Civil (arts. 186, 187, 927 e 932)** fundamenta a responsabilidade civil: quem, por ação ou omissão voluntária, negligência ou imprudência, violar direito e causar dano a outrem, ainda que exclusivamente moral, comete ato ilícito e deve repará-lo.
-
-No contexto digital, os danos morais são presumidos (*in re ipsa*) quando comprovada a perseguição reiterada: ansiedade, insônia, medo de sair de casa, perda de oportunidades profissionais, rompimento de vínculos sociais, necessidade de tratamento psicológico. Danos materiais incluem gastos com advogado, troca de aparelhos, mudança de endereço, instalação de câmeras, medicamentos, terapia.
-
-A jurisprudência dos tribunais brasileiros tem reconhecido valores expressivos em casos de *stalking* digital, especialmente quando há violação de intimidade, exposição de dados sensíveis (fotos íntimas, orientação sexual, condição de saúde) ou uso de *deepfakes* e *revenge porn* como ferramentas de perseguição.
-
-## O que você pode fazer hoje: roteiro prático e seguro
-
-Se você está vivendo isso, a prioridade é a sua segurança. Não espere a situação "piorar" para agir.
-
-**1. Preserve as provas com método**
-Não apague nada. Faça *prints* de tela com data e hora visíveis (use a função nativa do celular ou aplicativos de captura certificada, como o *Printscreen* com carimbo de tempo). Salve *links* diretos dos perfis, mensagens, e-mails, *logs* de chamadas. Se possível, faça **ata notarial** em cartório — o tabelião documenta o conteúdo das páginas e mensagens, conferindo fé pública à prova, o que dificulta alegações de adulteração posterior.
-
-**2. Registre o Boletim de Ocorrência**
-Vá à delegacia (pode ser online, no site da Polícia Civil do seu estado, mas o presencial costuma gerar resposta mais rápida para medidas urgentes). Leve as provas organizadas. Peça para constar explicitamente: "perseguição digital (stalking), art. 147-A do CP", e, se for o caso, "violência doméstica, Lei Maria da Penha". Exija o número do BO e cópia.
-
-**3. Solicite medida protetiva de urgência**
-Se houver risco atual ou iminente, peça na própria delegacia ou procure a Defensoria Pública / advogado particular para ingressar com pedido judicial. A medida pode ser concedida em **24 a 48 horas**. Ela proíbe contato por *qualquer meio* — e o descumprimento é crime.
-
-**4. Fortaleça sua higiene digital**
-- Troque **todas** as senhas (e-mail, nuvem, redes sociais, banco, apps de entrega, streaming). Use gerenciador de senhas e autenticação em dois fatores (2FA) — preferencialmente com app autenticador (Google Authenticator, Authy), não SMS.
-- Revise dispositivos confiáveis nas configurações de conta (Google, Apple ID, Meta) e remova os que não reconhece.
-- Verifique se há aplicativos desconhecidos instalados (busque por *spyware*, *keylogger*, *stalkerware*). Se tiver dúvida, faça *backup* dos dados essenciais e restaure o aparelho para configuração de fábrica.
-- Desative localização em tempo real em apps que não precisam dela. Revise permissões de "compartilhar localização" no WhatsApp, Google Maps, Find My (iOS).
-- Considere criar novo e-mail e novo número de telefone para contatos essenciais (banco, trabalho, saúde), mantendo o antigo apenas para coletar provas (com notificações silenciadas).
-
-**5. Denuncie às plataformas**
-Use os canais de denúncia de cada rede social (Instagram, Facebook, WhatsApp, TikTok, LinkedIn, X/Twitter) para reportar assédio, perfis falsos, vazamento de dados íntimos. Anexe o BO. Muitas plataformas removem o conteúdo e banem o agressor em poucas horas quando há ordem judicial ou BO.
-
-**6. Busque apoio psicológico e rede de suporte**
-O impacto do *stalking* na saúde mental é severo: hipervigilância, síndrome do pânico, depressão, isolamento. O SUS oferece atendimento nos CAPS (Centros de Atenção Psicossociais). ONGs como o **Instituto Maria da Penha**, **SaferNet**, **Childhood Brasil** e **AzMina** oferecem orientação gratuita. Não enfrente sozinho.
-
-**7. Consulte um advogado especializado em Direito Digital**
-Um profissional vai avaliar: ação penal (acompanhamento como assistente de acusação), medidas protetivas, ação cível indenizatória, notificação extrajudicial a plataformas e controladores de dados (LGPD), pedido de remoção de conteúdo (Marco Civil da Internet, art. 21), e eventuais medidas cautelares para preservação de provas (busca e apreensão de dispositivos do agressor, quebra de sigilo telemático).
-
-## A tecnologia não é o inimigo — a impunidade, sim
-
-Celulares, redes sociais, geolocalização, nuvem: essas ferramentas foram criadas para aproximar, facilitar, informar. O problema não é a tecnologia, mas quem a usa como arma. O ordenamento jurídico brasileiro, embora ainda em construção, já oferece respostas concretas: **crime tipificado, medidas protetivas urgentes, proteção de dados pessoais, reparação civil**.
-
-O que falta, muitas vezes, é a vítima saber que **tem direito** e **como acionar** esses direitos. A vergonha, o medo de não ser acreditada, a sensação de que "a polícia não faz nada" — tudo isso é compreensível, mas não pode paralisar. Cada BO registrado, cada medida protetiva deferida, cada indenização concedida fortalece o precedente e sinaliza ao agressor: **a tela não o protege, a lei o alcança**.
-
-Se você está lendo isso porque vive essa realidade, ou porque conhece alguém que vive, guarde este texto. Compartilhe com quem precisa. E, acima de tudo, **procure ajuda especializada**. A sua liberdade, sua privacidade e sua paz não são negociáveis.
+A LGPD exige que o tratamento de dados pessoais ocorra com base legal, finalidade e segurança, inclusive quando houver cumprimento de ordem judicial.
 
 ---
 
-*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. O escritório **Lisomar Barbosa Advogados** atua em Direito Digital, proteção de dados, crimes cibernéticos e reparação civil. Se você precisa de orientação para o seu caso, entre em contato conosco.*`,
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
   },
   {
+    slug: 'contratos-software-licencas-uso-direitos-deveres',
+    title:
+      'Contratos de software e licenças de uso: o que você precisa saber antes de clicar em "concordo"',
+    excerpt:
+      'Saiba como funcionam licenças de uso, contratos de SaaS, desenvolvimento por encomenda, portabilidade de dados e cláusulas contratuais que merecem atenção.',
+    date: '2026-08-23',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image:
+      'https://images.unsplash.com/photo-1783547351290-e3c2cb1cb1a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDg0NDIyfA&ixlib=rb-4.1.0&q=80&w=1080',
+    content: `# Contratos de software e licenças de uso: o que você precisa saber antes de clicar em "concordo"
+
+Contratos de software definem direitos, limites de uso, responsabilidades e regras sobre dados, suporte, rescisão e continuidade do serviço.
+
+## Licença não é venda
+
+Na maioria das vezes, o usuário não compra a propriedade do software, mas apenas uma licença de uso nos limites definidos pelo contrato.
+
+## Desenvolvimento por encomenda
+
+Projetos personalizados exigem cláusulas claras sobre titularidade do código, cessão de direitos, entregáveis e documentação.
+
+## SaaS e portabilidade
+
+Nos contratos em nuvem, é essencial prever disponibilidade, suporte, exportação de dados e condições de encerramento da relação.
+
+## LGPD
+
+Se o software trata dados pessoais, o contrato deve disciplinar bases legais, segurança, incidentes, suboperadores e descarte de dados.
+
+## Cuidados práticos
+
+Leia cláusulas de responsabilidade, rescisão, foro, portabilidade e tratamento de dados antes de aceitar.
+
+---
+
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
+  },
+  {
+    slug: 'perseguicao-digital-protecao-juridica-vitima',
+    title:
+      'Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você',
+    excerpt:
+      'O stalking digital é uma forma real de violência. Entenda a proteção jurídica disponível, a importância das provas e as medidas cabíveis para cessar a conduta.',
+    date: '2026-08-23',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image:
+      'https://images.unsplash.com/photo-1768637757717-3e47abf07422?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQ3NTM3fA&ixlib=rb-4.1.0&q=80&w=1080',
+    content: `# Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você
+
+A perseguição digital, ou stalking, não é exagero nem mero desconforto virtual. Trata-se de conduta que pode ter relevância penal, cível e até conexão com medidas protetivas.
+
+## Crime de perseguição
+
+A legislação brasileira tipifica a perseguição reiterada, inclusive por meios digitais, quando há invasão da privacidade, ameaça ou comprometimento da liberdade da vítima.
+
+## Provas
+
+É fundamental preservar prints, links, vídeos, datas, horários, perfis e, sempre que possível, formalizar prova por ata notarial.
+
+## Medidas cabíveis
+
+A vítima pode buscar boletim de ocorrência, remoção de conteúdo, preservação de registros, pedido de medida protetiva e indenização, conforme o caso.
+
+## Dados pessoais
+
+Informações usadas para perseguir, monitorar ou ameaçar também podem envolver violação à proteção de dados pessoais.
+
+---
+
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
+  },
+
+  {
     slug: 'crimes-contra-honra-internet-guia-completo',
-    title: 'Crimes contra a honra na internet: o que a lei protege, como provar e o que fazer quando a ofensa vem da tela',
-    excerpt: 'Um comentário maldoso, um print fora de contexto, um perfil falso. A honra, direito fundamental, ganha nova dimensão no ambiente digital. Entenda as diferenças entre calúnia, difamação e injúria, os prazos curtos para agir e por que a \'anonymidade\' da rede é um mito perigoso.',
+    title:
+      'Crimes contra a honra na internet: o que a lei protege, como provar e o que fazer quando a ofensa vem da tela',
+    excerpt:
+      'Entenda as diferenças entre calúnia, difamação e injúria no ambiente digital, como preservar provas e por que agir rápido pode ser decisivo.',
     date: '2026-08-23',
     readTime: '12 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1762340273954-afe9b71819c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDUwNzA1fA&ixlib=rb-4.1.0&q=80&w=1080',
+    image:
+      'https://images.unsplash.com/photo-1762340273954-afe9b71819c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDUwNzA1fA&ixlib=rb-4.1.0&q=80&w=1080',
     content: `# Crimes contra a honra na internet: o que a lei protege, como provar e o que fazer quando a ofensa vem da tela
 
-Imagine a seguinte cena: você acorda, pega o celular ainda na cama e abre o WhatsApp. No grupo da família, um print de um comentário seu em uma rede social circula com uma legenda mentirosa. No Instagram, uma conta anônima publica um story acusando você de um crime que nunca cometeu. No LinkedIn, um ex-colega escreve uma recomendação pública que, na verdade, destrói sua reputação profissional com mentiras.
+A honra continua protegida pela lei mesmo quando a agressão ocorre em rede social, aplicativo de mensagem, comentário público ou perfil falso.
 
-Situações assim deixaram de ser exceção para virar rotina. A facilidade de publicar, compartilhar e viralizar conteúdos transformou a internet no maior palco de conflitos de honra da história. Mas a sensação de impunidade — "é só internet", "ninguém descobre quem sou atrás da tela" — é uma armadilha perigosa. O ordenamento jurídico brasileiro não distingue o ofensa proferida na praça da ofensa publicada no feed: a dignidade da pessoa humana e a inviolabilidade da honra e da imagem, garantidas pelo **artigo 5º, incisos X e V, da Constituição Federal**, valem para ambos os mundos.
+## Conceitos básicos
 
-Este artigo explica, em linguagem acessível, como o Direito enxerga esses conflitos, quais são os caminhos processuais — muitas vezes desconhecidos e armadilhados por prazos curtos — e o que você deve fazer *agora* se for vítima ou testemunha.
+Calúnia, difamação e injúria têm diferenças jurídicas importantes, e a forma como a ofensa acontece influencia a estratégia de resposta.
 
-## O que a lei entende por ofensa à honra no ambiente digital
+## Provas
 
-O Código Penal, em seus **artigos 138, 139 e 140**, desenha três figuras distintas, embora no senso comum sejam tratadas como a mesma coisa. A distinção não é mero academicismo: define a pena, o rito processual e a estratégia de defesa.
+Conteúdo ofensivo deve ser preservado com técnica, preferencialmente com elementos adicionais além de print simples, especialmente em casos mais graves.
 
-A **calúnia** (art. 138) ocorre quando alguém imputa a outra pessoa a prática de um crime *falso*. Exemplo clássico na internet: "Fulano desviou dinheiro da empresa" ou "Ciclano é pedófilo", sendo mentira. O núcleo do tipo penal é a imputação *falsa* de fato definido como crime. Se a acusação for verdadeira, não há calúnia — ainda que a divulgação seja criminosa por outros motivos (violação de segredo de justiça, por exemplo).
+## Medidas possíveis
 
-A **difamação** (art. 139) atinge a reputação, a fama, o bom nome. Não se acusa de crime, mas se ofende a dignidade ou o decoro. Frases como "Fulano é corrupto" (sem imputar crime específico), "Essa médica é incompetente e mata pacientes" ou "Aquele advogado rouba os clientes" configuram difamação se forem mentirosas ou excessivas. A linha entre crítica legítima e difamação é tênue: opinar sobre um serviço ruim é direito do consumidor; atacar a honra subjetiva do profissional com mentiras é crime.
-
-A **injúria** (art. 140) é a ofensa direta à dignidade ou ao decoro, sem imputar fato específico. Xingamentos, adjetivos pejorativos baseados em raça, cor, etnia, religião, origem, orientação sexual, deficiência ou condição social. O "você é um idiota", "ladrão", "vagabundo" proferidos em comentários, direct messages ou áudios de WhatsApp se enquadram aqui. A injúria qualificada (com elementos de preconceito) tem pena mais severa.
-
-No mundo digital, a forma de execução — post, story, comentário, print, deepfake, perfil falso — não cria novos crimes. O meio é apenas o instrumento. A jurisprudência dos tribunais superiores firmou o entendimento de que a publicação em rede social, grupo de mensagens ou site equivale, para fins penais, à divulgação pública. O alcance potencialmente viral, inclusive, costuma ser valorado na dosimetria da pena como circunstância judicial desfavorável (art. 59 do CP), mesmo não havendo majorante expressa para "internet" no Código Penal.
-
-## A armadilha do prazo: ação penal privada e os seis meses
-
-Aqui mora o maior perigo para a vítima leiga. Diferente da maioria dos crimes (roubo, furto, homicídio), nos quais o Ministério Público age de ofício (ação penal pública), os crimes contra a honra — calúnia, difamação e injúria — são, via de regra, de **ação penal privada** (art. 100 do CP c/c art. 38 do CPP).
-
-O que isso significa na prática? Que **o Estado não processa o ofensor por você**. Você, vítima, deve contratar advogado e apresentar *queixa-crime* no prazo decadencial de **seis meses**, contados do dia em que soube da autoria do crime. Não é prazo prescricional (que pode ser interrompido); é prazo decadencial. Perdeu o prazo, perdeu o direito de processar criminalmente. Para sempre.
-
-Há exceções. Se a vítima for funcionário público ofendido em razão da função, a ação é pública condicionada à representação (art. 142 do CP). Na injúria simples, a representação (manifestação de vontade de processar) também é condição de procedibilidade, devendo ser feita no mesmo prazo de seis meses. Na calúnia e difamação contra particular, a queixa-crime *é* a representação.
-
-Seis meses passam voando enquanto a vítima tenta "resolver amigável", espera a plataforma remover o conteúdo, ou simplesmente não sabe por onde começar. Por isso, a orientação unânime de especialistas: **procure um advogado imediatamente ao tomar conhecimento da ofensa**. A preservação da prova (print, ata notarial, link) e o ajuizamento da queixa-crime no prazo são atos urgentes.
-
-## A ilusão do anonimato e a força da prova técnica
-
-"Foi um perfil falso, não tem como descobrir quem foi."
-
-Essa é a frase mais ouvida em escritórios de Direito Digital. E ela está errada. A internet não é terra sem lei; é terra com rastro técnico.
-
-Todo acesso deixa rastros: endereço IP, logs de conexão, identificadores de dispositivo, metadados de arquivos. O **Marco Civil da Internet (Lei nº 12.965/2014)**, em seu **artigo 10**, determina que os provedores de aplicação guardem registros de conexão por seis meses. O **artigo 22** estabelece que a divulgação desses dados a terceiros depende de ordem judicial. Ou seja: a identificação do autor *exige* processo judicial (cível ou criminal) e decisão de juiz determinando a quebra de sigilo telemático.
-
-A **LGPD (Lei nº 13.709/2018)** não impede isso. Seus **artigos 7º, II e III, e 10** autorizam o tratamento de dados pessoais (IP, logs cadastrais) para cumprimento de obrigação legal ou exercício regular de direitos em processo judicial. O direito à privacidade do ofensor não é absoluto e cede diante da necessidade de apuração de ilícito.
-
-Na prática, o advogado ingressa com ação (cautelar, cível ou na própria queixa-crime) pedindo a quebra de sigilo dos dados cadastrais e de conexão do perfil ofensivo. Com a ordem judicial, a plataforma (Meta, Google, TikTok, X, provedor de e-mail) informa o IP e os dados de cadastro. A partir do IP, pede-se à operadora de telecom a identificação do assinante da linha. O caminho é técnico, burocrático, mas *funciona*. Perfis falsos são desmascarados rotineiramente.
-
-**Dica de ouro:** não confie apenas em prints de tela. Prints podem ser contestados ("foi montagem"). A prova robusta é a **ata notarial** (lavrada por tabelião, que acessa o link, certifica o conteúdo, a URL, a data/hora, o código-fonte da página) ou a **perícia técnica forense**. O custo é maior, mas a força probatória é inquestionável.
-
-## Duas vias, um mesmo fato: a esfera cível e a esfera penal
-
-Muita gente acha que deve escolher: ou processo criminal *ou* processo cível. Errado. As vias são **independentes e simultâneas**.
-
-Na **esfera penal**, o objetivo é a punição do ofensor (pena de detenção, multa, prestação de serviços à comunidade). A vítima é parte (assistente de acusação ou querelante), mas o foco é a sanção estatal.
-
-Na **esfera cível**, baseada nos **artigos 186, 927 e 932, III, do Código Civil**, o objetivo é a **reparação do dano moral** (indenização em dinheiro) e, muitas vezes, a **remoção do conteúdo** e **direito de resposta**. O provedor da aplicação (Facebook, Instagram, Google, WhatsApp) pode ser responsabilizado *civilmente* se, após notificação judicial, não remover o conteúdo ofensivo (art. 19 do Marco Civil). Atenção: a responsabilidade do provedor é **subsidiária** e exige **ordem judicial prévia** (salvo nos casos de nudez/sexo não autorizado, art. 21 do Marco Civil). O provedor não é juiz; não cabe a ele decidir o que é ofensa. Cabe a ele cumprir a ordem do juiz.
-
-Essa duplicidade é estratégica. Muitas vezes, a ação cível de obrigação de fazer (remoção) + indenização por danos morais resolve a urgência da vítima (tirar o conteúdo do ar, receber compensação) enquanto a queixa-crime corre seu rito mais lento. Um advogado experiente saberá coordenar as duas frentes.
-
-## O papel das plataformas: não são juízes, mas têm deveres
-
-Quando a ofensa aparece no Instagram, no YouTube, no TikTok ou no WhatsApp, o impulso natural é denunciar pelo botão "reportar". Faça isso. Mas saiba: a moderação privada das plataformas segue *termos de uso* e *diretrizes de comunidade*, não a lei brasileira. Eles podem não remover algo que a justiça consideraria crime, ou remover algo que era lícito.
-
-O **Marco Civil da Internet** criou um regime de **responsabilidade civil subsidiária** para provedores de aplicação (art. 19). Eles *não* respondem pelo conteúdo gerado por terceiros *automaticamente*. Respondem apenas se, após **ordem judicial específica**, não removerem o conteúdo apontado como infringente. A ordem judicial deve conter identificação clara do material (URL), sob pena de nulidade.
-
-Isso significa que **não adianta mandar notificação extrajudicial para o jurídico da Meta no Brasil exigindo remoção sem ordem judicial**. Eles não são obrigados a cumprir (embora às vezes o façam por política interna). O caminho jurídico seguro é a tutela de urgência (liminar) em ação cível pedindo a remoção. Com a liminar deferida, a plataforma cumpre em horas.
-
-No WhatsApp, a criptografia de ponta a ponta impede que a plataforma acesse o conteúdo das mensagens. A quebra de sigilo lá recai sobre o aparelho do remetente ou destinatário (perícia no celular) ou sobre metadados de envio (IP, horário, destinatário) guardados pelo provedor. Perfis falsos no WhatsApp Business, por exemplo, deixam rastros cadastrais (CNPJ, telefone verificado) que facilitam a identificação.
-
-## O que fazer na prática: roteiro de emergência
-
-Se você está lendo isso porque *agora mesmo* está sendo atacado, siga este roteiro:
-
-1.  **Não responda, não apague, não bloqueie ainda.** A interação alimenta o algoritmo e pode apagar provas do lado do ofensor. Bloquear impede que você veja novas postagens.
-2.  **Faça a ata notarial *hoje*.** Vá a um cartório de notas com o link, o print, o vídeo. O tabelião certifica o conteúdo. Isso custa algumas centenas de reais, mas vale ouro em juízo.
-3.  **Salve tudo em nuvem e mídia física.** Prints (com data/hora visíveis), vídeos de tela gravando a navegação (mostrando URL, perfil, comentários), PDFs da página (Ctrl+P > Salvar como PDF).
-4.  **Identifique o autor, se possível.** Nome do perfil, @usuario, link do perfil, número de telefone (WhatsApp), e-mail. Mesmo que seja "falso", guarde o identificador único da conta (UID), que aparece no código-fonte ou na URL.
-5.  **Procure advogado especializado em Direito Digital *imediatamente*.** O prazo de seis meses para a queixa-crime corre contra você. A ação cível de remoção/indenização tem prazo maior (prescrição trienal ou decenal), mas a urgência da remoção exige liminar.
-6.  **Registre boletim de ocorrência (BO).** Embora a ação seja privada, o BO documenta o fato perante a autoridade policial, gera número de ocorrência e pode subsidiar inquérito se houver indícios de outros crimes (ameaça, stalking, extorsão). Faça online (delegacia virtual) ou presencial.
-7.  **Denuncie na plataforma.** Use os canais oficiais de denúncia (não só o botão "reportar", mas os formulários de "conteúdo ilegal" ou "direitos autorais/difamação" das centrais de transparência). Anexe o BO e a ata notarial.
-8.  **Não faça justiça com as próprias mãos.** Não publique dados do ofensor (doxxing), não ameace, não crie perfis para contra-atacar. Isso vira crime *seu*.
-
-## Quando a ofensa vem de dentro de casa: o assédio moral digital e o stalking
-
-Muitas vezes, a ofensa à honra não é um evento isolado, mas parte de um padrão: perseguição sistemática, monitoramento de perfis, criação de fakes para vigiar, envio de mensagens ameaçadoras, vazamento de dados íntimos. Aqui, a figura pode extrapolar os arts. 138/139/140 e entrar no **stalking (art. 147-A do CP)** — perseguição reiterada que ameaça a integridade física ou psicológica, restringe a liberdade — ou no **assédio moral no trabalho digital**, com repercussões na Justiça do Trabalho.
-
-Nesses casos, a prova da *reiteração* é fundamental. A ata notarial de *cada* episódio, o diário de ocorrências, os prints sequenciais mostram o padrão. Medidas protetivas de urgência (Lei Maria da Penha, se houver vínculo doméstico/familiar, ou genéricas no CPP) podem determinar afastamento, proibição de contato e até prisão preventiva se descumpridas.
-
-## Reflexão final: a cidadania digital exige coragem e técnica
-
-A internet não é um parque de diversões sem regras. Cada comentário, cada share, cada story carrega responsabilidade jurídica. Para a vítima, a sensação de violação é real, visceral — a honra ferida na tela sangra na vida real: oportunidades perdidas, abalo psíquico, medo, vergonha.
-
-O Direito oferece respostas. Elas não são automáticas, não são fáceis, exigem técnica processual, prazos rigorosos, provas técnicas e investimento. Mas existem. A anonimidade é um mito técnico; a impunidade, uma escolha de quem não age a tempo.
-
-Se você está passando por isso, não se cale por vergonha ou medo. Não deixe o prazo correr. A honra é bem jurídico tutelado pela Constituição, pelo Código Penal, pelo Código Civil, pelo Marco Civil, pela LGPD. O arcabouço está posto. Falta a iniciativa — assessorada por quem conhece o caminho.
-
-**O escritório Lisomar Barbosa Advogados atua na defesa da honra e da imagem no ambiente digital, com atuação estratégica nas esferas cível e criminal, remoção de conteúdos, quebra de sigilo telemático e reparação por danos morais.** Agende uma consulta e entenda seus direitos na prática.
+Dependendo do caso, pode haver esfera penal, esfera cível, pedido de remoção de conteúdo e busca pela identificação do autor.
 
 ---
 
-*Este artigo tem caráter informativo e educativo, não substitui consulta jurídica personalizada. A legislação e a jurisprudência podem sofrer alterações.*`,
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
   },
+
   {
     slug: 'stalking-virtual-consequencias-juridicas-lei-14132-2021',
-    title: 'Stalking Virtual e suas Consequências Jurídicas: Análise Completa à Luz da Lei 14.132/2021, Marco Civil, LGPD e Jurisprudência',
-    excerpt: 'Artigo técnico sobre o crime de perseguição (stalking) no ambiente digital. Aborda a tipificação no Art. 147-A do CP, responsabilidade civil por danos morais, tutelas inibitórias, deveres das plataformas (Marco Civil e LGPD), violência doméstica (Lei Maria da Penha), prova digital e desafios da IA.',
+    title:
+      'Stalking Virtual e suas Consequências Jurídicas: Análise Completa à Luz da Lei 14.132/2021, Marco Civil, LGPD e Jurisprudência',
+    excerpt:
+      'Artigo técnico sobre o crime de perseguição no ambiente digital, seus desdobramentos civis e penais e os deveres das plataformas.',
     date: '2026-08-22',
     readTime: '13 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&ixlib=rb-4.1.0&q=80&w=1080',
+    image:
+      'https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&ixlib=rb-4.1.0&q=80&w=1080',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'invasao-dispositivo-informatico-consequencias-juridicas',
-    title: 'Invasão de Dispositivo Informático: Análise Completa das Consequências Jurídicas no Ordenamento Brasileiro',
-    excerpt: 'Estudo aprofundado sobre o crime de invasão de dispositivo informático (Art. 154-A do CP), responsabilidade civil por danos morais e materiais, deveres de segurança sob a LGPD e Marco Civil da Internet, responsabilidade objetiva do fornecedor no CDC e preservação de provas digitais.',
+    title:
+      'Invasão de Dispositivo Informático: Análise Completa das Consequências Jurídicas no Ordenamento Brasileiro',
+    excerpt:
+      'Estudo sobre o crime de invasão de dispositivo informático, responsabilidade civil, preservação de provas digitais e impactos jurídicos no Brasil.',
     date: '2026-08-22',
     readTime: '11 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1756671994948-183e2d833da0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQxODI4fA&ixlib=rb-4.1.0&q=80&w=1080',
+    image:
+      'https://images.unsplash.com/photo-1756671994948-183e2d833da0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQxODI4fA&ixlib=rb-4.1.0&q=80&w=1080',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'regulamentacao-criptomoedas',
     title: 'Regulamentação de Criptomoedas no Brasil: Marco Legal e Perspectivas',
-    excerpt: 'Análise completa do marco legal das criptomoedas no Brasil, incluindo a Lei 14.478/2022, regulamentação do Banco Central, tributação pela Receita Federal e os desafios jurídicos do mercado cripto.',
+    excerpt:
+      'Análise do marco legal das criptomoedas no Brasil, incluindo regulação, tributação e desafios jurídicos do mercado cripto.',
     date: '2025-03-10',
     readTime: '14 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'compliance-lgpd',
     title: 'Compliance com a LGPD: Guia Completo para Empresas',
-    excerpt: 'Guia prático e completo para implementar um programa de compliance com a Lei Geral de Proteção de Dados. Desde o mapeamento de dados até a resposta a incidentes de segurança.',
+    excerpt:
+      'Guia prático para implementação de programa de compliance com a Lei Geral de Proteção de Dados.',
     date: '2025-02-20',
     readTime: '16 min',
     category: 'LGPD',
-    image: 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'fake-news-difamacao',
     title: 'Fake News e Difamação Digital: Seus Direitos e Como se Defender',
-    excerpt: 'Como agir juridicamente contra fake news e difamação nas redes sociais. Direitos das vítimas, responsabilidade das plataformas e estratégias legais para proteção da honra e imagem.',
+    excerpt:
+      'Como agir juridicamente contra fake news e difamação nas redes sociais, com foco em honra, imagem e responsabilidade.',
     date: '2025-01-25',
     readTime: '13 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'protecao-dados-pessoais',
     title: 'Proteção de Dados Pessoais: Seus Direitos como Titular',
-    excerpt: 'Conheça todos os seus direitos como titular de dados pessoais garantidos pela LGPD: acesso, correção, exclusão, portabilidade e como exercê-los de forma eficaz.',
+    excerpt:
+      'Conheça os principais direitos do titular de dados pessoais garantidos pela LGPD e como exercê-los.',
     date: '2025-01-10',
     readTime: '11 min',
     category: 'LGPD',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'custodia-criptoativos',
     title: 'Custódia de Criptoativos: Aspectos Jurídicos e Melhores Práticas',
-    excerpt: 'Análise dos aspectos jurídicos da custódia de criptoativos no Brasil, incluindo responsabilidade das exchanges, proteção do investidor e boas práticas de segurança.',
+    excerpt:
+      'Análise dos aspectos jurídicos da custódia de criptoativos, responsabilidade das exchanges e boas práticas de segurança.',
     date: '2024-12-15',
     readTime: '12 min',
     category: 'Cripto',
-    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'crimes-ciberneticos',
     title: 'Crimes Cibernéticos: Como se Proteger e Buscar Justiça',
-    excerpt: 'Guia completo sobre crimes cibernéticos no Brasil: tipos, legislação aplicável, como registrar ocorrência, preservar provas e buscar reparação judicial.',
+    excerpt:
+      'Guia sobre crimes cibernéticos no Brasil, preservação de provas, registro de ocorrência e reparação judicial.',
     date: '2024-11-20',
     readTime: '14 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'instagram-hackeado',
     title: 'Instagram Hackeado: O Que Fazer e Seus Direitos',
-    excerpt: 'Passo a passo completo para recuperar conta do Instagram hackeada, medidas legais cabíveis, responsabilidade da plataforma e como proteger seus dados nas redes sociais.',
+    excerpt:
+      'Passo a passo para recuperar conta hackeada, avaliar responsabilidade e proteger dados nas redes sociais.',
     date: '2024-11-05',
     readTime: '10 min',
     category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'golpes-criptomoedas',
     title: 'Golpes com Criptomoedas: Como Identificar e Recuperar Valores',
-    excerpt: 'Os golpes mais comuns no mercado de criptomoedas, como identificá-los antes de cair, e as medidas jurídicas disponíveis para tentar recuperar valores perdidos.',
+    excerpt:
+      'Os golpes mais comuns no mercado de criptomoedas, sinais de alerta e medidas jurídicas possíveis.',
     date: '2024-10-15',
     readTime: '13 min',
     category: 'Cripto',
-    image: 'https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
   {
     slug: 'lgpd-erros-comuns',
     title: 'LGPD: Erros Comuns na Implementação e Como Evitá-los',
-    excerpt: 'Evite multas e sanções da LGPD. Conheça os erros mais comuns na implementação da Lei Geral de Proteção de Dados e como garantir a conformidade da sua empresa.',
+    excerpt:
+      'Conheça falhas frequentes na implementação da LGPD e como reduzir riscos regulatórios e operacionais.',
     date: '2024-09-10',
     readTime: '12 min',
     category: 'LGPD',
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&auto=format&fit=crop&q=80',
+    image:
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&auto=format&fit=crop&q=80',
     content: 'Ver página completa do artigo.',
   },
 ];
