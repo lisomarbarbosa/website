@@ -143,14 +143,35 @@ function getToday() {
   return new Date().toISOString().slice(0, 10);
 }
 
+/**
+ * Retorna o número de dias completos desde 2024-01-01 (época fixa).
+ * Garante progressão contínua entre meses e anos, sem repetir o mesmo
+ * índice no mesmo dia de meses diferentes.
+ */
+function absoluteDayIndex() {
+  const EPOCH = Date.UTC(2024, 0, 1); // 2024-01-01
+  const now   = Date.now();
+  return Math.floor((now - EPOCH) / 86_400_000);
+}
+
+/**
+ * Escolhe o tema do artigo de forma determinística mas única por execução.
+ *
+ * - Slot 1: índice = dias absolutos desde 2024-01-01
+ * - Slot 2: índice = dias absolutos + metade do array (garante tema diferente do slot 1)
+ * - CUSTOM_TOPIC: sempre tem precedência
+ *
+ * O índice é baseado em dias absolutos (não apenas getUTCDate), então o tema
+ * avança a cada dia e nunca repete no mesmo dia de meses/anos diferentes.
+ */
 function chooseTopic(slot = 1) {
   if (process.env.CUSTOM_TOPIC && process.env.CUSTOM_TOPIC.trim()) {
     return process.env.CUSTOM_TOPIC.trim();
   }
-  const now = new Date();
-  const dayIndex = now.getUTCDate() % TOPICS.length;
-  const offset = slot === 2 ? 15 : 0;
-  return TOPICS[(dayIndex + offset) % TOPICS.length];
+  const base   = absoluteDayIndex();
+  const half   = Math.floor(TOPICS.length / 2);
+  const offset = slot === 2 ? half : 0;
+  return TOPICS[(base + offset) % TOPICS.length];
 }
 
 function cleanMarkdown(text) {
