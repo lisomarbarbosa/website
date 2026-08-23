@@ -12,11 +12,10 @@
 
 | Lei / Norma | Status | Observação |
 |---|---|---|
-| Lei nº 8.078/1990 (CDC) | ✅ Vigente | — |
 | Lei nº 13.709/2018 (LGPD) | ✅ Vigente | — |
 | Decreto nº 7.962/2013 (E-commerce) | ✅ Vigente | — |
 
-**Leis detectadas:** 3 | **Problemas:** 0
+**Leis detectadas:** 2 | **Problemas:** 0
 
 ---
 
@@ -25,6 +24,6 @@
 | Métrica | Valor |
 |---|---|
 | Arquivos auditados | 1 |
-| Referências legislativas encontradas | 3 |
+| Referências legislativas encontradas | 2 |
 | Problemas identificados | 0 |
 | Status geral | ✅ Aprovado |
