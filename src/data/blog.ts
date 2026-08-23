@@ -9,7 +9,102 @@ export interface BlogPost {
   content: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[
+  {
+    slug: 'perseguicao-digital-protecao-juridica-vitima',
+    title: 'Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você',
+    excerpt: 'O stalking digital não é "coisa de internet" — é crime, viola direitos fundamentais e deixa cicatrizes profundas. Entenda como a legislação brasileira (Lei 14.132/2021, Lei Maria da Penha, LGPD e Código Civil) ampara a vítima e quais passos práticos tomar hoje para recuperar sua segurança e tranquilidade.',
+    date: '2026-08-23',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1768637757717-3e47abf07422?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQ3NTM3fA&ixlib=rb-4.1.0&q=80&w=1080',
+    content: '# Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você
+
+O som de uma notificação que antes trazia alegria — uma mensagem de um amigo, um e-mail esperado — passa a gelar a espinha. O coração acelera antes mesmo de você olhar a tela. Quem está do outro lado? O que essa pessoa sabe sobre a sua rotina? Quantas vezes hoje ela tentou te contatar depois que você pediu, implorou, bloqueou, para que parasse?
+
+Essa sensação de vigilância constante, de invasão que não respeita o bloqueio, de presença indesejada que atravessa a barreira do digital para o psicológico, tem nome: **perseguição digital**, ou *stalking*. E, ao contrário do que ainda se ouve por aí, não é "drama", não é "exagero" e certamente não é "coisa que a polícia não resolve". Desde 2021, o Código Penal brasileiro tipificou a conduta como crime autônomo. A Lei Maria da Penha prevê medidas protetivas que alcançam o ambiente virtual. A LGPD garante que seus dados não sejam combustível para o perseguidor. E o Código Civil assegura o direito à reparação pelos danos sofridos.
+
+Este artigo existe para traduzir esse arcabouço jurídico em linguagem clara, mostrar o que você pode fazer **agora** e reforçar: você não está sozinho, e a lei está do seu lado.
+
+## O que a lei entende por perseguição (e por que o digital mudou tudo)
+
+Até pouco tempo, o ordenamento jurídico brasileiro tratava condutas de perseguição como contravenção penal — "perturbação da tranquilidade" —, com penas brandas e pouca efetividade. A **Lei nº 14.132, de 2021**, alterou o Código Penal para inserir o **artigo 147-A**, criando o crime de **perseguição (stalking)**. A norma pune quem, de forma reiterada, persegue alguém, ameaça sua integridade física ou psicológica, restringe sua capacidade de locomoção ou invade sua esfera de liberdade e privacidade — **inclusive por meios virtuais**.
+
+A palavra-chave aqui é **reiterada**. Um único episódio de abordagem indesejada pode configurar ameaça (art. 147 do CP) ou outro ilícito, mas o *stalking* exige um padrão: mensagens sucessivas, criação de perfis falsos para burlar bloqueios, monitoramento de *stories* e localização, envio de presentes não solicitados, aparecimento "coincidente" nos mesmos lugares que a vítima frequenta após ver seus *check-ins*. No ambiente digital, a reiteração ganha escala: o agressor pode estar a quilômetros de distância, mas a sensação de proximidade forçada é imediata e constante.
+
+A pena prevista é de reclusão de seis meses a dois anos, e multa. Ela aumenta se o crime for cometido contra mulher por razões de gênero, contra criança, adolescente, idoso ou pessoa com deficiência, ou mediante concurso de agentes ou uso de arma. Importante: a ação penal é **pública incondicionada** — o Ministério Público pode (e deve) agir mesmo sem representação da vítima, embora o relato dela seja o ponto de partida.
+
+## Quando a perseguição nasce ou se agrava no contexto doméstico
+
+Muitas vezes, o perseguidor não é um estranho. É o ex-companheiro que não aceita o fim do relacionamento, o familiar que exerce controle coercitivo, o parceiro que usa a tecnologia como extensão do poder. Nesses casos, a **Lei Maria da Penha (Lei nº 11.340/2006)** é instrumento poderoso. O artigo 7º autoriza o juiz a decretar **medidas protetivas de urgência** que incluem: afastamento do lar, proibição de aproximação da vítima e de seus familiares — **e proibição de contato por qualquer meio de comunicação**, o que abrange WhatsApp, e-mail, redes sociais, ligações, SMS e até interações indiretas (pedir a terceiros que transmitam recados).
+
+O descumprimento de medida protetiva é crime autônimo (art. 24-A da mesma lei), com pena de detenção de três meses a dois anos. Na prática, isso significa que, se o agressor manda uma única mensagem após a intimação judicial, ele comete novo delito, o que facilita a prisão em flagrante e reforça a proteção da vítima.
+
+Não é necessário aguardar o fim do processo criminal para obter a medida. O pedido pode ser feito na delegacia (preferencialmente na Delegacia da Mulher), no Ministério Público ou diretamente ao juiz, com base no relato da vítima e em indícios de risco. A urgência é presumida quando há violência doméstica.
+
+## Seus dados pessoais não são munição para o agressor: a LGPD como escudo
+
+Perseguição digital frequentemente envolve **uso indevido de dados pessoais**. O agressor acessa e-mail, nuvem, localização em tempo real, histórico de compras, cadastros em aplicativos de entrega, até prontuários médicos. Muitas vezes, ele obtém essas informações porque, em algum momento, a vítima compartilhou senhas, deixou o celular desbloqueado, usou dispositivos compartilhados — ou porque o próprio agressor instalou *spyware* (software espião) no aparelho.
+
+A **Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)** estabelece que todo tratamento de dados pessoais exige **base legal**, **finalidade determinada** e **consentimento livre, informado e inequívoco** (salvo exceções legais). O uso de dados para monitorar, perseguir, humilhar ou ameaçar alguém viola frontalmente os princípios da **finalidade**, **adequação**, **necessidade**, **segurança** e **não discriminação** (art. 6º).
+
+A vítima tem direito a:
+- **Solicitar a eliminação** de dados que estejam sendo usados para a perseguição (art. 18, VI);
+- **Revogar o consentimento** a qualquer momento (art. 8º, § 5º);
+- **Opor-se ao tratamento** quando este descumpre a lei (art. 18, § 2º);
+- **Exigir bloqueio** de acesso indevido e notificação de incidente de segurança (art. 48).
+
+Plataformas e controladores de dados (Google, Meta, Apple, operadoras, apps de entrega, bancos) têm o dever de adotar medidas técnicas e administrativas para proteger esses dados (art. 46). Se houver vazamento ou acesso não autorizado facilitado por falha de segurança, a vítima pode buscar reparação civil com base na LGPD e no Código Civil.
+
+## O lado civil: indenização por danos morais e materiais
+
+Independentemente do desfecho do processo penal, a vítima pode — e deve — ingressar com **ação de indenização por danos morais e materiais** no Juizado Especial Cível ou na Vara Cível comum. O **Código Civil (arts. 186, 187, 927 e 932)** fundamenta a responsabilidade civil: quem, por ação ou omissão voluntária, negligência ou imprudência, violar direito e causar dano a outrem, ainda que exclusivamente moral, comete ato ilícito e deve repará-lo.
+
+No contexto digital, os danos morais são presumidos (*in re ipsa*) quando comprovada a perseguição reiterada: ansiedade, insônia, medo de sair de casa, perda de oportunidades profissionais, rompimento de vínculos sociais, necessidade de tratamento psicológico. Danos materiais incluem gastos com advogado, troca de aparelhos, mudança de endereço, instalação de câmeras, medicamentos, terapia.
+
+A jurisprudência dos tribunais brasileiros tem reconhecido valores expressivos em casos de *stalking* digital, especialmente quando há violação de intimidade, exposição de dados sensíveis (fotos íntimas, orientação sexual, condição de saúde) ou uso de *deepfakes* e *revenge porn* como ferramentas de perseguição.
+
+## O que você pode fazer hoje: roteiro prático e seguro
+
+Se você está vivendo isso, a prioridade é a sua segurança. Não espere a situação "piorar" para agir.
+
+**1. Preserve as provas com método**
+Não apague nada. Faça *prints* de tela com data e hora visíveis (use a função nativa do celular ou aplicativos de captura certificada, como o *Printscreen* com carimbo de tempo). Salve *links* diretos dos perfis, mensagens, e-mails, *logs* de chamadas. Se possível, faça **ata notarial** em cartório — o tabelião documenta o conteúdo das páginas e mensagens, conferindo fé pública à prova, o que dificulta alegações de adulteração posterior.
+
+**2. Registre o Boletim de Ocorrência**
+Vá à delegacia (pode ser online, no site da Polícia Civil do seu estado, mas o presencial costuma gerar resposta mais rápida para medidas urgentes). Leve as provas organizadas. Peça para constar explicitamente: "perseguição digital (stalking), art. 147-A do CP", e, se for o caso, "violência doméstica, Lei Maria da Penha". Exija o número do BO e cópia.
+
+**3. Solicite medida protetiva de urgência**
+Se houver risco atual ou iminente, peça na própria delegacia ou procure a Defensoria Pública / advogado particular para ingressar com pedido judicial. A medida pode ser concedida em **24 a 48 horas**. Ela proíbe contato por *qualquer meio* — e o descumprimento é crime.
+
+**4. Fortaleça sua higiene digital**
+- Troque **todas** as senhas (e-mail, nuvem, redes sociais, banco, apps de entrega, streaming). Use gerenciador de senhas e autenticação em dois fatores (2FA) — preferencialmente com app autenticador (Google Authenticator, Authy), não SMS.
+- Revise dispositivos confiáveis nas configurações de conta (Google, Apple ID, Meta) e remova os que não reconhece.
+- Verifique se há aplicativos desconhecidos instalados (busque por *spyware*, *keylogger*, *stalkerware*). Se tiver dúvida, faça *backup* dos dados essenciais e restaure o aparelho para configuração de fábrica.
+- Desative localização em tempo real em apps que não precisam dela. Revise permissões de "compartilhar localização" no WhatsApp, Google Maps, Find My (iOS).
+- Considere criar novo e-mail e novo número de telefone para contatos essenciais (banco, trabalho, saúde), mantendo o antigo apenas para coletar provas (com notificações silenciadas).
+
+**5. Denuncie às plataformas**
+Use os canais de denúncia de cada rede social (Instagram, Facebook, WhatsApp, TikTok, LinkedIn, X/Twitter) para reportar assédio, perfis falsos, vazamento de dados íntimos. Anexe o BO. Muitas plataformas removem o conteúdo e banem o agressor em poucas horas quando há ordem judicial ou BO.
+
+**6. Busque apoio psicológico e rede de suporte**
+O impacto do *stalking* na saúde mental é severo: hipervigilância, síndrome do pânico, depressão, isolamento. O SUS oferece atendimento nos CAPS (Centros de Atenção Psicossociais). ONGs como o **Instituto Maria da Penha**, **SaferNet**, **Childhood Brasil** e **AzMina** oferecem orientação gratuita. Não enfrente sozinho.
+
+**7. Consulte um advogado especializado em Direito Digital**
+Um profissional vai avaliar: ação penal (acompanhamento como assistente de acusação), medidas protetivas, ação cível indenizatória, notificação extrajudicial a plataformas e controladores de dados (LGPD), pedido de remoção de conteúdo (Marco Civil da Internet, art. 21), e eventuais medidas cautelares para preservação de provas (busca e apreensão de dispositivos do agressor, quebra de sigilo telemático).
+
+## A tecnologia não é o inimigo — a impunidade, sim
+
+Celulares, redes sociais, geolocalização, nuvem: essas ferramentas foram criadas para aproximar, facilitar, informar. O problema não é a tecnologia, mas quem a usa como arma. O ordenamento jurídico brasileiro, embora ainda em construção, já oferece respostas concretas: **crime tipificado, medidas protetivas urgentes, proteção de dados pessoais, reparação civil**.
+
+O que falta, muitas vezes, é a vítima saber que **tem direito** e **como acionar** esses direitos. A vergonha, o medo de não ser acreditada, a sensação de que "a polícia não faz nada" — tudo isso é compreensível, mas não pode paralisar. Cada BO registrado, cada medida protetiva deferida, cada indenização concedida fortalece o precedente e sinaliza ao agressor: **a tela não o protege, a lei o alcança**.
+
+Se você está lendo isso porque vive essa realidade, ou porque conhece alguém que vive, guarde este texto. Compartilhe com quem precisa. E, acima de tudo, **procure ajuda especializada**. A sua liberdade, sua privacidade e sua paz não são negociáveis.
+
+---
+
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. O escritório **Lisomar Barbosa Advogados** atua em Direito Digital, proteção de dados, crimes cibernéticos e reparação civil. Se você precisa de orientação para o seu caso, entre em contato conosco.*'
+  },] = [
   {
     slug: 'stalking-virtual-consequencias-juridicas-lei-14132-2021',
     title: 'Stalking Virtual e suas Consequências Jurídicas: Análise Completa à Luz da Lei 14.132/2021, Marco Civil, LGPD e Jurisprudência',
