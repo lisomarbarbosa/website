@@ -9,7 +9,7 @@ export interface BlogPost {
   content: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'ofensas-redes-sociais-consequencias-juridicas',
     title: 'Ofensas nas redes sociais: quando a tela não protege — entenda seus direitos e como agir',
@@ -73,8 +73,8 @@ A internet não é um território sem lei. A Constituição, o Código Penal, o 
 
 Se você sofreu uma ofensa, não se cale por vergonha ou medo de "dar ibope". O silêncio costuma ser interpretado como aceitação. A lei lhe dá ferramentas para fazer cessar a violação, identificar o autor, remover o conteúdo e ser reparado. O primeiro passo é documentar com rigor técnico; o segundo, buscar orientação jurídica especializada para transformar o direito abstrato em resultado concreto.
 
-No escritório Lisomar Barbosa Advogados, atuamos diariamente na defesa da honra, da imagem e da privacidade no ambiente digital. Se você passa por isso, entre em contato. A justiça também tem endereço na internet — e ele pode ser o do seu advogado.`
-  },] = [
+No escritório Lisomar Barbosa Advogados, atuamos diariamente na defesa da honra, da imagem e da privacidade no ambiente digital. Se você passa por isso, entre em contato. A justiça também tem endereço na internet — e ele pode ser o do seu advogado.`,
+  },
   {
     slug: 'direito-do-consumidor-compras-online',
     title:
@@ -86,37 +86,69 @@ No escritório Lisomar Barbosa Advogados, atuamos diariamente na defesa da honra
     category: 'Direito Digital',
     image:
       'https://images.unsplash.com/photo-1697545806029-f22eb0f36bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTA3NjgyfA&ixlib=rb-4.1.0&q=80&w=1080',
-    content: `# Seus direitos nas compras online: o que a lei garante quando o produto não chega ou chega diferente do combinado
+    content: `Você entra no site, escolhe o produto, paga com cartão ou Pix e aguarda a entrega. Dias depois, a caixa chega amassada, o tamanho não serve, o aparelho não liga ou, pior, o pacote nunca sai do centro de distribuição. Situações assim são cada vez mais comuns no cotidiano digital brasileiro. O que nem todo mundo sabe é que a legislação consumerista também se aplica integralmente às relações de consumo eletrônicas, impondo deveres claros a quem vende e garantias efetivas a quem compra.
 
-Comprar pela internet virou rotina, mas problemas de entrega, defeito e informação enganosa continuam frequentes. O Código de Defesa do Consumidor protege o comprador também no ambiente digital.
+O ponto de partida é o **Código de Defesa do Consumidor (Lei nº 8.078/1990)**. O artigo 2º define consumidor como toda pessoa física ou jurídica que adquire produto ou serviço como destinatário final, enquanto fornecedor é quem o coloca no mercado. Não há distinção entre loja física e virtual: a proteção é a mesma. No comércio eletrônico, essas obrigações foram detalhadas pelo **Decreto nº 7.962/2013**, que exige informações ostensivas como nome empresarial, CNPJ, endereço físico, canais de atendimento, características essenciais do produto, preço total com frete e prazo de entrega.
 
-## Direito de arrependimento
+## Direito de arrependimento: sete dias para mudar de ideia
 
-Nas compras feitas fora do estabelecimento comercial, o consumidor pode desistir em até sete dias corridos, contados da assinatura do contrato ou do recebimento do produto.
+Uma das garantias mais relevantes, e ainda pouco conhecidas, é o **direito de arrependimento**, previsto no artigo 49 do CDC. Como a compra online ocorre fora do estabelecimento comercial, sem a possibilidade de tocar, experimentar ou testar o produto antes do pagamento, a lei concede ao consumidor **sete dias corridos**, contados da assinatura do contrato ou do recebimento do bem, para desistir da aquisição **sem necessidade de justificativa**.
 
-## Dever de informação
+Na prática, isso significa que, se você comprou uma camisa e não gostou do caimento, ou adquiriu um eletrodoméstico e percebeu que ele não cabe no espaço planejado, pode devolvê-lo e receber **o valor integral pago**, inclusive o frete. Nessas hipóteses, o custo da devolução também é do fornecedor. Muitos sites ainda tentam impor restrições abusivas, como negar devolução de produtos abertos ou transferir o frete de retorno ao cliente, mas essas cláusulas são **nulas de pleno direito**, nos termos do artigo 51 do CDC.
 
-A loja deve informar com clareza preço, frete, prazo de entrega, características do produto e canais de atendimento.
+> **Dica prática:** guarde prints da tela de compra, e-mails de confirmação, código de rastreio e, ao receber o produto, faça um vídeo curto abrindo a embalagem. Esses registros facilitam a comprovação do prazo e do estado do item caso seja necessário acionar o arrependimento.
 
-## Vício do produto
+## Informação adequada: o dever de transparência antes do clique
 
-Se o item chega com defeito, a cadeia de fornecimento pode responder, e o consumidor pode exigir reparo, troca, abatimento proporcional ou devolução do valor, conforme o caso.
+O artigo 6º, inciso III, do CDC assegura o direito à **informação adequada e clara** sobre produtos e serviços. No ambiente digital, isso se traduz em obrigações concretas: descrição fiel, indicação de cor, voltagem, dimensões, composição, disponibilidade em estoque, prazo de entrega estimado e formas de pagamento. O Decreto nº 7.962/2013 reforça que essas informações devem estar **disponíveis de forma ostensiva** antes da finalização do pedido.
 
-## Marketplaces
+Se o site promete entrega em dois dias úteis e o produto leva três semanas, se a foto mostra um item diferente do que foi entregue, ou se taxas só aparecem no checkout, há violação do dever de informação. Nesses casos, o consumidor pode exigir o cumprimento forçado da oferta, aceitar produto equivalente ou rescindir o contrato com devolução integral dos valores pagos, sem prejuízo de eventuais perdas e danos.
 
-Quando a plataforma participa da cadeia de fornecimento, pode haver responsabilidade conforme as circunstâncias do caso concreto.
+## Vício do produto ou do serviço: quem responde?
 
-## LGPD
+Quando o produto chega com defeito, não liga, rasga na primeira lavagem ou apresenta erro de fabricação, estamos diante de **vício de qualidade**. O CDC estabelece responsabilidade **solidária** entre os integrantes da cadeia de fornecimento, o que inclui fabricante, importador, distribuidor e varejista. Isso permite ao consumidor reclamar diretamente com a loja onde comprou, sem depender de contato com fabricante estrangeiro ou intermediários difíceis de localizar.
 
-Os dados pessoais fornecidos na compra devem ser tratados com finalidade legítima, necessidade e segurança.
+O prazo para reclamar é de **30 dias** para produtos não duráveis, como alimentos e cosméticos, e de **90 dias** para produtos duráveis, como eletrônicos, móveis e eletrodomésticos, contados da entrega efetiva. O fornecedor tem **30 dias** para sanar o vício. Se isso não ocorrer, o consumidor pode escolher entre a substituição do produto, a restituição imediata da quantia paga, com correção monetária, ou o abatimento proporcional do preço.
 
-## O que fazer
+Para serviços digitais, como assinaturas de streaming, cursos online e hospedagem de sites, a lógica é semelhante. O serviço deve corresponder ao que foi prometido. Se a plataforma anuncia acesso ilimitado e impõe bloqueios indevidos, ou promete suporte contínuo e não responde, pode haver vício de serviço.
 
-Guarde provas, registre reclamação formal, procure Procon ou Consumidor.gov.br e, se necessário, avalie medida judicial.
+## Marketplaces e a responsabilidade do intermediador
+
+Hoje, grande parte das compras ocorre em *marketplaces*, como Mercado Livre, Amazon, Shopee e Magalu. A dúvida mais comum é: se o vendedor é terceiro, a plataforma responde? Em regra, a resposta tende a ser positiva, especialmente quando o marketplace participa ativamente da cadeia de fornecimento, lucra com a intermediação, controla o ambiente de negociação, processa pagamentos e, em muitos casos, interfere na logística.
+
+Nessas situações, o consumidor não deve ser empurrado para uma negociação isolada com vendedor anônimo ou sem identificação adequada. A plataforma precisa oferecer canais efetivos de atendimento, intermediar a solução do conflito e, conforme o caso concreto, responder solidariamente pelos prejuízos causados.
+
+## Proteção de dados: o que a LGPD tem a ver com sua compra
+
+Ao comprar online, você fornece nome, CPF, endereço, telefone, e-mail e, muitas vezes, dados de pagamento. A **Lei Geral de Proteção de Dados (Lei nº 13.709/2018)** exige que esse tratamento tenha **finalidade específica**, seja **necessário** para a execução da compra e ocorra com **segurança**, evitando coleta excessiva e exposição indevida de informações pessoais.
+
+O consumidor tem direito de saber quais dados são coletados, corrigir informações incorretas, solicitar a exclusão de dados desnecessários após o término da relação contratual e pedir a portabilidade quando cabível. Em casos de vazamento de dados em e-commerce, pode haver dever de notificação à Autoridade Nacional de Proteção de Dados e ao titular afetado, além da possibilidade de responsabilização civil por danos materiais e morais.
+
+## O que fazer quando o problema acontece
+
+1. **Reúna provas:** guarde prints da oferta, e-mails, comprovantes de pagamento, código de rastreio, fotos, vídeos e protocolos de atendimento.
+2. **Registre a reclamação nos canais oficiais da loja ou plataforma:** sempre anote e preserve o número de protocolo.
+3. **Sem solução em prazo razoável:** procure o Procon do seu estado e registre manifestação no Consumidor.gov.br.
+4. **Para valores menores:** avalie o Juizado Especial Cível, que admite ações de até 20 salários mínimos sem advogado, embora o acompanhamento jurídico continue recomendável.
+5. **Havendo dano moral ou material relevante:** a via judicial pode incluir pedido indenizatório, sobretudo em casos de negativação indevida, recusa abusiva ou exposição indevida de dados.
+
+## Hábitos de prevenção
+
+- **Prefira sites confiáveis** ou plataformas que exibam claramente CNPJ, endereço físico e canais reais de contato.
+- **Use cartão virtual ou intermediadores de pagamento** para ampliar a segurança e facilitar eventual contestação.
+- **Evite transferências diretas para pessoas físicas desconhecidas**, especialmente em ofertas muito abaixo do preço de mercado.
+- **Leia os termos essenciais** sobre troca, devolução, garantia e tratamento de dados pessoais.
+- **Ative autenticação em dois fatores** nas contas de e-commerce e no e-mail vinculado ao cadastro.
+
+## Considerações finais
+
+Comprar pela internet não é um ato de fé, mas uma relação jurídica regulada por normas claras. O ordenamento brasileiro oferece mecanismos de proteção que abrangem direito de arrependimento, dever de informação, responsabilidade por vícios, proteção de dados e responsabilização de integrantes da cadeia de fornecimento.
+
+Conhecer esses direitos ajuda o consumidor a agir com mais segurança e a reagir com estratégia quando a compra não sai como prometido. Diante de negativa automática, silêncio do fornecedor ou resposta abusiva, a recomendação é documentar tudo, reclamar pelos canais formais e buscar orientação jurídica quando o caso exigir análise individualizada.
 
 ---
 
-*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.*`,
   },
   {
     slug: 'direito-anonimato-internet-limites',
@@ -231,7 +263,6 @@ Informações usadas para perseguir, monitorar ou ameaçar também podem envolve
 
 *Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
   },
-
   {
     slug: 'crimes-contra-honra-internet-guia-completo',
     title:
@@ -263,7 +294,6 @@ Dependendo do caso, pode haver esfera penal, esfera cível, pedido de remoção 
 
 *Este artigo tem caráter informativo e não substitui consulta jurídica personalizada.*`,
   },
-
   {
     slug: 'stalking-virtual-consequencias-juridicas-lei-14132-2021',
     title:
