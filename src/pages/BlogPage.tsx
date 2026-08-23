@@ -6,21 +6,6 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { blogPosts } from "@/data/blog";
 
-// Mapa slug → rota interna (artigos com página dedicada)
-const slugToRoute: Record<string, string> = {
-  "lgpd-erros-comuns": "/artigos/lgpd-erros-comuns",
-  "golpes-criptomoedas": "/artigos/golpes-criptomoedas",
-  "instagram-hackeado": "/artigos/instagram-hackeado",
-  "crimes-ciberneticos": "/artigos/crimes-ciberneticos",
-  "custodia-criptoativos": "/artigos/custodia-criptoativos",
-  "protecao-dados-pessoais": "/artigos/protecao-dados-pessoais",
-  "fake-news-difamacao": "/artigos/fake-news-difamacao",
-  "compliance-lgpd": "/artigos/compliance-lgpd",
-  "regulamentacao-criptomoedas": "/artigos/regulamentacao-criptomoedas",
-  "invasao-dispositivo-informatico-consequencias-juridicas": "/artigos/invasao-dispositivo-informatico-consequencias-juridicas",
-  "stalking-virtual-consequencias-juridicas-lei-14132-2021": "/artigos/stalking-virtual-consequencias-juridicas",
-};
-
 function formatDate(dateStr: string): string {
   try {
     const [year, month, day] = dateStr.split("-").map(Number);
@@ -84,61 +69,58 @@ const BlogPage = () => {
 
               {/* Articles Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {articles.map((article, index) => {
-                  const route = slugToRoute[article.slug] ?? `/artigos/${article.slug}`;
-                  return (
-                    <Link key={article.slug} to={route} className="block">
-                      <Card
-                        className="group border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-smooth hover:shadow-cyber overflow-hidden animate-scale-in cursor-pointer h-full"
-                        style={{ animationDelay: `${index * 0.05}s` }}
-                      >
-                        {/* Image */}
-                        <div className="relative h-48 overflow-hidden">
-                          <img
-                            src={article.image}
-                            alt={article.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-smooth duration-700"
-                            loading="lazy"
-                            width={800}
-                            height={192}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                          <div className="absolute top-4 left-4">
-                            <span className="px-3 py-1 rounded-full bg-primary/90 text-xs font-medium backdrop-blur-sm">
-                              {article.category}
-                            </span>
+                {articles.map((article, index) => (
+                  <Link key={article.slug} to={`/artigos/${article.slug}`} className="block">
+                    <Card
+                      className="group border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-smooth hover:shadow-cyber overflow-hidden animate-scale-in cursor-pointer h-full"
+                      style={{ animationDelay: `${index * 0.05}s` }}
+                    >
+                      {/* Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={article.image}
+                          alt={article.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-smooth duration-700"
+                          loading="lazy"
+                          width={800}
+                          height={192}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                        <div className="absolute top-4 left-4">
+                          <span className="px-3 py-1 rounded-full bg-primary/90 text-xs font-medium backdrop-blur-sm">
+                            {article.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-4 text-xs text-foreground/60 mb-3">
+                          <div className="flex items-center gap-1">
+                            <Calendar size={14} />
+                            <span>{formatDate(article.date)}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock size={14} />
+                            <span>{article.readTime}</span>
                           </div>
                         </div>
 
-                        <CardContent className="p-6">
-                          <div className="flex items-center gap-4 text-xs text-foreground/60 mb-3">
-                            <div className="flex items-center gap-1">
-                              <Calendar size={14} />
-                              <span>{formatDate(article.date)}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Clock size={14} />
-                              <span>{article.readTime}</span>
-                            </div>
-                          </div>
+                        <h2 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-smooth line-clamp-2">
+                          {article.title}
+                        </h2>
 
-                          <h2 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-smooth line-clamp-2">
-                            {article.title}
-                          </h2>
+                        <p className="text-foreground/70 leading-relaxed mb-4 line-clamp-3">
+                          {article.excerpt}
+                        </p>
 
-                          <p className="text-foreground/70 leading-relaxed mb-4 line-clamp-3">
-                            {article.excerpt}
-                          </p>
-
-                          <div className="flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-smooth">
-                            <span>Ler artigo</span>
-                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-smooth" />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  );
-                })}
+                        <div className="flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-smooth">
+                          <span>Ler artigo</span>
+                          <ArrowRight size={16} className="group-hover:translate-x-1 transition-smooth" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
               </div>
 
             </div>
