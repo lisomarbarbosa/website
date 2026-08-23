@@ -7,7 +7,7 @@ import path from "path";
 export default defineConfig(({ mode }) => ({
   // Configurações do servidor
   server: {
-    host: mode === "development" ? "::" : "www.lisomarbarbosa.adv.br", // Aberto a todas as interfaces em dev, restrito a www.lisomarbarbosa.adv.br em produção
+    host: mode === "development" ? "::" : "www.lisomarbarbosa.adv.br",
     port: 8080,
   },
   // Plugins
@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     {
       name: "copy-to-404",
-      closeBundle() {
+      writeBundle() {
         copyFileSync("dist/index.html", "dist/404.html");
       },
     },
