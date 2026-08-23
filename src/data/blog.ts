@@ -9,7 +9,7 @@ export interface BlogPost {
   content: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'perseguicao-digital-protecao-juridica-vitima',
     title: 'Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você',
@@ -18,7 +18,7 @@ export const blogPosts: BlogPost[
     readTime: '10 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1768637757717-3e47abf07422?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQ3NTM3fA&ixlib=rb-4.1.0&q=80&w=1080',
-    content: '# Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você
+    content: `# Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você
 
 O som de uma notificação que antes trazia alegria — uma mensagem de um amigo, um e-mail esperado — passa a gelar a espinha. O coração acelera antes mesmo de você olhar a tela. Quem está do outro lado? O que essa pessoa sabe sobre a sua rotina? Quantas vezes hoje ela tentou te contatar depois que você pediu, implorou, bloqueou, para que parasse?
 
@@ -38,7 +38,7 @@ A pena prevista é de reclusão de seis meses a dois anos, e multa. Ela aumenta 
 
 Muitas vezes, o perseguidor não é um estranho. É o ex-companheiro que não aceita o fim do relacionamento, o familiar que exerce controle coercitivo, o parceiro que usa a tecnologia como extensão do poder. Nesses casos, a **Lei Maria da Penha (Lei nº 11.340/2006)** é instrumento poderoso. O artigo 7º autoriza o juiz a decretar **medidas protetivas de urgência** que incluem: afastamento do lar, proibição de aproximação da vítima e de seus familiares — **e proibição de contato por qualquer meio de comunicação**, o que abrange WhatsApp, e-mail, redes sociais, ligações, SMS e até interações indiretas (pedir a terceiros que transmitam recados).
 
-O descumprimento de medida protetiva é crime autônimo (art. 24-A da mesma lei), com pena de detenção de três meses a dois anos. Na prática, isso significa que, se o agressor manda uma única mensagem após a intimação judicial, ele comete novo delito, o que facilita a prisão em flagrante e reforça a proteção da vítima.
+O descumprimento de medida protetiva é crime autônomo (art. 24-A da mesma lei), com pena de detenção de três meses a dois anos. Na prática, isso significa que, se o agressor manda uma única mensagem após a intimação judicial, ele comete novo delito, o que facilita a prisão em flagrante e reforça a proteção da vítima.
 
 Não é necessário aguardar o fim do processo criminal para obter a medida. O pedido pode ser feito na delegacia (preferencialmente na Delegacia da Mulher), no Ministério Público ou diretamente ao juiz, com base no relato da vítima e em indícios de risco. A urgência é presumida quando há violência doméstica.
 
@@ -103,8 +103,8 @@ Se você está lendo isso porque vive essa realidade, ou porque conhece alguém 
 
 ---
 
-*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. O escritório **Lisomar Barbosa Advogados** atua em Direito Digital, proteção de dados, crimes cibernéticos e reparação civil. Se você precisa de orientação para o seu caso, entre em contato conosco.*'
-  },] = [
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. O escritório **Lisomar Barbosa Advogados** atua em Direito Digital, proteção de dados, crimes cibernéticos e reparação civil. Se você precisa de orientação para o seu caso, entre em contato conosco.*`,
+  },
   {
     slug: 'stalking-virtual-consequencias-juridicas-lei-14132-2021',
     title: 'Stalking Virtual e suas Consequências Jurídicas: Análise Completa à Luz da Lei 14.132/2021, Marco Civil, LGPD e Jurisprudência',
