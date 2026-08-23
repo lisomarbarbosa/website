@@ -84,16 +84,16 @@ Se você enfrentou — ou teme enfrentar — problemas em uma compra online, nã
 
 *Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar seu caso concreto, entre em contato com nossa equipe.*`
   },
-  {
-    slug: 'direito-anonimato-internet-limites',
-    title: 'Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade',
-    excerpt: 'Entenda como a Constituição, o Marco Civil da Internet e a LGPD equilibram a proteção da identidade digital com a necessidade de responsabilização por abusos. Saiba o que fazer se você é vítima de perfis falsos, ofensas anônimas ou vazamento de dados.',
-    date: '2026-08-23',
-    readTime: '10 min',
-    category: 'Direito Digital',
-    image: 'https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDk1ODE1fA&ixlib=rb-4.1.0&q=80&w=1080',
-    content: '# Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade
-
+ {
+  slug: 'direito-anonimato-internet-limites',
+  title: 'Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade',
+  excerpt: 'Entenda como a Constituição, o Marco Civil da Internet e a LGPD equilibram a proteção da identidade digital com a necessidade de responsabilização por abusos. Saiba o que fazer se você é vítima de perfis falsos, ofensas anônimas ou vazamento de dados.',
+  date: '2026-08-23',
+  readTime: '10 min',
+  category: 'Direito Digital',
+  image: 'https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDk1ODE1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  content: `# Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade
+  
 A tela do celular acende no escuro do quarto. Uma notificação chega: um comentário agressivo em uma foto antiga, uma mensagem privada com ameaças veladas, um perfil falso usando seu nome e sua imagem para aplicar golpes. O coração acelera. A primeira pergunta que vem à mente é quase sempre a mesma: "quem está por trás disso?". A segunda, mais urgente: "o que eu posso fazer para parar?".
 
 Essa angústia é real e cada vez mais comum. Vivemos em um ambiente onde a facilidade de criar contas, usar VPNs, navegadores anônimos e números virtuais faz com que a identificação do autor de um ato ilícito pareça uma missão impossível. Mas o direito não deixou de existir só porque a tecnologia tornou o rastro mais difícil de seguir. O ordenamento jurídico brasileiro construiu, ao longo dos anos, um sistema de freios e contrapesos que protege a privacidade de quem usa a rede de boa-fé, mas abre caminho para identificar quem a usa como escudo para praticar crimes ou causar danos.
@@ -249,8 +249,9 @@ Software não é apenas código; é relação jurídica. Cada *clique* em "aceit
 Não trate o contrato como um obstáculo burocrático a ser contornado com o *scroll* rápido do mouse. Trate-o como a **arquitetura da confiança** que sustenta seu ativo digital. Seja você um desenvolvedor protegendo sua propriedade intelectual, uma startup negociando seu primeiro *enterprise deal* ou um gestor de TI renovando o ERP da corporação: a clareza contratual hoje evita o litígio amanhã.
 
 Se este artigo trouxe dúvidas sobre sua situação concreta — um contrato em análise, uma notificação extrajudicial recebida, uma migração de nuvem planejada —, **converse com quem entende do assunto**. O escritório Lisomar Barbosa Advogados atua na redação, revisão e negociação de contratos de software, licenças, SaaS, desenvolvimento por encomenda, escrow e adequação à LGPD. **Agende uma consulta** e transforme a incerteza jurídica em segurança estratégica para o seu negócio digital.'
-  },] = [
-  {
+`,
+},
+{
     slug: 'perseguicao-digital-protecao-juridica-vitima',
     title: 'Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você',
     excerpt: 'O stalking digital não é "coisa de internet" — é crime, viola direitos fundamentais e deixa cicatrizes profundas. Entenda como a legislação brasileira (Lei 14.132/2021, Lei Maria da Penha, LGPD e Código Civil) ampara a vítima e quais passos práticos tomar hoje para recuperar sua segurança e tranquilidade.',
