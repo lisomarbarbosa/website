@@ -1,7 +1,19 @@
-import { Calendar, Clock, ArrowLeft } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  AlertTriangle,
+  ShieldCheck,
+  Smartphone,
+  KeyRound,
+  Scale,
+  CheckCircle,
+  Calendar,
+  Clock,
+  Eye,
+} from "lucide-react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
@@ -11,31 +23,103 @@ const InstagramHackeado = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const sinais = [
+    "Não consegue fazer login mesmo com a senha correta",
+    "Seu e-mail ou número de telefone foram alterados sem sua autorização",
+    "Publicações ou stories que você não criou aparecem no perfil",
+    "Mensagens sendo enviadas automaticamente para seus seguidores",
+    "Recebeu e-mail do Instagram notificando alterações que você não fez",
+    "Seguidores reportam contatos estranhos vindos da sua conta",
+  ];
+
+  const preventivos = [
+    {
+      icon: KeyRound,
+      titulo: "Autenticação de dois fatores (2FA)",
+      descricao:
+        "Acesse Configurações → Segurança → Autenticação de dois fatores. Use um aplicativo autenticador (Google Authenticator ou Authy), não o SMS, que pode ser interceptado via SIM swap.",
+    },
+    {
+      icon: ShieldCheck,
+      titulo: "Senha única e forte",
+      descricao:
+        "Crie uma senha com no mínimo 12 caracteres misturando letras, números e símbolos. Nunca reutilize a mesma senha em outros serviços. Use um gerenciador de senhas.",
+    },
+    {
+      icon: Eye,
+      titulo: "Revise aplicativos conectados",
+      descricao:
+        "Em Configurações → Segurança → Aplicativos autorizados, remova qualquer app que você não reconhece. Apps de terceiros com permissão de leitura são uma porta de entrada comum.",
+    },
+    {
+      icon: Smartphone,
+      titulo: "Cuidado com phishing",
+      descricao:
+        "O Instagram nunca solicita sua senha por e-mail. Não clique em links recebidos por DM ou e-mail pedindo para 'verificar' ou 'confirmar' sua conta. Acesse sempre pelo app oficial.",
+    },
+  ];
+
   return (
     <>
       <Helmet>
-        <title>Instagram Hackeado: Recuperação e Direitos | Lisomar Barbosa | Direito Digital e Proteção de Dados</title>
-        <meta name="description" content="Sua conta do Instagram foi hackeada? Saiba como recuperar o acesso, proteger seus dados e quais medidas legais tomar para responsabilizar os invasores." />
-        <link rel="canonical" href="https://www.lisomarbarbosa.adv.br/blog/instagram-hackeado" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-
-        <meta property="og:site_name" content="Lisomar Barbosa | Direito Digital" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.lisomarbarbosa.adv.br/blog/instagram-hackeado" />
-        <meta property="og:image" content="https://www.lisomarbarbosa.adv.br/og-image.jpg" />
-        <meta property="og:title" content="Instagram Hackeado: Recuperação e Direitos | Lisomar Barbosa | Direito Digital e Proteção de Dados" />
-        <meta property="og:description" content="Sua conta do Instagram foi hackeada? Saiba como recuperar o acesso, proteger seus dados e quais medidas legais tomar para responsabilizar os invasores." />
-
+        <title>
+          Instagram Hackeado: Passo a Passo para Recuperar sua Conta e seus
+          Direitos | Lisomar Barbosa | Direito Digital
+        </title>
+        <meta
+          name="description"
+          content="Sua conta do Instagram foi hackeada? Saiba como recuperar o acesso em 4 etapas, quais medidas legais tomar e como responsabilizar os invasores pela Lei Carolina Dieckmann e LGPD."
+        />
+        <link
+          rel="canonical"
+          href="https://www.lisomarbarbosa.adv.br/blog/instagram-hackeado"
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <meta
+          property="og:site_name"
+          content="Lisomar Barbosa | Direito Digital"
+        />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content="https://www.lisomarbarbosa.adv.br/blog/instagram-hackeado"
+        />
+        <meta
+          property="og:image"
+          content="https://www.lisomarbarbosa.adv.br/og-image.jpg"
+        />
+        <meta
+          property="og:title"
+          content="Instagram Hackeado: Passo a Passo para Recuperar sua Conta e seus Direitos"
+        />
+        <meta
+          property="og:description"
+          content="Sua conta do Instagram foi hackeada? Saiba como recuperar o acesso em 4 etapas, quais medidas legais tomar e como responsabilizar os invasores."
+        />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Instagram Hackeado: Recuperação e Direitos | Lisomar Barbosa | Direito Digital e Proteção de Dados" />
-        <meta name="twitter:description" content="Sua conta do Instagram foi hackeada? Saiba como recuperar o acesso, proteger seus dados e quais medidas legais tomar para responsabilizar os invasores." />
-        <meta name="twitter:image" content="https://www.lisomarbarbosa.adv.br/og-image.jpg" />
+        <meta
+          name="twitter:title"
+          content="Instagram Hackeado: Passo a Passo para Recuperar sua Conta e seus Direitos"
+        />
+        <meta
+          name="twitter:description"
+          content="Saiba como recuperar o acesso em 4 etapas, quais medidas legais tomar e como responsabilizar os invasores."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.lisomarbarbosa.adv.br/og-image.jpg"
+        />
       </Helmet>
+
       <div className="min-h-screen bg-background">
         <Header />
         <article className="py-32">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-4xl mx-auto">
+
               <Link to="/#artigos">
                 <Button variant="ghost" className="mb-8">
                   <ArrowLeft className="mr-2" size={18} />
@@ -57,7 +141,7 @@ const InstagramHackeado = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock size={16} />
-                    <span>6 min de leitura</span>
+                    <span>7 min de leitura</span>
                   </div>
                 </div>
               </div>
@@ -65,128 +149,186 @@ const InstagramHackeado = () => {
               <div className="relative h-96 rounded-2xl overflow-hidden mb-12 shadow-cyber">
                 <img
                   src="https://images.unsplash.com/photo-1611262588024-d12430b98920?w=1200&auto=format&fit=crop&q=80"
-                  alt="Instagram - Segurança de contas"
+                  alt="Instagram — Segurança de contas"
                   className="w-full h-full object-cover"
                 />
               </div>
 
               <div className="prose prose-lg prose-invert max-w-none">
+
                 <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
-                  Ter o Instagram hackeado é mais comum do que parece. Milhares de brasileiros perdem acesso às suas 
-                  contas todos os dias. Veja o que fazer imediatamente.
+                  Ter o Instagram invadido é mais comum do que parece: milhares de brasileiros perdem acesso
+                  às suas contas todos os dias por meio de phishing, SIM swap e vazamentos de senha. Além do
+                  transtorno imediato, a invasão pode gerar danos à imagem, prejuízos financeiros e violação
+                  de dados pessoais. Saiba o que fazer.
                 </p>
 
-                <h2 className="text-3xl font-bold mt-12 mb-6">Sinais de Que Sua Conta Foi Hackeada</h2>
-                <ul className="list-disc pl-6 mb-6 text-foreground/80 space-y-2">
-                  <li>Não consegue fazer login com sua senha</li>
-                  <li>Seu e-mail ou número de telefone foi alterado</li>
-                  <li>Publicações que você não fez aparecem no seu perfil</li>
-                  <li>Mensagens sendo enviadas automaticamente para seus seguidores</li>
-                  <li>Recebeu e-mail do Instagram sobre alterações que você não fez</li>
-                </ul>
+                {/* Sinais de alerta */}
+                <h2 className="text-3xl font-bold mt-12 mb-6">Sinais de que sua conta foi invadida</h2>
 
-                <h2 className="text-3xl font-bold mt-12 mb-6">Passo a Passo para Recuperação Imediata</h2>
-                
-                <h3 className="text-2xl font-bold mt-8 mb-4">1. Use a Opção "Esqueci a Senha"</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Na tela de login, clique em "Esqueceu a senha?" e tente recuperar o acesso através do seu e-mail 
-                  ou número de telefone. Se ainda tiver acesso a eles, você poderá redefinir sua senha.
+                <Card className="p-6 mb-10 border-red-500/30 bg-red-500/5">
+                  <div className="flex gap-4">
+                    <AlertTriangle className="text-red-400 shrink-0 mt-1" size={22} />
+                    <ul className="space-y-2">
+                      {sinais.map((s, i) => (
+                        <li key={i} className="text-foreground/80 text-sm leading-relaxed flex items-start gap-2">
+                          <span className="text-red-400 mt-0.5">•</span>
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Card>
+
+                {/* Passo a passo */}
+                <h2 className="text-3xl font-bold mt-12 mb-6">Passo a passo para recuperação imediata</h2>
+                <p className="text-foreground/80 mb-8 leading-relaxed">
+                  Aja rápido. Quanto mais tempo o invasor tiver acesso, maior o dano. Siga estas etapas na ordem:
                 </p>
 
-                <h3 className="text-2xl font-bold mt-8 mb-4">2. Solicite um Link de Login</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Se não conseguir redefinir a senha, use a opção "Precisa de mais ajuda?" para receber um link de 
-                  login no seu e-mail. Esse link permite acessar sua conta temporariamente.
+                <div className="space-y-6 mb-10">
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-sm font-bold">1</span>
+                      Use a opção “Esqueci a senha”
+                    </h3>
+                    <p className="text-foreground/80 leading-relaxed">
+                      Na tela de login, toque em “Esqueceu a senha?” e tente recuperar via e-mail ou telefone.
+                      Se você ainda controla esse e-mail ou número, poderá redefinir a senha e retomar o acesso
+                      imediatamente.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-sm font-bold">2</span>
+                      Desfaça alterações nas primeiras 48 horas
+                    </h3>
+                    <p className="text-foreground/80 leading-relaxed">
+                      O Instagram envia uma notificação ao e-mail anterior sempre que o endereço cadastrado é
+                      alterado. Nessa mensagem há um botão “Desfazer esta alteração” — use-o imediatamente.
+                      Esse link tem prazo limitádo.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-sm font-bold">3</span>
+                      Solicite ajuda do suporte com verificação de identidade
+                    </h3>
+                    <p className="text-foreground/80 leading-relaxed">
+                      Em casos mais graves, acesse instagram.com/hacked, escolha a opção correspondente ao seu
+                      problema e siga as instruções. O Instagram pode pedir um vídeo selfie para verificar sua
+                      identidade — esse processo comprova que você é o dono legítimo da conta.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-sm font-bold">4</span>
+                      Documente tudo antes de qualquer ação
+                    </h3>
+                    <p className="text-foreground/80 leading-relaxed">
+                      Faça prints das mensagens suspeitas, do perfil alterado, das notificações recebidas e de
+                      qualquer comunicação com o suporte. Essa documentação será essencial para o Boletim de
+                      Ocorrência e para eventual ação judicial.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Medidas Juridicas */}
+                <h2 className="text-3xl font-bold mt-12 mb-6">Medidas jurídicas disponíveis</h2>
+
+                <Card className="p-6 border border-primary/10 mb-8">
+                  <div className="flex gap-4">
+                    <Scale className="text-primary shrink-0 mt-1" size={22} />
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-semibold text-sm mb-1">Responsabilização criminal do invasor</p>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          O acesso não autorizado a dispositivos e contas digitais configura crime pela
+                          <strong> Lei Carolina Dieckmann (Lei 12.737/2012)</strong>, com pena de detenção
+                          de 3 meses a 1 ano, além de multa. Se houver indução a erro para obter vantagem
+                          econômica, pode configurar estelionato.
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm mb-1">Responsabilidade da plataforma</p>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          Se o Instagram não fornecer suporte adequado ou se houver falhas comprovadas de
+                          segurança, é possível acionar a plataforma com base no Marco Civil da Internet
+                          (Lei 12.965/2014) e no Código de Defesa do Consumidor.
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm mb-1">Proteção de dados pessoais (LGPD)</p>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          Se dados pessoais foram expostos ou utilizados indevidamente, você tem direito à
+                          reparação com base na Lei 13.709/2018. Um advogado pode formalizar a exigência
+                          de medidas de proteção e indenização.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Prevencao */}
+                <h2 className="text-3xl font-bold mt-12 mb-8">Como prevenir futuros ataques</h2>
+
+                <div className="grid gap-6 mb-10">
+                  {preventivos.map((item, i) => (
+                    <Card key={i} className="p-6 border border-primary/10">
+                      <div className="flex gap-4">
+                        <div className="p-2 rounded-lg bg-primary/10 shrink-0">
+                          <item.icon className="text-primary" size={20} />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-lg mb-2">{item.titulo}</h3>
+                          <p className="text-foreground/70 text-sm leading-relaxed">{item.descricao}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+
+                <h2 className="text-3xl font-bold mt-12 mb-6">Quando buscar ajuda jurídica</h2>
+                <p className="text-foreground/80 mb-4 leading-relaxed">
+                  Se você tentou todos os métodos de recuperação sem sucesso, ou se sua conta foi usada para
+                  praticar fraudes ou publicar conteúdo ilegal, é hora de agir juridicamente. Um advogado
+                  especializado pode:
                 </p>
 
-                <h3 className="text-2xl font-bold mt-8 mb-4">3. Reverta Alterações Não Autorizadas</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Se o hacker alterou seu e-mail ou telefone, você pode reverter dentro de 48 horas. O Instagram envia 
-                  notificações sobre essas mudanças com opção de desfazer.
-                </p>
-
-                <h3 className="text-2xl font-bold mt-8 mb-4">4. Verifique sua Identidade</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Em casos mais graves, o Instagram pode pedir que você verifique sua identidade enviando uma foto 
-                  segurando um papel com um código específico. Isso comprova que você é o verdadeiro dono da conta.
-                </p>
-
-                <h2 className="text-3xl font-bold mt-12 mb-6">Ações Jurídicas Disponíveis</h2>
-                
-                <h3 className="text-2xl font-bold mt-8 mb-4">Responsabilização do Hacker</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  O acesso não autorizado a contas digitais é crime previsto na Lei Carolina Dieckmann (Lei 12.737/2012). 
-                  O invasor pode ser processado criminalmente e civilmente pelos danos causados.
-                </p>
-
-                <h3 className="text-2xl font-bold mt-8 mb-4">Responsabilidade da Plataforma</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Se o Instagram não fornecer suporte adequado para recuperação da conta ou se houver falhas de segurança 
-                  comprovadas, é possível acionar a plataforma judicialmente para recuperação de danos.
-                </p>
-
-                <h3 className="text-2xl font-bold mt-8 mb-4">Proteção de Dados Pessoais</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Se dados pessoais foram expostos ou utilizados indevidamente, você tem direitos garantidos pela LGPD 
-                  para solicitar medidas de proteção e reparação.
-                </p>
-
-                <h2 className="text-3xl font-bold mt-12 mb-6">Como Prevenir Futuros Ataques</h2>
-                
-                <h3 className="text-2xl font-bold mt-8 mb-4">1. Ative a Autenticação de Dois Fatores</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Vá em Configurações → Segurança → Autenticação de dois fatores e ative. Isso adiciona uma camada 
-                  extra de proteção exigindo um código adicional ao fazer login.
-                </p>
-
-                <h3 className="text-2xl font-bold mt-8 mb-4">2. Use Senhas Fortes e Únicas</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Crie uma senha com pelo menos 12 caracteres, misturando letras maiúsculas e minúsculas, números e 
-                  símbolos. Nunca use a mesma senha em diferentes serviços.
-                </p>
-
-                <h3 className="text-2xl font-bold mt-8 mb-4">3. Cuidado com Links e E-mails Suspeitos</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Nunca clique em links recebidos por mensagem direta ou e-mail que pedem para você "verificar" sua conta. 
-                  O Instagram nunca solicita sua senha por e-mail.
-                </p>
-
-                <h3 className="text-2xl font-bold mt-8 mb-4">4. Revise Aplicativos Conectados</h3>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Verifique regularmente quais aplicativos têm acesso à sua conta do Instagram e remova aqueles que 
-                  você não reconhece ou não usa mais.
-                </p>
-
-                <h2 className="text-3xl font-bold mt-12 mb-6">Quando Buscar Ajuda Jurídica</h2>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Se você tentou todos os métodos de recuperação e o Instagram não responde, ou se sua conta foi usada 
-                  para atividades criminosas, é hora de buscar assessoria jurídica especializada. Um advogado pode:
-                </p>
-                <ul className="list-disc pl-6 mb-6 text-foreground/80 space-y-2">
-                  <li>Notificar extrajudicialmente o Instagram exigindo providências</li>
-                  <li>Ingressar com ação judicial para recuperação da conta</li>
-                  <li>Representar criminalmente o invasor</li>
-                  <li>Buscar reparação por danos morais e materiais</li>
-                </ul>
-
-                <h2 className="text-3xl font-bold mt-12 mb-6">Conclusão</h2>
-                <p className="text-foreground/80 mb-6 leading-relaxed">
-                  A recuperação de contas hackeadas nem sempre é simples e pode levar tempo. Agir rapidamente e ter 
-                  o suporte jurídico adequado aumenta significativamente suas chances de sucesso.
-                </p>
+                <div className="grid gap-3 mb-8">
+                  {[
+                    "Enviar notificação extrajudicial ao Instagram exigindo a recuperação da conta",
+                    "Ingressar com ação judicial contra a plataforma ou o invasor",
+                    "Formalizar representacão criminal por acesso não autorizado",
+                    "Buscar reparação por danos morais e materiais sofridos",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <CheckCircle className="text-green-400 shrink-0 mt-0.5" size={18} />
+                      <p className="text-foreground/80 text-sm leading-relaxed">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-16 p-8 rounded-2xl gradient-cyber border border-primary/20 text-center">
-                <h3 className="text-2xl font-bold mb-4">Precisa Recuperar sua Conta do Instagram?</h3>
+                <h3 className="text-2xl font-bold mb-4">Precisa recuperar sua conta do Instagram?</h3>
                 <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
-                  Assessoria jurídica especializada em recuperação de redes sociais e responsabilização de invasores.
+                  Assessoria jurídica especializada em recuperação de contas em redes sociais e
+                  responsabilização de invasores. Agende uma consulta.
                 </p>
                 <Link to="/#contato">
-                  <Button size="lg" className="bg-gradient-accent text-background font-semibold shadow-cyber">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-accent text-background font-semibold shadow-cyber"
+                  >
                     Falar com Especialista
                   </Button>
                 </Link>
               </div>
+
             </div>
           </div>
         </article>
