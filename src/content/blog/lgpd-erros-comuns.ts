@@ -16,13 +16,25 @@ A Lei Geral de Proteção de Dados (LGPD) trouxe um novo paradigma para o tratam
 ## Como Evitar Esses Erros e Garantir a Conformidade
 
 - **Realize um Diagnóstico e Mapeamento de Dados:** Entenda todo o ciclo de vida dos dados na sua empresa.
-- **Revise e Adeque as Bases Legais:** Garanta que cada tratamento de dados tenha uma base legal sólida, especialmente o consentimento.
+- **Revise e Adéque as Bases Legais:** Garanta que cada tratamento de dados tenha uma base legal sólida, especialmente o consentimento.
 - **Nomeie um DPO:** Seja interno ou externo, o DPO é essencial para a governança de dados.
 - **Elabore Documentos Claros e Específicos:** Crie políticas de privacidade e termos de uso que sejam transparentes e reflitam a realidade da sua empresa.
 - **Invista em Segurança da Informação:** Implemente firewalls, criptografia, controle de acesso e realize auditorias de segurança.
 - **Crie Canais para Atendimento aos Titulares:** Facilite o exercício dos direitos dos titulares de dados.
 - **Estabeleça Contratos com Terceiros:** Garanta que seus parceiros também estejam em conformidade com a LGPD.
 - **Treine Sua Equipe:** A conscientização e o treinamento dos colaboradores são fundamentais para a cultura de proteção de dados.
+
+## Penalidades Previstas na LGPD
+
+Empresas que descumprirem a LGPD estão sujeitas às seguintes sanções, aplicadas pela ANPD:
+
+- Advertência com prazo para adoção de medidas corretivas
+- Multa simples de até 2% do faturamento no Brasil, limitada a R$ 50 milhões por infração
+- Multa diária, observado o limite acima
+- Publicação da infração após devidamente apurada
+- Bloqueio ou eliminação dos dados pessoais
+- Suspensão parcial ou total do banco de dados
+- Proibição parcial ou total do exercício de atividades relacionadas ao tratamento de dados
 
 ## Conclusão
 
