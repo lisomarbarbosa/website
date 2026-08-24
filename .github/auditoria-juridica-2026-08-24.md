@@ -6,15 +6,17 @@
 
 ---
 
-## 📄 GolpesCriptomoedas.tsx
+## 📄 InstagramHackeado.tsx
 
-**Caminho:** `src/pages/articles/GolpesCriptomoedas.tsx`
+**Caminho:** `src/pages/articles/InstagramHackeado.tsx`
 
 | Lei / Norma | Status | Observação |
 |---|---|---|
-| — | — | Nenhuma referência legislativa detectada neste arquivo |
+| Lei nº 13.709/2018 (LGPD) | ✅ Vigente | — |
+| Lei nº 12.965/2014 (Marco Civil) | ✅ Vigente | — |
+| Lei nº 12.737/2012 (Lei Carolina Dieckmann) | ✅ Vigente | — |
 
-**Leis detectadas:** 0 | **Problemas:** 0
+**Leis detectadas:** 3 | **Problemas:** 0
 
 ---
 
@@ -23,6 +25,6 @@
 | Métrica | Valor |
 |---|---|
 | Arquivos auditados | 1 |
-| Referências legislativas encontradas | 0 |
+| Referências legislativas encontradas | 3 |
 | Problemas identificados | 0 |
 | Status geral | ✅ Aprovado |
