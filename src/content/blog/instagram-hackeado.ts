@@ -1,78 +1,77 @@
 export const content = `
 # Instagram Hackeado? Passo a Passo para Recuperar sua Conta
 
-Ter o Instagram hackeado é mais comum do que parece. Milhares de brasileiros perdem acesso às suas contas todos os dias. Veja o que fazer imediatamente.
+Ter o Instagram invadido é mais comum do que parece: milhares de brasileiros perdem acesso às suas contas todos os dias por meio de phishing, SIM swap e vazamentos de senha. Além do transtorno imediato, a invasão pode gerar danos à imagem, prejuízos financeiros e violação de dados pessoais. Saiba o que fazer.
 
-## Sinais de Que Sua Conta Foi Hackeada
+## Sinais de que sua Conta Foi Invadida
 
-- Não consegue fazer login com sua senha
-- Seu e-mail ou número de telefone foi alterado
-- Publicações que você não fez aparecem no seu perfil
+- Não consegue fazer login mesmo com a senha correta
+- Seu e-mail ou número de telefone foram alterados sem sua autorização
+- Publicações ou stories que você não criou aparecem no perfil
 - Mensagens sendo enviadas automaticamente para seus seguidores
-- Recebeu e-mail do Instagram sobre alterações que você não fez
+- Recebeu e-mail do Instagram notificando alterações que você não fez
+- Seguidores reportam contatos estranhos vindos da sua conta
 
 ## Passo a Passo para Recuperação Imediata
 
-### 1. Use a Opção "Esqueci a Senha"
+Aja rápido. Quanto mais tempo o invasor tiver acesso, maior o dano. Siga estas etapas na ordem:
 
-Na tela de login, clique em "Esqueceu a senha?" e tente recuperar o acesso através do seu e-mail ou número de telefone. Se ainda tiver acesso a eles, você poderá redefinir sua senha.
+### 1. Use a opção “Esqueci a senha”
 
-### 2. Solicite um Link de Login
+Na tela de login, toque em “Esqueceu a senha?” e tente recuperar via e-mail ou telefone. Se você ainda controla esse e-mail ou número, poderá redefinir a senha e retomar o acesso imediatamente.
 
-Se não conseguir redefinir a senha, use a opção "Precisa de mais ajuda?" para receber um link de login no seu e-mail. Esse link permite acessar sua conta temporariamente.
+### 2. Desfazer alterações nas primeiras 48 horas
 
-### 3. Reverta Alterações Não Autorizadas
+O Instagram envia uma notificação ao e-mail anterior sempre que o endereço cadastrado é alterado. Nessa mensagem há um botão “Desfazer esta alteração” — use-o imediatamente. Esse link tem prazo limitado.
 
-Se o hacker alterou seu e-mail ou telefone, você pode reverter dentro de 48 horas. O Instagram envia notificações sobre essas mudanças com opção de desfazer.
+### 3. Solicite ajuda do suporte com verificação de identidade
 
-### 4. Verifique sua Identidade
+Em casos mais graves, acesse instagram.com/hacked, escolha a opção correspondente ao seu problema e siga as instruções. O Instagram pode pedir um vídeo selfie para verificar sua identidade — esse processo comprova que você é o dono legítimo da conta.
 
-Em casos mais graves, o Instagram pode pedir que você verifique sua identidade enviando uma foto segurando um papel com um código específico. Isso comprova que você é o verdadeiro dono da conta.
+### 4. Documente tudo antes de qualquer ação
 
-## Ações Jurídicas Disponíveis
+Faça prints das mensagens suspeitas, do perfil alterado, das notificações recebidas e de qualquer comunicação com o suporte. Essa documentação será essencial para o Boletim de Ocorrência e para eventual ação judicial.
 
-### Responsabilização do Hacker
+## Medidas Jurídicas Disponíveis
 
-O acesso não autorizado a contas digitais é crime previsto na Lei Carolina Dieckmann (Lei 12.737/2012). O invasor pode ser processado criminalmente e civilmente pelos danos causados.
+### Responsabilização Criminal do Invasor
+
+O acesso não autorizado a dispositivos e contas digitais configura crime pela **Lei Carolina Dieckmann (Lei 12.737/2012)**, com pena de detenção de 3 meses a 1 ano, além de multa. Se houver indução a erro para obter vantagem econômica, pode configurar estelionato.
 
 ### Responsabilidade da Plataforma
 
-Se o Instagram não fornecer suporte adequado para recuperação da conta ou se houver falhas de segurança comprovadas, é possível acionar a plataforma judicialmente para recuperação de danos.
+Se o Instagram não fornecer suporte adequado ou se houver falhas comprovadas de segurança, é possível acionar a plataforma com base no **Marco Civil da Internet (Lei 12.965/2014)** e no Código de Defesa do Consumidor.
 
-### Proteção de Dados Pessoais
+### Proteção de Dados Pessoais (LGPD)
 
-Se dados pessoais foram expostos ou utilizados indevidamente, você tem direitos garantidos pela LGPD para solicitar medidas de proteção e reparação.
+Se dados pessoais foram expostos ou utilizados indevidamente, você tem direito à reparação com base na **Lei 13.709/2018**. Um advogado pode formalizar a exigência de medidas de proteção e indenização.
 
 ## Como Prevenir Futuros Ataques
 
-### 1. Ative a Autenticação de Dois Fatores
+### Autenticação de Dois Fatores (2FA)
 
-Vá em Configurações → Segurança → Autenticação de dois fatores e ative. Isso adiciona uma camada extra de proteção exigindo um código adicional ao fazer login.
+Acesse Configurações → Segurança → Autenticação de dois fatores. Use um aplicativo autenticador (Google Authenticator ou Authy), não o SMS, que pode ser interceptado via SIM swap.
 
-### 2. Use Senhas Fortes e Únicas
+### Senha Única e Forte
 
-Crie uma senha com pelo menos 12 caracteres, misturando letras maiúsculas e minúsculas, números e símbolos. Nunca use a mesma senha em diferentes serviços.
+Crie uma senha com no mínimo 12 caracteres misturando letras, números e símbolos. Nunca reutilize a mesma senha em outros serviços. Use um gerenciador de senhas.
 
-### 3. Cuidado com Links e E-mails Suspeitos
+### Revise Aplicativos Conectados
 
-Nunca clique em links recebidos por mensagem direta ou e-mail que pedem para você "verificar" sua conta. O Instagram nunca solicita sua senha por e-mail.
+Em Configurações → Segurança → Aplicativos autorizados, remova qualquer app que você não reconhece. Apps de terceiros com permissão de leitura são uma porta de entrada comum.
 
-### 4. Revise Aplicativos Conectados
+### Cuidado com Phishing
 
-Verifique regularmente quais aplicativos têm acesso à sua conta do Instagram e remova aqueles que você não reconhece ou não usa mais.
+O Instagram nunca solicita sua senha por e-mail. Não clique em links recebidos por DM ou e-mail pedindo para “verificar” ou “confirmar” sua conta. Acesse sempre pelo app oficial.
 
 ## Quando Buscar Ajuda Jurídica
 
-Se você tentou todos os métodos de recuperação e o Instagram não responde, ou se sua conta foi usada para atividades criminosas, é hora de buscar assessoria jurídica especializada. Um advogado pode:
+Se você tentou todos os métodos de recuperação sem sucesso, ou se sua conta foi usada para praticar fraudes ou publicar conteúdo ilegal, é hora de agir juridicamente. Um advogado especializado pode:
 
-- Notificar extrajudicialmente o Instagram exigindo providências
-- Ingressar com ação judicial para recuperação da conta
-- Representar criminalmente o invasor
-- Buscar reparação por danos morais e materiais
-
-## Conclusão
-
-A recuperação de contas hackeadas nem sempre é simples e pode levar tempo. Agir rapidamente e ter o suporte jurídico adequado aumenta significativamente suas chances de sucesso.
+- Enviar notificação extrajudicial ao Instagram exigindo a recuperação da conta
+- Ingressar com ação judicial contra a plataforma ou o invasor
+- Formalizar representação criminal por acesso não autorizado
+- Buscar reparação por danos morais e materiais sofridos
 
 ---
 
