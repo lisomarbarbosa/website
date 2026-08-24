@@ -1,11 +1,32 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Shield, AlertTriangle, FileText, Eye } from "lucide-react";
+import {
+  ArrowLeft,
+  AlertTriangle,
+  Shield,
+  Eye,
+  FileText,
+  UserX,
+  Scale,
+  Lock,
+} from "lucide-react";
 import { useEffect } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+const pageTitle =
+  "Stalking virtual: o que é e quais as consequências jurídicas no Brasil | Lisomar Barbosa | Direito Digital";
+
+const pageDescription =
+  "Entenda o que caracteriza o stalking virtual, como a Lei nº 14.132/2021 tipifica o crime de perseguição no ambiente digital, quais as consequências penais e civis e o que fazer se você está sendo vítima dessa conduta.";
+
+const pageUrl =
+  "https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil";
+
+const pageImage =
+  "https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&ixlib=rb-4.1.0&q=80&w=1080";
 
 const StalkingVirtual = () => {
   useEffect(() => {
@@ -15,23 +36,27 @@ const StalkingVirtual = () => {
   return (
     <>
       <Helmet>
-        <title>Stalking Virtual e suas Consequências Jurídicas | Lisomar Barbosa | Direito Digital</title>
-        <meta name="description" content="Análise completa sobre o crime de perseguição (Art. 147-A do CP) no ambiente digital, responsabilidade civil, tutelas inibitórias, deveres das plataformas (Marco Civil e LGPD) e prova digital." />
-        <link rel="canonical" href="https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={pageUrl} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
 
         <meta property="og:site_name" content="Lisomar Barbosa | Direito Digital" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas" />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&ixlib=rb-4.1.0&q=80&w=1080" />
-        <meta property="og:title" content="Stalking Virtual e suas Consequências Jurídicas | Lisomar Barbosa | Direito Digital" />
-        <meta property="og:description" content="Análise completa sobre o crime de perseguição (Art. 147-A do CP) no ambiente digital, responsabilidade civil, tutelas inibitórias, deveres das plataformas (Marco Civil e LGPD) e prova digital." />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={pageImage} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Stalking Virtual e suas Consequências Jurídicas | Lisomar Barbosa | Direito Digital" />
-        <meta name="twitter:description" content="Análise completa sobre o crime de perseguição (Art. 147-A do CP) no ambiente digital, responsabilidade civil, tutelas inibitórias, deveres das plataformas (Marco Civil e LGPD) e prova digital." />
-        <meta name="twitter:image" content="https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&ixlib=rb-4.1.0&q=80&w=1080" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={pageImage} />
       </Helmet>
+
       <div className="min-h-screen bg-background">
         <Header />
 
@@ -50,135 +75,194 @@ const StalkingVirtual = () => {
                   <span className="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
                     Direito Digital
                   </span>
+
                   <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                    Stalking Virtual e suas Consequências Jurídicas: Análise Completa à Luz da Lei 14.132/2021, Marco Civil, LGPD e Jurisprudência
+                    Stalking virtual: o que é e quais as consequências jurídicas no Brasil
                   </h1>
+
                   <div className="flex items-center gap-4 text-sm text-foreground/60 mb-8">
                     <span>22 Ago 2026</span>
                     <span>•</span>
-                    <span>13 min de leitura</span>
+                    <span>10 min de leitura</span>
                   </div>
+
                   <img
-                    src="https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&ixlib=rb-4.1.0&q=80&w=1080"
-                    alt="Stalking Virtual e Perseguição Digital"
+                    src={pageImage}
+                    alt="Pessoa olhando para tela de celular em ambiente escuro, representando perseguição digital"
                     className="w-full h-[400px] object-cover rounded-lg mb-8"
+                    loading="lazy"
                   />
                 </header>
 
                 <div className="prose prose-lg max-w-none">
                   <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
-                    A expansão das relações sociais para o ambiente digital trouxe consigo a replicação e a potencialização de condutas lesivas à dignidade humana. Entre elas, destaca-se o <strong>stalking virtual</strong> (ciberstalking), fenômeno caracterizado pela perseguição reiterada, intrusiva e ameaçadora perpetrada por meio de tecnologias da informação e comunicação. No Brasil, a promulgação da <strong>Lei nº 14.132/2021</strong>, que inseriu o <strong>Art. 147-A no Código Penal</strong>, marcou um divisor de águas ao tipificar especificamente o crime de <strong>Perseguição</strong>, abrangendo expressamente os meios virtuais.
+                    Uma mensagem que você não pediu. Depois outra. Um perfil desconhecido que aparece nos seus seguidores. Comentários em fotos antigas. A sensação de que alguém monitora o que você publica, onde você está e com quem você fala. Esse padrão tem nome — <strong>stalking virtual</strong> — e, desde 2021, tem tipificação penal expressa no Brasil. O que muita gente ainda não sabe é que a lei alcança essa conduta de forma abrangente, com consequências que vão da esfera criminal à indenização civil, e que a resposta jurídica começa antes mesmo de entrar na Justiça.
                   </p>
 
                   <Card className="p-6 bg-accent/10 border-accent/20 mb-8">
                     <div className="flex items-start gap-4">
                       <AlertTriangle className="text-accent flex-shrink-0 mt-1" size={24} />
                       <div>
-                        <h3 className="font-bold mb-2">Atenção: Preserve as Provas Digitais</h3>
+                        <h3 className="font-bold mb-2">Atenção: preserve as provas antes de qualquer coisa</h3>
                         <p className="text-sm text-foreground/80">
-                          Ao identificar perseguição virtual, não exclua as mensagens. Faça prints com data/hora visíveis, grave vídeo da tela e registre boletim de ocorrência imediatamente. O prazo para representação criminal é de 6 meses.
+                          Não apague mensagens, comentários nem perfis suspeitos. Faça prints com data e hora visíveis, grave vídeos da tela e registre boletim de ocorrência. O prazo para representação criminal é de seis meses a contar do conhecimento do fato, e a prova digital é o principal elemento para o caso.
                         </p>
                       </div>
                     </div>
                   </Card>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
-                    <Shield className="text-primary" size={28} />
-                    1. Fundamentação Constitucional
+                    <Eye className="text-primary" size={28} />
+                    O que é stalking virtual
                   </h2>
+
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    A tutela jurídica contra o stalking virtual encontra sua raiz na <strong>Constituição Federal de 1988</strong>. O <strong>Art. 1º, III</strong>, estabelece a <strong>dignidade da pessoa humana</strong> como fundamento da República. O <strong>Art. 5º, X</strong>, garante a inviolabilidade da intimidade, vida privada, honra e imagem, assegurando indenização por dano material ou moral. No contexto digital, essa cláusula geral de tutela da personalidade é a base para a reparação civil por danos morais <em>in re ipsa</em> e para a concessão de tutelas inibitórias.
+                    O stalking virtual, também chamado de <em>ciberstalking</em>, é a perseguição reiterada praticada por meios digitais. Diferente de um contato indesejado isolado, o que caracteriza a conduta é a <strong>reiteração</strong> — o padrão persistente de comportamento que ameaça a integridade psicológica da vítima, restringe sua liberdade ou invade sua privacidade de forma sistemática.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Na prática, isso inclui: envio repetido de mensagens não solicitadas, criação de perfis falsos para monitorar ou contatar a vítima, comentários frequentes em publicações, coleta e divulgação de dados pessoais (<em>doxxing</em>), uso de <em>spyware</em> para rastrear localização ou comunicações, e até mobilização de terceiros para assediar a vítima em massa — os chamados <em>raids</em> organizados. O meio pode ser qualquer plataforma digital.
                   </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <FileText className="text-primary" size={28} />
-                    2. O Crime de Perseguição (Art. 147-A do CP)
+                    A lei brasileira: Art. 147-A do Código Penal
                   </h2>
 
-                  <div className="space-y-6 mb-12">
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">2.1 Tipificação</h3>
-                      <p className="text-foreground/80 leading-relaxed">
-                        A <strong>Lei nº 14.132/2021</strong> inseriu o Art. 147-A no Código Penal: <em>"Perseguir alguém, reiteradamente e por qualquer meio, ameaçando-lhe a integridade física ou psicológica, restringindo-lhe a capacidade de locomoção ou, de qualquer forma, invadindo ou perturbando sua esfera de liberdade ou privacidade — pena de reclusão de 6 meses a 2 anos, e multa."</em>
-                      </p>
-                      <p className="text-foreground/80 leading-relaxed mt-3">
-                        A expressão <strong>"por qualquer meio"</strong> abrange o ambiente virtual: mensagens instantâneas (WhatsApp, Telegram), redes sociais, e-mails, criação de perfis falsos, monitoramento por <em>spyware</em>, geolocalização não consentida e <em>doxxing</em>.
-                      </p>
-                    </div>
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    A <strong>Lei nº 14.132/2021</strong> inseriu o artigo 147-A no Código Penal, tipificando o crime de <strong>perseguição</strong>. A redação é direta: "Perseguir alguém, reiteradamente e por qualquer meio, ameaçando-lhe a integridade física ou psicológica, restringindo-lhe a capacidade de locomoção ou, de qualquer forma, invadindo ou perturbando sua esfera de liberdade ou privacidade." A pena é de reclusão de seis meses a dois anos, e multa.
+                  </p>
 
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">2.2 Causas de Aumento de Pena (§ 1º)</h3>
-                      <p className="text-foreground/80 leading-relaxed">
-                        A pena é aumentada de <strong>metade</strong> se o crime é cometido: contra criança, adolescente ou idoso; mediante concurso de 2 ou mais pessoas (incluindo <em>raids</em> organizados, bots de assédio em massa); ou com emprego de arma.
-                      </p>
-                    </div>
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    A expressão <strong>"por qualquer meio"</strong> é o que torna a norma plenamente aplicável ao ambiente digital. Não existe uma lista fechada de plataformas ou formas de contato — WhatsApp, Instagram, e-mail, Telegram, fóruns, Discord ou qualquer outro canal pode ser o veículo da perseguição. O que importa é a reiteração da conduta e o efeito sobre a esfera de liberdade ou privacidade da vítima.
+                  </p>
 
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">2.3 Concurso de Crimes</h3>
-                      <p className="text-foreground/80 leading-relaxed">
-                        O stalking virtual frequentemente ocorre com: Ameaça (Art. 147 CP), Crimes contra a Honra (Arts. 138-140 CP), Invasão de Dispositivo Informático (Art. 154-A CP), Registro Não Autorizado da Intimidade Sexual (Art. 216-B CP) e Descumprimento de Medida Protetiva (Art. 24-A CP).
-                      </p>
-                    </div>
-                  </div>
+                  <blockquote>
+                    <p>
+                      <strong>Elemento essencial:</strong> para a configuração do crime, a conduta precisa ser <em>reiterada</em>. Um contato isolado, ainda que indesejado, não preenche o tipo penal. O padrão de comportamento persistente é o que distingue o stalking do mero incômodo digital.
+                    </p>
+                  </blockquote>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
-                    <Eye className="text-primary" size={28} />
-                    3. Responsabilidade Civil e Tutela Inibitória
+                    <Shield className="text-primary" size={28} />
+                    Quando a pena aumenta
                   </h2>
+
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O dano moral no stalking virtual é <strong>presumido (<em>in re ipsa</em>)</strong>. O sofrimento psíquico, a angústia, o medo fundado e a restrição da liberdade digital são inerentes à conduta persecutória. São cabíveis tutelas inibitórias (CPC Arts. 297, 300, 497): proibição de contato virtual, remoção de conteúdos, bloqueio de contas e preservação de <em>logs</em> para perícia.
+                    O § 1º do artigo 147-A prevê aumento de pena de <strong>metade</strong> em situações agravantes: quando a vítima é criança, adolescente ou idoso; quando o crime é cometido por duas ou mais pessoas, hipótese que alcança os <em>raids</em> organizados e campanhas coletivas de assédio; ou com emprego de arma. Nesses casos, a pena máxima pode chegar a três anos de reclusão.
                   </p>
 
-                  <h2 className="text-3xl font-bold mt-12 mb-6">4. Marco Civil e LGPD: Deveres das Plataformas</h2>
-                  <p className="text-foreground/80 mb-4 leading-relaxed">
-                    O <strong>Art. 19 do Marco Civil da Internet</strong> exige <strong>ordem judicial específica</strong> para a remoção de conteúdo geral. Já o <strong>Art. 21</strong> — para conteúdo de nudez ou ato sexual privado — admite <strong>notificação extrajudicial</strong> da vítima, gerando dever de remoção imediata sob pena de responsabilidade solidária.
-                  </p>
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    A <strong>LGPD (Arts. 46 e 48)</strong> impõe às plataformas o dever de segurança. Vazamentos de dados que facilitam o <em>doxxing</em> configuram incidente de segurança, sujeitos a sanções pela ANPD e reparação civil.
+                    Além disso, o stalking virtual frequentemente ocorre ao lado de outros crimes. É comum o concurso com ameaça (artigo 147 do CP), crimes contra a honra como injúria e difamação (artigos 138 a 140), invasão de dispositivo informático (artigo 154-A) e registro não autorizado de intimidade sexual (artigo 216-B). Cada conduta autônoma pode ser apurada de forma independente.
                   </p>
 
-                  <h2 className="text-3xl font-bold mt-12 mb-6">5. Lei Maria da Penha: Violência Doméstica e Virtual</h2>
+                  <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
+                    <UserX className="text-primary" size={28} />
+                    Violência doméstica e medidas protetivas
+                  </h2>
+
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Quando o stalking ocorre em contexto de violência doméstica, aplicam-se as <strong>Medidas Protetivas de Urgência (Art. 22 da Lei 11.340/2006)</strong>, incluindo proibição de contato por qualquer meio eletrônico. O descumprimento é crime autônomo (Art. 24-A CP), com pena de detenção de 3 meses a 2 anos, ação pública incondicionada.
+                    Quando o stalking acontece em contexto de violência doméstica — ex-parceiro, cônjuge, familiar com relação de afeto — aplica-se a <strong>Lei Maria da Penha (Lei nº 11.340/2006)</strong>. As medidas protetivas de urgência do artigo 22 podem incluir proibição de contato por qualquer meio eletrônico, proibição de aproximação e monitoramento eletrônico do agressor.
                   </p>
 
-                  <h2 className="text-3xl font-bold mt-12 mb-6">6. Como Agir em Caso de Stalking Virtual</h2>
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    O descumprimento de medida protetiva é crime autônomo, previsto no artigo 24-A do Código Penal, com pena de detenção de três meses a dois anos e ação penal pública incondicionada — ou seja, o Ministério Público pode agir independentemente de representação da vítima.
+                  </p>
+
+                  <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
+                    <Scale className="text-primary" size={28} />
+                    Responsabilidade civil e tutela inibitória
+                  </h2>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Além da esfera criminal, o stalking virtual abre caminho para a <strong>reparação civil</strong>. O dano moral nessa situação é considerado <em>in re ipsa</em> — ou seja, presumido pela própria natureza da conduta. O sofrimento psíquico, a angústia, o medo e a restrição da liberdade digital são inerentes à perseguição e não precisam ser provados individualmente para gerar direito à indenização.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    O Código de Processo Civil permite a concessão de <strong>tutelas inibitórias</strong> (artigos 297, 300 e 497): proibição judicial de contato, remoção de conteúdo, bloqueio de contas e preservação de <em>logs</em> para perícia. Essas medidas podem ser obtidas antes mesmo do julgamento do mérito, quando há urgência, e são ferramentas essenciais para interromper a conduta enquanto o processo corre.
+                  </p>
+
+                  <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
+                    <Lock className="text-primary" size={28} />
+                    O papel das plataformas e a LGPD
+                  </h2>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    As plataformas digitais não são espectadoras neutras. O <strong>Marco Civil da Internet</strong> estabelece que a remoção de conteúdo de nudez ou ato sexual sem consentimento pode ser feita mediante <strong>notificação extrajudicial</strong> da vítima (artigo 21), gerando dever imediato de remoção. Para outros conteúdos, em regra exige-se ordem judicial específica (artigo 19), mas isso não impede que a plataforma adote medidas preventivas por suas políticas internas.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    A <strong>LGPD (Lei nº 13.709/2018)</strong> entra em cena quando o stalking envolve coleta e exposição de dados pessoais. Os artigos 46 e 48 impõem às plataformas deveres de segurança e notificação em caso de incidente. Quando o <em>doxxing</em> é viabilizado por falha de segurança de uma plataforma, há responsabilidade civil e possibilidade de sanção pela Autoridade Nacional de Proteção de Dados (ANPD).
+                  </p>
+
+                  <h2 className="text-3xl font-bold mt-12 mb-6">O que fazer quando o problema acontece</h2>
+
                   <ol className="space-y-4 mb-12">
                     <li className="flex gap-4">
-                      <span className="font-bold text-primary">1.</span>
-                      <div><strong>Preserve as provas:</strong> Prints com data/hora, gravação de tela em vídeo, ata notarial para prova pré-constituída (CPC Art. 381).</div>
+                      <span className="font-bold text-primary text-lg">1.</span>
+                      <div>
+                        <strong>Preserve as provas imediatamente:</strong> prints com data e hora visíveis, gravação de tela em vídeo e, se possível, ata notarial para prova pré-constituída (CPC, artigo 381).
+                      </div>
                     </li>
                     <li className="flex gap-4">
-                      <span className="font-bold text-primary">2.</span>
-                      <div><strong>Boletim de Ocorrência:</strong> Registre na Delegacia de Crimes Cibernéticos com <strong>representação</strong> expressa (prazo de 6 meses do Art. 38 CPP).</div>
+                      <span className="font-bold text-primary text-lg">2.</span>
+                      <div>
+                        <strong>Registre boletim de ocorrência</strong> na Delegacia de Crimes Cibernéticos ou delegacia comum, com representação expressa. O prazo é de seis meses contados do conhecimento do fato (CPP, artigo 38).
+                      </div>
                     </li>
                     <li className="flex gap-4">
-                      <span className="font-bold text-primary">3.</span>
-                      <div><strong>Medidas Cautelares (CPC Art. 294):</strong> Bloqueio de perfis, preservação de logs, proibição de contato por ordem judicial.</div>
+                      <span className="font-bold text-primary text-lg">3.</span>
+                      <div>
+                        <strong>Solicite medidas cautelares judiciais</strong> (CPC, artigo 294): bloqueio de perfis, preservação de <em>logs</em> e proibição de contato por ordem do juízo.
+                      </div>
                     </li>
                     <li className="flex gap-4">
-                      <span className="font-bold text-primary">4.</span>
-                      <div><strong>Ação de Indenização:</strong> Por danos morais (<em>in re ipsa</em>) e materiais (tratamento psicológico, gastos com segurança).</div>
+                      <span className="font-bold text-primary text-lg">4.</span>
+                      <div>
+                        <strong>Ajuíze ação de indenização</strong> por danos morais presumidos e materiais comprováveis — gastos com tratamento psicológico, segurança digital e outros impactos diretos.
+                      </div>
                     </li>
                     <li className="flex gap-4">
-                      <span className="font-bold text-primary">5.</span>
-                      <div><strong>ANPD:</strong> Peticione à Autoridade Nacional de Proteção de Dados se houver vazamento de dados pessoais.</div>
+                      <span className="font-bold text-primary text-lg">5.</span>
+                      <div>
+                        <strong>Se houver vazamento de dados,</strong> registre reclamação na ANPD e notifique a plataforma formalmente para gerar o dever de resposta e responsabilização.
+                      </div>
                     </li>
                   </ol>
 
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Conclusão</h2>
+                  <h2 className="text-3xl font-bold mt-12 mb-6">Hábitos de prevenção digital</h2>
+
+                  <ul className="list-disc pl-6 mb-8 text-foreground/80 space-y-3">
+                    <li>
+                      <strong>Revise as configurações de privacidade</strong> das suas redes sociais periodicamente e limite quem pode ver sua localização, histórico e contatos.
+                    </li>
+                    <li>
+                      <strong>Ative autenticação em dois fatores</strong> em todas as contas vinculadas ao seu e-mail e nas plataformas que você mais usa.
+                    </li>
+                    <li>
+                      <strong>Desconfie de aplicativos que pedem acesso a localização em tempo real</strong> sem justificativa clara de funcionalidade.
+                    </li>
+                    <li>
+                      <strong>Use e-mails diferentes</strong> para cadastros comerciais e para contas pessoais sensíveis — isso reduz a superfície de ataque em caso de vazamento.
+                    </li>
+                    <li>
+                      <strong>Documente qualquer contato indesejado</strong> desde o início, mesmo que pareça isolado. O padrão de reiteração pode se tornar relevante mais tarde.
+                    </li>
+                  </ul>
+
+                  <hr />
+
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O stalking virtual é uma violação de direitos fundamentais potencializada pela tecnologia. A resposta jurídica brasileira é multinível: penal (Art. 147-A CP), cível (reparação integral e tutelas inibitórias), regulatória (MCI/LGPD) e especial (Lei Maria da Penha). A efetividade depende da preservação imediata da prova digital e da atuação advocatícia estratégica combinando as vias penal, cível e administrativa.
-                  </p>
-                  <p className="text-sm text-foreground/50 italic">
-                    Este artigo tem caráter informativo e não substitui consulta a advogado especializado para análise do caso concreto.
+                    <em>
+                      Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.
+                    </em>
                   </p>
                 </div>
 
                 <div className="mt-16 p-8 rounded-2xl gradient-cyber border border-primary/20 text-center">
-                  <h3 className="text-2xl font-bold mb-4">Está Sofrendo Stalking Virtual?</h3>
+                  <h3 className="text-2xl font-bold mb-4">Está sofrendo stalking virtual?</h3>
                   <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
-                    Nossa equipe especializada em Direito Digital está pronta para orientar você, desde a preservação das provas até a obtenção de medidas protetivas e indenização.
+                    Nossa equipe especializada em Direito Digital está pronta para orientar você: da preservação das provas à obtenção de medidas protetivas e indenização.
                   </p>
                   <Link to="/#contato">
                     <Button size="lg" className="bg-gradient-accent text-background font-semibold shadow-cyber">
