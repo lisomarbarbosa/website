@@ -17,10 +17,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const pageTitle =
-  "Stalking virtual: o que é e quais as consequências jurídicas no Brasil | Lisomar Barbosa | Direito Digital";
+  "Stalking virtual: o que é, como identificar e quais as consequências jurídicas no Brasil | Lisomar Barbosa | Direito Digital";
 
 const pageDescription =
-  "Entenda o que caracteriza o stalking virtual, como a Lei nº 14.132/2021 tipifica o crime de perseguição no ambiente digital, quais as consequências penais e civis, o papel das plataformas e o que fazer se você está sendo vítima dessa conduta.";
+  "Entenda o que caracteriza o stalking virtual, como a Lei nº 14.132/2021 tipifica o crime de perseguição no ambiente digital, quando a pena aumenta, o papel da LGPD e do Marco Civil da Internet, e o que fazer se você está sendo vítima dessa conduta.";
 
 const pageUrl =
   "https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil";
@@ -77,7 +77,7 @@ const StalkingVirtual = () => {
                   </span>
 
                   <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                    Stalking virtual: o que é e quais as consequências jurídicas no Brasil
+                    Stalking virtual: o que é, como identificar e quais as consequências jurídicas no Brasil
                   </h1>
 
                   <div className="flex items-center gap-4 text-sm text-foreground/60 mb-8">
@@ -88,7 +88,7 @@ const StalkingVirtual = () => {
 
                   <img
                     src={pageImage}
-                    alt="Pessoa olhando para tela de celular em ambiente escuro, representando perseguição digital"
+                    alt="Pessoa olhando para a tela do celular em ambiente escuro, representando perseguição digital"
                     className="w-full h-[400px] object-cover rounded-lg mb-8"
                     loading="lazy"
                   />
@@ -96,16 +96,20 @@ const StalkingVirtual = () => {
 
                 <div className="prose prose-lg max-w-none">
                   <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
-                    Uma mensagem que você não pediu. Depois outra. Um perfil desconhecido que aparece nos seus seguidores. Comentários em fotos antigas. A sensação crescente de que alguém monitora o que você publica, onde você está e com quem você fala. Esse padrão tem nome — <strong>stalking virtual</strong> — e, desde 2021, tem tipificação penal expressa no Brasil. O problema é que muita gente ainda confunde a conduta com "excesso de interesse" ou trata o assunto como algo menor, digital e, portanto, menos grave. Não é. A perseguição no ambiente online causa dano psicológico real, restringe a liberdade de quem a sofre e pode escalar para ameaças físicas. A resposta jurídica existe, é robusta e começa antes mesmo de entrar na Justiça.
+                    Uma mensagem que você não pediu. Depois outra. E mais outra. Um perfil desconhecido que aparece entre seus seguidores, visualiza tudo o que você publica e volta a comentar em fotos antigas, como se estivesse marcando presença de propósito. Aos poucos, o que parecia apenas um incômodo digital passa a gerar sensação real de vigilância, medo e perda de controle. Esse padrão de comportamento tem nome: <strong>stalking virtual</strong>. E, no Brasil, ele não é tratado como mera insistência online, mas como conduta capaz de gerar responsabilização penal, civil e, em muitos casos, medidas urgentes de proteção.
+                  </p>
+
+                  <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
+                    O problema é que muitas vítimas demoram para perceber quando a linha foi ultrapassada. Em um ambiente em que insistência, curiosidade invasiva, perfis falsos, exposição de dados e mensagens repetidas se misturam com a rotina das redes sociais, nem sempre é simples identificar o momento em que o comportamento deixa de ser inconveniente e passa a configurar perseguição. Por isso, compreender o que caracteriza o stalking virtual, quais são os seus elementos jurídicos e quais providências devem ser adotadas desde os primeiros sinais faz diferença prática. Em casos assim, agir cedo protege a vítima, fortalece a prova e aumenta a chance de interromper a conduta antes que ela escale.
                   </p>
 
                   <Card className="p-6 bg-accent/10 border-accent/20 mb-8">
                     <div className="flex items-start gap-4">
                       <AlertTriangle className="text-accent flex-shrink-0 mt-1" size={24} />
                       <div>
-                        <h3 className="font-bold mb-2">Atenção: preserve as provas antes de qualquer coisa</h3>
+                        <h3 className="font-bold mb-2">Atenção: documente tudo antes de bloquear ou apagar</h3>
                         <p className="text-sm text-foreground/80">
-                          Não apague mensagens, comentários nem perfis suspeitos. Faça prints com data e hora visíveis, grave vídeos da tela e registre boletim de ocorrência assim que perceber o padrão de reiteração. O prazo para representação criminal é de seis meses a contar do conhecimento do fato, e a prova digital é o principal elemento para sustentar o caso.
+                          Prints, vídeos de tela, links de perfis, nomes de usuários, datas, horários, e-mails, mensagens diretas e protocolos de atendimento podem ser decisivos. Em casos de perseguição digital, a prova documental é um dos elementos mais importantes para pedidos de medidas protetivas, investigação criminal e eventual indenização.
                         </p>
                       </div>
                     </div>
@@ -113,98 +117,110 @@ const StalkingVirtual = () => {
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <Eye className="text-primary" size={28} />
-                    O que é stalking virtual
+                    O que é stalking virtual e como ele costuma aparecer
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O stalking virtual, também chamado de <em>ciberstalking</em>, é a perseguição reiterada praticada por meios digitais. Diferente de um contato indesejado isolado, o que caracteriza a conduta é a <strong>reiteração</strong> — o padrão persistente de comportamento que ameaça a integridade psicológica da vítima, restringe sua liberdade ou invade sua privacidade de forma sistemática. A chave está na repetição e no efeito: uma mensagem não solicitada é incômoda; uma sequência interminável de mensagens, monitoramentos e aparições em diferentes plataformas configura perseguição.
+                    O stalking virtual, também chamado de <em>ciberstalking</em>, consiste em uma perseguição reiterada praticada por meios digitais. O ponto central não está em um contato isolado, mas na repetição insistente de condutas capazes de invadir a privacidade, perturbar a liberdade da vítima ou afetar sua integridade psicológica. Em outras palavras, não se trata apenas de alguém mandando mensagem demais, mas de um comportamento persistente que cria cerco, vigilância e constrangimento.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Na prática, o stalking virtual inclui: envio repetido de mensagens não solicitadas por qualquer canal digital, criação de perfis falsos para monitorar ou contatar a vítima sem que ela perceba, comentários frequentes e obsessivos em publicações antigas, coleta e divulgação pública de dados pessoais como endereço, local de trabalho e rotina — conduta conhecida como <em>doxxing</em> — uso de <em>spyware</em> para rastrear localização ou interceptar comunicações, e a mobilização organizada de terceiros para assediar a vítima em massa, os chamados <em>raids</em> ou linchamentos virtuais. O meio pode ser qualquer plataforma: WhatsApp, Instagram, Telegram, e-mail, fóruns, Discord, jogos online ou qualquer canal de comunicação digital.
+                    Essa perseguição pode assumir formas bastante variadas: envio constante de mensagens não desejadas, criação de perfis falsos para acompanhar a rotina da vítima, insistência em múltiplas plataformas após bloqueios sucessivos, comentários invasivos em publicações antigas, contato com amigos, familiares ou colegas de trabalho, monitoramento de localização, divulgação de dados pessoais e até uso de aplicativos clandestinos para rastrear atividades digitais. Em muitos casos, o agressor alterna momentos de aparente cordialidade com ameaças veladas, o que torna a situação ainda mais confusa emocionalmente para quem sofre a conduta.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    É importante distinguir o stalking de comportamentos que, embora inconvenientes, não alcançam o limiar jurídico da perseguição. Seguir alguém nas redes sociais, curtir publicações ou enviar uma mensagem sem resposta não configura, por si só, a conduta. O que transforma o comportamento em crime é a persistência, a escala e o efeito concreto sobre a vida da vítima — o medo, a alteração de rotina, o isolamento digital e o sofrimento psicológico decorrentes da sensação constante de estar sendo vigiada.
+                    Também é comum que o stalking virtual venha acompanhado de outras práticas abusivas, como difamação, exposição indevida da intimidade, chantagem emocional, assédio coletivo e tentativas de isolar socialmente a vítima. Quando terceiros são mobilizados para ampliar o ataque, o dano tende a crescer de forma rápida. Por isso, o olhar jurídico sobre o stalking digital precisa considerar não apenas a plataforma usada, mas o padrão global da conduta, sua repetição e seus efeitos concretos.
                   </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <FileText className="text-primary" size={28} />
-                    A lei brasileira: Art. 147-A do Código Penal
+                    O que diz a lei brasileira
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    A <strong>Lei nº 14.132/2021</strong> inseriu o artigo 147-A no Código Penal, tipificando expressamente o crime de <strong>perseguição</strong>. A redação é abrangente: "Perseguir alguém, reiteradamente e por qualquer meio, ameaçando-lhe a integridade física ou psicológica, restringindo-lhe a capacidade de locomoção ou, de qualquer forma, invadindo ou perturbando sua esfera de liberdade ou privacidade." A pena prevista é de reclusão de seis meses a dois anos, além de multa, e a ação penal depende de representação da vítima.
+                    A tipificação penal da perseguição foi introduzida pela Lei nº 14.132/2021, que acrescentou o artigo 147-A ao Código Penal. A norma passou a prever, expressamente, o crime de perseguir alguém de forma reiterada, por qualquer meio, ameaçando sua integridade física ou psicológica, restringindo sua capacidade de locomoção ou invadindo e perturbando sua esfera de liberdade ou privacidade.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    A expressão <strong>"por qualquer meio"</strong> é o que torna a norma plenamente aplicável ao ambiente digital, sem necessidade de uma listagem exaustiva de plataformas ou tecnologias. Não existe um rol fechado de canais — o que importa é a reiteração da conduta e o efeito sobre a esfera de liberdade ou privacidade da vítima. Isso significa que a lei acompanha a evolução tecnológica: novas plataformas que surgirem nos próximos anos estarão igualmente abrangidas pelo tipo penal, desde que a conduta preencha os elementos essenciais.
+                    Um aspecto importante da redação legal é a expressão <strong>&quot;por qualquer meio&quot;</strong>. Isso torna a regra plenamente aplicável ao ambiente digital, alcançando redes sociais, aplicativos de mensagens, e-mails, fóruns, jogos online e outras ferramentas tecnológicas. A lei não depende do nome da plataforma, mas da conduta praticada e de sua reiteração. É justamente essa amplitude que permite enquadrar juridicamente o stalking virtual com mais segurança.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Antes da Lei nº 14.132/2021, a perseguição virtual era enquadrada de forma fragmentada em outros tipos penais — ameaça, constrangimento ilegal, crimes contra a honra — o que dificultava a resposta jurídica adequada. A criação de um tipo específico para a perseguição foi um avanço relevante, pois permite que a conduta seja apurada de forma autônoma, com a possibilidade de cumulação com outros crimes que tenham ocorrido no mesmo contexto.
+                    Outro ponto essencial é compreender que um único episódio, ainda que desagradável, pode não ser suficiente para configurar o crime de perseguição. O stalking exige um padrão reiterado. Isso não significa que o primeiro ato deva ser ignorado, mas que ele precisa ser documentado desde o início, porque o histórico de repetição costuma ser o elemento que dá consistência probatória ao caso.
                   </p>
 
                   <blockquote>
                     <p>
-                      <strong>Elemento essencial:</strong> para a configuração do crime, a conduta precisa ser <em>reiterada</em>. Um contato isolado, ainda que indesejado, não preenche o tipo penal. O padrão de comportamento persistente é o que distingue o stalking do mero incômodo digital — e é exatamente por isso que documentar desde o primeiro episódio é tão importante.
+                      <strong>Dica prática:</strong> não espere ficar grave demais para começar a registrar os fatos. Em perseguição digital, a cronologia da conduta costuma ser tão importante quanto o conteúdo de cada ato.
                     </p>
                   </blockquote>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <Shield className="text-primary" size={28} />
-                    Quando a pena aumenta
+                    Quando a situação pode ser ainda mais grave
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O § 1º do artigo 147-A prevê aumento de pena de <strong>metade</strong> em situações agravantes: quando a vítima é criança, adolescente ou idoso; quando o crime é cometido por duas ou mais pessoas — hipótese que alcança diretamente os <em>raids</em> organizados e as campanhas coletivas de assédio digital — ou com emprego de arma. Nesses casos, a pena máxima pode chegar a três anos de reclusão. A previsão sobre pluralidade de agentes é particularmente relevante no contexto das redes sociais, onde grupos organizados mobilizam centenas de pessoas para atacar uma única vítima de forma coordenada.
+                    Em determinados contextos, a gravidade jurídica aumenta. A legislação prevê hipóteses de majoração da pena, como situações envolvendo crianças, adolescentes, pessoas idosas ou quando a perseguição é praticada por mais de uma pessoa. No ambiente digital, isso pode ocorrer em campanhas coordenadas de assédio, perseguição em massa ou ataques articulados para intimidar a vítima.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Além disso, o stalking virtual frequentemente ocorre ao lado de outros crimes, e cada conduta autônoma pode ser apurada de forma independente. É comum o concurso com ameaça (artigo 147 do CP), crimes contra a honra como injúria e difamação (artigos 138 a 140), invasão de dispositivo informático (artigo 154-A), registro não autorizado de intimidade sexual (artigo 216-B) e divulgação de cena de estupro ou de nudez sem consentimento (artigo 218-C). A identificação correta de todos os crimes em concurso é tarefa do advogado, e pode impactar significativamente a pena aplicável e as medidas cautelares disponíveis.
+                    Além disso, o stalking virtual raramente aparece sozinho. Muitas vezes ele se conecta a outros ilícitos, como ameaça, injúria, difamação, calúnia, invasão de dispositivo informático, divulgação não autorizada de imagens íntimas ou exposição indevida de dados pessoais. Cada um desses fatos pode gerar consequências jurídicas próprias, o que amplia a responsabilidade do agressor e muda a estratégia processual mais adequada.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Na prática, isso significa que uma análise jurídica cuidadosa do caso concreto é indispensável. O mesmo conjunto de fatos pode envolver esfera penal, responsabilidade civil, tutela de urgência, proteção de dados e até medidas protetivas em contexto de violência doméstica. Reduzir tudo a um único rótulo jurídico pode enfraquecer a reação e deixar de explorar mecanismos relevantes de proteção.
                   </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <UserX className="text-primary" size={28} />
-                    Violência doméstica e medidas protetivas
+                    Violência doméstica, ex-relacionamentos e medidas protetivas
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Quando o stalking acontece em contexto de violência doméstica — ex-parceiro, cônjuge, familiar ou pessoa com relação de afeto — aplica-se a <strong>Lei Maria da Penha (Lei nº 11.340/2006)</strong>, que amplia consideravelmente as ferramentas de proteção disponíveis. As medidas protetivas de urgência do artigo 22 podem incluir proibição de contato por qualquer meio eletrônico, proibição de aproximação física e monitoramento eletrônico do agressor. Essas medidas são concedidas pelo juiz com rapidez, muitas vezes em regime de plantão, e seu descumprimento constitui crime autônomo.
+                    Uma parte significativa dos casos de stalking virtual surge em contextos de ruptura afetiva. Ex-companheiros, ex-namorados ou pessoas inconformadas com o término podem passar a usar a internet como instrumento de vigilância, controle e intimidação. Nesses casos, a situação pode se enquadrar também na Lei Maria da Penha, quando houver relação doméstica, familiar ou íntima de afeto.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O descumprimento de medida protetiva é previsto no artigo 24-A do Código Penal, com pena de detenção de três meses a dois anos e ação penal pública incondicionada — ou seja, o Ministério Público pode agir independentemente de nova representação da vítima. Isso significa que, uma vez obtida a medida protetiva, qualquer violação pode ser denunciada e processada sem depender da iniciativa ou da coragem da pessoa perseguida em comparecer novamente à delegacia. A proteção, nesse caso, passa a ser dever do Estado.
+                    Isso é relevante porque as medidas protetivas de urgência podem ser fundamentais para interromper rapidamente a conduta. A proibição de contato por qualquer meio, inclusive redes sociais, mensagens e e-mails, pode ser determinada judicialmente. Dependendo da gravidade, também podem ser fixadas restrições de aproximação, retirada de conteúdos e outras providências voltadas à proteção imediata da vítima.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    O ambiente digital não reduz a violência; em muitos casos, ele a amplia. A sensação de acesso contínuo à vítima, a facilidade de criar perfis falsos e a possibilidade de perseguição permanente por múltiplos canais tornam esse cenário particularmente nocivo. Por isso, minimizar a perseguição por acontecer só pela internet é um erro grave.
                   </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <Scale className="text-primary" size={28} />
-                    Responsabilidade civil e tutela inibitória
+                    Responsabilidade civil e medidas judiciais urgentes
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Além da esfera criminal, o stalking virtual abre caminho para a <strong>reparação civil</strong> por danos morais e materiais. O dano moral nessa situação é considerado <em>in re ipsa</em> — presumido pela própria natureza da conduta. O sofrimento psíquico, a angústia, o medo, a restrição da liberdade digital e a necessidade de alterar rotinas e hábitos para se proteger são inerentes à perseguição e não precisam ser provados individualmente para gerar direito à indenização. Basta demonstrar a ocorrência da conduta e seu padrão de reiteração.
+                    Além da apuração criminal, o stalking virtual pode gerar dever de indenizar. A vítima pode buscar reparação por danos morais e, quando houver, também por danos materiais. Gastos com suporte psicológico, segurança digital, recuperação de contas, monitoramento de vazamento e outras consequências concretas podem integrar o pedido indenizatório, desde que devidamente documentados.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Os danos materiais também são ressarcíveis: gastos com tratamento psicológico, assessoria de segurança digital, troca de dispositivos comprometidos, honorários advocatícios e qualquer outro prejuízo financeiro diretamente decorrente da perseguição podem ser incluídos no pedido indenizatório. Em casos mais graves, onde a vítima precisou se afastar do trabalho ou mudar de residência, o escopo do dano material pode ser significativo.
+                    Também é possível buscar tutela inibitória, isto é, uma ordem judicial voltada a cessar imediatamente a conduta. Dependendo do caso, isso pode envolver proibição de contato, remoção de conteúdo, bloqueio de perfis, preservação de registros e determinação para que plataformas mantenham logs ou dados necessários à identificação do agressor. Em situações urgentes, essas medidas não precisam esperar o final do processo.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O Código de Processo Civil permite a concessão de <strong>tutelas inibitórias</strong> (artigos 297, 300 e 497): proibição judicial de contato, remoção de conteúdo, bloqueio de contas nas plataformas e preservação de <em>logs</em> para perícia digital. Essas medidas podem ser obtidas em caráter de urgência, antes mesmo do julgamento do mérito, quando há fundamento razoável e risco de dano irreparável — e são ferramentas essenciais para interromper a conduta enquanto o processo principal ainda corre.
+                    Em muitos casos, a atuação rápida faz mais diferença do que a própria condenação futura. Interromper o comportamento, preservar provas e evitar a escalada do assédio é, juridicamente, tão importante quanto discutir a punição do agressor ao final.
                   </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <Lock className="text-primary" size={28} />
-                    O papel das plataformas e a LGPD
+                    O papel das plataformas, do Marco Civil e da LGPD
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    As plataformas digitais não são espectadoras neutras e têm obrigações jurídicas concretas nesse contexto. O <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong> estabelece que a remoção de conteúdo de nudez ou ato sexual sem consentimento pode ser feita mediante simples <strong>notificação extrajudicial</strong> da vítima (artigo 21), gerando dever imediato de remoção, independentemente de ordem judicial. Para outros conteúdos que configurem perseguição, em regra exige-se ordem judicial específica (artigo 19), mas isso não impede que a plataforma adote medidas preventivas por suas políticas internas de uso — e cada vez mais as grandes plataformas têm instrumentos próprios de denúncia e bloqueio que podem ser acionados em paralelo à via judicial.
+                    O stalking virtual frequentemente envolve tratamento indevido de dados pessoais. Quando há exposição de telefone, endereço, documentos, imagens, rotina, localização ou qualquer outro elemento capaz de identificar a vítima, a Lei Geral de Proteção de Dados passa a ter relevância concreta. A divulgação indevida dessas informações pode aprofundar os danos, ampliar o risco físico e aumentar a vulnerabilidade da pessoa perseguida.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    A <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> entra em cena quando o stalking envolve coleta, exposição ou uso indevido de dados pessoais. Os artigos 46 e 48 da LGPD impõem às plataformas deveres de segurança técnica e de notificação à Autoridade Nacional de Proteção de Dados (ANPD) em caso de incidente de segurança com potencial de causar risco ou dano aos titulares. Quando o <em>doxxing</em> é viabilizado por uma falha de segurança da plataforma — vazamento de dados cadastrais, por exemplo — há responsabilidade civil do controlador e possibilidade de sanção administrativa pela ANPD, que pode aplicar multas de até 2% do faturamento da empresa, limitado a R$ 50 milhões por infração.
+                    As plataformas também têm papel importante. Embora a responsabilidade delas dependa do contexto e do regime jurídico aplicável, é fundamental registrar formalmente denúncias, guardar protocolos e exigir respostas claras. Em certas hipóteses, a omissão diante de conteúdos abusivos, perfis reiteradamente usados para perseguição ou falhas de segurança que permitam exposição indevida de dados pode integrar a análise jurídica do caso.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    O Marco Civil da Internet, as políticas internas das plataformas e a LGPD formam, nesse ponto, uma camada complementar de proteção. A vítima não deve pensar apenas em denunciar o agressor, mas também em estruturar uma reação documentada perante os intermediários digitais envolvidos.
                   </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6">O que fazer quando o problema acontece</h2>
@@ -213,63 +229,76 @@ const StalkingVirtual = () => {
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">1.</span>
                       <div>
-                        <strong>Preserve as provas imediatamente:</strong> prints com data e hora visíveis, gravação de tela em vídeo e, se possível, ata notarial para prova pré-constituída com valor probatório reforçado (CPC, artigo 381). Não apague nada, mesmo que o conteúdo seja perturbador.
+                        <strong>Preserve as provas:</strong> faça prints, grave vídeos de tela, anote links, nomes de usuários, datas, horários e canais utilizados.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">2.</span>
                       <div>
-                        <strong>Registre boletim de ocorrência</strong> na Delegacia de Crimes Cibernéticos do seu estado ou na delegacia comum, com representação expressa contra o autor. O prazo decadencial é de seis meses contados do conhecimento do fato (CPP, artigo 38).
+                        <strong>Organize os fatos em ordem cronológica,</strong> porque a repetição da conduta é parte central da caracterização jurídica.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">3.</span>
                       <div>
-                        <strong>Solicite medidas cautelares judiciais urgentes</strong> (CPC, artigo 294 e seguintes): bloqueio de perfis, preservação de <em>logs</em> pelas plataformas e proibição judicial de contato. Se houver contexto de violência doméstica, requeira medida protetiva de urgência com base na Lei Maria da Penha.
+                        <strong>Registre boletim de ocorrência</strong> e leve o máximo de documentação possível.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">4.</span>
                       <div>
-                        <strong>Ajuíze ação de indenização</strong> por danos morais presumidos e materiais comprováveis — gastos com tratamento psicológico, segurança digital, honorários e outros impactos financeiros diretos.
+                        <strong>Denuncie formalmente nas plataformas</strong> e guarde todos os protocolos de atendimento.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">5.</span>
                       <div>
-                        <strong>Se houver vazamento ou exposição de dados pessoais,</strong> registre reclamação formal na ANPD e notifique a plataforma por escrito, gerando o dever legal de resposta e o início do prazo para responsabilização.
+                        <strong>Considere medidas urgentes,</strong> como tutela judicial para cessação da conduta e preservação de registros.
+                      </div>
+                    </li>
+                    <li className="flex gap-4">
+                      <span className="font-bold text-primary text-lg">6.</span>
+                      <div>
+                        <strong>Busque orientação jurídica especializada</strong> para avaliar as vias penal, cível e eventualmente protetiva de forma integrada.
                       </div>
                     </li>
                   </ol>
 
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Hábitos de prevenção digital</h2>
+                  <h2 className="text-3xl font-bold mt-12 mb-6">Hábitos de prevenção</h2>
 
                   <ul className="list-disc pl-6 mb-8 text-foreground/80 space-y-3">
                     <li>
-                      <strong>Revise as configurações de privacidade</strong> das suas redes sociais periodicamente — limite quem pode ver sua localização, seus seguidores, seu histórico de publicações e suas informações de contato.
+                      <strong>Revise suas configurações de privacidade</strong> nas redes sociais e reduza a exposição pública desnecessária.
                     </li>
                     <li>
-                      <strong>Ative autenticação em dois fatores</strong> em todas as contas vinculadas ao seu e-mail e nas plataformas que você mais usa, especialmente redes sociais e serviços de mensagens.
+                      <strong>Ative autenticação em dois fatores</strong> nas principais contas digitais.
                     </li>
                     <li>
-                      <strong>Desconfie de aplicativos que pedem acesso à localização em tempo real</strong> sem justificativa clara de funcionalidade. Revogue permissões de localização de apps que não precisam dela para funcionar.
+                      <strong>Evite compartilhar localização em tempo real</strong> com frequência ou sem necessidade.
                     </li>
                     <li>
-                      <strong>Use endereços de e-mail diferentes</strong> para cadastros comerciais e para contas pessoais sensíveis — isso reduz a superfície de ataque em caso de vazamento de dados por terceiros.
+                      <strong>Separe canais pessoais e públicos</strong> sempre que possível.
                     </li>
                     <li>
-                      <strong>Documente qualquer contato indesejado desde o primeiro episódio,</strong> mesmo que pareça isolado. O padrão de reiteração pode se tornar juridicamente relevante antes do que você imagina, e a prova mais antiga tem mais valor probatório.
+                      <strong>Desconfie de perfis insistentes, novos ou incoerentes,</strong> especialmente após bloqueios anteriores.
+                    </li>
+                    <li>
+                      <strong>Comece a documentar cedo,</strong> porque o histórico costuma ser decisivo.
                     </li>
                   </ul>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6">Considerações finais</h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O stalking virtual não é um aborrecimento passageiro nem uma questão menor por acontecer na tela — é uma conduta com tipificação penal, consequências civis significativas e impacto real sobre a liberdade, a saúde psíquica e a segurança de quem a sofre. A Lei nº 14.132/2021 deu ao ordenamento brasileiro uma ferramenta direta e abrangente para enfrentar essa realidade, e o Marco Civil da Internet, a LGPD e o direito civil completam o arsenal disponível para a vítima agir em diferentes frentes simultaneamente.
+                    O stalking virtual não é exagero, sensibilidade excessiva nem drama de internet. Trata-se de uma conduta que pode comprometer a liberdade, a paz psicológica, a intimidade e a segurança de quem a sofre. O fato de acontecer por telas, aplicativos e perfis não diminui sua gravidade; em muitos casos, torna o assédio mais constante, invasivo e difícil de interromper.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Agir cedo faz diferença concreta. Preservar provas desde o primeiro episódio, registrar a ocorrência antes do prazo decadencial e buscar orientação jurídica especializada são os primeiros passos para interromper a conduta, proteger os dados pessoais e garantir reparação pelos danos causados. Silenciar ou apagar evidências na esperança de que o problema cesse por si só costuma ter o efeito contrário — e pode comprometer a possibilidade de ação judicial futura. Diante de perseguição digital, informação e estratégia jurídica são os instrumentos mais eficazes.
+                    Conhecer a estrutura jurídica disponível muda a forma como a vítima reage. Em vez de apenas tentar bloquear perfis sucessivamente, passa a ser possível construir prova, acionar mecanismos legais adequados, buscar proteção urgente e exigir responsabilização. Em matéria de perseguição digital, informação e documentação são parte da estratégia de defesa.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Quando há insistência reiterada, vigilância, exposição, medo ou restrição concreta da liberdade digital, a resposta não deve ser improvisada. O caminho mais seguro é documentar tudo, formalizar as denúncias e avaliar o caso com abordagem jurídica individualizada.
                   </p>
 
                   <hr />
@@ -284,7 +313,7 @@ const StalkingVirtual = () => {
                 <div className="mt-16 p-8 rounded-2xl gradient-cyber border border-primary/20 text-center">
                   <h3 className="text-2xl font-bold mb-4">Está sofrendo stalking virtual?</h3>
                   <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
-                    Nossa equipe especializada em Direito Digital está pronta para orientar você: da preservação das provas à obtenção de medidas protetivas e indenização.
+                    Nossa equipe especializada em Direito Digital está pronta para orientar você, da preservação das provas à adoção de medidas protetivas e indenizatórias.
                   </p>
                   <Link to="/#contato">
                     <Button size="lg" className="bg-gradient-accent text-background font-semibold shadow-cyber">
