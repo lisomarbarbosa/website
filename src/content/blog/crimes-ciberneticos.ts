@@ -1,51 +1,33 @@
 export const content = `
-# Crimes Cibernéticos: Proteja-se no Ambiente Digital
+# Crimes Cibernéticos: O que São, Como Denunciar e Quais São Seus Direitos
 
-Com a crescente digitalização da vida, os crimes cibernéticos se tornaram uma ameaça constante. Fraudes online, roubo de dados, ataques de phishing e extorsão são apenas alguns exemplos. É fundamental entender como esses crimes funcionam para se proteger e saber como agir caso seja vítima.
+O ambiente digital multiplicou as possibilidades de comunicação, comércio e relacionamento — mas também criou um terreno fértil para práticas criminosas. O Brasil registra, anualmente, milhões de ocorrências relacionadas a crimes cibernéticos, que vão desde o acesso não autorizado a dispositivos até a extorsão por dados roubados. Conhecer o que a lei tipifica como crime, como agir quando se é vítima e quais direitos a legislação garante é fundamental para se defender com eficácia nesse cenário.
 
-> **Atenção: Tempo é Essencial.** Em casos de extorsão digital, cada minuto conta. Não pague resgates sem consultar um advogado especializado e registre um boletim de ocorrência imediatamente.
+## O que são crimes cibernéticos
 
-## Tipos Comuns de Crimes Cibernéticos
+Crimes cibernéticos são condutas ilícitas praticadas com o uso de tecnologia da informação como meio ou como fim. Podem ser dirigidos contra sistemas, dispositivos e dados — como invasão de computadores, ransomware e furto de informações — ou contra pessoas, utilizando o ambiente digital como instrumento — como stalking virtual, estelionato online, difamação em redes sociais e extorsão por imagens íntimas. A distinção importa juridicamente porque determina qual legislação específica se aplica e quais são as penas previstas.
 
-### 1. Phishing
+## O marco legal brasileiro: principais leis
 
-Tentativas de obter informações confidenciais (senhas, dados bancários) por meio de e-mails, mensagens ou sites falsos que se passam por entidades legítimas.
+O **Marco Civil da Internet (Lei 12.965/2014)** é a espinha dorsal da regulação do ambiente digital no Brasil. Estabelece princípios como a neutralidade da rede, a proteção da privacidade e a responsabilidade dos provedores. Sua relevância prática está especialmente nos artigos que tratam da guarda de registros e da responsabilidade civil de plataformas por conteúdos de terceiros.
 
-### 2. Malware
+A **Lei Carolina Dieckmann (Lei 12.737/2012)** tipificou especificamente a invasão de dispositivos informáticos alheios para obter, alterar ou destruir dados — com pena de detenção de 3 meses a 1 ano, aumentada se o invasor obteve conteúdo de comunicações privadas, segredos comerciais ou informações sigilosas. A **Lei 13.718/2018** criminalizou a divulgação não consentida de cenas de sexo ou nudez — a chamada *revenge porn* —, com pena de 1 a 5 anos de reclusão, e o **Código Penal** contempla o estelionato, a extorsão, a ameaça, a calúnia, a injúria e a difamação praticadas por meio digital. A **LGPD (Lei 13.709/2018)**, por sua vez, protege dados pessoais e estabelece responsabilidades civis e administrativas para quem os trata de forma irregular.
 
-Softwares maliciosos (vírus, ransomware, spyware) que infectam sistemas para roubar dados, danificar arquivos ou controlar o dispositivo da vítima.
+## Como proceder ao ser vítima de um crime cibernético
 
-### 3. Fraudes Online
+O primeiro passo, sempre, é **preservar as provas**. Antes de bloquear, excluir ou reportar qualquer conteúdo, faça capturas de tela completas — incluindo URLs, datas, horários e perfis dos envolvidos. Salve links, guarde e-mails originais (com cabeçalhos técnicos), registre hashes de transações blockchain quando aplicável. Provas digitais são frágeis: podem ser apagadas, alteradas ou expirar. Quanto mais cedo forem preservadas, maiores as chances de responsabilização.
 
-Esquemas para enganar usuários e obter dinheiro ou bens, como falsas promoções, leilões fraudulentos ou golpes de investimento.
+Em seguida, registre o **Boletim de Ocorrência**. Vários estados possuem Delegacias Especializadas em Crimes Cibernéticos (DEIC), e o registro pode ser feito online em muitas unidades da federação. O B.O. formaliza a notícia do crime e é indispensável para qualquer providência judicial ou extrajudicial posterior. Dependendo do tipo de crime e da plataforma envolvida, também é possível — e recomendável — **denunciar diretamente à plataforma digital**, ao **Safernet Brasil** (safernet.org.br) e, quando houver violação de dados pessoais, à **ANPD**.
 
-### 4. Roubo de Identidade
+## Responsabilidade das plataformas digitais
 
-Uso indevido de informações pessoais para cometer fraudes, abrir contas ou realizar compras em nome da vítima.
+O Marco Civil da Internet estabelece que plataformas digitais não são responsáveis por conteúdos publicados por terceiros, salvo após **ordem judicial específica determinando a remoção** e o descumprimento desta. Na prática, isso significa que, para forçar a retirada de conteúdo ofensivo, caluniante ou íntimo divulgado sem consentimento, frequentemente é necessária uma decisão judicial. Advogados especializados podem obter **tutelas de urgência** com remoção em questão de horas — o que faz diferença crucial em casos de violação de privacidade ou *revenge porn*.
 
-### 5. Cyberbullying e Difamação
+Há exceções importantes: para crimes contra a honra e para divulgação não consentida de nudez ou atos sexuais, o Marco Civil prevê remoção **sem necessidade de ordem judicial**, bastando notificação extrajudicial documentada à plataforma. Mesmo assim, a assessoria jurídica acelera o processo e garante que a notificação tenha o formato adequado para gerar responsabilidade civil caso ignorada.
 
-Assédio, ameaças ou disseminação de informações falsas e prejudiciais online.
+## Danos morais e reparação civil
 
-## Como se Proteger?
-
-1. **Senhas Fortes:** Use senhas complexas e únicas para cada serviço, e ative a autenticação de dois fatores sempre que possível.
-2. **Software Atualizado:** Mantenha seu sistema operacional, navegadores e antivírus sempre atualizados.
-3. **Cuidado com Links e Anexos:** Desconfie de e-mails e mensagens suspeitas, evite clicar em links desconhecidos ou baixar anexos de remetentes não confiáveis.
-4. **Backup de Dados:** Faça backups regulares de seus arquivos importantes para evitar perdas em caso de ataques de ransomware ou falhas de sistema.
-5. **Monitore suas Contas:** Verifique regularmente extratos bancários e atividades em suas contas online para identificar qualquer transação suspeita.
-
-## Fui Vítima de um Crime Cibernético, e Agora?
-
-Se você foi vítima de um crime cibernético, é crucial agir rapidamente:
-
-- **Registre um Boletim de Ocorrência:** Procure a delegacia de polícia mais próxima ou faça um BO online, reunindo todas as provas possíveis (prints, e-mails, conversas).
-- **Comunique as Instituições:** Informe seu banco, operadora de cartão de crédito ou a plataforma onde o crime ocorreu.
-- **Busque Ajuda Especializada:** Um advogado especializado em direito digital pode orientá-lo sobre os próximos passos legais, como a remoção de conteúdo indevido ou a busca por indenização.
-
-## Conclusão
-
-A segurança no ambiente digital é uma responsabilidade compartilhada. Ao adotar boas práticas de cibersegurança e estar ciente dos riscos, você pode reduzir significativamente as chances de ser vítima de crimes cibernéticos. Em caso de dúvidas ou necessidade de assistência jurídica, não hesite em procurar um especialista.
+Além da esfera criminal, a vítima de crime cibernético tem direito à **reparação civil por danos morais e materiais**. A jurisprudência brasileira reconhece consistentemente o cabimento de indenização em casos de invasão de privacidade, divulgação de conteúdo íntimo, estelionato online, cyberbullying e stalking digital. O valor da indenização considera a gravidade do fato, a extensão do dano, o impacto na vida pessoal e profissional da vítima e o grau de culpa do ofensor. A ação pode ser proposta contra o autor identificado, contra a plataforma que deixou de remover o conteúdo após notificação adequada, ou contra ambos.
 
 ---
 
