@@ -463,6 +463,10 @@ jobs:
             if [ -f "$CONTENT_FILE" ]; then
               sed -i 's/[[:space:]]*$//' "$CONTENT_FILE"
             fi
+            TSX_FILE="src/pages/artigos/${GENERATED_SLUG}.tsx"
+            if [ -f "$TSX_FILE" ]; then
+              sed -i 's/[[:space:]]*$//' "$TSX_FILE"
+            fi
           fi
           echo "✅ Trailing whitespace removido."
 
@@ -479,6 +483,10 @@ jobs:
           echo ""
           echo "📄 Arquivos gerados em src/content/blog/:"
           git diff --name-only --diff-filter=A -- 'src/content/blog/*.ts' || true
+
+          echo ""
+          echo "📄 Arquivos gerados em src/pages/artigos/:"
+          git diff --name-only --diff-filter=A -- 'src/pages/artigos/*.tsx' || true
 
           echo ""
           echo "🗺️ Alterações em sitemap.xml:"
@@ -506,7 +514,7 @@ jobs:
           git add src/data/blog.ts
           git add src/content/blog/
           git add public/sitemap.xml
-          git add src/pages/articles/ || true
+          git add src/pages/artigos/ || true
           git add src/App.tsx || true
 
           git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
