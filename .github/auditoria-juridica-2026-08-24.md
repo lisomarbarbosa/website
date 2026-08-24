@@ -6,9 +6,9 @@
 
 ---
 
-## 📄 InstagramHackeado.tsx
+## 📄 CrimesCiberneticos.tsx
 
-**Caminho:** `src/pages/articles/InstagramHackeado.tsx`
+**Caminho:** `src/pages/articles/CrimesCiberneticos.tsx`
 
 | Lei / Norma | Status | Observação |
 |---|---|---|
