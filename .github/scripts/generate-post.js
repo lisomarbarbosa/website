@@ -9,6 +9,7 @@ const __dirname = dirname(__filename);
 const ROOT = process.cwd();
 
 const CONTENT_DIR = join(ROOT, "src/content/blog");
+const BLOG_DATA_FILE = join(ROOT, "src/data/blog.ts");
 const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
@@ -133,6 +134,16 @@ function calculateReadTime(words) {
 
 function getToday() {
   return new Date().toISOString().slice(0, 10);
+}
+
+/**
+ * Escapa uma string para ser inserida com segurança dentro de aspas simples
+ * em um arquivo TypeScript (ex.: dentro de um objeto literal).
+ */
+function escapeForSingleQuote(text) {
+  return String(text)
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'");
 }
 
 // ─── Curadoria de temas ───────────────────────────────────────────────────────
@@ -317,30 +328,14 @@ async function callOpenRouter(messages, modelIndex = 0) {
 
 /**
  * Gera o artigo em Markdown puro.
- * Retorna { title, slug, content, wordCount }
+ * Retorna { title, slug, markdown, wordCount }
  */
 async function generateArticle(topic, modelIndex = 0) {
   log(`✍️  Gerando artigo sobre: "${topic}"`);
 
-  const systemPrompt = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.
-Escreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.
-Use linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.
-Nunca use markdown de code block (sem \`\`\`). Use apenas formatação Markdown padrão (##, ###, **, *).
-Ao final, adicione a linha: *Este artigo tem caráter informativo e não substitui consulta jurídica individualizada.*`;
+  const systemPrompt = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.\nEscreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.\nUse linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.\nNunca use markdown de code block (sem \`\`\`). Use apenas formatação Markdown padrão (##, ###, **, *).\nAo final, adicione a linha: *Este artigo tem caráter informativo e não substitui consulta jurídica individualizada.*`;
 
-  const userPrompt = `Escreva um artigo completo e aprofundado sobre o tema: "${topic}".
-
-Requisitos:
-- Mínimo de ${MIN_WORDS} palavras
-- Título claro e informativo (linha 1, iniciando com #)
-- Estrutura com subtítulos (##, ###)
-- Parágrafos bem desenvolvidos
-- Exemplos práticos quando cabível
-- Referências a leis, decretos ou jurisprudência brasileira relevantes
-- Conclusão ou considerações finais
-- Linguagem acessível ao público leigo interessado em seus direitos
-
-Retorne APENAS o texto do artigo em Markdown. Não inclua JSON, frontmatter ou metadados.`;
+  const userPrompt = `Escreva um artigo completo e aprofundado sobre o tema: "${topic}".\n\nRequisitos:\n- Mínimo de ${MIN_WORDS} palavras\n- Título claro e informativo (linha 1, iniciando com #)\n- Estrutura com subtítulos (##, ###)\n- Parágrafos bem desenvolvidos\n- Exemplos práticos quando cabível\n- Referências a leis, decretos ou jurisprudência brasileira relevantes\n- Conclusão ou considerações finais\n- Linguagem acessível ao público leigo interessado em seus direitos\n\nRetorne APENAS o texto do artigo em Markdown. Não inclua JSON, frontmatter ou metadados.`;
 
   const raw = await callOpenRouter(
     [
@@ -363,6 +358,31 @@ Retorne APENAS o texto do artigo em Markdown. Não inclua JSON, frontmatter ou m
   return { title, slug, markdown, wordCount };
 }
 
+// ─── Geração do excerpt via IA ────────────────────────────────────────────────
+
+/**
+ * Gera um excerpt (resumo de até 200 caracteres) para o artigo.
+ * Retorna a string do excerpt.
+ */
+async function generateExcerpt(title, markdown, modelIndex = 0) {
+  log(`📋 Gerando excerpt para: "${title}"`);
+
+  const prompt = `Leia o artigo jurídico abaixo e escreva um resumo em português do Brasil com no máximo 200 caracteres. O resumo deve ser atrativo, informativo e adequado como descrição de blog. Retorne APENAS o texto do resumo, sem aspas, sem prefixo.\n\nTítulo: ${title}\n\nArtigo:\n${markdown.slice(0, 2000)}`;
+
+  try {
+    const raw = await callOpenRouter(
+      [{ role: "user", content: prompt }],
+      modelIndex
+    );
+    const excerpt = normalizeText(raw).slice(0, 200);
+    log(`📋 Excerpt gerado: "${excerpt}"`);
+    return excerpt;
+  } catch (err) {
+    log(`⚠️  Falha ao gerar excerpt (${err.message}) — usando fallback.`);
+    return title.slice(0, 200);
+  }
+}
+
 // ─── Auditoria ────────────────────────────────────────────────────────────────
 
 /**
@@ -372,24 +392,7 @@ Retorne APENAS o texto do artigo em Markdown. Não inclua JSON, frontmatter ou m
 async function auditArticle(title, markdown, modelIndex = 0) {
   log(`🔍 Auditando artigo: "${title}"`);
 
-  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:
-{
-  "approved": true/false,
-  "reason": "motivo breve se reprovado"
-}
-
-Reprove se:
-- Conteúdo genérico demais, sem referências jurídicas concretas
-- Menos de 800 palavras
-- Título não condiz com o conteúdo
-- Conteúdo claramente incorreto juridicamente
-
-Artigo:
----
-${markdown.slice(0, 3000)}
----
-
-Retorne APENAS o JSON.`;
+  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{\n  "approved": true/false,\n  "reason": "motivo breve se reprovado"\n}\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${markdown.slice(0, 3000)}\n---\n\nRetorne APENAS o JSON.`;
 
   try {
     const raw = await callOpenRouter(
@@ -405,7 +408,7 @@ Retorne APENAS o JSON.`;
   }
 }
 
-// ─── Escrita do arquivo ───────────────────────────────────────────────────────
+// ─── Escrita dos arquivos ─────────────────────────────────────────────────────
 
 /**
  * Escreve src/content/blog/[slug].ts com o formato da nova arquitetura:
@@ -422,6 +425,42 @@ async function writeContentFile(slug, markdown) {
   await writeFile(filePath, fileContent, "utf8");
   log(`💾 Arquivo salvo: src/content/blog/${slug}.ts`);
   return filePath;
+}
+
+/**
+ * Insere uma nova entrada no array blogPosts em src/data/blog.ts.
+ * Adiciona o novo post no início do array (mais recente primeiro).
+ */
+async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
+  const source = await readFile(BLOG_DATA_FILE, "utf8");
+
+  // Detecta o marcador de início do array
+  const arrayStart = source.indexOf("export const blogPosts: BlogPost[] = [");
+  if (arrayStart === -1) {
+    throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
+  }
+
+  const insertAt = source.indexOf("[", arrayStart) + 1;
+
+  const safeTitle    = escapeForSingleQuote(title);
+  const safeExcerpt  = escapeForSingleQuote(excerpt);
+  const safeImage    = escapeForSingleQuote(image);
+  const safeCategory = escapeForSingleQuote(category);
+
+  const newEntry = `
+  {
+    slug: '${slug}',
+    title: '${safeTitle}',
+    excerpt: '${safeExcerpt}',
+    date: '${date}',
+    readTime: '${readTime}',
+    category: '${safeCategory}',
+    image: '${safeImage}',
+  },`;
+
+  const updated = source.slice(0, insertAt) + newEntry + source.slice(insertAt);
+  await writeFile(BLOG_DATA_FILE, updated, "utf8");
+  log(`📚 blogPosts atualizado: entrada '${slug}' inserida em src/data/blog.ts`);
 }
 
 /**
@@ -485,9 +524,28 @@ async function main() {
       continue;
     }
 
-    // 7. Salva o arquivo
+    // 7. Busca imagem e gera excerpt
+    const [image, excerpt] = await Promise.all([
+      fetchImage(topic),
+      generateExcerpt(article.title, article.markdown, attempt - 1),
+    ]);
+
+    const date     = getToday();
+    const readTime = calculateReadTime(article.wordCount);
+    const category = "Direito Digital";
+
+    // 8. Salva os arquivos
     try {
       await writeContentFile(article.slug, article.markdown);
+      await updateBlogData({
+        slug: article.slug,
+        title: article.title,
+        excerpt,
+        date,
+        readTime,
+        category,
+        image,
+      });
       await saveGeneratedSlug(article.slug);
     } catch (err) {
       log(`❌ Falha ao salvar arquivo: ${err.message}`);
@@ -495,10 +553,11 @@ async function main() {
     }
 
     log(`\n🎉 Artigo publicado com sucesso!`);
-    log(`   Título: ${article.title}`);
-    log(`   Slug:   ${article.slug}`);
+    log(`   Título:   ${article.title}`);
+    log(`   Slug:     ${article.slug}`);
     log(`   Palavras: ${article.wordCount}`);
-    log(`   Arquivo: src/content/blog/${article.slug}.ts`);
+    log(`   Arquivo:  src/content/blog/${article.slug}.ts`);
+    log(`   Blog:     src/data/blog.ts atualizado`);
     return;
   }
 
