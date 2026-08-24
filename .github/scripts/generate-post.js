@@ -15,7 +15,7 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
-const MAX_ATTEMPTS = 10;
+const MAX_ATTEMPTS = 15;
 
 const MODELS = [
   "nvidia/nemotron-3-ultra-550b-a55b:free",
