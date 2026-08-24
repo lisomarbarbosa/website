@@ -6,17 +6,15 @@
 
 ---
 
-## 📄 CrimesCiberneticos.tsx
+## 📄 StalkingVirtual.tsx
 
-**Caminho:** `src/pages/articles/CrimesCiberneticos.tsx`
+**Caminho:** `src/pages/articles/StalkingVirtual.tsx`
 
 | Lei / Norma | Status | Observação |
 |---|---|---|
 | Lei nº 13.709/2018 (LGPD) | ✅ Vigente | — |
-| Lei nº 12.965/2014 (Marco Civil) | ✅ Vigente | — |
-| Lei nº 12.737/2012 (Lei Carolina Dieckmann) | ✅ Vigente | — |
 
-**Leis detectadas:** 3 | **Problemas:** 0
+**Leis detectadas:** 1 | **Problemas:** 0
 
 ---
 
@@ -25,6 +23,6 @@
 | Métrica | Valor |
 |---|---|
 | Arquivos auditados | 1 |
-| Referências legislativas encontradas | 3 |
+| Referências legislativas encontradas | 1 |
 | Problemas identificados | 0 |
 | Status geral | ✅ Aprovado |
