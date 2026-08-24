@@ -8,7 +8,16 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[
+  {
+    slug: 'stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil',
+    title: 'Stalking Virtual: O que é e quais as consequências jurídicas no Brasil',
+    excerpt: 'Entenda o que é stalking virtual, como se proteger e quais as ações legais previstas no Brasil, incluindo LGPD, Marco Civil e Lei 13.869/2019.',
+    date: '2026-08-24',
+    readTime: '7 min de leitura',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1751448555253-f39c06e29d82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTc3MTkxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },] = [
   {
     slug: 'contratos-digitais-validade-juridica-assinaturas-direitos',
     title: 'Contratos digitais: validade jurídica, assinaturas e o que você precisa saber antes de clicar em "concordo"',
