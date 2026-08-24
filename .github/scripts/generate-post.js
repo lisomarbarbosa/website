@@ -1,4 +1,4 @@
-import { readFile, writeFile, readdir } from "fs/promises";
+import { readFile, writeFile, readdir, mkdir } from "fs/promises";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -285,45 +285,9 @@ async function callOpenRouter(messages, modelIndex = 0) {
 async function generateArticle(topic, modelIndex = 0) {
   log(`✍️  Gerando artigo sobre: "${topic}"`);
 
-  const systemPrompt = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.
-Escreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.
-Use linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.
-Nunca inclua blocos de código Markdown (\`\`\`). Responda APENAS com JSON válido.`;
+  const systemPrompt = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.\nEscreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.\nUse linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.\nNunca inclua blocos de código Markdown (\`\`\`). Responda APENAS com JSON válido.`;
 
-  const userPrompt = `Escreva um artigo jurídico completo sobre o tema: "${topic}".
-
-Retorne APENAS um objeto JSON (sem Markdown ao redor) com a seguinte estrutura:
-
-{
-  "title": "Título informativo e claro (máximo 100 caracteres)",
-  "description": "Meta descrição para SEO (máximo 200 caracteres, explica o valor do artigo)",
-  "intro": "Parágrafo introdutório forte (2-4 frases, contextualiza o problema e anuncia o que o artigo cobre)",
-  "alertTitle": "Título curto do bloco de atenção (ex: 'Atenção: documente tudo desde o início')",
-  "alertBody": "Texto do bloco de atenção (1-3 frases práticas e diretas)",
-  "sections": [
-    {
-      "heading": "Subtítulo da seção (H2, até 60 caracteres)",
-      "paragraphs": ["Parágrafo 1 da seção", "Parágrafo 2 da seção"]
-    }
-  ],
-  "actionSteps": [
-    { "title": "Título curto da ação", "body": "Descrição da ação em 1-2 frases" }
-  ],
-  "preventionItems": [
-    { "bold": "Título em negrito", "text": "Explicação breve" }
-  ],
-  "closing": "Parágrafo final de considerações (2-3 frases)",
-  "closingExtra": "Segundo parágrafo final opcional (2-3 frases)",
-  "disclaimer": "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada."
-}
-
-Requisitos:
-- "sections": entre 4 e 6 seções, cada uma com 2-3 parágrafos bem desenvolvidos
-- "actionSteps": 4 a 6 passos numerados práticos
-- "preventionItems": 4 a 6 dicas de prevenção
-- Total de palavras estimado: mínimo ${MIN_WORDS}
-- Cite leis, artigos do CDC, LGPD, Marco Civil, CPB ou jurisprudência relevante onde apropriado
-- Linguagem acessível ao público leigo interessado em seus direitos`;
+  const userPrompt = `Escreva um artigo jurídico completo sobre o tema: "${topic}".\n\nRetorne APENAS um objeto JSON (sem Markdown ao redor) com a seguinte estrutura:\n\n{\n  "title": "Título informativo e claro (máximo 100 caracteres)",\n  "description": "Meta descrição para SEO (máximo 200 caracteres, explica o valor do artigo)",\n  "intro": "Parágrafo introdutório forte (2-4 frases, contextualiza o problema e anuncia o que o artigo cobre)",\n  "alertTitle": "Título curto do bloco de atenção (ex: 'Atenção: documente tudo desde o início')",\n  "alertBody": "Texto do bloco de atenção (1-3 frases práticas e diretas)",\n  "sections": [\n    {\n      "heading": "Subtítulo da seção (H2, até 60 caracteres)",\n      "paragraphs": ["Parágrafo 1 da seção", "Parágrafo 2 da seção"]\n    }\n  ],\n  "actionSteps": [\n    { "title": "Título curto da ação", "body": "Descrição da ação em 1-2 frases" }\n  ],\n  "preventionItems": [\n    { "bold": "Título em negrito", "text": "Explicação breve" }\n  ],\n  "closing": "Parágrafo final de considerações (2-3 frases)",\n  "closingExtra": "Segundo parágrafo final opcional (2-3 frases)",\n  "disclaimer": "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada."\n}\n\nRequisitos:\n- "sections": entre 4 e 6 seções, cada uma com 2-3 parágrafos bem desenvolvidos\n- "actionSteps": 4 a 6 passos numerados práticos\n- "preventionItems": 4 a 6 dicas de prevenção\n- Total de palavras estimado: mínimo ${MIN_WORDS}\n- Cite leis, artigos do CDC, LGPD, Marco Civil, CPB ou jurisprudência relevante onde apropriado\n- Linguagem acessível ao público leigo interessado em seus direitos`;
 
   const raw = await callOpenRouter(
     [
@@ -370,21 +334,7 @@ Requisitos:
 async function auditArticle(title, intro, sections, modelIndex = 0) {
   log(`🔍 Auditando artigo: "${title}"`);
   const preview = [intro, ...sections.map(s => s.paragraphs.join(" "))].join("\n\n").slice(0, 3000);
-  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:
-{ "approved": true/false, "reason": "motivo breve se reprovado" }
-
-Reprove se:
-- Conteúdo genérico demais, sem referências jurídicas concretas
-- Menos de 800 palavras no preview
-- Título não condiz com o conteúdo
-- Conteúdo claramente incorreto juridicamente
-
-Artigo:
----
-${preview}
----
-
-Retorne APENAS o JSON.`;
+  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true/false, "reason": "motivo breve se reprovado" }\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras no preview\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${preview}\n---\n\nRetorne APENAS o JSON.`;
   try {
     const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
     const result = extractJson(raw);
@@ -660,6 +610,7 @@ export default ${componentName};
  */
 async function writePageFile(slug, tsxContent) {
   const filePath = join(PAGES_DIR, `${slug}.tsx`);
+  await mkdir(PAGES_DIR, { recursive: true });
   await writeFile(filePath, tsxContent, "utf8");
   log(`💾 Arquivo salvo: src/pages/artigos/${slug}.tsx`);
   return filePath;
