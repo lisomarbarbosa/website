@@ -9,6 +9,7 @@ import {
   Bug,
   UserX,
   Lock,
+  Scale,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -81,7 +82,7 @@ const CrimesCiberneticos = () => {
                   </h1>
 
                   <div className="flex items-center gap-4 text-sm text-foreground/60 mb-8">
-                    <span>20 Out 2024</span>
+                    <span>24 Ago 2026</span>
                     <span>•</span>
                     <span>10 min de leitura</span>
                   </div>
@@ -117,17 +118,27 @@ const CrimesCiberneticos = () => {
                   </h2>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    O Brasil possui um conjunto de leis que criminalizam condutas praticadas no ambiente digital. A <strong>Lei nº 12.737/2012</strong>, conhecida como Lei Carolina Dieckmann, foi pioneira ao tipificar a invasão de dispositivo informático. O <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong> estabelece princípios, direitos e deveres para o uso da internet no país. Já a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> impõe obrigações às organizações que tratam dados pessoais e prevê sanções em caso de negligência.
+                    O Brasil possui um conjunto de leis que criminalizam condutas praticadas no ambiente digital. A <strong>Lei nº 12.737/2012</strong>, conhecida como Lei Carolina Dieckmann, foi pioneira ao tipificar a invasão de dispositivo informático, com pena de detenção de três meses a um ano — agravada quando a invasão resulta em obtenção de conteúdo íntimo ou causa prejuízo econômico. O <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong> estabelece princípios, direitos e deveres para o uso da internet no país, incluindo a responsabilidade dos provedores pela guarda de logs e pela remoção de conteúdo ilícito mediante ordem judicial.
                   </p>
 
                   <p className="text-foreground/80 mb-6 leading-relaxed">
-                    Além dessas normas específicas, crimes como estelionato, extorsão, difamação, ameaça e falsidade ideológica também se aplicam quando praticados por meios digitais, com as mesmas penas previstas no Código Penal. A prática do crime pela internet não afasta a responsabilidade penal — apenas exige provas digitais adequadas para a apuração e a persecução criminal.
+                    Já a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> impõe obrigações às organizações que tratam dados pessoais e prevê sanções administrativas em caso de negligência, incluindo multas de até 2% do faturamento da empresa, limitadas a R$ 50 milhões por infração. Além dessas normas específicas, crimes como estelionato, extorsão, difamação, ameaça e falsidade ideológica também se aplicam quando praticados por meios digitais, com as mesmas penas previstas no Código Penal. A prática do crime pela internet não afasta a responsabilidade penal — apenas exige provas digitais adequadas para a apuração e a persecução criminal.
                   </p>
+
+                  <blockquote>
+                    <p>
+                      <strong>Dado relevante:</strong> segundo o Anuário Brasileiro de Segurança Pública, os crimes cibernéticos apresentaram crescimento expressivo nos últimos anos, com o estelionato digital respondendo pela maior parte dos registros. O subnoticiamento ainda é alto, pois muitas vítimas não sabem como ou onde registrar a ocorrência.
+                    </p>
+                  </blockquote>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <ShieldAlert className="text-primary" size={28} />
                     Principais modalidades de crimes cibernéticos
                   </h2>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    O universo dos crimes digitais é amplo e está em constante evolução. Conhecer as modalidades mais comuns ajuda a identificar riscos e a agir com mais rapidez quando algo ocorre.
+                  </p>
 
                   <div className="space-y-8 mb-12">
                     <div>
@@ -136,7 +147,7 @@ const CrimesCiberneticos = () => {
                         Phishing
                       </h3>
                       <p className="text-foreground/80 leading-relaxed">
-                        Técnica de engenharia social que consiste em induzir a vítima a revelar informações confidenciais — senhas, dados bancários, número de cartão — por meio de e-mails, mensagens de texto ou sites falsos que imitam plataformas legítimas. O phishing é a porta de entrada de grande parte das fraudes financeiras digitais no Brasil.
+                        Técnica de engenharia social que consiste em induzir a vítima a revelar informações confidenciais — senhas, dados bancários, número de cartão — por meio de e-mails, mensagens de texto ou sites falsos que imitam plataformas legítimas. O phishing é a porta de entrada de grande parte das fraudes financeiras digitais no Brasil. Em muitos casos, o link enviado é indistinguível do endereço original, e a página falsa replica fielmente a identidade visual do banco ou da loja.
                       </p>
                     </div>
 
@@ -146,7 +157,7 @@ const CrimesCiberneticos = () => {
                         Malware e ransomware
                       </h3>
                       <p className="text-foreground/80 leading-relaxed">
-                        Softwares maliciosos instalados no dispositivo da vítima sem seu conhecimento. O ransomware, em especial, criptografa os arquivos do computador ou celular e exige pagamento de resgate para liberação do acesso. Empresas, hospitais e órgãos públicos têm sido alvos frequentes, mas pessoas físicas também são atingidas.
+                        Softwares maliciosos instalados no dispositivo da vítima sem seu conhecimento. O ransomware, em especial, criptografa os arquivos do computador ou celular e exige pagamento de resgate para liberação do acesso — frequentemente em criptomoedas, o que dificulta o rastreamento. Empresas, hospitais e órgãos públicos têm sido alvos frequentes, mas pessoas físicas também são atingidas, muitas vezes por meio de arquivos recebidos por e-mail ou aplicativos baixados de fontes não oficiais.
                       </p>
                     </div>
 
@@ -156,7 +167,7 @@ const CrimesCiberneticos = () => {
                         Roubo de identidade
                       </h3>
                       <p className="text-foreground/80 leading-relaxed">
-                        Uso não autorizado de dados pessoais para abrir contas bancárias, contrair empréstimos, realizar compras ou cometer fraudes em nome da vítima. O roubo de identidade pode causar danos financeiros severos e manchar o histórico de crédito do titular por anos.
+                        Uso não autorizado de dados pessoais para abrir contas bancárias, contrair empréstimos, realizar compras ou cometer fraudes em nome da vítima. O roubo de identidade pode causar danos financeiros severos e manchar o histórico de crédito do titular por anos. Nos casos mais graves, a vítima só descobre o problema quando já está negativada por dívidas que nunca contraiu.
                       </p>
                     </div>
 
@@ -166,7 +177,7 @@ const CrimesCiberneticos = () => {
                         Fraudes online
                       </h3>
                       <p className="text-foreground/80 leading-relaxed">
-                        Incluem falsas promoções em redes sociais, lojas virtuais inexistentes, golpes de investimento com criptomoedas ou rendimentos impossíveis, leilões fraudulentos e compras que nunca são entregues. O estelionato praticado por meio eletrônico é crime previsto no artigo 171 do Código Penal, com pena de um a cinco anos de reclusão.
+                        Incluem falsas promoções em redes sociais, lojas virtuais inexistentes, golpes de investimento com criptomoedas ou rendimentos impossíveis, leilões fraudulentos e compras que nunca são entregues. O estelionato praticado por meio eletrônico é crime previsto no artigo 171 do Código Penal, com pena de um a cinco anos de reclusão. Quando a fraude envolve dispositivos eletrônicos ou transferências bancárias indevidas, as penas podem ser aumentadas.
                       </p>
                     </div>
 
@@ -176,10 +187,23 @@ const CrimesCiberneticos = () => {
                         Cyberbullying, difamação e ameaças
                       </h3>
                       <p className="text-foreground/80 leading-relaxed">
-                        Assédio sistemático, exposição vexatória, ameaças, publicação de informações falsas ou ofensivas e disseminação de conteúdo íntimo sem autorização são condutas que combinam ilicitude penal e civil. A vítima pode buscar tanto a responsabilização criminal do agressor quanto indenização por danos morais na esfera cível.
+                        Assédio sistemático, exposição vexatória, ameaças, publicação de informações falsas ou ofensivas e disseminação de conteúdo íntimo sem autorização são condutas que combinam ilicitude penal e civil. A vítima pode buscar tanto a responsabilização criminal do agressor quanto indenização por danos morais na esfera cível. A Lei nº 14.811/2024 reforçou o arcabouço normativo de combate à intimidação sistêmica, inclusive no ambiente digital.
                       </p>
                     </div>
                   </div>
+
+                  <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
+                    <Scale className="text-primary" size={28} />
+                    Responsabilidade civil e criminal: quem pode ser responsabilizado
+                  </h2>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Em crimes cibernéticos, a responsabilidade pode recair sobre o autor direto do ilícito, mas também sobre terceiros que, de alguma forma, contribuíram para o dano. Provedores de aplicação são responsabilizados por danos decorrentes de conteúdo gerado por terceiros quando, notificados judicialmente, deixam de remover o conteúdo apontado como ilícito, nos termos do artigo 19 do Marco Civil da Internet.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Empresas que sofrem vazamentos de dados e negligenciaram medidas básicas de segurança também podem responder civil e administrativamente perante a Autoridade Nacional de Proteção de Dados (ANPD). O titular de dados tem direito à reparação por danos materiais e morais decorrentes do tratamento irregular de suas informações, independentemente de culpa do responsável pelo tratamento, quando aplicável a responsabilidade objetiva.
+                  </p>
 
                   <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
                     <Lock className="text-primary" size={28} />
@@ -192,22 +216,22 @@ const CrimesCiberneticos = () => {
 
                   <ul className="list-disc pl-6 mb-8 text-foreground/80 space-y-3">
                     <li>
-                      <strong>Senhas fortes e únicas:</strong> use combinações longas e diferentes para cada serviço. Gerenciadores de senhas facilitam esse controle.
+                      <strong>Senhas fortes e únicas:</strong> use combinações longas e diferentes para cada serviço. Gerenciadores de senhas facilitam esse controle sem comprometer a segurança.
                     </li>
                     <li>
-                      <strong>Autenticação em dois fatores (2FA):</strong> ative em e-mail, redes sociais, aplicativos bancários e qualquer plataforma que ofereça essa opção.
+                      <strong>Autenticação em dois fatores (2FA):</strong> ative em e-mail, redes sociais, aplicativos bancários e qualquer plataforma que ofereça essa opção. Prefira aplicativos autenticadores a SMS.
                     </li>
                     <li>
                       <strong>Atualizações em dia:</strong> mantenha sistema operacional, navegador e antivírus sempre atualizados. Vulnerabilidades corrigidas deixam de ser porta de entrada para ataques.
                     </li>
                     <li>
-                      <strong>Desconfie de links e anexos:</strong> não clique em links recebidos por e-mail ou WhatsApp sem verificar a origem. Sites fraudulentos costumam imitar domínios legítimos com pequenas alterações.
+                      <strong>Desconfie de links e anexos:</strong> não clique em links recebidos por e-mail ou WhatsApp sem verificar a origem. Sites fraudulentos costumam imitar domínios legítimos com pequenas alterações ortográficas.
                     </li>
                     <li>
-                      <strong>Backup regular:</strong> mantenha cópias dos seus arquivos em local separado do dispositivo principal. Em caso de ransomware, o backup pode evitar o pagamento de resgate.
+                      <strong>Backup regular:</strong> mantenha cópias dos seus arquivos em local separado do dispositivo principal. Em caso de ransomware, o backup pode evitar o pagamento de resgate e a perda definitiva dos dados.
                     </li>
                     <li>
-                      <strong>Monitore suas contas:</strong> verifique periodicamente extratos bancários, histórico de crédito e atividades nas suas contas digitais para identificar movimentações suspeitas.
+                      <strong>Monitore suas contas:</strong> verifique periodicamente extratos bancários, histórico de crédito e atividades nas suas contas digitais para identificar movimentações suspeitas com antecedência.
                     </li>
                   </ul>
 
@@ -220,34 +244,64 @@ const CrimesCiberneticos = () => {
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">1.</span>
                       <div>
-                        <strong>Preserve todas as provas:</strong> prints de tela, e-mails, mensagens, registros de acesso, extratos e qualquer outro documento que comprove o ocorrido. Provas digitais são frágeis e podem ser apagadas pelo agressor.
+                        <strong>Preserve todas as provas:</strong> prints de tela, e-mails, mensagens, registros de acesso, extratos e qualquer outro documento que comprove o ocorrido. Provas digitais são frágeis e podem ser apagadas pelo agressor a qualquer momento.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">2.</span>
                       <div>
-                        <strong>Registre boletim de ocorrência:</strong> presencialmente na Delegacia de Crimes Cibernéticos (onde houver) ou pela internet, dependendo do estado. O BO é documento essencial para qualquer providência posterior.
+                        <strong>Registre boletim de ocorrência:</strong> presencialmente na Delegacia de Crimes Cibernéticos (onde houver) ou pela internet, dependendo do estado. O BO é documento essencial para qualquer providência posterior, inclusive judicial.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">3.</span>
                       <div>
-                        <strong>Comunique as instituições envolvidas:</strong> informe o banco, a operadora do cartão ou a plataforma onde o crime ocorreu. Em casos de fraude financeira, a comunicação imediata pode viabilizar o bloqueio de transações e o ressarcimento.
+                        <strong>Comunique as instituições envolvidas:</strong> informe o banco, a operadora do cartão ou a plataforma onde o crime ocorreu. Em casos de fraude financeira, a comunicação imediata pode viabilizar o bloqueio de transações e o ressarcimento dos valores.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">4.</span>
                       <div>
-                        <strong>Solicite remoção de conteúdo:</strong> em casos de difamação, exposição íntima ou conteúdo falso, plataformas como Google, Instagram e WhatsApp possuem canais de denúncia. Em situações urgentes, é possível obter ordem judicial de remoção em 24 horas.
+                        <strong>Solicite remoção de conteúdo:</strong> em casos de difamação, exposição íntima ou conteúdo falso, plataformas como Google, Instagram e WhatsApp possuem canais de denúncia. Em situações urgentes, é possível obter ordem judicial de remoção em 24 horas mediante tutela de urgência.
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">5.</span>
                       <div>
-                        <strong>Busque orientação jurídica especializada:</strong> um advogado de Direito Digital pode orientar sobre medidas cautelares, ação penal privada ou pública, e eventual pedido de indenização por danos materiais e morais.
+                        <strong>Busque orientação jurídica especializada:</strong> um advogado de Direito Digital pode orientar sobre medidas cautelares, ação penal privada ou pública, e eventual pedido de indenização por danos materiais e morais, além de acompanhar a investigação criminal.
                       </div>
                     </li>
                   </ol>
+
+                  <h2 className="text-3xl font-bold mt-12 mb-6">Hábitos de prevenção</h2>
+
+                  <ul className="list-disc pl-6 mb-8 text-foreground/80 space-y-3">
+                    <li>
+                      <strong>Verifique sempre o remetente</strong> de e-mails e mensagens antes de clicar em qualquer link, especialmente os que pedem dados ou senhas.
+                    </li>
+                    <li>
+                      <strong>Use redes Wi-Fi seguras</strong> ou VPN ao acessar serviços bancários e plataformas sensíveis em locais públicos.
+                    </li>
+                    <li>
+                      <strong>Revise as permissões dos aplicativos</strong> instalados no celular e remova aqueles que solicitam acesso além do necessário para sua função.
+                    </li>
+                    <li>
+                      <strong>Ative alertas de transação</strong> em todos os seus serviços financeiros para ser notificado imediatamente de qualquer movimentação.
+                    </li>
+                    <li>
+                      <strong>Eduque as pessoas próximas:</strong> muitos ataques chegam através de contatos da vítima que já foram comprometidos. A segurança digital de um depende da do outro.
+                    </li>
+                  </ul>
+
+                  <h2 className="text-3xl font-bold mt-12 mb-6">Considerações finais</h2>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Os crimes cibernéticos são uma realidade do ambiente digital contemporâneo, mas o ordenamento jurídico brasileiro dispõe de ferramentas concretas para responsabilizar os autores e proteger as vítimas. O caminho passa pela combinação de prevenção técnica, atenção comportamental e conhecimento dos seus direitos.
+                  </p>
+
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Quando o crime já ocorreu, agir rápido e com estratégia faz toda a diferença: documentar, registrar a ocorrência, comunicar as instituições envolvidas e buscar orientação jurídica especializada são as etapas que abrem o caminho para a responsabilização do agressor e, quando possível, para a reparação dos danos sofridos.
+                  </p>
 
                   <hr />
 
