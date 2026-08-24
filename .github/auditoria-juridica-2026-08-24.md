@@ -13,8 +13,9 @@
 | Lei / Norma | Status | Observação |
 |---|---|---|
 | Lei nº 13.709/2018 (LGPD) | ✅ Vigente | — |
+| Lei nº 12.965/2014 (Marco Civil) | ✅ Vigente | — |
 
-**Leis detectadas:** 1 | **Problemas:** 0
+**Leis detectadas:** 2 | **Problemas:** 0
 
 ---
 
@@ -23,6 +24,6 @@
 | Métrica | Valor |
 |---|---|
 | Arquivos auditados | 1 |
-| Referências legislativas encontradas | 1 |
+| Referências legislativas encontradas | 2 |
 | Problemas identificados | 0 |
 | Status geral | ✅ Aprovado |
