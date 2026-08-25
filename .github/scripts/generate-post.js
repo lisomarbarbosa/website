@@ -17,26 +17,22 @@ const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
 const MAX_ATTEMPTS = 15;
 
-// ── Modelo principal: openrouter/auto ─────────────────────────────────────────
-// O modelo "openrouter/auto" seleciona automaticamente o melhor modelo disponível
-// com base no prompt enviado (custo, capacidade e disponibilidade em tempo real).
-// Em caso de falha (rate limit, erro HTTP), o sistema faz fallback para o pool abaixo.
-const AUTO_MODEL = "openrouter/auto";
-
-// ── Pool de fallback (usado apenas se AUTO_MODEL falhar) ──────────────────────
-const FALLBACK_MODELS = [
-  "meta-llama/llama-3.3-70b-instruct:free",
-  "mistralai/mistral-7b-instruct:free",
-  "qwen/qwen-2.5-72b-instruct:free",
-  "deepseek/deepseek-chat:free",
-  "meta-llama/llama-3.1-8b-instruct:free",
-  "nvidia/nemotron-3-ultra-550b-a55b:free",
-  "nvidia/nemotron-3-super-120b-a12b:free",
-  "dots-studio/dots-3-note-preview:free",
-  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-  "poolside/laguna-s-2.1:free",
-  "google/gemma-4-31b-it:free",
-  "google/gemma-4-26b-a4b-it:free",
+// ── Pool de modelos (slugs free válidos em ago/2026) ───────────────────────────
+// Modelos verificados como disponíveis na tier gratuita do OpenRouter.
+// Caso um modelo retorne 404, ele é pulado automaticamente pelo retry loop.
+const MODELS = [
+  "meta-llama/llama-3.3-70b-instruct",       // versão paga disponível (sem :free)
+  "google/gemma-3-27b-it:free",
+  "google/gemma-3-12b-it:free",
+  "google/gemma-3-4b-it:free",
+  "microsoft/phi-4:free",
+  "microsoft/phi-4-reasoning:free",
+  "mistralai/mistral-small-3.2-24b-instruct:free",
+  "qwen/qwen3-8b:free",
+  "qwen/qwen3-14b:free",
+  "qwen/qwen3-30b-a3b:free",
+  "deepseek/deepseek-r1-0528-qwen3-8b:free",
+  "moonshotai/kimi-k2:free",
 ];
 
 const SAME_TOPIC_RETRIES = 3;
@@ -233,26 +229,15 @@ async function fetchImage(topic) {
 
 // ── OpenRouter ─────────────────────────────────────────────────────────────────
 //
-// Estratégia de seleção de modelo:
-//   1ª tentativa  → AUTO_MODEL ("openrouter/auto"): roteamento automático pelo OpenRouter,
-//                   que escolhe o melhor modelo disponível no momento para o prompt.
-//   Tentativas 2+ → FALLBACK_MODELS[modelIndex % length]: rotação pelos modelos gratuitos
-//                   definidos no pool, usados quando o auto falha por rate limit ou erro.
-//
-// O campo "model" retornado na resposta indica qual modelo foi efetivamente usado,
-// útil para debug e logs de auditoria.
+// Rotaciona pelos modelos do pool em ordem.
+// Se um modelo retornar 404 (descontinuado) ou 429 (rate limit), o erro é
+// propagado e o retry loop no main() avança para o próximo índice automaticamente.
 
 async function callOpenRouter(messages, modelIndex = 0) {
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) throw new Error("OPENROUTER_API_KEY não configurada.");
-
-  // Na primeira tentativa usa o modelo auto; nas demais, rotaciona o pool de fallback
-  const model = modelIndex === 0
-    ? AUTO_MODEL
-    : FALLBACK_MODELS[(modelIndex - 1) % FALLBACK_MODELS.length];
-
-  log(`🤖 Modelo selecionado: ${model}${model === AUTO_MODEL ? " (roteamento automático)" : ""}`);
-
+  const model = MODELS[modelIndex % MODELS.length];
+  log(`🤖 Modelo: ${model}`);
   const res = await fetch(OPENROUTER_URL, {
     method: "POST",
     headers: {
@@ -261,28 +246,11 @@ async function callOpenRouter(messages, modelIndex = 0) {
       "HTTP-Referer": "https://lisomarbarbosa.adv.br",
       "X-Title": "Blog Lisomar Barbosa ADV",
     },
-    body: JSON.stringify({
-      model,
-      messages,
-      max_tokens: 6000,
-      temperature: 0.8,
-    }),
+    body: JSON.stringify({ model, messages, max_tokens: 4096, temperature: 0.7 }),
   });
-
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`OpenRouter HTTP ${res.status}: ${body}`);
-  }
-
+  if (!res.ok) { const body = await res.text(); throw new Error(`OpenRouter HTTP ${res.status}: ${body}`); }
   const data = await res.json();
   const content = data?.choices?.[0]?.message?.content;
-
-  // Loga o modelo efetivamente usado (openrouter/auto pode rotear para qualquer modelo)
-  const modelUsed = data?.model || model;
-  if (model === AUTO_MODEL && modelUsed !== AUTO_MODEL) {
-    log(`   ↳ Modelo efetivo (auto-roteado): ${modelUsed}`);
-  }
-
   if (!content) throw new Error("Resposta vazia do modelo.");
   return content;
 }
@@ -401,11 +369,6 @@ async function auditArticle(title, intro, sections, modelIndex = 0) {
 }
 
 // ── Auditoria jurídica: jurisprudência e doutrina ─────────────────────────────
-//
-// Esta etapa avalia se as referências jurídicas citadas no artigo correspondem
-// à realidade: leis com numeração correta, entendimentos do STF/STJ conforme
-// firmados, e posicionamentos doutrinários que refletem o estado atual do direito
-// brasileiro. Artigos com erros jurídicos graves são reprovados e descartados.
 
 async function auditJuridico(title, intro, sections, modelIndex = 0) {
   log(`⚖️  Auditoria jurídica: "${title}"`);
@@ -632,7 +595,6 @@ async function saveGeneratedSlug(slug) {
 
 async function main() {
   log("🚀 Iniciando geração de artigo...");
-  log(`📡 Modo de modelo: ${AUTO_MODEL} (com fallback para ${FALLBACK_MODELS.length} modelos gratuitos)`);
 
   let attempt      = 0;
   let topic        = null;
