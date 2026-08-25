@@ -15,24 +15,20 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
-const MAX_ATTEMPTS = 15;
+const MAX_ATTEMPTS = 5;
 
 // ── Pool de modelos (slugs free válidos em ago/2026) ───────────────────────────
-// Modelos verificados como disponíveis na tier gratuita do OpenRouter.
-// Caso um modelo retorne 404, ele é pulado automaticamente pelo retry loop.
+// Verificados como disponíveis na tier gratuita do OpenRouter em agosto 2026.
+// Caso um modelo retorne 404 ou 429, ele é pulado pelo retry loop.
 const MODELS = [
-  "meta-llama/llama-3.3-70b-instruct",       // versão paga disponível (sem :free)
-  "google/gemma-3-27b-it:free",
-  "google/gemma-3-12b-it:free",
-  "google/gemma-3-4b-it:free",
-  "microsoft/phi-4:free",
-  "microsoft/phi-4-reasoning:free",
-  "mistralai/mistral-small-3.2-24b-instruct:free",
-  "qwen/qwen3-8b:free",
-  "qwen/qwen3-14b:free",
-  "qwen/qwen3-30b-a3b:free",
-  "deepseek/deepseek-r1-0528-qwen3-8b:free",
-  "moonshotai/kimi-k2:free",
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "openai/gpt-oss-20b:free",
+  "google/gemma-4-31b-it:free",
+  "google/gemma-4-26b-a4b-it:free",
+  "nvidia/nemotron-3-nano-30b-a3b:free",
+  "moonshotai/kimi-k2.6:free",
+  "inclusionai/ling-3.0-flash:free",
 ];
 
 const SAME_TOPIC_RETRIES = 3;
