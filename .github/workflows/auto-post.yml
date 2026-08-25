@@ -19,7 +19,7 @@ on:
         default: ""
         type: string
       artigo_slot:
-        description: "Slot do artigo (1 ou 2). Slot 2 só publica se slot 1 já existir hoje."
+        description: "Slot do artigo (1 ou 2)."
         required: false
         default: "1"
         type: string
@@ -232,7 +232,7 @@ jobs:
 
           echo "✅ Ambiente validado."
 
-      - name: 🕐 Verificar slot e condição de publicação
+      - name: 🕐 Determinar slot do artigo
         id: slot_check
         run: |
           HOUR=$(date -u +"%H")
@@ -249,43 +249,26 @@ jobs:
 
           echo "📌 Slot detectado: $SLOT"
           echo "slot=$SLOT" >> $GITHUB_OUTPUT
+          echo "skip=false" >> $GITHUB_OUTPUT
 
-          # Se for slot 2, verifica se já existe um post publicado hoje
-          if [ "$SLOT" = "2" ]; then
-            POSTS_TODAY=$(grep -c "date: '$TODAY'" src/data/blog.ts 2>/dev/null || echo "0")
-            echo "📊 Posts publicados hoje ($TODAY): $POSTS_TODAY"
+          # Extrai títulos já publicados hoje para evitar duplicidade de tema
+          TITLES_TODAY=$(node -e "
+            const fs = require('fs');
+            const content = fs.readFileSync('src/data/blog.ts', 'utf8');
+            const today = '$TODAY';
+            const blocks = content.split(/(?=\s*\{)/);
+            const titles = [];
+            for (const block of blocks) {
+              if (block.includes(\"date: '\" + today + \"'\")) {
+                const m = block.match(/title:\s*'([^']+)'/);
+                if (m) titles.push(m[1]);
+              }
+            }
+            console.log(titles.join('|'));
+          " 2>/dev/null || echo "")
 
-            if [ "$POSTS_TODAY" -eq "0" ]; then
-              echo "⏭️ Slot 2 ignorado: nenhum artigo publicado hoje ainda."
-              echo "skip=true" >> $GITHUB_OUTPUT
-              echo "used_topics=" >> $GITHUB_OUTPUT
-            else
-              echo "✅ Slot 2 liberado: $POSTS_TODAY post(s) publicado(s) hoje."
-              echo "skip=false" >> $GITHUB_OUTPUT
-
-              # Extrai os títulos dos posts publicados hoje para repassar ao script
-              TITLES_TODAY=$(node -e "
-                const fs = require('fs');
-                const content = fs.readFileSync('src/data/blog.ts', 'utf8');
-                const today = '$TODAY';
-                const blocks = content.split(/(?=\s*\{)/);
-                const titles = [];
-                for (const block of blocks) {
-                  if (block.includes(\"date: '\" + today + \"'\")) {
-                    const m = block.match(/title:\s*'([^']+)'/);
-                    if (m) titles.push(m[1]);
-                  }
-                }
-                console.log(titles.join('|'));
-              " 2>/dev/null || echo "")
-
-              echo "📋 Temas já publicados hoje: $TITLES_TODAY"
-              echo "used_topics=$TITLES_TODAY" >> $GITHUB_OUTPUT
-            fi
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-            echo "used_topics=" >> $GITHUB_OUTPUT
-          fi
+          echo "📋 Temas já publicados hoje: $TITLES_TODAY"
+          echo "used_topics=$TITLES_TODAY" >> $GITHUB_OUTPUT
 
       - name: 🤖 Generate, research and audit article (com loop de reescrita)
         if: steps.slot_check.outputs.skip != 'true'
