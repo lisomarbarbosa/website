@@ -14,6 +14,7 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
+const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 const MAX_ATTEMPTS = 5;
 
@@ -233,7 +234,7 @@ async function callOpenRouter(messages, modelIndex = 0) {
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) throw new Error("OPENROUTER_API_KEY não configurada.");
   const model = MODELS[modelIndex % MODELS.length];
-  log(`🤖 Modelo: ${model}`);
+  log(`🤖 OpenRouter · modelo: ${model}`);
   const res = await fetch(OPENROUTER_URL, {
     method: "POST",
     headers: {
@@ -249,6 +250,68 @@ async function callOpenRouter(messages, modelIndex = 0) {
   const content = data?.choices?.[0]?.message?.content;
   if (!content) throw new Error("Resposta vazia do modelo.");
   return content;
+}
+
+// ── Gemini API (fallback) ──────────────────────────────────────────────────────
+//
+// Acionada automaticamente quando o OpenRouter falha (qualquer erro).
+// Usa o modelo gemini-2.0-flash via REST, converte o formato messages → Gemini.
+
+async function callGemini(messages) {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("GEMINI_API_KEY não configurada.");
+  log(`🔷 Gemini API · modelo: gemini-2.0-flash (fallback)`);
+
+  // Converte formato OpenAI messages → Gemini contents
+  // system prompt é mesclado como primeira parte do user turn
+  const systemMsg = messages.find(m => m.role === "system");
+  const userMsgs  = messages.filter(m => m.role !== "system");
+
+  const contents = userMsgs.map((m, i) => {
+    let text = m.content;
+    // Injeta o system prompt no início da primeira mensagem user
+    if (i === 0 && systemMsg) {
+      text = `${systemMsg.content}\n\n${text}`;
+    }
+    return {
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text }],
+    };
+  });
+
+  const res = await fetch(`${GEMINI_URL}?key=${key}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents,
+      generationConfig: { maxOutputTokens: 4096, temperature: 0.7 },
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Gemini HTTP ${res.status}: ${body}`);
+  }
+
+  const data = await res.json();
+  const content = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!content) throw new Error("Resposta vazia do Gemini.");
+  return content;
+}
+
+// ── callAI: tenta OpenRouter, cai no Gemini se falhar ─────────────────────────
+
+async function callAI(messages, modelIndex = 0) {
+  try {
+    return await callOpenRouter(messages, modelIndex);
+  } catch (orErr) {
+    log(`⚠️  OpenRouter falhou (${orErr.message}) — tentando Gemini como fallback...`);
+    try {
+      return await callGemini(messages);
+    } catch (gemErr) {
+      throw new Error(`OpenRouter: ${orErr.message} | Gemini: ${gemErr.message}`);
+    }
+  }
 }
 
 // ── Geração do artigo estruturado ─────────────────────────────────────────────
@@ -308,7 +371,7 @@ Requisitos de conteúdo:
 
 IMPORTANT: All string values must use double quotes. Escape any internal double quotes with backslash. No trailing commas.`;
 
-  const raw = await callOpenRouter(
+  const raw = await callAI(
     [
       { role: "system", content: systemPrompt },
       { role: "user",   content: userPrompt },
@@ -354,7 +417,7 @@ async function auditArticle(title, intro, sections, modelIndex = 0) {
   const preview = [intro, ...sections.map(s => s.paragraphs.join(" "))].join("\n\n").slice(0, 3000);
   const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true, "reason": "" }\nou\n{ "approved": false, "reason": "motivo breve" }\n\nReturn ONLY a raw JSON object — no markdown, no explanation.\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras no preview\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${preview}\n---`;
   try {
-    const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
+    const raw = await callAI([{ role: "user", content: prompt }], modelIndex);
     const result = extractJson(raw);
     log(`✅ Auditoria editorial: ${result.approved ? "APROVADO" : `REPROVADO — ${result.reason}`}`);
     return { ok: !!result.approved, reason: result.reason || "" };
@@ -417,7 +480,7 @@ ${fullText}
 ---`;
 
   try {
-    const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex + 1);
+    const raw = await callAI([{ role: "user", content: prompt }], modelIndex + 1);
     const result = extractJson(raw);
 
     const approved = !!result.approved;
@@ -450,7 +513,7 @@ async function generateExcerpt(title, description, intro, modelIndex = 0) {
   log(`📋 Gerando excerpt para: "${title}"`);
   const prompt = `Escreva um resumo em português do Brasil com no máximo 200 caracteres para o artigo abaixo. Retorne APENAS o texto do resumo, sem aspas, sem JSON.\n\nTítulo: ${title}\n\nIntrodução: ${intro.slice(0, 500)}`;
   try {
-    const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
+    const raw = await callAI([{ role: "user", content: prompt }], modelIndex);
     return normalizeText(raw).slice(0, 200);
   } catch {
     return title.slice(0, 200);
