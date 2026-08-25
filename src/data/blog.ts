@@ -8,7 +8,7 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'difamacao-nas-redes-sociais-e-responsabilidade-juridica',
     title: 'Difamação nas redes sociais e responsabilidade jurídica',
@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[
     readTime: '8 min de leitura',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1776243365952-1f103dea9bec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NjE4MjkzfA&ixlib=rb-4.1.0&q=80&w=1080',
-  },] = [
+  },
   {
     slug: 'stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil',
     title: 'Stalking Virtual: O que é e quais as consequências jurídicas no Brasil',
