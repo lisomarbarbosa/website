@@ -8,7 +8,10 @@ const __dirname = dirname(__filename);
 
 const ROOT = process.cwd();
 
-const PAGES_DIR           = join(ROOT, "src/pages/artigos");
+// ── Caminhos corretos ──────────────────────────────────────────────────────────
+// O ArticlePage.tsx lê de src/content/blog/*.ts (import.meta.glob)
+// O blog.ts guarda os metadados (slug, title, excerpt, date, readTime, etc.)
+const CONTENT_DIR         = join(ROOT, "src/content/blog");
 const BLOG_DATA_FILE      = join(ROOT, "src/data/blog.ts");
 const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
@@ -17,7 +20,7 @@ const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
 const MAX_ATTEMPTS = 15;
 
-// ─── Pool de modelos corrigido ────────────────────────────────────────────────
+// ── Pool de modelos ────────────────────────────────────────────────────────────
 const MODELS = [
   "meta-llama/llama-3.3-70b-instruct:free",
   "mistralai/mistral-7b-instruct:free",
@@ -40,19 +43,6 @@ const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
 
 const MIN_WORDS = 1250;
-
-// Ícones Lucide disponíveis para escolha automática por tema
-const ICON_MAP = {
-  default:    ["Scale", "Shield", "FileText", "AlertTriangle", "Info"],
-  consumidor: ["ShoppingCart", "PackageSearch", "ShieldCheck", "Scale", "AlertTriangle"],
-  dados:      ["Lock", "Database", "ShieldCheck", "AlertTriangle", "Scale"],
-  crimes:     ["AlertTriangle", "Shield", "Scale", "FileText", "Lock"],
-  contratos:  ["FileText", "Scale", "ShieldCheck", "AlertTriangle", "Info"],
-  lgpd:       ["Lock", "ShieldCheck", "Database", "AlertTriangle", "Scale"],
-  internet:   ["Globe", "Shield", "AlertTriangle", "Scale", "Lock"],
-  ia:         ["Cpu", "Shield", "AlertTriangle", "Scale", "Lock"],
-  crypto:     ["Bitcoin", "Shield", "AlertTriangle", "Scale", "Lock"],
-};
 
 const TOPICS = [
   "Direito digital e responsabilidade civil nas relações online",
@@ -102,7 +92,7 @@ const TOPICS = [
   "Contratos de software e licenças de uso",
 ];
 
-// ─── Utilitários ──────────────────────────────────────────────────────────────
+// ── Utilitários ────────────────────────────────────────────────────────────────
 
 function log(message) {
   console.log(message);
@@ -154,29 +144,14 @@ function escapeForSingleQuote(text) {
     .replace(/'/g, "\\'");
 }
 
-function pickIcons(topic, count) {
-  const t = topic.toLowerCase();
-  let pool = ICON_MAP.default;
-  if (t.includes("consumidor") || t.includes("compra") || t.includes("marketplace")) pool = ICON_MAP.consumidor;
-  else if (t.includes("lgpd") || t.includes("dado") || t.includes("privacidade")) pool = ICON_MAP.lgpd;
-  else if (t.includes("crime") || t.includes("penal") || t.includes("fraude") || t.includes("stalking")) pool = ICON_MAP.crimes;
-  else if (t.includes("contrato") || t.includes("assinatura")) pool = ICON_MAP.contratos;
-  else if (t.includes("internet") || t.includes("provedor") || t.includes("marco civil")) pool = ICON_MAP.internet;
-  else if (t.includes("intelig") || t.includes("ia") || t.includes("artificial")) pool = ICON_MAP.ia;
-  else if (t.includes("cripto") || t.includes("nft") || t.includes("bitcoin")) pool = ICON_MAP.crypto;
-  const icons = [];
-  for (let i = 0; i < count; i++) icons.push(pool[i % pool.length]);
-  return icons;
-}
-
-// ─── Curadoria de temas ───────────────────────────────────────────────────────
+// ── Curadoria de temas ─────────────────────────────────────────────────────────
 
 async function getPublishedSlugs() {
   try {
-    const files = await readdir(PAGES_DIR);
+    const files = await readdir(CONTENT_DIR);
     return files
-      .filter(f => f.endsWith(".tsx"))
-      .map(f => f.replace(/\.tsx$/, ""));
+      .filter(f => f.endsWith(".ts"))
+      .map(f => f.replace(/\.ts$/, ""));
   } catch (_) {
     return [];
   }
@@ -211,7 +186,7 @@ async function chooseTopic(usedTopicSlugs = []) {
   return chosen;
 }
 
-// ─── Extração de JSON ─────────────────────────────────────────────────────────
+// ── Extração de JSON ───────────────────────────────────────────────────────────
 
 function extractJson(text) {
   const cleaned = normalizeText(text);
@@ -236,7 +211,7 @@ function extractJson(text) {
   throw new Error(`Não foi possível extrair JSON: ${cleaned.slice(0, 200)}`);
 }
 
-// ─── Imagem (Unsplash) ────────────────────────────────────────────────────────
+// ── Imagem (Unsplash) ──────────────────────────────────────────────────────────
 
 async function fetchImage(topic) {
   const key = process.env.UNSPLASH_ACCESS_KEY;
@@ -254,7 +229,7 @@ async function fetchImage(topic) {
   }
 }
 
-// ─── OpenRouter ───────────────────────────────────────────────────────────────
+// ── OpenRouter ─────────────────────────────────────────────────────────────────
 
 async function callOpenRouter(messages, modelIndex = 0) {
   const key = process.env.OPENROUTER_API_KEY;
@@ -278,7 +253,7 @@ async function callOpenRouter(messages, modelIndex = 0) {
   return content;
 }
 
-// ─── Geração do artigo estruturado ───────────────────────────────────────────
+// ── Geração do artigo estruturado ─────────────────────────────────────────────
 
 function buildSystemPrompt(reinforced = false) {
   const base = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.\nEscreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.\nUse linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.`;
@@ -353,8 +328,8 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
   for (const field of ["title", "intro", "alertTitle", "alertBody", "sections", "actionSteps", "preventionItems", "closing"]) {
     if (!data[field]) throw new Error(`Campo ausente no JSON do modelo: ${field}`);
   }
-  if (!Array.isArray(data.sections)     || data.sections.length < 2)     throw new Error("sections inválido.");
-  if (!Array.isArray(data.actionSteps)  || data.actionSteps.length < 2)  throw new Error("actionSteps inválido.");
+  if (!Array.isArray(data.sections)        || data.sections.length < 2)        throw new Error("sections inválido.");
+  if (!Array.isArray(data.actionSteps)     || data.actionSteps.length < 2)     throw new Error("actionSteps inválido.");
   if (!Array.isArray(data.preventionItems) || data.preventionItems.length < 2) throw new Error("preventionItems inválido.");
 
   const fullText = [
@@ -374,7 +349,7 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
   return { ...data, slug, wordCount, description: data.description || data.title };
 }
 
-// ─── Auditoria ────────────────────────────────────────────────────────────────
+// ── Auditoria ──────────────────────────────────────────────────────────────────
 
 async function auditArticle(title, intro, sections, modelIndex = 0) {
   log(`🔍 Auditando artigo: "${title}"`);
@@ -391,7 +366,7 @@ async function auditArticle(title, intro, sections, modelIndex = 0) {
   }
 }
 
-// ─── Excerpt ─────────────────────────────────────────────────────────────────
+// ── Excerpt ────────────────────────────────────────────────────────────────────
 
 async function generateExcerpt(title, description, intro, modelIndex = 0) {
   if (description && description.length > 20) return description.slice(0, 200);
@@ -405,270 +380,95 @@ async function generateExcerpt(title, description, intro, modelIndex = 0) {
   }
 }
 
-// ─── Geração do componente TSX ────────────────────────────────────────────────
+// ── Montagem do Markdown ───────────────────────────────────────────────────────
+// Gera o conteúdo no formato que o ArticlePage.tsx lê:
+//   export const content = `...markdown...`;
 
-function escapeJsx(text) {
-  return String(text || "")
-    .replace(/\\/g, "\\\\")
-    .replace(/`/g, "\\`")
-    .replace(/\$\{/g, "\\${")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
+function buildMarkdownContent({ title, intro, alertTitle, alertBody, sections, actionSteps, preventionItems, closing, closingExtra, disclaimer }) {
+  const sectionsText = sections.map(s => {
+    const paras = s.paragraphs.join("\n\n");
+    return `## ${s.heading}\n\n${paras}`;
+  }).join("\n\n");
 
-function escapeJsxAttr(text) {
-  return String(text || "")
-    .replace(/\\/g, "\\\\")
-    .replace(/`/g, "\\`")
-    .replace(/\$\{/g, "\\${")
-    .replace(/"/g, '\\"');
-}
+  const stepsText = actionSteps
+    .map((step, i) => `${i + 1}. **${step.title}:** ${step.body}`)
+    .join("\n");
 
-function mdBoldToJsx(text) {
-  return escapeJsx(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-}
+  const preventionText = preventionItems
+    .map(item => `- **${item.bold}** ${item.text}`)
+    .join("\n");
 
-function buildTsxComponent({ slug, title, description, image, date, readTime, intro, alertTitle, alertBody, sections, actionSteps, preventionItems, closing, closingExtra, disclaimer, topic }) {
-  const componentName = slug
-    .split("-")
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join("");
-
-  const pageUrl = `https://www.lisomarbarbosa.adv.br/artigos/${slug}`;
-  const icons = pickIcons(topic, sections.length);
-  const usedIcons = [...new Set(["AlertTriangle", "ArrowLeft", ...icons])].join(", ");
-
-  const sectionsJsx = sections.map((s, i) => {
-    const icon = icons[i] || "Scale";
-    const heading = escapeJsx(s.heading);
-    const paras = s.paragraphs
-      .map(p => `                  <p className="text-foreground/80 mb-6 leading-relaxed">\n                    ${mdBoldToJsx(p)}\n                  </p>`)
-      .join("\n");
-    return `
-                  <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center gap-3">
-                    <${icon} className="text-primary" size={28} />
-                    ${heading}
-                  </h2>
-
-${paras}`;
-  }).join("\n");
-
-  const stepsJsx = actionSteps.map((step, i) => `
-                    <li className="flex gap-4">
-                      <span className="font-bold text-primary text-lg">${i + 1}.</span>
-                      <div>
-                        <strong>${escapeJsx(step.title)}:</strong> ${mdBoldToJsx(step.body)}
-                      </div>
-                    </li>`).join("\n");
-
-  const preventionJsx = preventionItems.map(item => `
-                    <li>
-                      <strong>${escapeJsx(item.bold)}</strong> ${mdBoldToJsx(item.text)}
-                    </li>`).join("\n");
-
-  const closingExtra2 = closingExtra
-    ? `\n                  <p className="text-foreground/80 mb-6 leading-relaxed">\n                    ${mdBoldToJsx(closingExtra)}\n                  </p>`
+  const closingExtraText = closingExtra
+    ? `\n\n${closingExtra}`
     : "";
 
-  return `import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ${usedIcons} } from "lucide-react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+  return `# ${title}
 
-const pageTitle =
-  "${escapeJsxAttr(title)} | Lisomar Barbosa | Direito Digital";
+${intro}
 
-const pageDescription =
-  "${escapeJsxAttr(description)}";
+> **${alertTitle}**
+>
+> ${alertBody}
 
-const pageUrl =
-  "${pageUrl}";
+${sectionsText}
 
-const pageImage =
-  "${image}";
+## O que fazer quando o problema acontece
 
-const ${componentName} = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+${stepsText}
 
-  return (
-    <>
-      <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={pageUrl} />
-        <meta
-          name="robots"
-          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-        />
+## Hábitos de prevenção
 
-        <meta property="og:site_name" content="Lisomar Barbosa | Direito Digital" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={pageUrl} />
-        <meta property="og:image" content={pageImage} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
+${preventionText}
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDescription} />
-        <meta name="twitter:image" content={pageImage} />
-      </Helmet>
+## Considerações finais
 
-      <div className="min-h-screen bg-background">
-        <Header />
+${closing}${closingExtraText}
 
-        <main className="pt-32 pb-20">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <Link to="/blog">
-                <Button variant="ghost" className="mb-6 group">
-                  <ArrowLeft className="mr-2 group-hover:-translate-x-1 transition-smooth" size={18} />
-                  Voltar aos Artigos
-                </Button>
-              </Link>
+---
 
-              <article className="animate-fade-in">
-                <header className="mb-12">
-                  <span className="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-                    Direito Digital
-                  </span>
-
-                  <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                    ${escapeJsx(title)}
-                  </h1>
-
-                  <div className="flex items-center gap-4 text-sm text-foreground/60 mb-8">
-                    <span>${date}</span>
-                    <span>•</span>
-                    <span>${readTime}</span>
-                  </div>
-
-                  <img
-                    src={pageImage}
-                    alt="${escapeJsxAttr(title)}"
-                    className="w-full h-[400px] object-cover rounded-lg mb-8"
-                    loading="lazy"
-                  />
-                </header>
-
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
-                    ${mdBoldToJsx(intro)}
-                  </p>
-
-                  <Card className="p-6 bg-accent/10 border-accent/20 mb-8">
-                    <div className="flex items-start gap-4">
-                      <AlertTriangle className="text-accent flex-shrink-0 mt-1" size={24} />
-                      <div>
-                        <h3 className="font-bold mb-2">${escapeJsx(alertTitle)}</h3>
-                        <p className="text-sm text-foreground/80">
-                          ${mdBoldToJsx(alertBody)}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-${sectionsJsx}
-
-                  <h2 className="text-3xl font-bold mt-12 mb-6">O que fazer quando o problema acontece</h2>
-
-                  <ol className="space-y-4 mb-12">
-${stepsJsx}
-                  </ol>
-
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Hábitos de prevenção</h2>
-
-                  <ul className="list-disc pl-6 mb-8 text-foreground/80 space-y-3">
-${preventionJsx}
-                  </ul>
-
-                  <h2 className="text-3xl font-bold mt-12 mb-6">Considerações finais</h2>
-
-                  <p className="text-foreground/80 mb-6 leading-relaxed">
-                    ${mdBoldToJsx(closing)}
-                  </p>
-${closingExtra2}
-
-                  <hr />
-
-                  <p className="text-foreground/80 mb-6 leading-relaxed">
-                    <em>
-                      ${escapeJsx(disclaimer || "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.")}
-                    </em>
-                  </p>
-                </div>
-
-                <div className="mt-16 p-8 rounded-2xl gradient-cyber border border-primary/20 text-center">
-                  <h3 className="text-2xl font-bold mb-4">Precisa de orientação jurídica?</h3>
-                  <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
-                    Nossa equipe especializada em Direito Digital está pronta para analisar o seu caso e indicar as melhores estratégias jurídicas.
-                  </p>
-                  <Link to="/#contato">
-                    <Button size="lg" className="bg-gradient-accent text-background font-semibold shadow-cyber">
-                      Fale Conosco
-                    </Button>
-                  </Link>
-                </div>
-              </article>
-            </div>
-          </div>
-        </main>
-
-        <Footer />
-      </div>
-    </>
-  );
-};
-
-export default ${componentName};
+*${disclaimer || "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada."}*
 `;
 }
 
-// ─── Escrita dos arquivos ─────────────────────────────────────────────────────
+// ── Escrita dos arquivos ───────────────────────────────────────────────────────
 
-async function writePageFile(slug, tsxContent) {
-  const filePath = join(PAGES_DIR, `${slug}.tsx`);
-  await mkdir(PAGES_DIR, { recursive: true });
-  await writeFile(filePath, tsxContent, "utf8");
-  log(`💾 Arquivo salvo: src/pages/artigos/${slug}.tsx`);
+/**
+ * Salva o arquivo de conteúdo em src/content/blog/{slug}.ts
+ * no formato que o ArticlePage.tsx lê via import.meta.glob.
+ */
+async function writeContentFile(slug, markdownContent) {
+  await mkdir(CONTENT_DIR, { recursive: true });
+  const filePath = join(CONTENT_DIR, `${slug}.ts`);
+
+  // Escapa backticks e ${} dentro do markdown para não quebrar o template literal
+  const safe = markdownContent
+    .replace(/\\/g, "\\\\")
+    .replace(/`/g, "\\`")
+    .replace(/\$\{/g, "\\${");
+
+  const fileContent = `export const content = \`\n${safe}\`;\n`;
+  await writeFile(filePath, fileContent, "utf8");
+  log(`💾 Conteúdo salvo: src/content/blog/${slug}.ts`);
   return filePath;
 }
 
 /**
  * Insere o novo post no array blogPosts de src/data/blog.ts de forma segura.
- *
- * Estratégia:
- *  1. Localiza a linha exata "export const blogPosts: BlogPost[] = ["
- *  2. A partir dessa posição, percorre o source caractere a caractere
- *     rastreando profundidade de colchetes para encontrar o '[' que abre
- *     o array e o ']' que o fecha.
- *  3. Insere o novo objeto ANTES do ']' de fechamento, garantindo que a
- *     sintaxe TypeScript permaneça válida independentemente do conteúdo
- *     já existente no array.
  */
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
 
-  // 1. Localiza o início da declaração do array
   const MARKER = "export const blogPosts: BlogPost[] = [";
   const markerPos = source.indexOf(MARKER);
   if (markerPos === -1) {
     throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
   }
 
-  // 2. Encontra o '[' que abre o array (logo após o marcador)
   const arrayOpen = source.indexOf("[", markerPos);
   if (arrayOpen === -1) {
     throw new Error("Não foi possível localizar o abre-colchete do array blogPosts.");
   }
 
-  // 3. Percorre o source a partir do '[' rastreando profundidade para achar o ']' de fechamento
   let depth = 0;
   let arrayClose = -1;
   let inStr = false;
@@ -679,7 +479,6 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     if (esc) { esc = false; continue; }
     if (ch === "\\" && inStr) { esc = true; continue; }
     if (ch === '"' || ch === "'" || ch === "`") {
-      // toggle string only for matching quote (simplified – suficiente para blog.ts)
       if (!inStr) { inStr = true; } else { inStr = false; }
       continue;
     }
@@ -695,7 +494,6 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     throw new Error("Não foi possível localizar o fecha-colchete do array blogPosts.");
   }
 
-  // 4. Monta a nova entrada
   const safe = s => escapeForSingleQuote(s);
   const newEntry = `
   {
@@ -708,7 +506,6 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     image: '${safe(image)}',
   },`;
 
-  // 5. Insere ANTES do ']' de fechamento
   const updated =
     source.slice(0, arrayClose) +
     newEntry + "\n" +
@@ -723,15 +520,15 @@ async function saveGeneratedSlug(slug) {
   log(`🏷️  Slug salvo em .generated_slug: ${slug}`);
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+// ── Main ───────────────────────────────────────────────────────────────────────
 
 async function main() {
-  log("🚀 Iniciando geração de artigo (formato TSX)...");
+  log("🚀 Iniciando geração de artigo...");
 
-  let attempt        = 0;
-  let topic          = null;
-  let topicRetries   = 0;
-  const usedSlugs    = [];
+  let attempt      = 0;
+  let topic        = null;
+  let topicRetries = 0;
+  const usedSlugs  = [];
 
   while (attempt < MAX_ATTEMPTS) {
     attempt++;
@@ -767,7 +564,7 @@ async function main() {
     }
 
     if (article.wordCount < MIN_WORDS) {
-      log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente com o mesmo tema.`);
+      log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente.`);
       continue;
     }
 
@@ -797,13 +594,9 @@ async function main() {
     const readTime = calculateReadTime(article.wordCount);
     const category = "Direito Digital";
 
-    const tsxContent = buildTsxComponent({
-      slug:            article.slug,
+    // Monta o Markdown e salva em src/content/blog/{slug}.ts
+    const markdownContent = buildMarkdownContent({
       title:           article.title,
-      description:     article.description,
-      image,
-      date,
-      readTime,
       intro:           article.intro,
       alertTitle:      article.alertTitle,
       alertBody:       article.alertBody,
@@ -813,11 +606,10 @@ async function main() {
       closing:         article.closing,
       closingExtra:    article.closingExtra || "",
       disclaimer:      article.disclaimer || "",
-      topic,
     });
 
     try {
-      await writePageFile(article.slug, tsxContent);
+      await writeContentFile(article.slug, markdownContent);
       await updateBlogData({
         slug:     article.slug,
         title:    article.title,
@@ -837,7 +629,7 @@ async function main() {
     log(`   Título:   ${article.title}`);
     log(`   Slug:     ${article.slug}`);
     log(`   Palavras: ${article.wordCount}`);
-    log(`   Arquivo:  src/pages/artigos/${article.slug}.tsx`);
+    log(`   Arquivo:  src/content/blog/${article.slug}.ts`);
     log(`   Blog:     src/data/blog.ts atualizado`);
     return;
   }
