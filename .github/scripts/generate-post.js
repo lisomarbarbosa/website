@@ -18,13 +18,6 @@ const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 const MAX_ATTEMPTS = 15;
 
 // ─── Pool de modelos corrigido ────────────────────────────────────────────────
-// Removidos:
-//   nvidia/llama-nemotron-rerank-vl-1b-v2:free  → modelo de reranking, não gera texto
-//   nvidia/nemotron-3-nano-30b-a3b:free          → versão free descontinuada (HTTP 404)
-//   thinkingmachines/inkling:free                → só disponível em "agentic harnesses" (HTTP 403)
-// Reduzidos:
-//   google/gemma-4-31b-it:free e google/gemma-4-26b-a4b-it:free → sofrem rate limit intenso;
-//   mantidos apenas ao final como último recurso.
 const MODELS = [
   "meta-llama/llama-3.3-70b-instruct:free",
   "mistralai/mistral-7b-instruct:free",
@@ -287,35 +280,16 @@ async function callOpenRouter(messages, modelIndex = 0) {
 
 // ─── Geração do artigo estruturado ───────────────────────────────────────────
 
-/**
- * Monta o prompt do sistema. Em modo reforçado (reinforced=true), adiciona
- * instruções adicionais de formato para modelos que ignoraram o JSON na
- * tentativa anterior.
- */
 function buildSystemPrompt(reinforced = false) {
-  const base = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.
-Escreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.
-Use linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.`;
+  const base = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.\nEscreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.\nUse linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.`;
 
   const jsonRule = reinforced
-    ? `
-
-CRITICAL OUTPUT RULE (MANDATORY):
-- Your ENTIRE response must be a single raw JSON object.
-- Do NOT write any text before the opening { or after the closing }.
-- Do NOT wrap the JSON in markdown code fences (no \`\`\`json, no \`\`\`).
-- Do NOT add any explanation, commentary, or apology.
-- Start your response with { and end it with }.`
-    : `
-Nunca inclua blocos de código Markdown. Responda APENAS com JSON válido, começando com { e terminando com }.`;
+    ? `\n\nCRITICAL OUTPUT RULE (MANDATORY):\n- Your ENTIRE response must be a single raw JSON object.\n- Do NOT write any text before the opening { or after the closing }.\n- Do NOT wrap the JSON in markdown code fences (no \`\`\`json, no \`\`\`).\n- Do NOT add any explanation, commentary, or apology.\n- Start your response with { and end it with }.`
+    : `\nNunca inclua blocos de código Markdown. Responda APENAS com JSON válido, começando com { e terminando com }.`;
 
   return base + jsonRule;
 }
 
-/**
- * Solicita ao modelo um artigo estruturado em JSON com seções bem definidas.
- * O parâmetro reinforced=true endurece as instruções de formato JSON.
- */
 async function generateArticle(topic, modelIndex = 0, reinforced = false) {
   log(`✍️  Gerando artigo sobre: "${topic}"${reinforced ? " [modo reforçado]" : ""}`);
 
@@ -376,7 +350,6 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
     throw new Error(`JSON inválido do modelo: ${err.message}`);
   }
 
-  // Valida campos obrigatórios
   for (const field of ["title", "intro", "alertTitle", "alertBody", "sections", "actionSteps", "preventionItems", "closing"]) {
     if (!data[field]) throw new Error(`Campo ausente no JSON do modelo: ${field}`);
   }
@@ -406,23 +379,7 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
 async function auditArticle(title, intro, sections, modelIndex = 0) {
   log(`🔍 Auditando artigo: "${title}"`);
   const preview = [intro, ...sections.map(s => s.paragraphs.join(" "))].join("\n\n").slice(0, 3000);
-  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:
-{ "approved": true, "reason": "" }
-ou
-{ "approved": false, "reason": "motivo breve" }
-
-Return ONLY a raw JSON object — no markdown, no explanation.
-
-Reprove se:
-- Conteúdo genérico demais, sem referências jurídicas concretas
-- Menos de 800 palavras no preview
-- Título não condiz com o conteúdo
-- Conteúdo claramente incorreto juridicamente
-
-Artigo:
----
-${preview}
----`;
+  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true, "reason": "" }\nou\n{ "approved": false, "reason": "motivo breve" }\n\nReturn ONLY a raw JSON object — no markdown, no explanation.\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras no preview\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${preview}\n---`;
   try {
     const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
     const result = extractJson(raw);
@@ -683,11 +640,62 @@ async function writePageFile(slug, tsxContent) {
   return filePath;
 }
 
+/**
+ * Insere o novo post no array blogPosts de src/data/blog.ts de forma segura.
+ *
+ * Estratégia:
+ *  1. Localiza a linha exata "export const blogPosts: BlogPost[] = ["
+ *  2. A partir dessa posição, percorre o source caractere a caractere
+ *     rastreando profundidade de colchetes para encontrar o '[' que abre
+ *     o array e o ']' que o fecha.
+ *  3. Insere o novo objeto ANTES do ']' de fechamento, garantindo que a
+ *     sintaxe TypeScript permaneça válida independentemente do conteúdo
+ *     já existente no array.
+ */
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
-  const arrayStart = source.indexOf("export const blogPosts: BlogPost[] = [");
-  if (arrayStart === -1) throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
-  const insertAt = source.indexOf("[", arrayStart) + 1;
+
+  // 1. Localiza o início da declaração do array
+  const MARKER = "export const blogPosts: BlogPost[] = [";
+  const markerPos = source.indexOf(MARKER);
+  if (markerPos === -1) {
+    throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
+  }
+
+  // 2. Encontra o '[' que abre o array (logo após o marcador)
+  const arrayOpen = source.indexOf("[", markerPos);
+  if (arrayOpen === -1) {
+    throw new Error("Não foi possível localizar o abre-colchete do array blogPosts.");
+  }
+
+  // 3. Percorre o source a partir do '[' rastreando profundidade para achar o ']' de fechamento
+  let depth = 0;
+  let arrayClose = -1;
+  let inStr = false;
+  let esc = false;
+
+  for (let i = arrayOpen; i < source.length; i++) {
+    const ch = source[i];
+    if (esc) { esc = false; continue; }
+    if (ch === "\\" && inStr) { esc = true; continue; }
+    if (ch === '"' || ch === "'" || ch === "`") {
+      // toggle string only for matching quote (simplified – suficiente para blog.ts)
+      if (!inStr) { inStr = true; } else { inStr = false; }
+      continue;
+    }
+    if (inStr) continue;
+    if (ch === "[") { depth++; continue; }
+    if (ch === "]") {
+      depth--;
+      if (depth === 0) { arrayClose = i; break; }
+    }
+  }
+
+  if (arrayClose === -1) {
+    throw new Error("Não foi possível localizar o fecha-colchete do array blogPosts.");
+  }
+
+  // 4. Monta a nova entrada
   const safe = s => escapeForSingleQuote(s);
   const newEntry = `
   {
@@ -699,7 +707,13 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     category: '${safe(category)}',
     image: '${safe(image)}',
   },`;
-  const updated = source.slice(0, insertAt) + newEntry + source.slice(insertAt);
+
+  // 5. Insere ANTES do ']' de fechamento
+  const updated =
+    source.slice(0, arrayClose) +
+    newEntry + "\n" +
+    source.slice(arrayClose);
+
   await writeFile(BLOG_DATA_FILE, updated, "utf8");
   log(`📚 blogPosts atualizado: entrada '${slug}' inserida em src/data/blog.ts`);
 }
@@ -716,18 +730,13 @@ async function main() {
 
   let attempt        = 0;
   let topic          = null;
-  let topicRetries   = 0;   // tentativas no tema atual
+  let topicRetries   = 0;
   const usedSlugs    = [];
 
   while (attempt < MAX_ATTEMPTS) {
     attempt++;
     log(`\n🔄 Tentativa ${attempt}/${MAX_ATTEMPTS}`);
 
-    // ── Estratégia de seleção de tema ────────────────────────────────────────
-    // Nas primeiras SAME_TOPIC_RETRIES tentativas após um erro de JSON/palavras,
-    // reusa o mesmo tema com prompt reforçado.
-    // Só sorteia novo tema quando: (a) ainda não tem tema, (b) esgotou retries
-    // no tema atual, ou (c) o tema foi reprovado na auditoria de qualidade.
     const needNewTopic = topic === null || topicRetries >= SAME_TOPIC_RETRIES;
     const reinforced   = topic !== null && topicRetries > 0 && !needNewTopic;
 
@@ -737,7 +746,6 @@ async function main() {
       usedSlugs.push(candidateSlug);
       topicRetries = 0;
 
-      // Verifica se o slug já existe antes mesmo de chamar o modelo
       const existingFiles = await getPublishedSlugs();
       if (existingFiles.includes(candidateSlug)) {
         log(`⏩ Slug "${candidateSlug}" já existe — pulando.`);
@@ -750,33 +758,27 @@ async function main() {
 
     topicRetries++;
 
-    // ── Geração ───────────────────────────────────────────────────────────────
     let article;
     try {
       article = await generateArticle(topic, attempt - 1, reinforced);
     } catch (err) {
       log(`❌ Falha na geração: ${err.message}`);
-      // Não descarta o tema ainda — tenta de novo com prompt reforçado
       continue;
     }
 
-    // ── Verifica contagem mínima ───────────────────────────────────────────────
     if (article.wordCount < MIN_WORDS) {
       log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente com o mesmo tema.`);
-      // Não descarta o tema — tenta de novo com reforço
       continue;
     }
 
-    // ── Auditoria de qualidade ─────────────────────────────────────────────────
     const audit = await auditArticle(article.title, article.intro, article.sections, attempt - 1);
     if (!audit.ok) {
       log(`🔁 Artigo reprovado na auditoria — sorteando novo tema.`);
-      topic = null; // força novo tema
+      topic = null;
       topicRetries = 0;
       continue;
     }
 
-    // ── Verifica colisão de slug final ────────────────────────────────────────
     const existingFiles = await getPublishedSlugs();
     if (existingFiles.includes(article.slug)) {
       log(`⏩ Slug final "${article.slug}" já existe — sorteando novo tema.`);
@@ -785,7 +787,6 @@ async function main() {
       continue;
     }
 
-    // ── Busca imagem e excerpt em paralelo ────────────────────────────────────
     const [image, excerpt] = await Promise.all([
       fetchImage(topic),
       generateExcerpt(article.title, article.description, article.intro, attempt - 1),
@@ -796,7 +797,6 @@ async function main() {
     const readTime = calculateReadTime(article.wordCount);
     const category = "Direito Digital";
 
-    // ── Constrói o componente TSX ─────────────────────────────────────────────
     const tsxContent = buildTsxComponent({
       slug:            article.slug,
       title:           article.title,
@@ -816,7 +816,6 @@ async function main() {
       topic,
     });
 
-    // ── Salva os arquivos ─────────────────────────────────────────────────────
     try {
       await writePageFile(article.slug, tsxContent);
       await updateBlogData({
