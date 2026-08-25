@@ -8,8 +8,8 @@ const __dirname = dirname(__filename);
 
 const ROOT = process.cwd();
 
-const PAGES_DIR       = join(ROOT, "src/pages/artigos");
-const BLOG_DATA_FILE  = join(ROOT, "src/data/blog.ts");
+const PAGES_DIR           = join(ROOT, "src/pages/artigos");
+const BLOG_DATA_FILE      = join(ROOT, "src/data/blog.ts");
 const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
@@ -17,18 +17,31 @@ const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
 const MAX_ATTEMPTS = 15;
 
+// ─── Pool de modelos corrigido ────────────────────────────────────────────────
+// Removidos:
+//   nvidia/llama-nemotron-rerank-vl-1b-v2:free  → modelo de reranking, não gera texto
+//   nvidia/nemotron-3-nano-30b-a3b:free          → versão free descontinuada (HTTP 404)
+//   thinkingmachines/inkling:free                → só disponível em "agentic harnesses" (HTTP 403)
+// Reduzidos:
+//   google/gemma-4-31b-it:free e google/gemma-4-26b-a4b-it:free → sofrem rate limit intenso;
+//   mantidos apenas ao final como último recurso.
 const MODELS = [
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "mistralai/mistral-7b-instruct:free",
+  "qwen/qwen-2.5-72b-instruct:free",
+  "deepseek/deepseek-chat:free",
+  "meta-llama/llama-3.1-8b-instruct:free",
   "nvidia/nemotron-3-ultra-550b-a55b:free",
   "nvidia/nemotron-3-super-120b-a12b:free",
-  "google/gemma-4-31b-it:free",
-  "google/gemma-4-26b-a4b-it:free",
-  "nvidia/llama-nemotron-rerank-vl-1b-v2:free",
   "dots-studio/dots-3-note-preview:free",
   "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-  "thinkingmachines/inkling:free",
   "poolside/laguna-s-2.1:free",
-  "nvidia/nemotron-3-nano-30b-a3b:free",
+  "google/gemma-4-31b-it:free",
+  "google/gemma-4-26b-a4b-it:free",
 ];
+
+// Quantas tentativas consecutivas no MESMO tema antes de sortear um novo
+const SAME_TOPIC_RETRIES = 3;
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
@@ -148,9 +161,6 @@ function escapeForSingleQuote(text) {
     .replace(/'/g, "\\'");
 }
 
-/**
- * Escolhe ícones Lucide para os H2 do artigo de acordo com o tema.
- */
 function pickIcons(topic, count) {
   const t = topic.toLowerCase();
   let pool = ICON_MAP.default;
@@ -278,21 +288,83 @@ async function callOpenRouter(messages, modelIndex = 0) {
 // ─── Geração do artigo estruturado ───────────────────────────────────────────
 
 /**
- * Solicita ao modelo um artigo estruturado em JSON com seções bem definidas.
- * Retorna { title, slug, intro, alertTitle, alertBody, sections, actionSteps,
- *           preventionItems, closing, wordCount }
+ * Monta o prompt do sistema. Em modo reforçado (reinforced=true), adiciona
+ * instruções adicionais de formato para modelos que ignoraram o JSON na
+ * tentativa anterior.
  */
-async function generateArticle(topic, modelIndex = 0) {
-  log(`✍️  Gerando artigo sobre: "${topic}"`);
+function buildSystemPrompt(reinforced = false) {
+  const base = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.
+Escreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.
+Use linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.`;
 
-  const systemPrompt = `Você é Lisomar Barbosa, advogada especialista em Direito Digital.\nEscreva artigos jurídicos informativos, acessíveis e bem fundamentados em português do Brasil.\nUse linguagem clara, evite jargão desnecessário, cite legislação e jurisprudência relevantes.\nNunca inclua blocos de código Markdown (\`\`\`). Responda APENAS com JSON válido.`;
+  const jsonRule = reinforced
+    ? `
 
-  const userPrompt = `Escreva um artigo jurídico completo sobre o tema: "${topic}".\n\nRetorne APENAS um objeto JSON (sem Markdown ao redor) com a seguinte estrutura:\n\n{\n  "title": "Título informativo e claro (máximo 100 caracteres)",\n  "description": "Meta descrição para SEO (máximo 200 caracteres, explica o valor do artigo)",\n  "intro": "Parágrafo introdutório forte (2-4 frases, contextualiza o problema e anuncia o que o artigo cobre)",\n  "alertTitle": "Título curto do bloco de atenção (ex: 'Atenção: documente tudo desde o início')",\n  "alertBody": "Texto do bloco de atenção (1-3 frases práticas e diretas)",\n  "sections": [\n    {\n      "heading": "Subtítulo da seção (H2, até 60 caracteres)",\n      "paragraphs": ["Parágrafo 1 da seção", "Parágrafo 2 da seção"]\n    }\n  ],\n  "actionSteps": [\n    { "title": "Título curto da ação", "body": "Descrição da ação em 1-2 frases" }\n  ],\n  "preventionItems": [\n    { "bold": "Título em negrito", "text": "Explicação breve" }\n  ],\n  "closing": "Parágrafo final de considerações (2-3 frases)",\n  "closingExtra": "Segundo parágrafo final opcional (2-3 frases)",\n  "disclaimer": "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada."\n}\n\nRequisitos:\n- "sections": entre 4 e 6 seções, cada uma com 2-3 parágrafos bem desenvolvidos\n- "actionSteps": 4 a 6 passos numerados práticos\n- "preventionItems": 4 a 6 dicas de prevenção\n- Total de palavras estimado: mínimo ${MIN_WORDS}\n- Cite leis, artigos do CDC, LGPD, Marco Civil, CPB ou jurisprudência relevante onde apropriado\n- Linguagem acessível ao público leigo interessado em seus direitos`;
+CRITICAL OUTPUT RULE (MANDATORY):
+- Your ENTIRE response must be a single raw JSON object.
+- Do NOT write any text before the opening { or after the closing }.
+- Do NOT wrap the JSON in markdown code fences (no \`\`\`json, no \`\`\`).
+- Do NOT add any explanation, commentary, or apology.
+- Start your response with { and end it with }.`
+    : `
+Nunca inclua blocos de código Markdown. Responda APENAS com JSON válido, começando com { e terminando com }.`;
+
+  return base + jsonRule;
+}
+
+/**
+ * Solicita ao modelo um artigo estruturado em JSON com seções bem definidas.
+ * O parâmetro reinforced=true endurece as instruções de formato JSON.
+ */
+async function generateArticle(topic, modelIndex = 0, reinforced = false) {
+  log(`✍️  Gerando artigo sobre: "${topic}"${reinforced ? " [modo reforçado]" : ""}`);
+
+  const systemPrompt = buildSystemPrompt(reinforced);
+
+  const userPrompt = `
+RETURN ONLY A RAW JSON OBJECT. No markdown. No explanation. Start with { end with }.
+
+Escreva um artigo jurídico completo sobre o tema: "${topic}".
+
+O objeto JSON deve ter exatamente esta estrutura (todos os campos são obrigatórios):
+
+{
+  "title": "Título informativo e claro (máximo 100 caracteres)",
+  "description": "Meta descrição para SEO (máximo 200 caracteres, explica o valor do artigo)",
+  "intro": "Parágrafo introdutório forte (2-4 frases, contextualiza o problema e anuncia o que o artigo cobre)",
+  "alertTitle": "Título curto do bloco de atenção (ex: Atenção: documente tudo desde o início)",
+  "alertBody": "Texto do bloco de atenção (1-3 frases práticas e diretas)",
+  "sections": [
+    {
+      "heading": "Subtítulo da seção (H2, até 60 caracteres)",
+      "paragraphs": ["Parágrafo 1 da seção com pelo menos 80 palavras.", "Parágrafo 2 da seção com pelo menos 80 palavras."]
+    }
+  ],
+  "actionSteps": [
+    { "title": "Título curto da ação", "body": "Descrição da ação em 1-2 frases." }
+  ],
+  "preventionItems": [
+    { "bold": "Título em negrito", "text": "Explicação breve." }
+  ],
+  "closing": "Parágrafo final de considerações (2-3 frases).",
+  "closingExtra": "Segundo parágrafo final opcional (2-3 frases).",
+  "disclaimer": "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada."
+}
+
+Requisitos de conteúdo:
+- sections: entre 4 e 6 seções, cada uma com 2-3 parágrafos bem desenvolvidos (mínimo 80 palavras por parágrafo)
+- actionSteps: 4 a 6 passos numerados práticos
+- preventionItems: 4 a 6 dicas de prevenção
+- Total de palavras no artigo: mínimo ${MIN_WORDS} palavras
+- Cite leis, artigos do CDC, LGPD, Marco Civil, CPB ou jurisprudência relevante onde apropriado
+- Linguagem acessível ao público leigo interessado em seus direitos
+
+IMPORTANT: All string values must use double quotes. Escape any internal double quotes with backslash. No trailing commas.`;
 
   const raw = await callOpenRouter(
     [
       { role: "system", content: systemPrompt },
-      { role: "user", content: userPrompt },
+      { role: "user",   content: userPrompt },
     ],
     modelIndex
   );
@@ -308,8 +380,8 @@ async function generateArticle(topic, modelIndex = 0) {
   for (const field of ["title", "intro", "alertTitle", "alertBody", "sections", "actionSteps", "preventionItems", "closing"]) {
     if (!data[field]) throw new Error(`Campo ausente no JSON do modelo: ${field}`);
   }
-  if (!Array.isArray(data.sections) || data.sections.length < 2) throw new Error("sections inválido.");
-  if (!Array.isArray(data.actionSteps) || data.actionSteps.length < 2) throw new Error("actionSteps inválido.");
+  if (!Array.isArray(data.sections)     || data.sections.length < 2)     throw new Error("sections inválido.");
+  if (!Array.isArray(data.actionSteps)  || data.actionSteps.length < 2)  throw new Error("actionSteps inválido.");
   if (!Array.isArray(data.preventionItems) || data.preventionItems.length < 2) throw new Error("preventionItems inválido.");
 
   const fullText = [
@@ -334,7 +406,23 @@ async function generateArticle(topic, modelIndex = 0) {
 async function auditArticle(title, intro, sections, modelIndex = 0) {
   log(`🔍 Auditando artigo: "${title}"`);
   const preview = [intro, ...sections.map(s => s.paragraphs.join(" "))].join("\n\n").slice(0, 3000);
-  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true/false, "reason": "motivo breve se reprovado" }\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras no preview\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${preview}\n---\n\nRetorne APENAS o JSON.`;
+  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:
+{ "approved": true, "reason": "" }
+ou
+{ "approved": false, "reason": "motivo breve" }
+
+Return ONLY a raw JSON object — no markdown, no explanation.
+
+Reprove se:
+- Conteúdo genérico demais, sem referências jurídicas concretas
+- Menos de 800 palavras no preview
+- Título não condiz com o conteúdo
+- Conteúdo claramente incorreto juridicamente
+
+Artigo:
+---
+${preview}
+---`;
   try {
     const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
     const result = extractJson(raw);
@@ -351,7 +439,7 @@ async function auditArticle(title, intro, sections, modelIndex = 0) {
 async function generateExcerpt(title, description, intro, modelIndex = 0) {
   if (description && description.length > 20) return description.slice(0, 200);
   log(`📋 Gerando excerpt para: "${title}"`);
-  const prompt = `Escreva um resumo em português do Brasil com no máximo 200 caracteres para o artigo abaixo. Retorne APENAS o texto do resumo.\n\nTítulo: ${title}\n\nIntrodução: ${intro.slice(0, 500)}`;
+  const prompt = `Escreva um resumo em português do Brasil com no máximo 200 caracteres para o artigo abaixo. Retorne APENAS o texto do resumo, sem aspas, sem JSON.\n\nTítulo: ${title}\n\nIntrodução: ${intro.slice(0, 500)}`;
   try {
     const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
     return normalizeText(raw).slice(0, 200);
@@ -362,10 +450,6 @@ async function generateExcerpt(title, description, intro, modelIndex = 0) {
 
 // ─── Geração do componente TSX ────────────────────────────────────────────────
 
-/**
- * Escapa texto para uso seguro dentro de JSX (evita quebras de template literal
- * e caracteres especiais que invalidam o TSX).
- */
 function escapeJsx(text) {
   return String(text || "")
     .replace(/\\/g, "\\\\")
@@ -376,9 +460,6 @@ function escapeJsx(text) {
     .replace(/"/g, "&quot;");
 }
 
-/**
- * Versão que mantém < e > (para uso em atributos JSX entre {}).
- */
 function escapeJsxAttr(text) {
   return String(text || "")
     .replace(/\\/g, "\\\\")
@@ -387,16 +468,10 @@ function escapeJsxAttr(text) {
     .replace(/"/g, '\\"');
 }
 
-/**
- * Converte **negrito** para <strong>negrito</strong> em JSX.
- */
 function mdBoldToJsx(text) {
   return escapeJsx(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
-/**
- * Gera o código-fonte completo do componente React TSX.
- */
 function buildTsxComponent({ slug, title, description, image, date, readTime, intro, alertTitle, alertBody, sections, actionSteps, preventionItems, closing, closingExtra, disclaimer, topic }) {
   const componentName = slug
     .split("-")
@@ -405,11 +480,8 @@ function buildTsxComponent({ slug, title, description, image, date, readTime, in
 
   const pageUrl = `https://www.lisomarbarbosa.adv.br/artigos/${slug}`;
   const icons = pickIcons(topic, sections.length);
-
-  // Conjunto de ícones necessários (AlertTriangle sempre presente)
   const usedIcons = [...new Set(["AlertTriangle", "ArrowLeft", ...icons])].join(", ");
 
-  // Renderiza seções H2 com ícones
   const sectionsJsx = sections.map((s, i) => {
     const icon = icons[i] || "Scale";
     const heading = escapeJsx(s.heading);
@@ -425,7 +497,6 @@ function buildTsxComponent({ slug, title, description, image, date, readTime, in
 ${paras}`;
   }).join("\n");
 
-  // Renderiza passos numerados
   const stepsJsx = actionSteps.map((step, i) => `
                     <li className="flex gap-4">
                       <span className="font-bold text-primary text-lg">${i + 1}.</span>
@@ -434,7 +505,6 @@ ${paras}`;
                       </div>
                     </li>`).join("\n");
 
-  // Renderiza itens de prevenção
   const preventionJsx = preventionItems.map(item => `
                     <li>
                       <strong>${escapeJsx(item.bold)}</strong> ${mdBoldToJsx(item.text)}
@@ -605,9 +675,6 @@ export default ${componentName};
 
 // ─── Escrita dos arquivos ─────────────────────────────────────────────────────
 
-/**
- * Salva src/pages/artigos/[slug].tsx com o componente React completo.
- */
 async function writePageFile(slug, tsxContent) {
   const filePath = join(PAGES_DIR, `${slug}.tsx`);
   await mkdir(PAGES_DIR, { recursive: true });
@@ -616,9 +683,6 @@ async function writePageFile(slug, tsxContent) {
   return filePath;
 }
 
-/**
- * Insere a nova entrada no array blogPosts em src/data/blog.ts.
- */
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
   const arrayStart = source.indexOf("export const blogPosts: BlogPost[] = [");
@@ -650,54 +714,78 @@ async function saveGeneratedSlug(slug) {
 async function main() {
   log("🚀 Iniciando geração de artigo (formato TSX)...");
 
-  const usedSlugs = [];
-  let attempt = 0;
+  let attempt        = 0;
+  let topic          = null;
+  let topicRetries   = 0;   // tentativas no tema atual
+  const usedSlugs    = [];
 
   while (attempt < MAX_ATTEMPTS) {
     attempt++;
     log(`\n🔄 Tentativa ${attempt}/${MAX_ATTEMPTS}`);
 
-    // 1. Escolhe tema
-    const topic = await chooseTopic(usedSlugs);
-    const candidateSlug = slugify(topic);
-    usedSlugs.push(candidateSlug);
+    // ── Estratégia de seleção de tema ────────────────────────────────────────
+    // Nas primeiras SAME_TOPIC_RETRIES tentativas após um erro de JSON/palavras,
+    // reusa o mesmo tema com prompt reforçado.
+    // Só sorteia novo tema quando: (a) ainda não tem tema, (b) esgotou retries
+    // no tema atual, ou (c) o tema foi reprovado na auditoria de qualidade.
+    const needNewTopic = topic === null || topicRetries >= SAME_TOPIC_RETRIES;
+    const reinforced   = topic !== null && topicRetries > 0 && !needNewTopic;
 
-    // 2. Verifica se já existe
-    const existingFiles = await getPublishedSlugs();
-    if (existingFiles.includes(candidateSlug)) {
-      log(`⏩ Slug "${candidateSlug}" já existe — pulando.`);
-      continue;
+    if (needNewTopic) {
+      topic = await chooseTopic(usedSlugs);
+      const candidateSlug = slugify(topic);
+      usedSlugs.push(candidateSlug);
+      topicRetries = 0;
+
+      // Verifica se o slug já existe antes mesmo de chamar o modelo
+      const existingFiles = await getPublishedSlugs();
+      if (existingFiles.includes(candidateSlug)) {
+        log(`⏩ Slug "${candidateSlug}" já existe — pulando.`);
+        topic = null;
+        continue;
+      }
+    } else {
+      log(`♻️  Reutilizando tema: "${topic}" (retry ${topicRetries}/${SAME_TOPIC_RETRIES})`);
     }
 
-    // 3. Gera artigo estruturado
+    topicRetries++;
+
+    // ── Geração ───────────────────────────────────────────────────────────────
     let article;
     try {
-      article = await generateArticle(topic, attempt - 1);
+      article = await generateArticle(topic, attempt - 1, reinforced);
     } catch (err) {
       log(`❌ Falha na geração: ${err.message}`);
+      // Não descarta o tema ainda — tenta de novo com prompt reforçado
       continue;
     }
 
-    // 4. Verifica contagem mínima
+    // ── Verifica contagem mínima ───────────────────────────────────────────────
     if (article.wordCount < MIN_WORDS) {
-      log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente.`);
+      log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente com o mesmo tema.`);
+      // Não descarta o tema — tenta de novo com reforço
       continue;
     }
 
-    // 5. Auditoria de qualidade
+    // ── Auditoria de qualidade ─────────────────────────────────────────────────
     const audit = await auditArticle(article.title, article.intro, article.sections, attempt - 1);
     if (!audit.ok) {
-      log(`🔁 Artigo reprovado na auditoria — tentando novamente.`);
+      log(`🔁 Artigo reprovado na auditoria — sorteando novo tema.`);
+      topic = null; // força novo tema
+      topicRetries = 0;
       continue;
     }
 
-    // 6. Verifica colisão de slug final
+    // ── Verifica colisão de slug final ────────────────────────────────────────
+    const existingFiles = await getPublishedSlugs();
     if (existingFiles.includes(article.slug)) {
-      log(`⏩ Slug final "${article.slug}" já existe — pulando.`);
+      log(`⏩ Slug final "${article.slug}" já existe — sorteando novo tema.`);
+      topic = null;
+      topicRetries = 0;
       continue;
     }
 
-    // 7. Busca imagem e gera excerpt em paralelo
+    // ── Busca imagem e excerpt em paralelo ────────────────────────────────────
     const [image, excerpt] = await Promise.all([
       fetchImage(topic),
       generateExcerpt(article.title, article.description, article.intro, attempt - 1),
@@ -708,7 +796,7 @@ async function main() {
     const readTime = calculateReadTime(article.wordCount);
     const category = "Direito Digital";
 
-    // 8. Constrói o componente TSX
+    // ── Constrói o componente TSX ─────────────────────────────────────────────
     const tsxContent = buildTsxComponent({
       slug:            article.slug,
       title:           article.title,
@@ -728,14 +816,14 @@ async function main() {
       topic,
     });
 
-    // 9. Salva os arquivos
+    // ── Salva os arquivos ─────────────────────────────────────────────────────
     try {
       await writePageFile(article.slug, tsxContent);
       await updateBlogData({
-        slug: article.slug,
-        title: article.title,
+        slug:     article.slug,
+        title:    article.title,
         excerpt,
-        date: dateISO,
+        date:     dateISO,
         readTime,
         category,
         image,
