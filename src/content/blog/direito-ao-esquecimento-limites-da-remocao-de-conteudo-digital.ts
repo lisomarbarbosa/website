@@ -1,83 +1,152 @@
 export const content = `
-# Direito ao Esquecimento: Limites da Remoção de Conteúdo Digital
+# Direito ao Esquecimento: Limites da Remoção e da Desindexação de Conteúdo Digital
 
-O direito ao esquecimento é um dos temas mais debatidos no campo do direito digital contemporâneo. Em um ambiente em que informações permanecem indexadas por décadas, em que um único episódio do passado pode ser encontrado por qualquer pessoa a qualquer momento, cresce a demanda por mecanismos jurídicos que permitam ao indivíduo controlar a narrativa sobre si mesmo no espaço online. A questão central não é apagar a história, mas determinar quando a manutenção pública de certas informações deixa de servir ao interesse legítimo da sociedade e passa a causar dano injustificado à pessoa.
+A permanência de informações na internet pode produzir efeitos jurídicos relevantes, especialmente quando conteúdos antigos são facilmente encontrados mediante a pesquisa do nome de uma pessoa.
 
-A tensão é real e permanente: de um lado, o direito à privacidade, à honra, à autodeterminação informativa e à proteção de dados pessoais; de outro, a liberdade de imprensa, o direito de acesso à informação, a memória coletiva e o interesse público. Nenhum desses valores é absoluto, e é exatamente nessa zona de tensão que se constroem as decisões judiciais e as normas regulatórias sobre o tema.
+O tema envolve a tensão entre a proteção da honra, da imagem, da privacidade e dos dados pessoais, de um lado, e a liberdade de expressão, o direito à informação e o interesse público, de outro.
 
-> **Atenção prática:** O direito ao esquecimento não garante a remoção automática de qualquer conteúdo. Cada caso é analisado individualmente, e a decisão depende de critérios como relevância pública, veracidade, tempo decorrido e proporcionalidade entre o dano causado e o interesse informativo. Busque orientação jurídica especializada antes de qualquer ação.
+No Brasil, é importante distinguir três medidas diferentes:
 
-## O conceito jurídico e suas raízes históricas
+- **Remoção:** retirada do conteúdo do site ou da plataforma de origem;
+- **Desindexação:** desvinculação do conteúdo em determinados resultados de busca;
+- **Eliminação de dados:** exclusão de dados pessoais de banco de dados, nas hipóteses previstas na LGPD.
 
-O direito ao esquecimento surgiu no âmbito do direito europeu, com raízes na tradição civilista de proteção da personalidade. Na doutrina alemã e francesa, já havia discussão sobre o direito de não ser indefinidamente lembrado por fatos passados, especialmente após cumprimento de pena criminal. A ideia central era que a pessoa que já respondeu por seus erros perante a sociedade teria o direito de ser reintegrada sem o estigma perpétuo de sua conduta anterior.
+Essas medidas não são automáticas e dependem da natureza do conteúdo, da forma de tratamento dos dados e das circunstâncias concretas.
 
-No Brasil, o debate ganhou força com o desenvolvimento da internet e com a facilidade de acesso a informações antigas. O Superior Tribunal de Justiça (STJ) reconheceu, em julgamentos paradigmáticos, que o direito ao esquecimento pode prevalecer sobre o direito de informação quando não há mais interesse público legítimo na divulgação de um fato antigo que cause dano atual à pessoa. A decisão no Recurso Especial 1.334.097/RJ, sobre o caso Chacina da Candelária, tornou-se referência nacional ao reconhecer que a exposição não autorizada de um indivíduo inocentado poderia representar uma segunda punição injusta.
+> **Atenção:** Não existe um direito geral de apagar informações verdadeiras e licitamente publicadas pelo simples fato de o tempo ter passado. Cada caso exige análise jurídica individualizada.
 
-## O posicionamento do Supremo Tribunal Federal
+## O direito ao esquecimento no Brasil
 
-O Supremo Tribunal Federal tratou do tema com profundidade no julgamento do Recurso Extraordinário 1.010.606/RJ, fixando a seguinte tese em sede de repercussão geral: "É incompatível com a Constituição Federal a ideia de um direito ao esquecimento, assim entendido como o poder de obstar, em razão da passagem do tempo, a divulgação de fatos ou dados verídicos e licitamente obtidos e publicados em meios de comunicação social, analógicos ou digitais."
+O chamado direito ao esquecimento foi discutido pelo Superior Tribunal de Justiça em casos envolvendo fatos criminais antigos, inclusive no caso da Chacina da Candelária. Naquela ocasião, o STJ admitiu, em situação específica, a proteção de pessoa absolvida que havia sido novamente associada ao fato em programa televisivo.
 
-Essa decisão gerou debate intenso. Ao mesmo tempo em que afastou a possibilidade de impor silêncio à imprensa com base exclusivamente na passagem do tempo, o STF não fechou a porta para proteção em casos específicos. O tribunal reafirmou que a proteção pode existir por outros fundamentos — como violação à privacidade, dados sensíveis, exposição de menores, imagens não autorizadas e tratamento indevido de dados pessoais — sem utilizar especificamente a denominação "direito ao esquecimento".
+Posteriormente, o Supremo Tribunal Federal fixou entendimento de alcance geral no sentido de que não existe um direito autônomo de impedir a divulgação de fatos verdadeiros e licitamente obtidos apenas porque transcorreu determinado período.
 
-> **Ponto importante:** A decisão do STF não significa que toda informação pode circular indefinidamente sem responsabilidade. Ela limita o argumento da passagem do tempo como fundamento isolado, mas mantém vigentes os demais instrumentos de proteção à personalidade, à privacidade e aos dados pessoais.
+Segundo o STF, eventuais abusos devem ser examinados caso a caso, com base na proteção da honra, da imagem, da privacidade e dos demais direitos da personalidade.
 
-## A Lei Geral de Proteção de Dados e o direito à eliminação
+Assim, a passagem do tempo, isoladamente, não autoriza a remoção de uma informação verdadeira e licitamente publicada.
 
-A LGPD — Lei nº 13.709/2018 — introduziu no ordenamento jurídico brasileiro um conjunto robusto de direitos ao titular dos dados pessoais, entre os quais o direito à eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei (artigo 18, inciso VI). Esse direito, embora distinto da concepção clássica do "direito ao esquecimento", tem efeito prático semelhante em muitos casos: permite que o titular exija a supressão de informações pessoais mantidas por controladores de dados.
+Isso não significa, contudo, que toda informação possa circular sem limites. Conteúdos falsos, desatualizados de forma relevante, ofensivos ou obtidos e tratados ilicitamente podem gerar consequências jurídicas por fundamentos próprios.
 
-O direito à eliminação previsto na LGPD tem contornos claros. Ele se aplica quando: (a) os dados foram coletados sem consentimento válido; (b) o consentimento foi revogado; (c) o tratamento é desnecessário, excessivo ou desproporcional; ou (d) os dados foram tratados de forma que viole a própria LGPD. Não se aplica, contudo, quando o tratamento for necessário para cumprimento de obrigação legal, exercício regular de direito em processo judicial ou para fins de pesquisa, desde que observados os parâmetros legais.
+## Remoção, desindexação e eliminação de dados
 
-A Autoridade Nacional de Proteção de Dados (ANPD) é o órgão responsável por fiscalizar o cumprimento da LGPD e pode aplicar sanções que vão desde advertências até multas de até 2% do faturamento da empresa, limitadas a R$ 50 milhões por infração. O titular que tiver seus direitos violados pode acionar a ANPD administrativamente ou buscar tutela judicial.
+A remoção busca retirar o conteúdo da página ou plataforma em que ele está hospedado. Em regra, é dirigida ao provedor responsável pela publicação ou disponibilização do material.
 
-## O Marco Civil da Internet e a remoção de conteúdo
+A desindexação tem alcance diferente. O conteúdo permanece disponível no site de origem, mas deixa de aparecer associado a determinada pesquisa, especialmente à busca feita exclusivamente pelo nome da pessoa.
 
-O Marco Civil da Internet (Lei nº 12.965/2014) estabelece regras importantes sobre a remoção de conteúdo produzido por terceiros. A regra geral é que provedores de aplicações não respondem civilmente por conteúdo gerado por usuários, salvo quando, notificados por ordem judicial, deixam de remover o material. Há, contudo, uma exceção relevante: em se tratando de imagens, vídeos ou outros materiais íntimos sem consentimento — o chamado revenge porn —, os provedores respondem subsidiariamente se não removerem o conteúdo após notificação extrajudicial da vítima ou de seu representante legal (artigo 21).
+Já a eliminação prevista na LGPD refere-se à exclusão de dados pessoais tratados por um controlador, observadas as hipóteses e limitações legais.
 
-A lógica do Marco Civil foi pensada para proteger a liberdade de expressão e evitar a censura privada por parte das plataformas. Em termos práticos, isso significa que a remoção de conteúdo que não se enquadra na exceção do artigo 21 depende, na maior parte dos casos, de uma ordem judicial. Essa realidade torna o processo mais lento, mas também mais garantístico, pois impede remoções arbitrárias sem o contraditório.
+Confundir esses mecanismos pode levar à formulação de pedidos inadequados. A desindexação, por exemplo, não equivale à exclusão da notícia nem impede necessariamente o acesso ao conteúdo por outras palavras-chave.
 
-Para conteúdos que envolvam violação à privacidade, exposição de dados sensíveis ou tratamento ilegal de dados pessoais, a LGPD pode funcionar como instrumento complementar, criando obrigações específicas para plataformas na qualidade de operadoras de dados pessoais.
+## O entendimento sobre desindexação
 
-## Desindexação nos mecanismos de busca
+O STJ reconhece que a desindexação não deve ser automaticamente confundida com o direito ao esquecimento. Em situações excepcionais, pode-se discutir a desvinculação entre o nome de uma pessoa e determinados resultados de busca, sem retirar a matéria do site de origem.
 
-Uma dimensão prática do direito ao esquecimento é a chamada desindexação: a remoção de links de resultados de mecanismos de busca como o Google, sem que o conteúdo seja necessariamente excluído do site de origem. Na Europa, o Regulamento Geral de Proteção de Dados (GDPR) e a decisão do Tribunal de Justiça da União Europeia no caso Google Spain v. AEPD (2014) consagraram esse direito, obrigando mecanismos de busca a remover resultados a pedido dos titulares quando preenchidos determinados requisitos.
+O exame costuma considerar, entre outros elementos:
 
-No Brasil, a desindexação ainda não tem regulação específica consolidada, mas tem sido objeto de demandas judiciais bem-sucedidas. Os fundamentos utilizados incluem a LGPD (tratamento desnecessário de dados pessoais), o direito à privacidade (art. 5º, X, da Constituição) e o artigo 21 do Marco Civil, quando aplicável. O Google e outros mecanismos de busca mantêm formulários próprios para solicitação de remoção de conteúdo, e decisões judiciais podem determinar a desindexação sob pena de multa diária.
+- se a busca é feita exclusivamente pelo nome da pessoa;
+- se o conteúdo permanece acessível por outros termos;
+- se há interesse público atual;
+- se a informação é verdadeira e foi licitamente obtida;
+- se existe dano desproporcional à privacidade, à honra ou à imagem;
+- se o pedido identifica precisamente os resultados ou URLs envolvidos.
 
-> **Dica prática:** Antes de ingressar com ação judicial, verifique se o conteúdo se enquadra nas políticas de remoção administrativas das plataformas (Google, Meta, YouTube, etc.). Em muitos casos, a remoção administrativa é mais rápida. Guarde todas as evidências do processo de solicitação e dos eventuais indeferimentos, pois esses registros são úteis na ação judicial.
+A aplicação não é uniforme em todos os casos. Há decisões admitindo a desindexação em situações excepcionais e outras que a rejeitam quando o conteúdo possui relevância social atual ou envolve fatos de interesse público.
 
-## Critérios para ponderação entre privacidade e liberdade de expressão
+Portanto, não é adequado afirmar que a desindexação seja um direito automático de pessoas absolvidas, condenadas ou envolvidas em fatos antigos.
 
-Nem todo conteúdo desagradável ou inconveniente pode ser removido com base no direito ao esquecimento ou na LGPD. Os tribunais brasileiros têm aplicado um conjunto de critérios para ponderar quando a proteção ao indivíduo deve prevalecer sobre o interesse informativo:
+## A LGPD e o direito à eliminação
 
-**Relevância pública atual:** A informação ainda serve a algum interesse legítimo da sociedade? Um fato que teve relevância pública décadas atrás pode ter perdido esse atributo com o tempo, especialmente quando o sujeito não é figura pública.
+A LGPD assegura ao titular, entre outros direitos, a possibilidade de requerer a anonimização, o bloqueio ou a eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei.
 
-**Veracidade:** Informações verídicas têm proteção mais robusta do que falsas. Conteúdo falso pode ser removido com base em outros fundamentos (difamação, calúnia, fake news) com menor dificuldade.
+Também prevê a eliminação de dados pessoais tratados com o consentimento do titular, ressalvadas as hipóteses legais de conservação.
 
-**Natureza da pessoa:** Figuras públicas — políticos, empresários, celebridades — têm esfera de privacidade reduzida em relação a atos praticados no exercício de suas funções ou posições públicas. Pessoas privadas têm proteção mais ampla.
+A eliminação não se aplica indistintamente a toda informação relacionada a uma pessoa. O tratamento pode ser mantido, por exemplo, quando necessário para:
 
-**Proporcionalidade do dano:** O dano causado pela manutenção da informação é desproporcional ao benefício informativo? Essa análise é central para qualquer decisão judicial.
+- cumprimento de obrigação legal ou regulatória;
+- realização de estudo por órgão de pesquisa, observada a anonimização quando possível;
+- transferência a terceiro, respeitadas as exigências legais;
+- uso exclusivo do controlador, com anonimização quando exigida.
 
-**Tempo decorrido:** Embora o STF tenha afastado o esquecimento fundado exclusivamente na passagem do tempo, este critério pode ser considerado em conjunto com os demais fatores, especialmente quando o sujeito é pessoa privada.
+Além disso, a LGPD não deve ser tratada como fundamento automático para retirar matérias jornalísticas. A lei possui regras específicas sobre sua aplicação e excepciona o tratamento realizado exclusivamente para fins jornalísticos, artísticos e acadêmicos.
 
-**Dados sensíveis:** Informações sobre saúde, orientação sexual, religião, origem étnica e outras categorias sensíveis merecem proteção reforçada nos termos da LGPD.
+## O Marco Civil da Internet
 
-## Como solicitar a remoção de conteúdo: passo a passo
+O artigo 19 do Marco Civil da Internet estabelece, como regra, que o provedor de aplicações somente pode ser responsabilizado civilmente por conteúdo gerado por terceiros quando, após ordem judicial específica, deixa de tornar indisponível o material indicado.
 
-O caminho para remover conteúdo online depende de sua natureza e do fundamento jurídico aplicável. Em termos práticos, o procedimento costuma seguir as seguintes etapas:
+A ordem deve identificar de maneira clara e específica o conteúdo questionado, permitindo sua localização inequívoca.
 
-**1. Preservação das provas:** Antes de qualquer contato com a plataforma ou com advogados, documente o conteúdo com prints de tela datados, URLs completas e identificação do autor quando possível.
+Essa regra não significa que toda remoção dependa necessariamente de ordem judicial. Existem exceções legais, políticas internas das plataformas e situações em que outros fundamentos jurídicos podem ser aplicáveis.
 
-**2. Notificação extrajudicial à plataforma:** Utilize os mecanismos de denúncia ou os formulários de remoção das plataformas. Em casos de imagens íntimas sem consentimento, a notificação já gera responsabilidade subsidiária para a plataforma nos termos do artigo 21 do Marco Civil.
+Uma exceção relevante está no artigo 21, que trata da divulgação não autorizada de imagens, vídeos ou outros materiais contendo nudez ou atos sexuais de caráter privado. Nessa hipótese, o provedor pode responder subsidiariamente se, após notificação válida da vítima ou de seu representante, não remover diligentemente o conteúdo.
 
-**3. Notificação ao controlador de dados (quando aplicável):** Se o conteúdo envolve dados pessoais tratados por empresa, a notificação formal ao encarregado de proteção de dados (DPO) da empresa, com fundamento na LGPD, é o passo adequado. A empresa tem prazo para responder e, em caso de negativa injustificada, a ANPD pode ser acionada.
+## Responsabilidade dos provedores
 
-**4. Ação judicial com pedido de tutela de urgência:** Quando as vias extrajudiciais se mostrarem ineficazes, o caminho é o Judiciário. A tutela de urgência (medida liminar) pode determinar a remoção imediata do conteúdo, com multa diária (astreintes) em caso de descumprimento. A ação pode ser cumulada com pedido de indenização por danos morais.
+É necessário identificar qual agente controla ou disponibiliza o conteúdo:
 
-**5. Reclamação à ANPD:** Em paralelo à via judicial, a reclamação à Autoridade Nacional de Proteção de Dados é cabível quando a violação envolver dados pessoais e não houver resposta satisfatória do controlador.
+- o autor da publicação;
+- o site ou veículo que hospeda a informação;
+- a plataforma que permite sua divulgação;
+- o mecanismo de busca que apresenta resultados.
 
-## Perspectivas e desafios futuros
+A responsabilidade não é automaticamente transferida ao buscador. Em regra, a pretensão de reconhecimento de abuso no conteúdo deve ser dirigida contra quem o publicou ou disponibilizou.
 
-O direito ao esquecimento no ambiente digital continua em construção no Brasil. O debate regulatório avança com o amadurecimento da ANPD e com a produção doutrinária e jurisprudencial sobre o tema. Questões ainda abertas incluem a obrigação de desindexação pelos mecanismos de busca sem ordem judicial, o tratamento de dados de pessoas falecidas e a extensão da proteção a informações históricas mantidas por veículos de comunicação digitais.
+Quanto ao provedor de pesquisa, a discussão pode envolver a desindexação de resultados específicos, mas não autoriza, como regra, a exigência de monitoramento amplo, filtragem genérica ou exclusão automática de qualquer resultado associado ao nome de uma pessoa.
 
-A tendência internacional aponta para um equilíbrio cada vez mais sofisticado entre proteção à personalidade e liberdade de expressão — não pela supressão de um em favor do outro, mas pela criação de mecanismos graduados que permitam respostas proporcionais a cada tipo de situação. Para o titular de dados e para as vítimas de exposição indevida, o cenário é de ampliação progressiva de instrumentos de tutela, ainda que o caminho para efetivá-los exija orientação jurídica qualificada.
+## Critérios para análise do caso concreto
+
+A análise jurídica deve considerar especialmente:
+
+**1. Licitude da obtenção e da publicação**
+Informações verdadeiras e licitamente obtidas recebem proteção relevante da liberdade de expressão e do direito à informação.
+
+**2. Interesse público atual**
+A relevância histórica ou social do fato pode justificar a manutenção do conteúdo, mesmo depois de longo período.
+
+**3. Natureza da pessoa envolvida**
+A condição de pessoa pública ou privada pode influenciar a ponderação, especialmente quando os fatos se relacionam ao exercício de função pública.
+
+**4. Atualidade e contexto**
+A matéria deve ser examinada para verificar se continua correta, se apresenta o resultado definitivo do processo e se evita associação enganosa ou descontextualizada.
+
+**5. Intensidade do dano**
+A existência de dano não basta, por si só, para determinar a remoção. É necessário avaliar sua gravidade e sua relação com a forma de divulgação.
+
+**6. Medida adequada**
+A solução pode envolver correção, atualização, direito de resposta, remoção, desindexação ou indenização, conforme o caso. A exclusão total tende a ser medida mais intensa do que a simples desvinculação do nome em determinada pesquisa.
+
+## Como agir diante de conteúdo potencialmente ilícito
+
+**1. Preserve as provas**
+
+Registre capturas de tela, endereço completo das páginas, data e horário do acesso, termos utilizados na pesquisa, identificação do autor ou responsável e respostas e protocolos das plataformas.
+
+**2. Identifique a providência pretendida**
+
+Defina se o objetivo é retirar o conteúdo da origem, corrigir ou atualizar a informação, desvincular o nome de resultados específicos, eliminar dados pessoais de determinado banco ou obter indenização.
+
+**3. Notifique o responsável adequado**
+
+A solicitação deve ser encaminhada ao site, veículo, plataforma, controlador ou mecanismo de busca correspondente, com indicação precisa do material questionado.
+
+**4. Avalie a necessidade de medida judicial**
+
+A ação judicial pode conter pedido de obrigação de fazer, tutela de urgência e eventual indenização, desde que demonstrados a ilicitude, o risco de dano e a adequação da medida.
+
+**5. Considere a atuação administrativa**
+
+Quando houver tratamento de dados pessoais sujeito à LGPD, o titular pode exercer seus direitos perante o controlador e, conforme a situação, peticionar à Autoridade Nacional de Proteção de Dados (ANPD) ou recorrer aos órgãos de defesa do consumidor.
+
+## Considerações finais
+
+No Brasil, a passagem do tempo não cria, por si só, um direito de apagar fatos verdadeiros e licitamente publicados.
+
+O chamado direito ao esquecimento, compreendido como poder geral de impedir a divulgação de informações antigas, foi considerado incompatível com a Constituição pelo STF. Isso não elimina a proteção contra conteúdos falsos, ofensivos, descontextualizados ou tratados de forma ilícita.
+
+A desindexação pode ser discutida em situações excepcionais, desde que não se confunda com a remoção da informação original e que sejam ponderados o interesse público, a privacidade, a honra, a imagem e a proteção de dados pessoais.
+
+A solução adequada depende da identificação do conteúdo, do agente responsável e da medida juridicamente proporcional ao dano alegado. As citações e a aplicação ao caso concreto devem ser verificadas antes de qualquer uso profissional.
+
+---
+
+*Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.*
 `;
