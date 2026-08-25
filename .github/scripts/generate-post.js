@@ -8,9 +8,6 @@ const __dirname = dirname(__filename);
 
 const ROOT = process.cwd();
 
-// ── Caminhos corretos ──────────────────────────────────────────────────────────
-// O ArticlePage.tsx lê de src/content/blog/*.ts (import.meta.glob)
-// O blog.ts guarda os metadados (slug, title, excerpt, date, readTime, etc.)
 const CONTENT_DIR         = join(ROOT, "src/content/blog");
 const BLOG_DATA_FILE      = join(ROOT, "src/data/blog.ts");
 const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
@@ -36,7 +33,6 @@ const MODELS = [
   "google/gemma-4-26b-a4b-it:free",
 ];
 
-// Quantas tentativas consecutivas no MESMO tema antes de sortear um novo
 const SAME_TOPIC_RETRIES = 3;
 
 const FALLBACK_IMAGE =
@@ -349,20 +345,105 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
   return { ...data, slug, wordCount, description: data.description || data.title };
 }
 
-// ── Auditoria ──────────────────────────────────────────────────────────────────
+// ── Auditoria de qualidade editorial ──────────────────────────────────────────
 
 async function auditArticle(title, intro, sections, modelIndex = 0) {
-  log(`🔍 Auditando artigo: "${title}"`);
+  log(`🔍 Auditoria editorial: "${title}"`);
   const preview = [intro, ...sections.map(s => s.paragraphs.join(" "))].join("\n\n").slice(0, 3000);
   const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true, "reason": "" }\nou\n{ "approved": false, "reason": "motivo breve" }\n\nReturn ONLY a raw JSON object — no markdown, no explanation.\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras no preview\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${preview}\n---`;
   try {
     const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex);
     const result = extractJson(raw);
-    log(`✅ Auditoria: ${result.approved ? "APROVADO" : `REPROVADO — ${result.reason}`}`);
+    log(`✅ Auditoria editorial: ${result.approved ? "APROVADO" : `REPROVADO — ${result.reason}`}`);
     return { ok: !!result.approved, reason: result.reason || "" };
   } catch (err) {
-    log(`⚠️  Auditoria falhou (${err.message}) — aprovando por padrão.`);
+    log(`⚠️  Auditoria editorial falhou (${err.message}) — aprovando por padrão.`);
     return { ok: true, reason: "" };
+  }
+}
+
+// ── Auditoria jurídica: jurisprudência e doutrina ─────────────────────────────
+//
+// Esta etapa avalia se as referências jurídicas citadas no artigo correspondem
+// à realidade: leis com numeração correta, entendimentos do STF/STJ conforme
+// firmados, e posicionamentos doutrinários que refletem o estado atual do direito
+// brasileiro. Artigos com erros jurídicos graves são reprovados e descartados.
+
+async function auditJuridico(title, intro, sections, modelIndex = 0) {
+  log(`⚖️  Auditoria jurídica: "${title}"`);
+
+  // Extrai todo o texto do artigo para análise
+  const fullText = [intro, ...sections.map(s => [s.heading, ...s.paragraphs].join(" "))]
+    .join("\n\n")
+    .slice(0, 4000);
+
+  const prompt = `Você é um especialista em Direito brasileiro com profundo conhecimento em Direito Digital, Direito Civil, Direito Penal e legislação correlata.
+
+Analise o artigo jurídico abaixo e verifique:
+
+1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados (STF, STJ, TJs) correspondem ao que realmente foi decidido? Números de processo, teses fixadas e datas são coerentes com o que se sabe sobre o direito brasileiro?
+
+2. LEGISLAÇÃO: As leis citadas existem com essa numeração? Os artigos referenciados (ex: art. 19 do Marco Civil, art. 5º da CF, art. 186 do CC) tratam realmente do que o artigo afirma?
+
+3. DOUTRINA: Os entendimentos doutrinários apresentados refletem o estado atual do direito brasileiro? Há afirmações que contradizem pacificamente o que a doutrina majoritária sustenta?
+
+4. CONSISTÊNCIA INTERNA: O artigo é internamente consistente? Afirmações contraditórias entre si devem ser sinalizadas.
+
+Importante:
+- Seja criterioso, mas não exija perfeição absoluta em citações numéricas (modelos de IA podem errar detalhes menores).
+- Reprove APENAS quando houver erro GRAVE: lei inexistente, jurisprudência completamente inventada, tese oposta ao entendimento consolidado, ou afirmação juridicamente perigosa para o leigo.
+- Pequenas imprecisões, simplificações didáticas e ausência de citações específicas NÃO devem reprovar.
+- Se não houver citações jurídicas verificáveis, avalie apenas a consistência do raciocínio jurídico.
+
+Retorne APENAS um JSON válido neste formato exato:
+{
+  "approved": true,
+  "errors": [],
+  "warnings": [],
+  "reason": ""
+}
+
+ou, se reprovado:
+{
+  "approved": false,
+  "errors": ["Descrição do erro grave 1", "Descrição do erro grave 2"],
+  "warnings": ["Imprecisão menor 1"],
+  "reason": "Resumo do motivo da reprovação em 1 frase"
+}
+
+Não inclua markdown, não explique, comece com { e termine com }.
+
+Artigo para análise:
+---
+Título: ${title}
+
+${fullText}
+---`;
+
+  try {
+    const raw = await callOpenRouter([{ role: "user", content: prompt }], modelIndex + 1);
+    const result = extractJson(raw);
+
+    const approved = !!result.approved;
+    const errors   = Array.isArray(result.errors)   ? result.errors   : [];
+    const warnings = Array.isArray(result.warnings) ? result.warnings : [];
+    const reason   = result.reason || "";
+
+    if (approved) {
+      log(`✅ Auditoria jurídica: APROVADO`);
+      if (warnings.length > 0) {
+        log(`⚠️  Avisos jurídicos (não bloqueantes):`);
+        warnings.forEach(w => log(`   • ${w}`));
+      }
+    } else {
+      log(`❌ Auditoria jurídica: REPROVADO — ${reason}`);
+      errors.forEach(e => log(`   🚫 ${e}`));
+    }
+
+    return { ok: approved, errors, warnings, reason };
+  } catch (err) {
+    log(`⚠️  Auditoria jurídica falhou (${err.message}) — aprovando por padrão.`);
+    return { ok: true, errors: [], warnings: [], reason: "" };
   }
 }
 
@@ -381,8 +462,6 @@ async function generateExcerpt(title, description, intro, modelIndex = 0) {
 }
 
 // ── Montagem do Markdown ───────────────────────────────────────────────────────
-// Gera o conteúdo no formato que o ArticlePage.tsx lê:
-//   export const content = `...markdown...`;
 
 function buildMarkdownContent({ title, intro, alertTitle, alertBody, sections, actionSteps, preventionItems, closing, closingExtra, disclaimer }) {
   const sectionsText = sections.map(s => {
@@ -432,15 +511,10 @@ ${closing}${closingExtraText}
 
 // ── Escrita dos arquivos ───────────────────────────────────────────────────────
 
-/**
- * Salva o arquivo de conteúdo em src/content/blog/{slug}.ts
- * no formato que o ArticlePage.tsx lê via import.meta.glob.
- */
 async function writeContentFile(slug, markdownContent) {
   await mkdir(CONTENT_DIR, { recursive: true });
   const filePath = join(CONTENT_DIR, `${slug}.ts`);
 
-  // Escapa backticks e ${} dentro do markdown para não quebrar o template literal
   const safe = markdownContent
     .replace(/\\/g, "\\\\")
     .replace(/`/g, "\\`")
@@ -452,9 +526,6 @@ async function writeContentFile(slug, markdownContent) {
   return filePath;
 }
 
-/**
- * Insere o novo post no array blogPosts de src/data/blog.ts de forma segura.
- */
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
 
@@ -555,6 +626,7 @@ async function main() {
 
     topicRetries++;
 
+    // 1. Gera o artigo
     let article;
     try {
       article = await generateArticle(topic, attempt - 1, reinforced);
@@ -563,19 +635,32 @@ async function main() {
       continue;
     }
 
+    // 2. Verifica tamanho mínimo
     if (article.wordCount < MIN_WORDS) {
       log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente.`);
       continue;
     }
 
-    const audit = await auditArticle(article.title, article.intro, article.sections, attempt - 1);
-    if (!audit.ok) {
-      log(`🔁 Artigo reprovado na auditoria — sorteando novo tema.`);
+    // 3. Auditoria editorial (qualidade geral)
+    const editorialAudit = await auditArticle(article.title, article.intro, article.sections, attempt - 1);
+    if (!editorialAudit.ok) {
+      log(`🔁 Artigo reprovado na auditoria editorial — sorteando novo tema.`);
       topic = null;
       topicRetries = 0;
       continue;
     }
 
+    // 4. Auditoria jurídica (jurisprudência e doutrina)
+    const juridicalAudit = await auditJuridico(article.title, article.intro, article.sections, attempt - 1);
+    if (!juridicalAudit.ok) {
+      log(`🔁 Artigo reprovado na auditoria jurídica — sorteando novo tema.`);
+      log(`   Motivo: ${juridicalAudit.reason}`);
+      topic = null;
+      topicRetries = 0;
+      continue;
+    }
+
+    // 5. Verifica duplicidade de slug
     const existingFiles = await getPublishedSlugs();
     if (existingFiles.includes(article.slug)) {
       log(`⏩ Slug final "${article.slug}" já existe — sorteando novo tema.`);
@@ -584,6 +669,7 @@ async function main() {
       continue;
     }
 
+    // 6. Busca imagem e excerpt em paralelo
     const [image, excerpt] = await Promise.all([
       fetchImage(topic),
       generateExcerpt(article.title, article.description, article.intro, attempt - 1),
@@ -594,7 +680,7 @@ async function main() {
     const readTime = calculateReadTime(article.wordCount);
     const category = "Direito Digital";
 
-    // Monta o Markdown e salva em src/content/blog/{slug}.ts
+    // 7. Monta e salva os arquivos
     const markdownContent = buildMarkdownContent({
       title:           article.title,
       intro:           article.intro,
@@ -625,12 +711,17 @@ async function main() {
       throw err;
     }
 
+    // 8. Log final com resultado das auditorias
     log(`\n🎉 Artigo publicado com sucesso!`);
     log(`   Título:   ${article.title}`);
     log(`   Slug:     ${article.slug}`);
     log(`   Palavras: ${article.wordCount}`);
     log(`   Arquivo:  src/content/blog/${article.slug}.ts`);
     log(`   Blog:     src/data/blog.ts atualizado`);
+    if (juridicalAudit.warnings.length > 0) {
+      log(`   ⚠️  Avisos jurídicos registrados: ${juridicalAudit.warnings.length}`);
+      juridicalAudit.warnings.forEach(w => log(`      • ${w}`));
+    }
     return;
   }
 
