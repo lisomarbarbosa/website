@@ -8,7 +8,16 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[
+  {
+    slug: 'direito-ao-esquecimento-limites-da-remocao-de-conteudo-digital',
+    title: 'Direito ao Esquecimento: Limites da Remoção de Conteúdo Digital',
+    excerpt: 'Entenda o direito ao esquecimento na LGPD e no Marco Civil, limites legais, jurisprudência e como solicitar remoção de dados ou conteúdos online com segurança jurídica.',
+    date: '2026-08-25',
+    readTime: '9 min de leitura',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1485740112426-0c2549fa8c86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NjIxMTQyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },] = [
   {
     slug: 'difamacao-nas-redes-sociais-e-responsabilidade-juridica',
     title: 'Difamação nas redes sociais e responsabilidade jurídica',
