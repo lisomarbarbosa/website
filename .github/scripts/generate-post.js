@@ -15,10 +15,11 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const GROQ_URL       = "https://api.groq.com/openai/v1/chat/completions";
 
 const MAX_ATTEMPTS = 5;
 
-// ── Pool de modelos (slugs free válidos em ago/2026) ───────────────────────────
+// ── Pool de modelos OpenRouter (slugs free válidos em ago/2026) ────────────────
 // Verificados como disponíveis na tier gratuita do OpenRouter em agosto 2026.
 // Caso um modelo retorne 404 ou 429, ele é pulado pelo retry loop.
 const MODELS = [
@@ -30,6 +31,16 @@ const MODELS = [
   "nvidia/nemotron-3-nano-30b-a3b:free",
   "moonshotai/kimi-k2.6:free",
   "inclusionai/ling-3.0-flash:free",
+];
+
+// ── Pool de modelos Groq (fallback 1) ─────────────────────────────────────────
+// Modelos rápidos disponíveis na tier gratuita do Groq em ago/2026.
+// Docs: https://console.groq.com/docs/models
+const GROQ_MODELS = [
+  "llama-3.3-70b-versatile",
+  "llama-3.1-8b-instant",
+  "gemma2-9b-it",
+  "mixtral-8x7b-32768",
 ];
 
 const SAME_TOPIC_RETRIES = 3;
@@ -252,15 +263,41 @@ async function callOpenRouter(messages, modelIndex = 0) {
   return content;
 }
 
-// ── Gemini API (fallback) ──────────────────────────────────────────────────────
+// ── Groq API (fallback 1) ──────────────────────────────────────────────────────
 //
-// Acionada automaticamente quando o OpenRouter falha (qualquer erro).
-// Usa o modelo gemini-2.0-flash via REST, converte o formato messages → Gemini.
+// Acionada quando o OpenRouter falha (404, 429 ou qualquer erro).
+// Usa interface compatível com OpenAI — modelos rápidos e com generoso free tier.
+// Secret necessário: GROQ_API_KEY (configurar em Settings > Secrets do repositório).
+
+async function callGroq(messages, modelIndex = 0) {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) throw new Error("GROQ_API_KEY não configurada.");
+  const model = GROQ_MODELS[modelIndex % GROQ_MODELS.length];
+  log(`⚡ Groq API · modelo: ${model} (fallback 1)`);
+  const res = await fetch(GROQ_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${key}`,
+    },
+    body: JSON.stringify({ model, messages, max_tokens: 4096, temperature: 0.7 }),
+  });
+  if (!res.ok) { const body = await res.text(); throw new Error(`Groq HTTP ${res.status}: ${body}`); }
+  const data = await res.json();
+  const content = data?.choices?.[0]?.message?.content;
+  if (!content) throw new Error("Resposta vazia do Groq.");
+  return content;
+}
+
+// ── Gemini API (fallback 2) ────────────────────────────────────────────────────
+//
+// Acionada quando tanto OpenRouter quanto Groq falham.
+// Usa o modelo gemini-2.0-flash via REST, converte formato messages → Gemini.
 
 async function callGemini(messages) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY não configurada.");
-  log(`🔷 Gemini API · modelo: gemini-2.0-flash (fallback)`);
+  log(`🔷 Gemini API · modelo: gemini-2.0-flash (fallback 2)`);
 
   // Converte formato OpenAI messages → Gemini contents
   // system prompt é mesclado como primeira parte do user turn
@@ -299,17 +336,31 @@ async function callGemini(messages) {
   return content;
 }
 
-// ── callAI: tenta OpenRouter, cai no Gemini se falhar ─────────────────────────
+// ── callAI: OpenRouter → Groq → Gemini ────────────────────────────────────────
+//
+// Cadeia de fallback em 3 níveis:
+//   1. OpenRouter (pool de modelos free)
+//   2. Groq       (llama/gemma/mixtral — free tier generoso)
+//   3. Gemini     (gemini-2.0-flash — último recurso)
 
 async function callAI(messages, modelIndex = 0) {
+  // Nível 1: OpenRouter
   try {
     return await callOpenRouter(messages, modelIndex);
   } catch (orErr) {
-    log(`⚠️  OpenRouter falhou (${orErr.message}) — tentando Gemini como fallback...`);
+    log(`⚠️  OpenRouter falhou (${orErr.message}) — tentando Groq como fallback 1...`);
+  }
+
+  // Nível 2: Groq
+  try {
+    return await callGroq(messages, modelIndex);
+  } catch (groqErr) {
+    log(`⚠️  Groq falhou (${groqErr.message}) — tentando Gemini como fallback 2...`);
+    // Nível 3: Gemini
     try {
       return await callGemini(messages);
     } catch (gemErr) {
-      throw new Error(`OpenRouter: ${orErr.message} | Gemini: ${gemErr.message}`);
+      throw new Error(`OpenRouter falhou | Groq falhou | Gemini: ${gemErr.message}`);
     }
   }
 }
