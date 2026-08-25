@@ -181,6 +181,8 @@ jobs:
   generate-legal-article:
     name: Generate and Validate Legal Article
     runs-on: ubuntu-latest
+    # Timeout total do job: 6 horas (8 tentativas × 30 min + margem)
+    timeout-minutes: 370
 
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -270,14 +272,62 @@ jobs:
           echo "📋 Temas já publicados hoje: $TITLES_TODAY"
           echo "used_topics=$TITLES_TODAY" >> $GITHUB_OUTPUT
 
-      - name: 🤖 Generate, research and audit article (com loop de reescrita)
+      # ──────────────────────────────────────────────────────────────────────
+      # LOOP DE RETRY: tenta gerar o artigo até MAX_ATTEMPTS vezes.
+      # Entre cada falha, aguarda WAIT_SECONDS (30 minutos) antes de tentar
+      # novamente. O loop sai imediatamente ao primeiro sucesso.
+      # ──────────────────────────────────────────────────────────────────────
+      - name: 🤖 Generate article (retry a cada 30 min até ter sucesso)
         if: steps.slot_check.outputs.skip != 'true'
         id: generate
         env:
           ARTICLE_SLOT: ${{ steps.slot_check.outputs.slot }}
           ARTICLE_USED_TOPICS: ${{ steps.slot_check.outputs.used_topics }}
         run: |
-          node .github/scripts/generate-post.js
+          MAX_ATTEMPTS=8        # máximo de tentativas (8 × 30 min = 4 horas)
+          WAIT_SECONDS=1800     # 30 minutos entre tentativas
+          ATTEMPT=0
+          SUCCESS=false
+
+          while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
+            ATTEMPT=$((ATTEMPT + 1))
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "🔄 Tentativa $ATTEMPT de $MAX_ATTEMPTS — $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+            # Executa o script de geração
+            if node .github/scripts/generate-post.js; then
+              echo ""
+              echo "✅ Artigo gerado com sucesso na tentativa $ATTEMPT!"
+              SUCCESS=true
+              break
+            else
+              EXIT_CODE=$?
+              echo ""
+              echo "❌ Tentativa $ATTEMPT falhou (exit code: $EXIT_CODE)."
+
+              if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+                WAIT_MIN=$((WAIT_SECONDS / 60))
+                echo "⏳ Aguardando $WAIT_MIN minutos antes da próxima tentativa..."
+                echo "   Próxima tentativa: $(date -u -d "+${WAIT_SECONDS} seconds" '+%H:%M:%S UTC' 2>/dev/null || date -u -v +${WAIT_SECONDS}S '+%H:%M:%S UTC')"
+                sleep "$WAIT_SECONDS"
+
+                # Atualiza o repositório antes de cada nova tentativa para
+                # garantir que o blog.ts esteja sincronizado
+                git pull --rebase origin main || true
+              else
+                echo "🚨 Todas as $MAX_ATTEMPTS tentativas falharam."
+                echo "   O artigo não pôde ser criado automaticamente."
+                echo "   Verifique os logs acima para identificar a causa."
+                exit 1
+              fi
+            fi
+          done
+
+          if [ "$SUCCESS" != "true" ]; then
+            exit 1
+          fi
 
       - name: 🔍 Validate generated files
         if: steps.slot_check.outputs.skip != 'true'
