@@ -17,8 +17,14 @@ const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
 
 const MAX_ATTEMPTS = 15;
 
-// ── Pool de modelos ────────────────────────────────────────────────────────────
-const MODELS = [
+// ── Modelo principal: openrouter/auto ─────────────────────────────────────────
+// O modelo "openrouter/auto" seleciona automaticamente o melhor modelo disponível
+// com base no prompt enviado (custo, capacidade e disponibilidade em tempo real).
+// Em caso de falha (rate limit, erro HTTP), o sistema faz fallback para o pool abaixo.
+const AUTO_MODEL = "openrouter/auto";
+
+// ── Pool de fallback (usado apenas se AUTO_MODEL falhar) ──────────────────────
+const FALLBACK_MODELS = [
   "meta-llama/llama-3.3-70b-instruct:free",
   "mistralai/mistral-7b-instruct:free",
   "qwen/qwen-2.5-72b-instruct:free",
@@ -226,12 +232,27 @@ async function fetchImage(topic) {
 }
 
 // ── OpenRouter ─────────────────────────────────────────────────────────────────
+//
+// Estratégia de seleção de modelo:
+//   1ª tentativa  → AUTO_MODEL ("openrouter/auto"): roteamento automático pelo OpenRouter,
+//                   que escolhe o melhor modelo disponível no momento para o prompt.
+//   Tentativas 2+ → FALLBACK_MODELS[modelIndex % length]: rotação pelos modelos gratuitos
+//                   definidos no pool, usados quando o auto falha por rate limit ou erro.
+//
+// O campo "model" retornado na resposta indica qual modelo foi efetivamente usado,
+// útil para debug e logs de auditoria.
 
 async function callOpenRouter(messages, modelIndex = 0) {
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) throw new Error("OPENROUTER_API_KEY não configurada.");
-  const model = MODELS[modelIndex % MODELS.length];
-  log(`🤖 Modelo: ${model}`);
+
+  // Na primeira tentativa usa o modelo auto; nas demais, rotaciona o pool de fallback
+  const model = modelIndex === 0
+    ? AUTO_MODEL
+    : FALLBACK_MODELS[(modelIndex - 1) % FALLBACK_MODELS.length];
+
+  log(`🤖 Modelo selecionado: ${model}${model === AUTO_MODEL ? " (roteamento automático)" : ""}`);
+
   const res = await fetch(OPENROUTER_URL, {
     method: "POST",
     headers: {
@@ -240,11 +261,28 @@ async function callOpenRouter(messages, modelIndex = 0) {
       "HTTP-Referer": "https://lisomarbarbosa.adv.br",
       "X-Title": "Blog Lisomar Barbosa ADV",
     },
-    body: JSON.stringify({ model, messages, max_tokens: 4096, temperature: 0.7 }),
+    body: JSON.stringify({
+      model,
+      messages,
+      max_tokens: 6000,
+      temperature: 0.8,
+    }),
   });
-  if (!res.ok) { const body = await res.text(); throw new Error(`OpenRouter HTTP ${res.status}: ${body}`); }
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`OpenRouter HTTP ${res.status}: ${body}`);
+  }
+
   const data = await res.json();
   const content = data?.choices?.[0]?.message?.content;
+
+  // Loga o modelo efetivamente usado (openrouter/auto pode rotear para qualquer modelo)
+  const modelUsed = data?.model || model;
+  if (model === AUTO_MODEL && modelUsed !== AUTO_MODEL) {
+    log(`   ↳ Modelo efetivo (auto-roteado): ${modelUsed}`);
+  }
+
   if (!content) throw new Error("Resposta vazia do modelo.");
   return content;
 }
@@ -372,7 +410,6 @@ async function auditArticle(title, intro, sections, modelIndex = 0) {
 async function auditJuridico(title, intro, sections, modelIndex = 0) {
   log(`⚖️  Auditoria jurídica: "${title}"`);
 
-  // Extrai todo o texto do artigo para análise
   const fullText = [intro, ...sections.map(s => [s.heading, ...s.paragraphs].join(" "))]
     .join("\n\n")
     .slice(0, 4000);
@@ -595,6 +632,7 @@ async function saveGeneratedSlug(slug) {
 
 async function main() {
   log("🚀 Iniciando geração de artigo...");
+  log(`📡 Modo de modelo: ${AUTO_MODEL} (com fallback para ${FALLBACK_MODELS.length} modelos gratuitos)`);
 
   let attempt      = 0;
   let topic        = null;
