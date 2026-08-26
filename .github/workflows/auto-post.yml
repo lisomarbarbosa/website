@@ -370,25 +370,26 @@ jobs:
           echo "🔍 Iniciando auditoria de integridade do artigo gerado..."
           ERRORS=0
 
-          # Localiza o arquivo .ts gerado mais recente em src/content/blog/
-          ARTICLE_FILE=$(git diff --name-only --diff-filter=A -- 'src/content/blog/*.ts' | head -1)
+          # Localiza o arquivo .tsx gerado mais recente em src/pages/articles/
+          ARTICLE_FILE=$(git diff --name-only --diff-filter=A -- 'src/pages/articles/*.tsx' | head -1)
 
           if [ -z "$ARTICLE_FILE" ]; then
-            # Fallback: arquivo modificado mais recente
-            ARTICLE_FILE=$(git diff --name-only -- 'src/content/blog/*.ts' | head -1)
+            # Fallback: arquivo modificado mais recente em src/pages/articles/
+            ARTICLE_FILE=$(git diff --name-only -- 'src/pages/articles/*.tsx' | head -1)
           fi
 
           if [ -z "$ARTICLE_FILE" ]; then
             # Segundo fallback: usa o slug gerado para localizar o arquivo diretamente
             if [ -f ".generated_slug" ]; then
               GENERATED_SLUG=$(cat .generated_slug)
-              ARTICLE_FILE="src/content/blog/${GENERATED_SLUG}.ts"
+              COMPONENT_NAME=$(echo "$GENERATED_SLUG" | sed 's/-\([a-z]\)/\U\1/g; s/^\([a-z]\)/\U\1/')
+              ARTICLE_FILE="src/pages/articles/${COMPONENT_NAME}.tsx"
               echo "🔎 Usando slug gerado para localizar: $ARTICLE_FILE"
             fi
           fi
 
           if [ -z "$ARTICLE_FILE" ] || [ ! -f "$ARTICLE_FILE" ]; then
-            echo "⚠️ Nenhum arquivo .ts encontrado em src/content/blog/ neste commit."
+            echo "⚠️ Nenhum arquivo .tsx encontrado em src/pages/articles/ neste commit."
             echo "   Pulando auditoria de integridade."
             exit 0
           fi
@@ -396,59 +397,59 @@ jobs:
           echo "📄 Arquivo auditado: $ARTICLE_FILE"
           echo "---"
 
-          # 1. slug — campo obrigatório no objeto de conteúdo
-          if grep -q "slug:" "$ARTICLE_FILE"; then
-            echo "✅ slug: presente"
+          # 1. canonical
+          if grep -q 'rel="canonical"' "$ARTICLE_FILE"; then
+            echo "✅ canonical: presente"
           else
-            echo "❌ slug: AUSENTE"
+            echo "❌ canonical: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 2. title
-          if grep -q "title:" "$ARTICLE_FILE"; then
-            echo "✅ title: presente"
+          # 2. og:title
+          if grep -q 'property="og:title"' "$ARTICLE_FILE"; then
+            echo "✅ og:title: presente"
           else
-            echo "❌ title: AUSENTE"
+            echo "❌ og:title: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 3. description / excerpt
-          if grep -qE "(description|excerpt):" "$ARTICLE_FILE"; then
-            echo "✅ description/excerpt: presente"
+          # 3. og:description
+          if grep -q 'property="og:description"' "$ARTICLE_FILE"; then
+            echo "✅ og:description: presente"
           else
-            echo "❌ description/excerpt: AUSENTE"
+            echo "❌ og:description: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 4. image
-          if grep -q "image:" "$ARTICLE_FILE"; then
-            echo "✅ image: presente"
+          # 4. og:image
+          if grep -q 'property="og:image"' "$ARTICLE_FILE"; then
+            echo "✅ og:image: presente"
           else
-            echo "❌ image: AUSENTE"
+            echo "❌ og:image: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 5. date
-          if grep -q "date:" "$ARTICLE_FILE"; then
-            echo "✅ date: presente"
+          # 5. twitter:card
+          if grep -q 'name="twitter:card"' "$ARTICLE_FILE"; then
+            echo "✅ twitter:card: presente"
           else
-            echo "❌ date: AUSENTE"
+            echo "❌ twitter:card: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 6. content / body — campo com o HTML/JSX do artigo
-          if grep -qE "(content|body):" "$ARTICLE_FILE"; then
-            echo "✅ content/body: presente"
-          else
-            echo "❌ content/body: AUSENTE — artigo sem conteúdo renderizável"
-            ERRORS=$((ERRORS+1))
-          fi
-
-          # 7. export default
-          if grep -q "export default" "$ARTICLE_FILE"; then
+          # 6. export default
+          if grep -q 'export default' "$ARTICLE_FILE"; then
             echo "✅ export default: presente"
           else
-            echo "❌ export default: AUSENTE — módulo não será importável"
+            echo "❌ export default: AUSENTE — componente não será importável pelo React Router"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 7. window.scrollTo
+          if grep -q 'window.scrollTo' "$ARTICLE_FILE"; then
+            echo "✅ window.scrollTo: presente"
+          else
+            echo "❌ window.scrollTo: AUSENTE — página não volta ao topo ao navegar"
             ERRORS=$((ERRORS+1))
           fi
 
@@ -491,14 +492,11 @@ jobs:
         run: |
           sed -i 's/[[:space:]]*$//' src/data/blog.ts
           sed -i 's/[[:space:]]*$//' public/sitemap.xml
-          # Aplica também aos arquivos de conteúdo gerados
+          # Aplica também ao arquivo .tsx gerado
           if [ -f ".generated_slug" ]; then
             GENERATED_SLUG=$(cat .generated_slug)
-            CONTENT_FILE="src/content/blog/${GENERATED_SLUG}.ts"
-            if [ -f "$CONTENT_FILE" ]; then
-              sed -i 's/[[:space:]]*$//' "$CONTENT_FILE"
-            fi
-            TSX_FILE="src/pages/artigos/${GENERATED_SLUG}.tsx"
+            COMPONENT_NAME=$(echo "$GENERATED_SLUG" | sed 's/-\([a-z]\)/\U\1/g; s/^\([a-z]\)/\U\1/')
+            TSX_FILE="src/pages/articles/${COMPONENT_NAME}.tsx"
             if [ -f "$TSX_FILE" ]; then
               sed -i 's/[[:space:]]*$//' "$TSX_FILE"
             fi
@@ -516,12 +514,8 @@ jobs:
           git diff -- src/data/blog.ts | head -60
 
           echo ""
-          echo "📄 Arquivos gerados em src/content/blog/:"
-          git diff --name-only --diff-filter=A -- 'src/content/blog/*.ts' || true
-
-          echo ""
-          echo "📄 Arquivos gerados em src/pages/artigos/:"
-          git diff --name-only --diff-filter=A -- 'src/pages/artigos/*.tsx' || true
+          echo "📄 Arquivos gerados em src/pages/articles/:"
+          git diff --name-only --diff-filter=A -- 'src/pages/articles/*.tsx' || true
 
           echo ""
           echo "🗺️ Alterações em sitemap.xml:"
@@ -547,9 +541,8 @@ jobs:
 
           # Adiciona todos os arquivos gerados/modificados pelo script
           git add src/data/blog.ts
-          git add src/content/blog/
           git add public/sitemap.xml
-          git add src/pages/artigos/ || true
+          git add src/pages/articles/ || true
           git add src/App.tsx || true
 
           git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
