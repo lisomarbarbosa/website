@@ -14,7 +14,7 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
-const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 const GROQ_URL       = "https://api.groq.com/openai/v1/chat/completions";
 
 const MAX_ATTEMPTS = 5;
@@ -37,10 +37,10 @@ const MODELS = [
 // Modelos rápidos disponíveis na tier gratuita do Groq em ago/2026.
 // Docs: https://console.groq.com/docs/models
 const GROQ_MODELS = [
+  "meta-llama/llama-4-scout-17b-16e-instruct",
+  "meta-llama/llama-4-maverick-17b-128e-instruct",
   "llama-3.3-70b-versatile",
-  "llama-3.1-8b-instant",
-  "gemma2-9b-it",
-  "mixtral-8x7b-32768",
+  "llama3-70b-8192",
 ];
 
 const SAME_TOPIC_RETRIES = 3;
@@ -292,12 +292,12 @@ async function callGroq(messages, modelIndex = 0) {
 // ── Gemini API (fallback 2) ────────────────────────────────────────────────────
 //
 // Acionada quando tanto OpenRouter quanto Groq falham.
-// Usa o modelo gemini-2.0-flash via REST, converte formato messages → Gemini.
+// Usa o modelo gemini-2.5-flash via REST, converte formato messages → Gemini.
 
 async function callGemini(messages) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY não configurada.");
-  log(`🔷 Gemini API · modelo: gemini-2.0-flash (fallback 2)`);
+  log(`🔷 Gemini API · modelo: gemini-2.5-flash (fallback 2)`);
 
   // Converte formato OpenAI messages → Gemini contents
   // system prompt é mesclado como primeira parte do user turn
@@ -340,8 +340,8 @@ async function callGemini(messages) {
 //
 // Cadeia de fallback em 3 níveis:
 //   1. OpenRouter (pool de modelos free)
-//   2. Groq       (llama/gemma/mixtral — free tier generoso)
-//   3. Gemini     (gemini-2.0-flash — último recurso)
+//   2. Groq       (llama4-scout / llama4-maverick / llama3.3 / llama3 — free tier)
+//   3. Gemini     (gemini-2.5-flash — último recurso)
 
 async function callAI(messages, modelIndex = 0) {
   // Nível 1: OpenRouter
