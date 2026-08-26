@@ -468,24 +468,7 @@ async function auditArticle(title, intro, sections, alertBody, actionSteps, prev
   const previewWords = countWords(previewParts.join(" "));
   log(`   Preview da auditoria: ${previewWords} palavras`);
 
-  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:
-{ "approved": true, "reason": "" }
-ou
-{ "approved": false, "reason": "motivo breve" }
-
-Return ONLY a raw JSON object — no markdown, no explanation.
-
-Reprove APENAS se:
-- Conteúdo claramente genérico demais, sem qualquer referência jurídica
-- Título não condiz absolutamente com o conteúdo
-- Conteúdo claramente incorreto juridicamente de forma grave
-
-NÃO reprove por contagem de palavras — isso já é validado separadamente.
-
-Artigo:
----
-${preview}
----`;
+  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true, "reason": "" }\nou\n{ "approved": false, "reason": "motivo breve" }\n\nReturn ONLY a raw JSON object — no markdown, no explanation.\n\nReprove APENAS se:\n- Conteúdo claramente genérico demais, sem qualquer referência jurídica\n- Título não condiz absolutamente com o conteúdo\n- Conteúdo claramente incorreto juridicamente de forma grave\n\nNÃO reprove por contagem de palavras — isso já é validado separadamente.\n\nArtigo:\n---\n${preview}\n---`;
 
   try {
     const raw = await callAI([{ role: "user", content: prompt }], modelIndex);
@@ -507,33 +490,7 @@ async function auditJuridico(title, intro, sections, modelIndex = 0) {
     .join("\n\n")
     .slice(0, 4000);
 
-  const prompt = `Você é um especialista em Direito brasileiro com profundo conhecimento em Direito Digital, Direito Civil, Direito Penal e legislação correlata.
-
-Analise o artigo jurídico abaixo e verifique:
-
-1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados correspondem ao que realmente foi decidido?
-
-2. LEGISLAÇÃO: As leis citadas existem com essa numeração? Os artigos referenciados tratam realmente do que o artigo afirma?
-
-3. DOUTRINA: Os entendimentos doutrinários refletem o estado atual do direito brasileiro?
-
-4. CONSISTÊNCIA INTERNA: O artigo é internamente consistente?
-
-Importante:
-- Reprove APENAS quando houver erro GRAVE: lei inexistente, jurisprudência completamente inventada, tese oposta ao entendimento consolidado.
-- Pequenas imprecisões e simplificações didáticas NÃO devem reprovar.
-
-Retorne APENAS JSON válido:
-{ "approved": true, "errors": [], "warnings": [], "reason": "" }
-
-Não inclua markdown. Comece com { e termine com }.
-
-Artigo:
----
-Título: ${title}
-
-${fullText}
----`;
+  const prompt = `Você é um especialista em Direito brasileiro com profundo conhecimento em Direito Digital, Direito Civil, Direito Penal e legislação correlata.\n\nAnalise o artigo jurídico abaixo e verifique:\n\n1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados correspondem ao que realmente foi decidido?\n\n2. LEGISLAÇÃO: As leis citadas existem com essa numeração? Os artigos referenciados tratam realmente do que o artigo afirma?\n\n3. DOUTRINA: Os entendimentos doutrinários refletem o estado atual do direito brasileiro?\n\n4. CONSISTÊNCIA INTERNA: O artigo é internamente consistente?\n\nImportante:\n- Reprove APENAS quando houver erro GRAVE: lei inexistente, jurisprudência completamente inventada, tese oposta ao entendimento consolidado.\n- Pequenas imprecisões e simplificações didáticas NÃO devem reprovar.\n\nRetorne APENAS JSON válido:\n{ "approved": true, "errors": [], "warnings": [], "reason": "" }\n\nNão inclua markdown. Comece com { e termine com }.\n\nArtigo:\n---\nTítulo: ${title}\n\n${fullText}\n---`;
 
   try {
     const raw = await callAI([{ role: "user", content: prompt }], modelIndex + 1);
@@ -621,21 +578,55 @@ ${closing}${closingExtraText}
 ---
 
 *${disclaimer || "Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada."}*
+
+---
+
+## Fale Conosco
+
+Se você precisa de orientação jurídica especializada em Direito Digital, entre em contato com o escritório Lisomar Barbosa Advocacia. Estamos prontos para analisar o seu caso e oferecer a melhor solução para a sua situação.
 `;
 }
 
 // ── Escrita dos arquivos ───────────────────────────────────────────────────────
 
-async function writeContentFile(slug, markdownContent) {
+async function writeContentFile(slug, title, description, excerpt, dateISO, image, category, readTime, markdownContent) {
   await mkdir(CONTENT_DIR, { recursive: true });
   const filePath = join(CONTENT_DIR, `${slug}.ts`);
 
-  const safe = markdownContent
+  // Escapa o conteúdo para uso dentro de template literal TypeScript
+  const safeContent = markdownContent
     .replace(/\\/g, "\\\\")
     .replace(/`/g, "\\`")
     .replace(/\$\{/g, "\\${");
 
-  const fileContent = `export const content = \`\n${safe}\`;\n`;
+  // Escapa campos de string para uso dentro de aspas simples
+  const esc = s => String(s).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+
+  const fileContent = `// Artigo gerado automaticamente — NÃO EDITAR MANUALMENTE
+export const slug = '${esc(slug)}';
+export const title = '${esc(title)}';
+export const description = '${esc(description)}';
+export const excerpt = '${esc(excerpt)}';
+export const date = '${esc(dateISO)}';
+export const image = '${esc(image)}';
+export const category = '${esc(category)}';
+export const readTime = '${esc(readTime)}';
+
+export const content = \`
+${safeContent}\`;
+
+export default {
+  slug,
+  title,
+  description,
+  excerpt,
+  date,
+  image,
+  category,
+  readTime,
+  content,
+};
+`;
   await writeFile(filePath, fileContent, "utf8");
   log(`💾 Conteúdo salvo: src/content/blog/${slug}.ts`);
   return filePath;
@@ -808,7 +799,17 @@ async function main() {
     });
 
     try {
-      await writeContentFile(article.slug, markdownContent);
+      await writeContentFile(
+        article.slug,
+        article.title,
+        article.description,
+        excerpt,
+        dateISO,
+        image,
+        category,
+        readTime,
+        markdownContent
+      );
       await updateBlogData({
         slug:     article.slug,
         title:    article.title,
