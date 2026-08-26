@@ -8,7 +8,17 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[
+  {
+    slug: 'direito-digital-e-responsabilidade-civil-nas-relacoes-online-guia-pratico',
+    title: 'Direito Digital e Responsabilidade Civil nas Relações Online: Guia Prático',
+    excerpt: 'Entenda a responsabilidade civil no ambiente virtual, como reparar danos morais e materiais na internet e o que dizem o Marco Civil, a LGPD e o CDC.',
+    date: '2026-08-26',
+    readTime: '9 min de leitura',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1592383010275-b028451b2947?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NzIwNDIyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+] = [
   {
     slug: 'direito-ao-esquecimento-limites-da-remocao-de-conteudo-digital',
     title: 'Direito ao Esquecimento: Limites da Remoção de Conteúdo Digital',
