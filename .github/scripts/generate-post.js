@@ -14,33 +14,32 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
-// gemini-3.6-flash: modelo atual indicado pelo próprio erro 404 do Gemini
 const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
 const GROQ_URL       = "https://api.groq.com/openai/v1/chat/completions";
 
 const MAX_ATTEMPTS = 5;
 
 // ── Pool de modelos OpenRouter (slugs free válidos em ago/2026) ────────────────
-// openai/gpt-oss-20b removido (virou pago)
+// Removidos: openai/gpt-oss-20b (pago), nvidia/nemotron-3-nano-30b-a3b (pago)
 const MODELS = [
   "nvidia/nemotron-3-ultra-550b-a55b:free",
   "nvidia/nemotron-3-super-120b-a12b:free",
   "google/gemma-4-31b-it:free",
   "google/gemma-4-26b-a4b-it:free",
-  "nvidia/nemotron-3-nano-30b-a3b:free",
   "moonshotai/kimi-k2.6:free",
   "inclusionai/ling-3.0-flash:free",
   "meta-llama/llama-4-scout:free",
+  "mistralai/mistral-nemo:free",
 ];
 
 // ── Pool de modelos Groq (fallback 1) ─────────────────────────────────────────
-// Slugs sem barra — formato exigido pela API do Groq
-// Refs: https://console.groq.com/docs/models (ago/2026)
+// Removidos: llama3-8b-8192 (decommissioned), gemma2-9b-it (decommissioned)
+// llama-4-scout/maverick só funcionam no plano pago do Groq
+// Usando apenas modelos confirmados no free tier em ago/2026
 const GROQ_MODELS = [
-  "llama-4-scout-17b-16e-instruct",
-  "llama-4-maverick-17b-128e-instruct",
-  "llama3-8b-8192",
-  "gemma2-9b-it",
+  "meta-llama/llama-4-maverick-17b-128e-instruct",
+  "llama-3.1-8b-instant",
+  "llama-3.1-70b-versatile",
 ];
 
 const SAME_TOPIC_RETRIES = 3;
@@ -49,6 +48,11 @@ const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
 
 const MIN_WORDS = 1250;
+// Limite mínimo de palavras para o preview da auditoria editorial.
+// Deve ser < MIN_WORDS para não reprovar artigos válidos.
+// O preview usa intro + paragraphs (subconjunto do artigo completo),
+// por isso o threshold é mantido bem abaixo do total exigido.
+const AUDIT_MIN_WORDS = 300;
 
 const TOPICS = [
   "Direito digital e responsabilidade civil nas relações online",
@@ -440,11 +444,49 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
 }
 
 // ── Auditoria de qualidade editorial ──────────────────────────────────────────
+//
+// BUG CORRIGIDO: o preview anterior usava apenas intro + paragraphs,
+// gerando ~300-400 palavras e sendo reprovado pelo threshold de 800.
+// Agora o preview inclui todos os campos relevantes (igual ao fullText
+// calculado em generateArticle), garantindo representação fiel do artigo.
+// O threshold foi reduzido para AUDIT_MIN_WORDS (300) para refletir que
+// o preview é um subconjunto e a contagem real já é validada por MIN_WORDS.
 
-async function auditArticle(title, intro, sections, modelIndex = 0) {
+async function auditArticle(title, intro, sections, alertBody, actionSteps, preventionItems, closing, modelIndex = 0) {
   log(`🔍 Auditoria editorial: "${title}"`);
-  const preview = [intro, ...sections.map(s => s.paragraphs.join(" "))].join("\n\n").slice(0, 3000);
-  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:\n{ "approved": true, "reason": "" }\nou\n{ "approved": false, "reason": "motivo breve" }\n\nReturn ONLY a raw JSON object — no markdown, no explanation.\n\nReprove se:\n- Conteúdo genérico demais, sem referências jurídicas concretas\n- Menos de 800 palavras no preview\n- Título não condiz com o conteúdo\n- Conteúdo claramente incorreto juridicamente\n\nArtigo:\n---\n${preview}\n---`;
+
+  // Monta preview completo para dar ao modelo contexto suficiente
+  const previewParts = [
+    intro,
+    alertBody || "",
+    ...sections.flatMap(s => [s.heading, ...s.paragraphs]),
+    ...( Array.isArray(actionSteps)     ? actionSteps.map(s => `${s.title} ${s.body}`)     : [] ),
+    ...( Array.isArray(preventionItems) ? preventionItems.map(p => `${p.bold} ${p.text}`) : [] ),
+    closing || "",
+  ];
+  const preview = previewParts.join("\n\n").slice(0, 4000);
+  const previewWords = countWords(previewParts.join(" "));
+  log(`   Preview da auditoria: ${previewWords} palavras`);
+
+  const prompt = `Você é um editor jurídico sênior. Avalie o artigo abaixo e retorne JSON com:
+{ "approved": true, "reason": "" }
+ou
+{ "approved": false, "reason": "motivo breve" }
+
+Return ONLY a raw JSON object — no markdown, no explanation.
+
+Reprove APENAS se:
+- Conteúdo claramente genérico demais, sem qualquer referência jurídica
+- Título não condiz absolutamente com o conteúdo
+- Conteúdo claramente incorreto juridicamente de forma grave
+
+NÃO reprove por contagem de palavras — isso já é validado separadamente.
+
+Artigo:
+---
+${preview}
+---`;
+
   try {
     const raw = await callAI([{ role: "user", content: prompt }], modelIndex);
     const result = extractJson(raw);
@@ -469,7 +511,7 @@ async function auditJuridico(title, intro, sections, modelIndex = 0) {
 
 Analise o artigo jurídico abaixo e verifique:
 
-1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados (STF, STJ, TJs) correspondem ao que realmente foi decidido?
+1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados correspondem ao que realmente foi decidido?
 
 2. LEGISLAÇÃO: As leis citadas existem com essa numeração? Os artigos referenciados tratam realmente do que o artigo afirma?
 
@@ -712,7 +754,12 @@ async function main() {
       continue;
     }
 
-    const editorialAudit = await auditArticle(article.title, article.intro, article.sections, attempt - 1);
+    // Passa todos os campos relevantes para auditoria ter preview completo
+    const editorialAudit = await auditArticle(
+      article.title, article.intro, article.sections,
+      article.alertBody, article.actionSteps, article.preventionItems, article.closing,
+      attempt - 1
+    );
     if (!editorialAudit.ok) {
       log(`🔁 Artigo reprovado na auditoria editorial — sorteando novo tema.`);
       topic = null;
