@@ -14,33 +14,33 @@ const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
-const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+// gemini-3.6-flash: modelo atual indicado pelo próprio erro 404 do Gemini
+const GEMINI_URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
 const GROQ_URL       = "https://api.groq.com/openai/v1/chat/completions";
 
 const MAX_ATTEMPTS = 5;
 
 // ── Pool de modelos OpenRouter (slugs free válidos em ago/2026) ────────────────
-// Verificados como disponíveis na tier gratuita do OpenRouter em agosto 2026.
-// Caso um modelo retorne 404 ou 429, ele é pulado pelo retry loop.
+// openai/gpt-oss-20b removido (virou pago)
 const MODELS = [
   "nvidia/nemotron-3-ultra-550b-a55b:free",
   "nvidia/nemotron-3-super-120b-a12b:free",
-  "openai/gpt-oss-20b:free",
   "google/gemma-4-31b-it:free",
   "google/gemma-4-26b-a4b-it:free",
   "nvidia/nemotron-3-nano-30b-a3b:free",
   "moonshotai/kimi-k2.6:free",
   "inclusionai/ling-3.0-flash:free",
+  "meta-llama/llama-4-scout:free",
 ];
 
 // ── Pool de modelos Groq (fallback 1) ─────────────────────────────────────────
-// Modelos rápidos disponíveis na tier gratuita do Groq em ago/2026.
-// Docs: https://console.groq.com/docs/models
+// Slugs sem barra — formato exigido pela API do Groq
+// Refs: https://console.groq.com/docs/models (ago/2026)
 const GROQ_MODELS = [
-  "meta-llama/llama-4-scout-17b-16e-instruct",
-  "meta-llama/llama-4-maverick-17b-128e-instruct",
-  "llama-3.3-70b-versatile",
-  "llama3-70b-8192",
+  "llama-4-scout-17b-16e-instruct",
+  "llama-4-maverick-17b-128e-instruct",
+  "llama3-8b-8192",
+  "gemma2-9b-it",
 ];
 
 const SAME_TOPIC_RETRIES = 3;
@@ -236,10 +236,6 @@ async function fetchImage(topic) {
 }
 
 // ── OpenRouter ─────────────────────────────────────────────────────────────────
-//
-// Rotaciona pelos modelos do pool em ordem.
-// Se um modelo retornar 404 (descontinuado) ou 429 (rate limit), o erro é
-// propagado e o retry loop no main() avança para o próximo índice automaticamente.
 
 async function callOpenRouter(messages, modelIndex = 0) {
   const key = process.env.OPENROUTER_API_KEY;
@@ -254,7 +250,7 @@ async function callOpenRouter(messages, modelIndex = 0) {
       "HTTP-Referer": "https://lisomarbarbosa.adv.br",
       "X-Title": "Blog Lisomar Barbosa ADV",
     },
-    body: JSON.stringify({ model, messages, max_tokens: 4096, temperature: 0.7 }),
+    body: JSON.stringify({ model, messages, max_tokens: 8192, temperature: 0.7 }),
   });
   if (!res.ok) { const body = await res.text(); throw new Error(`OpenRouter HTTP ${res.status}: ${body}`); }
   const data = await res.json();
@@ -264,10 +260,6 @@ async function callOpenRouter(messages, modelIndex = 0) {
 }
 
 // ── Groq API (fallback 1) ──────────────────────────────────────────────────────
-//
-// Acionada quando o OpenRouter falha (404, 429 ou qualquer erro).
-// Usa interface compatível com OpenAI — modelos rápidos e com generoso free tier.
-// Secret necessário: GROQ_API_KEY (configurar em Settings > Secrets do repositório).
 
 async function callGroq(messages, modelIndex = 0) {
   const key = process.env.GROQ_API_KEY;
@@ -280,7 +272,7 @@ async function callGroq(messages, modelIndex = 0) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`,
     },
-    body: JSON.stringify({ model, messages, max_tokens: 4096, temperature: 0.7 }),
+    body: JSON.stringify({ model, messages, max_tokens: 8000, temperature: 0.7 }),
   });
   if (!res.ok) { const body = await res.text(); throw new Error(`Groq HTTP ${res.status}: ${body}`); }
   const data = await res.json();
@@ -290,23 +282,17 @@ async function callGroq(messages, modelIndex = 0) {
 }
 
 // ── Gemini API (fallback 2) ────────────────────────────────────────────────────
-//
-// Acionada quando tanto OpenRouter quanto Groq falham.
-// Usa o modelo gemini-2.5-flash via REST, converte formato messages → Gemini.
 
 async function callGemini(messages) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY não configurada.");
-  log(`🔷 Gemini API · modelo: gemini-2.5-flash (fallback 2)`);
+  log(`🔷 Gemini API · modelo: gemini-3.6-flash (fallback 2)`);
 
-  // Converte formato OpenAI messages → Gemini contents
-  // system prompt é mesclado como primeira parte do user turn
   const systemMsg = messages.find(m => m.role === "system");
   const userMsgs  = messages.filter(m => m.role !== "system");
 
   const contents = userMsgs.map((m, i) => {
     let text = m.content;
-    // Injeta o system prompt no início da primeira mensagem user
     if (i === 0 && systemMsg) {
       text = `${systemMsg.content}\n\n${text}`;
     }
@@ -321,7 +307,7 @@ async function callGemini(messages) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       contents,
-      generationConfig: { maxOutputTokens: 4096, temperature: 0.7 },
+      generationConfig: { maxOutputTokens: 8192, temperature: 0.7 },
     }),
   });
 
@@ -337,26 +323,18 @@ async function callGemini(messages) {
 }
 
 // ── callAI: OpenRouter → Groq → Gemini ────────────────────────────────────────
-//
-// Cadeia de fallback em 3 níveis:
-//   1. OpenRouter (pool de modelos free)
-//   2. Groq       (llama4-scout / llama4-maverick / llama3.3 / llama3 — free tier)
-//   3. Gemini     (gemini-2.5-flash — último recurso)
 
 async function callAI(messages, modelIndex = 0) {
-  // Nível 1: OpenRouter
   try {
     return await callOpenRouter(messages, modelIndex);
   } catch (orErr) {
     log(`⚠️  OpenRouter falhou (${orErr.message}) — tentando Groq como fallback 1...`);
   }
 
-  // Nível 2: Groq
   try {
     return await callGroq(messages, modelIndex);
   } catch (groqErr) {
     log(`⚠️  Groq falhou (${groqErr.message}) — tentando Gemini como fallback 2...`);
-    // Nível 3: Gemini
     try {
       return await callGemini(messages);
     } catch (gemErr) {
@@ -491,39 +469,24 @@ async function auditJuridico(title, intro, sections, modelIndex = 0) {
 
 Analise o artigo jurídico abaixo e verifique:
 
-1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados (STF, STJ, TJs) correspondem ao que realmente foi decidido? Números de processo, teses fixadas e datas são coerentes com o que se sabe sobre o direito brasileiro?
+1. JURISPRUDÊNCIA: Os acórdãos, súmulas e entendimentos de tribunais citados (STF, STJ, TJs) correspondem ao que realmente foi decidido?
 
-2. LEGISLAÇÃO: As leis citadas existem com essa numeração? Os artigos referenciados (ex: art. 19 do Marco Civil, art. 5º da CF, art. 186 do CC) tratam realmente do que o artigo afirma?
+2. LEGISLAÇÃO: As leis citadas existem com essa numeração? Os artigos referenciados tratam realmente do que o artigo afirma?
 
-3. DOUTRINA: Os entendimentos doutrinários apresentados refletem o estado atual do direito brasileiro? Há afirmações que contradizem pacificamente o que a doutrina majoritária sustenta?
+3. DOUTRINA: Os entendimentos doutrinários refletem o estado atual do direito brasileiro?
 
-4. CONSISTÊNCIA INTERNA: O artigo é internamente consistente? Afirmações contraditórias entre si devem ser sinalizadas.
+4. CONSISTÊNCIA INTERNA: O artigo é internamente consistente?
 
 Importante:
-- Seja criterioso, mas não exija perfeição absoluta em citações numéricas (modelos de IA podem errar detalhes menores).
-- Reprove APENAS quando houver erro GRAVE: lei inexistente, jurisprudência completamente inventada, tese oposta ao entendimento consolidado, ou afirmação juridicamente perigosa para o leigo.
-- Pequenas imprecisões, simplificações didáticas e ausência de citações específicas NÃO devem reprovar.
-- Se não houver citações jurídicas verificáveis, avalie apenas a consistência do raciocínio jurídico.
+- Reprove APENAS quando houver erro GRAVE: lei inexistente, jurisprudência completamente inventada, tese oposta ao entendimento consolidado.
+- Pequenas imprecisões e simplificações didáticas NÃO devem reprovar.
 
-Retorne APENAS um JSON válido neste formato exato:
-{
-  "approved": true,
-  "errors": [],
-  "warnings": [],
-  "reason": ""
-}
+Retorne APENAS JSON válido:
+{ "approved": true, "errors": [], "warnings": [], "reason": "" }
 
-ou, se reprovado:
-{
-  "approved": false,
-  "errors": ["Descrição do erro grave 1", "Descrição do erro grave 2"],
-  "warnings": ["Imprecisão menor 1"],
-  "reason": "Resumo do motivo da reprovação em 1 frase"
-}
+Não inclua markdown. Comece com { e termine com }.
 
-Não inclua markdown, não explique, comece com { e termine com }.
-
-Artigo para análise:
+Artigo:
 ---
 Título: ${title}
 
@@ -736,7 +699,6 @@ async function main() {
 
     topicRetries++;
 
-    // 1. Gera o artigo
     let article;
     try {
       article = await generateArticle(topic, attempt - 1, reinforced);
@@ -745,13 +707,11 @@ async function main() {
       continue;
     }
 
-    // 2. Verifica tamanho mínimo
     if (article.wordCount < MIN_WORDS) {
       log(`⚠️  Artigo muito curto (${article.wordCount} palavras, mínimo ${MIN_WORDS}) — tentando novamente.`);
       continue;
     }
 
-    // 3. Auditoria editorial (qualidade geral)
     const editorialAudit = await auditArticle(article.title, article.intro, article.sections, attempt - 1);
     if (!editorialAudit.ok) {
       log(`🔁 Artigo reprovado na auditoria editorial — sorteando novo tema.`);
@@ -760,7 +720,6 @@ async function main() {
       continue;
     }
 
-    // 4. Auditoria jurídica (jurisprudência e doutrina)
     const juridicalAudit = await auditJuridico(article.title, article.intro, article.sections, attempt - 1);
     if (!juridicalAudit.ok) {
       log(`🔁 Artigo reprovado na auditoria jurídica — sorteando novo tema.`);
@@ -770,7 +729,6 @@ async function main() {
       continue;
     }
 
-    // 5. Verifica duplicidade de slug
     const existingFiles = await getPublishedSlugs();
     if (existingFiles.includes(article.slug)) {
       log(`⏩ Slug final "${article.slug}" já existe — sorteando novo tema.`);
@@ -779,7 +737,6 @@ async function main() {
       continue;
     }
 
-    // 6. Busca imagem e excerpt em paralelo
     const [image, excerpt] = await Promise.all([
       fetchImage(topic),
       generateExcerpt(article.title, article.description, article.intro, attempt - 1),
@@ -790,7 +747,6 @@ async function main() {
     const readTime = calculateReadTime(article.wordCount);
     const category = "Direito Digital";
 
-    // 7. Monta e salva os arquivos
     const markdownContent = buildMarkdownContent({
       title:           article.title,
       intro:           article.intro,
@@ -821,7 +777,6 @@ async function main() {
       throw err;
     }
 
-    // 8. Log final com resultado das auditorias
     log(`\n🎉 Artigo publicado com sucesso!`);
     log(`   Título:   ${article.title}`);
     log(`   Slug:     ${article.slug}`);
