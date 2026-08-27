@@ -8,7 +8,7 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'criptomoedas-e-regulamentacao-juridica-no-brasil-guia-completo',
     title: 'Criptomoedas e regulamentação jurídica no Brasil: guia completo',
@@ -18,7 +18,6 @@ export const blogPosts: BlogPost[
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3ODc0MjE3fA&ixlib=rb-4.1.0&q=80&w=1080',
   },
-] = [
   {
     slug: 'direito-digital-e-responsabilidade-civil-nas-relacoes-online-guia-pratico',
     title: 'Direito Digital e Responsabilidade Civil nas Relações Online: Guia Prático',
