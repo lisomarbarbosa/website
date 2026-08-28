@@ -20,7 +20,6 @@ const GROQ_URL       = "https://api.groq.com/openai/v1/chat/completions";
 const MAX_ATTEMPTS = 5;
 
 // ── Pool de modelos OpenRouter (slugs free válidos em ago/2026) ────────────────
-// Removidos: openai/gpt-oss-20b (pago), nvidia/nemotron-3-nano-30b-a3b (pago)
 const MODELS = [
   "nvidia/nemotron-3-ultra-550b-a55b:free",
   "nvidia/nemotron-3-super-120b-a12b:free",
@@ -33,9 +32,6 @@ const MODELS = [
 ];
 
 // ── Pool de modelos Groq (fallback 1) ─────────────────────────────────────────
-// Removidos: llama3-8b-8192 (decommissioned), gemma2-9b-it (decommissioned)
-// llama-4-scout/maverick só funcionam no plano pago do Groq
-// Usando apenas modelos confirmados no free tier em ago/2026
 const GROQ_MODELS = [
   "meta-llama/llama-4-maverick-17b-128e-instruct",
   "llama-3.1-8b-instant",
@@ -48,10 +44,6 @@ const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200";
 
 const MIN_WORDS = 1250;
-// Limite mínimo de palavras para o preview da auditoria editorial.
-// Deve ser < MIN_WORDS para não reprovar artigos válidos.
-// O preview usa intro + paragraphs (subconjunto do artigo completo),
-// por isso o threshold é mantido bem abaixo do total exigido.
 const AUDIT_MIN_WORDS = 300;
 
 const TOPICS = [
@@ -133,7 +125,7 @@ function slugify(text) {
 }
 
 // CORREÇÃO 1: retorna apenas "X min" — o template já acrescenta " de leitura"
-// Antes: `${Math.ceil(words / 200)} min de leitura`  ← duplicava "de leitura"
+// Nunca retornar "X min de leitura" para evitar "X min de leitura de leitura"
 function calculateReadTime(words) {
   return `${Math.max(1, Math.ceil(words / 200))} min`;
 }
@@ -446,18 +438,10 @@ IMPORTANT: All string values must use double quotes. Escape any internal double 
 }
 
 // ── Auditoria de qualidade editorial ──────────────────────────────────────────
-//
-// BUG CORRIGIDO: o preview anterior usava apenas intro + paragraphs,
-// gerando ~300-400 palavras e sendo reprovado pelo threshold de 800.
-// Agora o preview inclui todos os campos relevantes (igual ao fullText
-// calculado em generateArticle), garantindo representação fiel do artigo.
-// O threshold foi reduzido para AUDIT_MIN_WORDS (300) para refletir que
-// o preview é um subconjunto e a contagem real já é validada por MIN_WORDS.
 
 async function auditArticle(title, intro, sections, alertBody, actionSteps, preventionItems, closing, modelIndex = 0) {
   log(`🔍 Auditoria editorial: "${title}"`);
 
-  // Monta preview completo para dar ao modelo contexto suficiente
   const previewParts = [
     intro,
     alertBody || "",
@@ -483,7 +467,7 @@ async function auditArticle(title, intro, sections, alertBody, actionSteps, prev
   }
 }
 
-// ── Auditoria jurídica: jurisprudência e doutrina ─────────────────────────────
+// ── Auditoria jurídica ─────────────────────────────────────────────────────────
 
 async function auditJuridico(title, intro, sections, modelIndex = 0) {
   log(`⚖️  Auditoria jurídica: "${title}"`);
@@ -595,13 +579,11 @@ async function writeContentFile(slug, title, description, excerpt, dateISO, imag
   await mkdir(CONTENT_DIR, { recursive: true });
   const filePath = join(CONTENT_DIR, `${slug}.ts`);
 
-  // Escapa o conteúdo para uso dentro de template literal TypeScript
   const safeContent = markdownContent
     .replace(/\\/g, "\\\\")
     .replace(/`/g, "\\`")
     .replace(/\$\{/g, "\\${");
 
-  // Escapa campos de string para uso dentro de aspas simples
   const esc = s => String(s).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 
   const fileContent = `// Artigo gerado automaticamente — NÃO EDITAR MANUALMENTE
@@ -634,20 +616,40 @@ export default {
   return filePath;
 }
 
+// ── CORREÇÃO 2: updateBlogData robusto ────────────────────────────────────────
+// Problema anterior: o MARKER exato "export const blogPosts: BlogPost[] = ["
+// falha se o arquivo foi corrompido por um run anterior (ex: "BlogPost[{...}] = [").
+// Solução: tenta o MARKER exato primeiro; se não encontrar, usa regex como fallback
+// para localizar "blogPosts" + primeiro "[" + fecha "]" com parser de profundidade.
+// Também valida que arrayOpen e arrayClose foram encontrados antes de modificar.
+
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
 
-  const MARKER = "export const blogPosts: BlogPost[] = [";
-  const markerPos = source.indexOf(MARKER);
-  if (markerPos === -1) {
+  // Tenta localizar o array blogPosts com o marker exato
+  const MARKER_EXACT = "export const blogPosts: BlogPost[] = [";
+  let arrayOpen = -1;
+
+  const markerPos = source.indexOf(MARKER_EXACT);
+  if (markerPos !== -1) {
+    arrayOpen = source.indexOf("[", markerPos);
+  }
+
+  // Fallback: localiza "blogPosts" via regex e acha o primeiro "[" após ele
+  if (arrayOpen === -1) {
+    log("⚠️  MARKER exato não encontrado — usando fallback regex para localizar blogPosts.");
+    const fallbackMatch = source.match(/blogPosts[^=]*=\s*\[/);
+    if (fallbackMatch && fallbackMatch.index !== undefined) {
+      const eqBracket = source.indexOf("[", fallbackMatch.index);
+      if (eqBracket !== -1) arrayOpen = eqBracket;
+    }
+  }
+
+  if (arrayOpen === -1) {
     throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
   }
 
-  const arrayOpen = source.indexOf("[", markerPos);
-  if (arrayOpen === -1) {
-    throw new Error("Não foi possível localizar o abre-colchete do array blogPosts.");
-  }
-
+  // Parser de profundidade para achar o fecha-colchete correto do array
   let depth = 0;
   let arrayClose = -1;
   let inStr = false;
@@ -747,7 +749,6 @@ async function main() {
       continue;
     }
 
-    // Passa todos os campos relevantes para auditoria ter preview completo
     const editorialAudit = await auditArticle(
       article.title, article.intro, article.sections,
       article.alertBody, article.actionSteps, article.preventionItems, article.closing,
