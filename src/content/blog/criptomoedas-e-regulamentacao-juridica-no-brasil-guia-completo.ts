@@ -145,4 +145,4 @@ Conhecer os direitos assegurados pela legislação — especialmente pelo CDC, p
 ---
 
 *Este artigo tem caráter informativo e não substitui consulta jurídica personalizada. Para avaliar o seu caso concreto, busque orientação profissional adequada.*
-\`;
+`;
