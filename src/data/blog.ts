@@ -8,7 +8,17 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[
+  {
+    slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas-guia-de-direitos',
+    title: 'Golpes Digitais e Responsabilidade Jurídica das Plataformas: Guia de Direitos',
+    excerpt: 'Entenda quando redes sociais, bancos e plataformas digitais respondem juridicamente por golpes virtuais e saiba como reaver seus prejuízos financeiros.',
+    date: '2026-08-28',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1706759755831-bbbcca338f67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3OTQ3MTgxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+] = [
   {
     slug: 'criptomoedas-e-regulamentacao-juridica-no-brasil-guia-completo',
     title: 'Criptomoedas e regulamentação jurídica no Brasil: guia completo',
