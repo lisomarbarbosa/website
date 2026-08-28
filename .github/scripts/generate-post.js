@@ -132,8 +132,10 @@ function slugify(text) {
     .replace(/^-|-$/g, "");
 }
 
+// CORREÇÃO 1: retorna apenas "X min" — o template já acrescenta " de leitura"
+// Antes: `${Math.ceil(words / 200)} min de leitura`  ← duplicava "de leitura"
 function calculateReadTime(words) {
-  return `${Math.max(1, Math.ceil(words / 200))} min de leitura`;
+  return `${Math.max(1, Math.ceil(words / 200))} min`;
 }
 
 function getToday() {
