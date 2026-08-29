@@ -619,31 +619,35 @@ export default {
   return filePath;
 }
 
-// ── FIX: updateBlogData robusto ────────────────────────────────────────────────
+// ── updateBlogData robusto ─────────────────────────────────────────────────────
 //
-// Correções aplicadas:
+// Estratégia de inserção:
+//   1. Lê o arquivo e localiza a declaração exata "export const blogPosts: BlogPost[] = ["
+//   2. Usa um parser de profundidade com rastreamento correto de strings (FIX 1)
+//      para encontrar o "]" que fecha o array — sem confundir delimitadores.
+//   3. Insere o novo objeto DENTRO do array, logo APÓS o "[" de abertura,
+//      tornando o novo post o primeiro da lista (ordem cronológica reversa).
+//   4. Valida que "blogPosts", "export const blogPosts: BlogPost[] = [" e o slug
+//      estão presentes no conteúdo final antes de gravar (FIX 4).
+//   5. Em caso de falha no writeFile, restaura o conteúdo original (FIX 3).
 //
-// FIX 1 — Parser de string corrigido: usa `strChar` para rastrear qual
-//   delimitador está aberto (", ' ou `). Antes, a flag booleante `inStr`
-//   era invertida por qualquer um dos três, fazendo uma aspa simples dentro
-//   de uma template literal travar o parser e não encontrar o arrayClose.
-//
-// FIX 3 — Backup automático: lê o conteúdo original antes de qualquer
-//   modificação e restaura em caso de erro no writeFile.
-//
-// FIX 4 — Validação básica: verifica que o conteúdo gerado contém a nova
-//   entrada e que "blogPosts" ainda está presente antes de gravar.
+// Por que inserir APÓS o "[" e não ANTES do "]":
+//   Inserir antes do "]" é seguro, mas se o "]" estiver na mesma linha do
+//   último item (sem vírgula final) o resultado fica sintaticamente inválido.
+//   Inserir logo após o "[" garante que sempre haverá uma vírgula separando
+//   o novo item do próximo, independente de como o arquivo foi formatado.
 
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
 
-  // Tenta localizar o array blogPosts com o marker exato
+  // ── Localiza o "[" de abertura do array blogPosts ──────────────────────────
   const MARKER_EXACT = "export const blogPosts: BlogPost[] = [";
   let arrayOpen = -1;
 
   const markerPos = source.indexOf(MARKER_EXACT);
   if (markerPos !== -1) {
-    arrayOpen = source.indexOf("[", markerPos);
+    // Posição exata do "[" que abre o array
+    arrayOpen = markerPos + MARKER_EXACT.length - 1;
   }
 
   // Fallback: localiza "blogPosts" via regex e acha o primeiro "[" após ele
@@ -660,7 +664,12 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
   }
 
-  // FIX 1: Parser de profundidade com rastreamento correto do delimitador de string.
+  // Garante que encontramos realmente um "["
+  if (source[arrayOpen] !== "[") {
+    throw new Error(`Posição ${arrayOpen} não é "[" — encontrado: "${source[arrayOpen]}"`);
+  }
+
+  // ── FIX 1: Parser de profundidade com rastreamento correto do delimitador ──
   // strChar guarda qual quote abriu a string atual; só fecha quando encontra o mesmo.
   let depth = 0;
   let arrayClose = -1;
@@ -671,11 +680,9 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
   for (let i = arrayOpen; i < source.length; i++) {
     const ch = source[i];
 
-    // Sequência de escape dentro de string
     if (esc) { esc = false; continue; }
     if (ch === "\\" && inStr) { esc = true; continue; }
 
-    // Abertura/fechamento de string — só fecha com o mesmo delimitador que abriu
     if (!inStr && (ch === '"' || ch === "'" || ch === "`")) {
       inStr = true;
       strChar = ch;
@@ -700,6 +707,7 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     throw new Error("Não foi possível localizar o fecha-colchete do array blogPosts.");
   }
 
+  // ── Monta a nova entrada ───────────────────────────────────────────────────
   const safe = s => escapeForSingleQuote(s);
   const newEntry = `
   {
@@ -712,12 +720,16 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     image: '${safe(image)}',
   },`;
 
+  // Insere logo APÓS o "[" de abertura — novo post fica primeiro na lista
   const updated =
-    source.slice(0, arrayClose) +
+    source.slice(0, arrayOpen + 1) +  // tudo até e incluindo "["
     newEntry + "\n" +
-    source.slice(arrayClose);
+    source.slice(arrayOpen + 1);       // resto do array (itens antigos + "]" + restante do arquivo)
 
-  // FIX 4: Validação básica antes de gravar
+  // ── FIX 4: Validação antes de gravar ──────────────────────────────────────
+  if (!updated.includes(MARKER_EXACT)) {
+    throw new Error(`Validação falhou: declaração 'export const blogPosts: BlogPost[] = [' desapareceu do conteúdo gerado.`);
+  }
   if (!updated.includes(slug)) {
     throw new Error(`Validação falhou: slug '${slug}' não encontrado no conteúdo gerado.`);
   }
@@ -725,7 +737,7 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     throw new Error("Validação falhou: 'blogPosts' desapareceu do conteúdo gerado.");
   }
 
-  // FIX 3: Backup em memória + restauração em caso de falha no writeFile
+  // ── FIX 3: Backup em memória + restauração em caso de falha no writeFile ──
   try {
     await writeFile(BLOG_DATA_FILE, updated, "utf8");
   } catch (writeErr) {
