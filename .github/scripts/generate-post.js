@@ -124,8 +124,7 @@ function slugify(text) {
     .replace(/^-|-$/g, "");
 }
 
-// CORREÇÃO 1: retorna apenas "X min" — o template já acrescenta " de leitura"
-// Nunca retornar "X min de leitura" para evitar "X min de leitura de leitura"
+// Retorna apenas "X min" — o template já acrescenta " de leitura"
 function calculateReadTime(words) {
   return `${Math.max(1, Math.ceil(words / 200))} min`;
 }
@@ -142,10 +141,14 @@ function getTodayISO() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// FIX 2: escapa também quebras de linha (\n e \r) para evitar strings
+// multiline inválidas quando o modelo retorna texto com newlines embutidos.
 function escapeForSingleQuote(text) {
   return String(text)
     .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'");
+    .replace(/'/g, "\\'")
+    .replace(/\n/g, "\\n")
+    .replace(/\r/g, "\\r");
 }
 
 // ── Curadoria de temas ─────────────────────────────────────────────────────────
@@ -616,12 +619,20 @@ export default {
   return filePath;
 }
 
-// ── CORREÇÃO 2: updateBlogData robusto ────────────────────────────────────────
-// Problema anterior: o MARKER exato "export const blogPosts: BlogPost[] = ["
-// falha se o arquivo foi corrompido por um run anterior (ex: "BlogPost[{...}] = [").
-// Solução: tenta o MARKER exato primeiro; se não encontrar, usa regex como fallback
-// para localizar "blogPosts" + primeiro "[" + fecha "]" com parser de profundidade.
-// Também valida que arrayOpen e arrayClose foram encontrados antes de modificar.
+// ── FIX: updateBlogData robusto ────────────────────────────────────────────────
+//
+// Correções aplicadas:
+//
+// FIX 1 — Parser de string corrigido: usa `strChar` para rastrear qual
+//   delimitador está aberto (", ' ou `). Antes, a flag booleante `inStr`
+//   era invertida por qualquer um dos três, fazendo uma aspa simples dentro
+//   de uma template literal travar o parser e não encontrar o arrayClose.
+//
+// FIX 3 — Backup automático: lê o conteúdo original antes de qualquer
+//   modificação e restaura em caso de erro no writeFile.
+//
+// FIX 4 — Validação básica: verifica que o conteúdo gerado contém a nova
+//   entrada e que "blogPosts" ainda está presente antes de gravar.
 
 async function updateBlogData({ slug, title, excerpt, date, readTime, category, image }) {
   const source = await readFile(BLOG_DATA_FILE, "utf8");
@@ -649,21 +660,35 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     throw new Error("Não foi possível localizar o array blogPosts em src/data/blog.ts");
   }
 
-  // Parser de profundidade para achar o fecha-colchete correto do array
+  // FIX 1: Parser de profundidade com rastreamento correto do delimitador de string.
+  // strChar guarda qual quote abriu a string atual; só fecha quando encontra o mesmo.
   let depth = 0;
   let arrayClose = -1;
   let inStr = false;
+  let strChar = null;
   let esc = false;
 
   for (let i = arrayOpen; i < source.length; i++) {
     const ch = source[i];
+
+    // Sequência de escape dentro de string
     if (esc) { esc = false; continue; }
     if (ch === "\\" && inStr) { esc = true; continue; }
-    if (ch === '"' || ch === "'" || ch === "`") {
-      if (!inStr) { inStr = true; } else { inStr = false; }
+
+    // Abertura/fechamento de string — só fecha com o mesmo delimitador que abriu
+    if (!inStr && (ch === '"' || ch === "'" || ch === "`")) {
+      inStr = true;
+      strChar = ch;
       continue;
     }
+    if (inStr && ch === strChar) {
+      inStr = false;
+      strChar = null;
+      continue;
+    }
+
     if (inStr) continue;
+
     if (ch === "[") { depth++; continue; }
     if (ch === "]") {
       depth--;
@@ -692,7 +717,28 @@ async function updateBlogData({ slug, title, excerpt, date, readTime, category, 
     newEntry + "\n" +
     source.slice(arrayClose);
 
-  await writeFile(BLOG_DATA_FILE, updated, "utf8");
+  // FIX 4: Validação básica antes de gravar
+  if (!updated.includes(slug)) {
+    throw new Error(`Validação falhou: slug '${slug}' não encontrado no conteúdo gerado.`);
+  }
+  if (!updated.includes("blogPosts")) {
+    throw new Error("Validação falhou: 'blogPosts' desapareceu do conteúdo gerado.");
+  }
+
+  // FIX 3: Backup em memória + restauração em caso de falha no writeFile
+  try {
+    await writeFile(BLOG_DATA_FILE, updated, "utf8");
+  } catch (writeErr) {
+    log("❌ Falha ao gravar blog.ts — restaurando conteúdo original...");
+    try {
+      await writeFile(BLOG_DATA_FILE, source, "utf8");
+      log("✅ Conteúdo original restaurado com sucesso.");
+    } catch (restoreErr) {
+      log(`⚠️  Falha também ao restaurar: ${restoreErr.message}`);
+    }
+    throw writeErr;
+  }
+
   log(`📚 blogPosts atualizado: entrada '${slug}' inserida em src/data/blog.ts`);
 }
 
