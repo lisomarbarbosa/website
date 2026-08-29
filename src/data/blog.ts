@@ -8,7 +8,7 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'inteligencia-artificial-e-responsabilidade-civil-quem-paga-paga-pelo-dano',
     title: 'Inteligência Artificial e Responsabilidade Civil: Quem Paga Paga Pelo Dano?',
@@ -18,7 +18,6 @@ export const blogPosts: BlogPost[
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1525540810550-5032f5d191b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3OTY2MjAwfA&ixlib=rb-4.1.0&q=80&w=1080',
   },
-] = [
   {
     slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas-guia-de-direitos',
     title: 'Golpes Digitais e Responsabilidade Jurídica das Plataformas: Guia de Direitos',
@@ -33,7 +32,7 @@ export const blogPosts: BlogPost[
     title: 'Criptomoedas e regulamentação jurídica no Brasil: guia completo',
     excerpt: 'Entenda o marco legal das criptomoedas, obrigações de exchanges, proteção ao consumidor e riscos de lavagem de dinheiro no Brasil.',
     date: '2026-08-27',
-    readTime: '8 min de leitura',
+    readTime: '8 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3ODc0MjE3fA&ixlib=rb-4.1.0&q=80&w=1080',
   },
@@ -42,7 +41,7 @@ export const blogPosts: BlogPost[
     title: 'Direito Digital e Responsabilidade Civil nas Relações Online: Guia Prático',
     excerpt: 'Entenda a responsabilidade civil no ambiente virtual, como reparar danos morais e materiais na internet e o que dizem o Marco Civil, a LGPD e o CDC.',
     date: '2026-08-26',
-    readTime: '9 min de leitura',
+    readTime: '9 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1592383010275-b028451b2947?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NzIwNDIyfA&ixlib=rb-4.1.0&q=80&w=1080',
   },
@@ -51,7 +50,7 @@ export const blogPosts: BlogPost[
     title: 'Direito ao Esquecimento: Limites da Remoção de Conteúdo Digital',
     excerpt: 'Entenda o direito ao esquecimento na LGPD e no Marco Civil, limites legais, jurisprudência e como solicitar remoção de dados ou conteúdos online com segurança jurídica.',
     date: '2026-08-25',
-    readTime: '9 min de leitura',
+    readTime: '9 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1485740112426-0c2549fa8c86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NjIxMTQyfA&ixlib=rb-4.1.0&q=80&w=1080',
   },
@@ -60,7 +59,7 @@ export const blogPosts: BlogPost[
     title: 'Difamação nas redes sociais e responsabilidade jurídica',
     excerpt: 'Entenda como a difamação digital gera responsabilidade civil e penal, direitos de resposta e proteção de dados pessoais.',
     date: '2026-08-25',
-    readTime: '8 min de leitura',
+    readTime: '8 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1776243365952-1f103dea9bec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NjE4MjkzfA&ixlib=rb-4.1.0&q=80&w=1080',
   },
@@ -69,7 +68,7 @@ export const blogPosts: BlogPost[
     title: 'Stalking Virtual: O que é e quais as consequências jurídicas no Brasil',
     excerpt: 'Entenda o que é stalking virtual, como se proteger e quais as ações legais previstas no Brasil, incluindo LGPD, Marco Civil e Lei 13.869/2019.',
     date: '2026-08-24',
-    readTime: '7 min de leitura',
+    readTime: '7 min',
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1751448555253-f39c06e29d82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTc3MTkxfA&ixlib=rb-4.1.0&q=80&w=1080',
   },
