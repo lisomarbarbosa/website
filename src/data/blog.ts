@@ -8,7 +8,17 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[
+  {
+    slug: 'inteligencia-artificial-e-responsabilidade-civil-quem-paga-paga-pelo-dano',
+    title: 'Inteligência Artificial e Responsabilidade Civil: Quem Paga Paga Pelo Dano?',
+    excerpt: 'Entenda como a legislação brasileira trata os danos causados por inteligência artificial e conheça os seus direitos perante erros e falhas em algoritmos.',
+    date: '2026-08-29',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1525540810550-5032f5d191b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3OTY2MjAwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+] = [
   {
     slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas-guia-de-direitos',
     title: 'Golpes Digitais e Responsabilidade Jurídica das Plataformas: Guia de Direitos',
