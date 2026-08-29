@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-bancarias-digitais-e-responsabilidade-civil-direitos-do-consumidor',
+    title: 'Fraudes bancárias digitais e responsabilidade civil: direitos do consumidor',
+    excerpt: 'Entenda como a legislação brasileira protege vítimas de golpes online e quais medidas adotar para buscar reparação.',
+    date: '2026-08-29',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1748609523112-da78cb7210a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MDI1MTI4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'invasao-de-dispositivo-informatico-consequencias-juridicas-e-como-se-proteger',
     title: 'Invasão de Dispositivo Informático: Consequências Jurídicas e Como se Proteger',
     excerpt: 'Entenda as penalidades previstas no Código Penal, LGPD e Marco Civil para invasão de dispositivos, seus direitos e medidas práticas de defesa.',
