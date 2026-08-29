@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'invasao-de-dispositivo-informatico-consequencias-juridicas-e-como-se-proteger',
+    title: 'Invasão de Dispositivo Informático: Consequências Jurídicas e Como se Proteger',
+    excerpt: 'Entenda as penalidades previstas no Código Penal, LGPD e Marco Civil para invasão de dispositivos, seus direitos e medidas práticas de defesa.',
+    date: '2026-08-29',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330300444-4acba20c673e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MDEwODg1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-eletronicas-e-suas-consequencias-no-direito-penal-brasileiro',
     title: 'Fraudes Eletrônicas e suas Consequências no Direito Penal Brasileiro',
     excerpt: 'Entenda como o Direito Penal pune golpes virtuais, estelionato digital e invasão de dispositivos, além de saber como agir e se proteger perante a lei.',
