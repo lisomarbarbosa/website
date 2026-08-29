@@ -8,7 +8,7 @@ export interface BlogPost {
   image: string;
 }
 
-export const blogPosts: BlogPost[
+export const blogPosts: BlogPost[] = [
   {
     slug: 'crimes-digitais-e-os-limites-da-responsabilizacao-penal',
     title: 'Crimes Digitais e os Limites da Responsabilização Penal',
@@ -18,7 +18,6 @@ export const blogPosts: BlogPost[
     category: 'Direito Digital',
     image: 'https://images.unsplash.com/photo-1540569876033-6e5d046a1d77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3OTk3NzI2fA&ixlib=rb-4.1.0&q=80&w=1080',
   },
-] = [
   {
     slug: 'inteligencia-artificial-e-responsabilidade-civil-quem-paga-paga-pelo-dano',
     title: 'Inteligência Artificial e Responsabilidade Civil: Quem Paga Paga Pelo Dano?',
