@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-eletronicas-e-suas-consequencias-no-direito-penal-brasileiro',
+    title: 'Fraudes Eletrônicas e suas Consequências no Direito Penal Brasileiro',
+    excerpt: 'Entenda como o Direito Penal pune golpes virtuais, estelionato digital e invasão de dispositivos, além de saber como agir e se proteger perante a lei.',
+    date: '2026-08-29',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1632154131447-969e46f0b29b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3OTk4NzkzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'crimes-digitais-e-os-limites-da-responsabilizacao-penal',
     title: 'Crimes Digitais e os Limites da Responsabilização Penal',
     excerpt: 'Entenda a legislação brasileira sobre crimes virtuais, a prova digital e as fronteiras da punição penal na internet segundo o Código Penal e jurisprudência.',
