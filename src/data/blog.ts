@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online',
+    title: 'Stalking Virtual: Consequências Jurídicas e Como se Proteger da Perseguição Online',
+    excerpt: 'Entenda o enquadramento penal do stalking virtual, as sanções cíveis, a produção de provas válidas e as medidas de proteção cabíveis contra perseguidores virtuais.',
+    date: '2026-08-30',
+    readTime: '11 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1758525589668-6fe313595396?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MTEzMTgwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'estelionato-eletronico-e-direito-penal-direitos-penas-e-como-agir-em-casos-de-fraudes-virtuais',
     title: 'Estelionato Eletrônico e Direito Penal: Direitos, Penas e Como Agir em Casos de Fraudes Virtuais',
     excerpt: 'Entenda as regras do estelionato eletrônico no Direito Penal brasileiro, as penas da Lei 14.155/2021 e os passos para reaver prejuízos e buscar justiça.',
