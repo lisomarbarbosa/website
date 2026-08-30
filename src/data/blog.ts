@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'estelionato-eletronico-e-direito-penal-direitos-penas-e-como-agir-em-casos-de-fraudes-virtuais',
+    title: 'Estelionato Eletrônico e Direito Penal: Direitos, Penas e Como Agir em Casos de Fraudes Virtuais',
+    excerpt: 'Entenda as regras do estelionato eletrônico no Direito Penal brasileiro, as penas da Lei 14.155/2021 e os passos para reaver prejuízos e buscar justiça.',
+    date: '2026-08-30',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1756908992154-c8a89f5e517f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MDk3MjEwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-bancarias-digitais-e-responsabilidade-civil-direitos-do-consumidor',
     title: 'Fraudes bancárias digitais e responsabilidade civil: direitos do consumidor',
     excerpt: 'Entenda como a legislação brasileira protege vítimas de golpes online e quais medidas adotar para buscar reparação.',
