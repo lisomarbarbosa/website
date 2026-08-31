@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'marco-civil-da-internet-e-seus-reflexos-praticos-na-protecao-de-direitos-digitais-no-brasil',
+    title: 'Marco Civil da Internet e seus Reflexos Práticos na Proteção de Direitos Digitais no Brasil',
+    excerpt: 'Entenda os princípios do Marco Civil da Internet (Lei 12.965/14), neutralidade da rede, guarda de registros e como a legislação protege seus direitos no ambiente digital.',
+    date: '2026-08-31',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1771922748624-b205cf5d002d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MTkyMDI0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online',
     title: 'Stalking Virtual: Consequências Jurídicas e Como se Proteger da Perseguição Online',
     excerpt: 'Entenda o enquadramento penal do stalking virtual, as sanções cíveis, a produção de provas válidas e as medidas de proteção cabíveis contra perseguidores virtuais.',
