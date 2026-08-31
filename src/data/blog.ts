@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico',
+    title: 'Responsabilidade dos Provedores de Internet no Brasil: Guia Jurídico',
+    excerpt: 'Entenda como funciona a responsabilidade civil dos provedores de internet no Brasil, as regras do Marco Civil da Internet, da LGPD e os direitos dos usuários nas redes.',
+    date: '2026-08-31',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MjA2Mzg4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'marco-civil-da-internet-e-seus-reflexos-praticos-na-protecao-de-direitos-digitais-no-brasil',
     title: 'Marco Civil da Internet e seus Reflexos Práticos na Proteção de Direitos Digitais no Brasil',
     excerpt: 'Entenda os princípios do Marco Civil da Internet (Lei 12.965/14), neutralidade da rede, guarda de registros e como a legislação protege seus direitos no ambiente digital.',
