@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cyberbullying-e-consequencias-juridicas-no-brasil-direitos-e-responsabilidades',
+    title: 'Cyberbullying e Consequências Jurídicas no Brasil: Direitos e Responsabilidades',
+    excerpt: 'Descubra os aspectos jurídicos do cyberbullying no Brasil, as novidades da Lei 14.811/2024, a reparação por danos morais e como agir em casos de ataques virtuais.',
+    date: '2026-09-01',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1636484227749-9bbeaf58be1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MjY4NzQxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico',
     title: 'Responsabilidade dos Provedores de Internet no Brasil: Guia Jurídico',
     excerpt: 'Entenda como funciona a responsabilidade civil dos provedores de internet no Brasil, as regras do Marco Civil da Internet, da LGPD e os direitos dos usuários nas redes.',
