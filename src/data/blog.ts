@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'uso-indevido-de-imagem-na-internet-responsabilidade-civil-e-protecao-de-direitos',
+    title: 'Uso indevido de imagem na internet: responsabilidade civil e proteção de direitos',
+    excerpt: 'Entenda como a lei brasileira protege sua imagem online, quais danos podem ser reparados e como agir diante de uso não autorizado.',
+    date: '2026-09-02',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330421256-c65e36240e05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MzUyODY1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'nfts-e-propriedade-intelectual-o-que-voce-realmente-possui-no-mundo-digital',
     title: 'NFTs e Propriedade Intelectual: O que você realmente possui no mundo digital?',
     excerpt: 'Entenda a relação entre NFTs e direitos autorais. Aprenda a distinguir a posse de um token da propriedade da obra digital e como proteger seus direitos no ambiente Web3.',
