@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'direito-de-arrependimento-no-e-commerce-regras-e-praticas',
+    title: 'Direito de Arrependimento no E-commerce: Regras e Práticas',
+    excerpt: 'Entenda como o CDC garante o arrependimento em compras online, prazos, devoluções e obrigações das lojas virtuais.',
+    date: '2026-09-02',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1588460789007-a79cfe129bcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MzcxMzYyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'uso-indevido-de-imagem-na-internet-responsabilidade-civil-e-protecao-de-direitos',
     title: 'Uso indevido de imagem na internet: responsabilidade civil e proteção de direitos',
     excerpt: 'Entenda como a lei brasileira protege sua imagem online, quais danos podem ser reparados e como agir diante de uso não autorizado.',
