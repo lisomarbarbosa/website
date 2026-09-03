@@ -303,11 +303,6 @@ jobs:
         run: |
           node .github/scripts/update-sitemap.js
 
-      - name: 🗺️ Atualizar sitemap.xml
-        if: steps.slot_check.outputs.skip != 'true'
-        run: |
-          node .github/scripts/update-sitemap.js
-
       - name: 🔍 Validate generated files
         if: steps.slot_check.outputs.skip != 'true'
         run: |
@@ -374,7 +369,7 @@ jobs:
           echo "---"
 
           # 1. slug — campo obrigatório no objeto de conteúdo
-          if grep -q "slug:" "$ARTICLE_FILE"; then
+          if grep -q "export const slug" "$ARTICLE_FILE"; then
             echo "✅ slug: presente"
           else
             echo "❌ slug: AUSENTE"
@@ -382,7 +377,7 @@ jobs:
           fi
 
           # 2. title
-          if grep -q "title:" "$ARTICLE_FILE"; then
+          if grep -q "export const title" "$ARTICLE_FILE"; then
             echo "✅ title: presente"
           else
             echo "❌ title: AUSENTE"
@@ -390,7 +385,7 @@ jobs:
           fi
 
           # 3. description / excerpt
-          if grep -qE "(description|excerpt):" "$ARTICLE_FILE"; then
+          if grep -qE "(export const description|export const excerpt)" "$ARTICLE_FILE"; then
             echo "✅ description/excerpt: presente"
           else
             echo "❌ description/excerpt: AUSENTE"
@@ -398,7 +393,7 @@ jobs:
           fi
 
           # 4. image
-          if grep -q "image:" "$ARTICLE_FILE"; then
+          if grep -q "export const image" "$ARTICLE_FILE"; then
             echo "✅ image: presente"
           else
             echo "❌ image: AUSENTE"
@@ -406,7 +401,7 @@ jobs:
           fi
 
           # 5. date
-          if grep -q "date:" "$ARTICLE_FILE"; then
+          if grep -q "export const date" "$ARTICLE_FILE"; then
             echo "✅ date: presente"
           else
             echo "❌ date: AUSENTE"
@@ -414,7 +409,7 @@ jobs:
           fi
 
           # 6. content / body — campo com o HTML/JSX do artigo
-          if grep -qE "(content|body):" "$ARTICLE_FILE"; then
+          if grep -q "export const content" "$ARTICLE_FILE"; then
             echo "✅ content/body: presente"
           else
             echo "❌ content/body: AUSENTE — artigo sem conteúdo renderizável"
