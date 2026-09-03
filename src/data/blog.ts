@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ataques-virtuais-e-responsabilidade-civil-por-danos-causados-guia-pratico',
+    title: 'Ataques virtuais e responsabilidade civil por danos causados: guia prático',
+    excerpt: 'Entenda como a legislação brasileira trata a responsabilidade civil decorrente de ataques cibernéticos e quais medidas proteger seus direitos.',
+    date: '2026-09-03',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1536926568015-57bb3c08fe10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NDU2NTU5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'stalking-virtual-consequencias-juridicas-e-como-se-proteger',
     title: 'Stalking virtual: consequências jurídicas e como se proteger',
     excerpt: 'Entenda o que configura stalking virtual, as penas previstas no Código Penal e na LGPD, e saiba quais medidas práticas adotar para denunciar e se proteger.',
