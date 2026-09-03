@@ -15,6 +15,7 @@ import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog";
+import { buildArticleSchema, buildBreadcrumbSchema } from "@/lib/schema";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -180,6 +181,22 @@ const ArticlePage = () => {
 
   if (!post) return <Navigate to="/blog" replace />;
 
+  const articleUrl = `https://www.lisomarbarbosa.adv.br/artigos/${post.slug}`;
+
+  const articleSchema = buildArticleSchema({
+    title: post.title,
+    description: post.description || post.excerpt,
+    image: post.image,
+    datePublished: post.date,
+    url: articleUrl,
+  });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Início", url: "https://www.lisomarbarbosa.adv.br/" },
+    { name: "Blog", url: "https://www.lisomarbarbosa.adv.br/blog" },
+    { name: post.title, url: articleUrl },
+  ]);
+
   const content = getContent(slug!) ?? post.excerpt;
 
   return (
@@ -211,6 +228,12 @@ const ArticlePage = () => {
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
         <meta name="twitter:image" content={post.image} />
+        <script type="application/ld+json">
+          {JSON.stringify(articleSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

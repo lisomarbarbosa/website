@@ -24,6 +24,30 @@ const BlogPage = () => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
+  const blogUrl = "https://www.lisomarbarbosa.adv.br/blog";
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${blogUrl}#collection`,
+    name: "Artigos de Direito Digital",
+    description:
+      "Artigos jurídicos sobre Direito Digital, LGPD, proteção de dados, crimes digitais, privacidade, contratos eletrônicos e responsabilidade civil na internet.",
+    url: blogUrl,
+    inLanguage: "pt-BR",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: articles.length,
+      itemListElement: articles.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: post.title,
+        url: `https://www.lisomarbarbosa.adv.br/artigos/${post.slug}`,
+      })),
+    },
+  };
+
   return (
     <>
       <Helmet>
@@ -34,13 +58,16 @@ const BlogPage = () => {
         <meta property="og:site_name" content="Lisomar Barbosa | Direito Digital" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.lisomarbarbosa.adv.br/blog" />
-        <meta property="og:image" content="https://www.lisomarbarbosa.adv.br/og-image.jpg" />
+        <meta property="og:image" content="https://www.lisomarbarbosa.adv.br/og.webp" />
         <meta property="og:title" content="Blog | Lisomar Barbosa | Direito Digital e Proteção de Dados" />
         <meta property="og:description" content="Artigos sobre Direito Digital, LGPD, proteção de dados, crimes cibernéticos e criptoativos." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Blog | Lisomar Barbosa | Direito Digital e Proteção de Dados" />
         <meta name="twitter:description" content="Artigos sobre Direito Digital, LGPD, proteção de dados, crimes cibernéticos e criptoativos." />
-        <meta name="twitter:image" content="https://www.lisomarbarbosa.adv.br/og-image.jpg" />
+        <meta name="twitter:image" content="https://www.lisomarbarbosa.adv.br/og.webp" />
+        <script type="application/ld+json">
+          {JSON.stringify(blogSchema)}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
