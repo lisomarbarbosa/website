@@ -183,13 +183,13 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-  OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CUSTOM_TOPIC: ${{ inputs.tema }}
-  CUSTOM_MODEL: ${{ inputs.modelo_ia != '' && inputs.modelo_ia || '' }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CUSTOM_TOPIC: ${{ inputs.tema }}
+      CUSTOM_MODEL: ${{ inputs.modelo_ia != '' && inputs.modelo_ia || '' }}
 
     steps:
       - name: 📥 Checkout repository
