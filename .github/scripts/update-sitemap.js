@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const BLOG_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
 const SITEMAP_PATH = path.join(process.cwd(), 'public', 'sitemap.xml');
