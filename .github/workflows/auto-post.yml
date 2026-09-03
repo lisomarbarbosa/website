@@ -19,7 +19,7 @@ on:
         default: ""
         type: string
       artigo_slot:
-        description: "Slot do artigo (1 ou 2)."
+        description: "Slot do artigo (1 ou 2). Slot 2 só publica se slot 1 já existir hoje."
         required: false
         default: "1"
         type: string
@@ -181,13 +181,9 @@ jobs:
   generate-legal-article:
     name: Generate and Validate Legal Article
     runs-on: ubuntu-latest
-    # Timeout total do job: 6 horas (8 tentativas × 30 min + margem)
-    timeout-minutes: 370
 
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CUSTOM_TOPIC: ${{ inputs.tema }}
@@ -236,7 +232,7 @@ jobs:
 
           echo "✅ Ambiente validado."
 
-      - name: 🕐 Determinar slot do artigo
+      - name: 🕐 Verificar slot e condição de publicação
         id: slot_check
         run: |
           HOUR=$(date -u +"%H")
@@ -253,83 +249,62 @@ jobs:
 
           echo "📌 Slot detectado: $SLOT"
           echo "slot=$SLOT" >> $GITHUB_OUTPUT
-          echo "skip=false" >> $GITHUB_OUTPUT
 
-          # Extrai títulos já publicados hoje para evitar duplicidade de tema
-          TITLES_TODAY=$(node -e "
-            const fs = require('fs');
-            const content = fs.readFileSync('src/data/blog.ts', 'utf8');
-            const today = '$TODAY';
-            const blocks = content.split(/(?=\s*\{)/);
-            const titles = [];
-            for (const block of blocks) {
-              if (block.includes(\"date: '\" + today + \"'\")) {
-                const m = block.match(/title:\s*'([^']+)'/);
-                if (m) titles.push(m[1]);
-              }
-            }
-            console.log(titles.join('|'));
-          " 2>/dev/null || echo "")
+          # Se for slot 2, verifica se já existe um post publicado hoje
+          if [ "$SLOT" = "2" ]; then
+            POSTS_TODAY=$(grep -c "date: '$TODAY'" src/data/blog.ts 2>/dev/null || echo "0")
+            echo "📊 Posts publicados hoje ($TODAY): $POSTS_TODAY"
 
-          echo "📋 Temas já publicados hoje: $TITLES_TODAY"
-          echo "used_topics=$TITLES_TODAY" >> $GITHUB_OUTPUT
+            if [ "$POSTS_TODAY" -eq "0" ]; then
+              echo "⏭️ Slot 2 ignorado: nenhum artigo publicado hoje ainda."
+              echo "skip=true" >> $GITHUB_OUTPUT
+              echo "used_topics=" >> $GITHUB_OUTPUT
+            else
+              echo "✅ Slot 2 liberado: $POSTS_TODAY post(s) publicado(s) hoje."
+              echo "skip=false" >> $GITHUB_OUTPUT
 
-      # ──────────────────────────────────────────────────────────────────────
-      # LOOP DE RETRY: tenta gerar o artigo até MAX_ATTEMPTS vezes.
-      # Entre cada falha, aguarda WAIT_SECONDS (30 minutos) antes de tentar
-      # novamente. O loop sai imediatamente ao primeiro sucesso.
-      # ──────────────────────────────────────────────────────────────────────
-      - name: 🤖 Generate article (retry a cada 30 min até ter sucesso)
+              # Extrai os títulos dos posts publicados hoje para repassar ao script
+              TITLES_TODAY=$(node -e "
+                const fs = require('fs');
+                const content = fs.readFileSync('src/data/blog.ts', 'utf8');
+                const today = '$TODAY';
+                const blocks = content.split(/(?=\s*\{)/);
+                const titles = [];
+                for (const block of blocks) {
+                  if (block.includes(\"date: '\" + today + \"'\")) {
+                    const m = block.match(/title:\s*'([^']+)'/);
+                    if (m) titles.push(m[1]);
+                  }
+                }
+                console.log(titles.join('|'));
+              " 2>/dev/null || echo "")
+
+              echo "📋 Temas já publicados hoje: $TITLES_TODAY"
+              echo "used_topics=$TITLES_TODAY" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "used_topics=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🤖 Generate, research and audit article (com loop de reescrita)
         if: steps.slot_check.outputs.skip != 'true'
         id: generate
         env:
           ARTICLE_SLOT: ${{ steps.slot_check.outputs.slot }}
           ARTICLE_USED_TOPICS: ${{ steps.slot_check.outputs.used_topics }}
         run: |
-          MAX_ATTEMPTS=8        # máximo de tentativas (8 × 30 min = 4 horas)
-          WAIT_SECONDS=1800     # 30 minutos entre tentativas
-          ATTEMPT=0
-          SUCCESS=false
+          node .github/scripts/generate-post.js
 
-          while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
-            ATTEMPT=$((ATTEMPT + 1))
-            echo ""
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            echo "🔄 Tentativa $ATTEMPT de $MAX_ATTEMPTS — $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      - name: 🗺️ Atualizar sitemap.xml
+        if: steps.slot_check.outputs.skip != 'true'
+        run: |
+          node .github/scripts/update-sitemap.js
 
-            # Executa o script de geração
-            if node .github/scripts/generate-post.js; then
-              echo ""
-              echo "✅ Artigo gerado com sucesso na tentativa $ATTEMPT!"
-              SUCCESS=true
-              break
-            else
-              EXIT_CODE=$?
-              echo ""
-              echo "❌ Tentativa $ATTEMPT falhou (exit code: $EXIT_CODE)."
-
-              if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
-                WAIT_MIN=$((WAIT_SECONDS / 60))
-                echo "⏳ Aguardando $WAIT_MIN minutos antes da próxima tentativa..."
-                echo "   Próxima tentativa: $(date -u -d "+${WAIT_SECONDS} seconds" '+%H:%M:%S UTC' 2>/dev/null || date -u -v +${WAIT_SECONDS}S '+%H:%M:%S UTC')"
-                sleep "$WAIT_SECONDS"
-
-                # Atualiza o repositório antes de cada nova tentativa para
-                # garantir que o blog.ts esteja sincronizado
-                git pull --rebase origin main || true
-              else
-                echo "🚨 Todas as $MAX_ATTEMPTS tentativas falharam."
-                echo "   O artigo não pôde ser criado automaticamente."
-                echo "   Verifique os logs acima para identificar a causa."
-                exit 1
-              fi
-            fi
-          done
-
-          if [ "$SUCCESS" != "true" ]; then
-            exit 1
-          fi
+      - name: 🗺️ Atualizar sitemap.xml
+        if: steps.slot_check.outputs.skip != 'true'
+        run: |
+          node .github/scripts/update-sitemap.js
 
       - name: 🔍 Validate generated files
         if: steps.slot_check.outputs.skip != 'true'
@@ -368,72 +343,107 @@ jobs:
         if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
         run: |
           echo "🔍 Iniciando auditoria de integridade do artigo gerado..."
+          ERRORS=0
 
-          if [ -f ".generated_slug" ]; then
-            GENERATED_SLUG=$(cat .generated_slug)
-            ARTICLE_FILE="src/content/blog/${GENERATED_SLUG}.ts"
-            echo "🔎 Arquivo de conteúdo: $ARTICLE_FILE"
+          # Localiza o arquivo .ts gerado mais recente em src/content/blog/
+          ARTICLE_FILE=$(git diff --name-only --diff-filter=A -- 'src/content/blog/*.ts' | head -1)
+
+          if [ -z "$ARTICLE_FILE" ]; then
+            # Fallback: arquivo modificado mais recente
+            ARTICLE_FILE=$(git diff --name-only -- 'src/content/blog/*.ts' | head -1)
+          fi
+
+          if [ -z "$ARTICLE_FILE" ]; then
+            # Segundo fallback: usa o slug gerado para localizar o arquivo diretamente
+            if [ -f ".generated_slug" ]; then
+              GENERATED_SLUG=$(cat .generated_slug)
+              ARTICLE_FILE="src/content/blog/${GENERATED_SLUG}.ts"
+              echo "🔎 Usando slug gerado para localizar: $ARTICLE_FILE"
+            fi
           fi
 
           if [ -z "$ARTICLE_FILE" ] || [ ! -f "$ARTICLE_FILE" ]; then
-            echo "⚠️ Arquivo de conteúdo não encontrado em src/content/blog/."
+            echo "⚠️ Nenhum arquivo .ts encontrado em src/content/blog/ neste commit."
             echo "   Pulando auditoria de integridade."
             exit 0
           fi
 
           echo "📄 Arquivo auditado: $ARTICLE_FILE"
           echo "---"
-          ERRORS=0
 
-          # 1. export default
-          if grep -q 'export default' "$ARTICLE_FILE"; then
-            echo "✅ export default: presente"
-          else
-            echo "❌ export default: AUSENTE — módulo não será importável"
-            ERRORS=$((ERRORS+1))
-          fi
-
-          # 2. slug
-          if grep -q "^export const slug" "$ARTICLE_FILE"; then
+          # 1. slug — campo obrigatório no objeto de conteúdo
+          if grep -q "slug:" "$ARTICLE_FILE"; then
             echo "✅ slug: presente"
           else
             echo "❌ slug: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 3. title
-          if grep -q "^export const title" "$ARTICLE_FILE"; then
+          # 2. title
+          if grep -q "title:" "$ARTICLE_FILE"; then
             echo "✅ title: presente"
           else
             echo "❌ title: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 4. content
-          if grep -q "^export const content" "$ARTICLE_FILE"; then
-            echo "✅ content: presente"
+          # 3. description / excerpt
+          if grep -qE "(description|excerpt):" "$ARTICLE_FILE"; then
+            echo "✅ description/excerpt: presente"
           else
-            echo "❌ content: AUSENTE — artigo sem corpo de texto"
+            echo "❌ description/excerpt: AUSENTE"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 5. Fale Conosco (CTA)
+          # 4. image
+          if grep -q "image:" "$ARTICLE_FILE"; then
+            echo "✅ image: presente"
+          else
+            echo "❌ image: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 5. date
+          if grep -q "date:" "$ARTICLE_FILE"; then
+            echo "✅ date: presente"
+          else
+            echo "❌ date: AUSENTE"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 6. content / body — campo com o HTML/JSX do artigo
+          if grep -qE "(content|body):" "$ARTICLE_FILE"; then
+            echo "✅ content/body: presente"
+          else
+            echo "❌ content/body: AUSENTE — artigo sem conteúdo renderizável"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 7. export default
+          if grep -q "export default" "$ARTICLE_FILE"; then
+            echo "✅ export default: presente"
+          else
+            echo "❌ export default: AUSENTE — módulo não será importável"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # 8. CTA final obrigatório — bloco Fale Conosco
           if grep -q "Fale Conosco" "$ARTICLE_FILE"; then
             echo "✅ CTA final (Fale Conosco): presente"
           else
-            echo "❌ CTA final (Fale Conosco): AUSENTE"
+            echo "❌ CTA final (Fale Conosco): AUSENTE — artigo sem chamada para ação"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 6. Disclaimer legal
+          # 9. Disclaimer legal
           if grep -q "caráter informativo" "$ARTICLE_FILE"; then
             echo "✅ Disclaimer legal: presente"
           else
-            echo "❌ Disclaimer legal: AUSENTE"
+            echo "❌ Disclaimer legal: AUSENTE — obrigatório em todos os artigos"
             ERRORS=$((ERRORS+1))
           fi
 
-          # 7. Categoria Direito Digital
+          # 10. Categoria Direito Digital
           if grep -q "Direito Digital" "$ARTICLE_FILE"; then
             echo "✅ Categoria (Direito Digital): presente"
           else
@@ -456,13 +466,12 @@ jobs:
         run: |
           sed -i 's/[[:space:]]*$//' src/data/blog.ts
           sed -i 's/[[:space:]]*$//' public/sitemap.xml
-          # Aplica também ao arquivo .ts de conteúdo gerado
+          # Aplica também aos arquivos de conteúdo gerados
           if [ -f ".generated_slug" ]; then
             GENERATED_SLUG=$(cat .generated_slug)
             CONTENT_FILE="src/content/blog/${GENERATED_SLUG}.ts"
             if [ -f "$CONTENT_FILE" ]; then
               sed -i 's/[[:space:]]*$//' "$CONTENT_FILE"
-              echo "✅ Trailing whitespace removido de $CONTENT_FILE"
             fi
           fi
           echo "✅ Trailing whitespace removido."
@@ -505,8 +514,9 @@ jobs:
 
           # Adiciona todos os arquivos gerados/modificados pelo script
           git add src/data/blog.ts
+          git add src/content/blog/
           git add public/sitemap.xml
-          git add src/content/blog/ || true
+          git add src/pages/articles/ || true
           git add src/App.tsx || true
 
           git commit -m "bot: [slot ${SLOT}] ${TITLE} ${TODAY}"
