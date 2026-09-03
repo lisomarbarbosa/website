@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'stalking-virtual-consequencias-juridicas-e-como-se-proteger',
+    title: 'Stalking virtual: consequências jurídicas e como se proteger',
+    excerpt: 'Entenda o que configura stalking virtual, as penas previstas no Código Penal e na LGPD, e saiba quais medidas práticas adotar para denunciar e se proteger.',
+    date: '2026-09-03',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NDM4MDI4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'direito-de-arrependimento-no-e-commerce-regras-e-praticas',
     title: 'Direito de Arrependimento no E-commerce: Regras e Práticas',
     excerpt: 'Entenda como o CDC garante o arrependimento em compras online, prazos, devoluções e obrigações das lojas virtuais.',
