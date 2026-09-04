@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ Arquivo não encontrado: `src/pages/articles/ComplianceLGPD.tsx`
+## ⚠️ Arquivo não encontrado: `src/pages/articles/ContratosDigitaisValidadeJuridicaAssinaturasDireitos.tsx`
 
 ## 📊 Resumo Executivo
 
