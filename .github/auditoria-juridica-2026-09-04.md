@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ Arquivo não encontrado: `src/pages/articles/CrimesContraHonraInternetGuiaCompleto.tsx`
+## ⚠️ Arquivo não encontrado: `src/pages/articles/CriptomoedasERegulamentacaoJuridicaNoBrasilGuiaCompleto.tsx`
 
 ## 📊 Resumo Executivo
 
