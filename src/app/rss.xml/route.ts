@@ -1,4 +1,4 @@
-import { blogPosts } from '../data/blog';
+import { blogPosts } from '../../data/blog';
 
 const BASE_URL = 'https://lisomarbarbosa.adv.br';
 
