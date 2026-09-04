@@ -17,7 +17,7 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Artigos (42 URLs) -->
+  <!-- Artigos -->
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/ataques-virtuais-e-responsabilidade-civil-por-danos-causados-guia-pratico</loc>
     <lastmod>2026-09-04</lastmod>
@@ -265,6 +265,13 @@
 
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-por-publicacao-de-conteudo-ilicito-na-internet-direitos-e-deveres</loc>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

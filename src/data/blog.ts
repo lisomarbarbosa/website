@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-por-publicacao-de-conteudo-ilicito-na-internet-direitos-e-deveres',
+    title: 'Responsabilidade por Publicação de Conteúdo Ilícito na Internet: Direitos e Deveres',
+    excerpt: 'Descubra de quem é a responsabilidade pela publicação de conteúdos ilícitos na internet, o que diz o Marco Civil, o Código Civil e como agir em casos de ofensas ou fraudes online.',
+    date: '2026-09-04',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1720962158937-7ea890052166?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NTQyNjQ5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ataques-virtuais-e-responsabilidade-civil-por-danos-causados-guia-pratico',
     title: 'Ataques virtuais e responsabilidade civil por danos causados: guia prático',
     excerpt: 'Entenda como a legislação brasileira trata a responsabilidade civil decorrente de ataques cibernéticos e quais medidas proteger seus direitos.',
