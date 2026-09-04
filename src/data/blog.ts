@@ -374,3 +374,4 @@ export const blogPosts: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&auto=format&fit=crop&q=80',
   },
 ];
+// trigger build Fri Sep 4 00:46:25 UTC 2026
