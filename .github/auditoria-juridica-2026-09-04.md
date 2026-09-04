@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ Arquivo não encontrado: `src/pages/articles/ContratosDigitaisValidadeJuridicaAssinaturasDireitos.tsx`
+## ⚠️ Arquivo não encontrado: `src/pages/articles/ContratosSoftwareLicencasUsoDireitosDeveres.tsx`
 
 ## 📊 Resumo Executivo
 
