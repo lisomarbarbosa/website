@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ Arquivo não encontrado: `src/pages/articles/CriptomoedasERegulamentacaoJuridicaNoBrasilGuiaCompleto.tsx`
+## ⚠️ Arquivo não encontrado: `src/pages/articles/CustodiaCriptoativos.tsx`
 
 ## 📊 Resumo Executivo
 
