@@ -1,363 +1,315 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página inicial -->
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Página de listagem do blog -->
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/blog</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/compliancelgpd</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/crimesciberneticos</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/custodiacriptoativos</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/fakenewsdifamacao</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/golpescriptomoedas</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/instagramhackeado</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/lgpderroscomuns</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/protecaodadospessoais</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/blog/regulamentacaocriptomoedas</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/perseguicao-digital-protecao-juridica-vitima</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/crimes-contra-honra-internet-guia-completo</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/contratos-software-licencas-uso-direitos-deveres</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-anonimato-internet-limites</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-do-consumidor-compras-online</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/ofensas-redes-sociais-consequencias-juridicas</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/contratos-digitais-validade-juridica-assinaturas-direitos</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
+  <!-- Artigos (42 URLs) -->
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/ataques-virtuais-e-responsabilidade-civil-por-danos-causados-guia-pratico</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/compliance-lgpd</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/contratos-digitais-validade-juridica-assinaturas-direitos</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/contratos-software-licencas-uso-direitos-deveres</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/crimes-ciberneticos</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/crimes-contra-honra-internet-guia-completo</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/crimes-digitais-e-os-limites-da-responsabilizacao-penal</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/criptomoedas-e-regulamentacao-juridica-no-brasil-guia-completo</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/custodia-criptoativos</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/cyberbullying-e-consequencias-juridicas-no-brasil-direitos-e-responsabilidades</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/deepfake-e-responsabilidade-civil-e-penal-direitos-crimes-e-indenizacoes-no-direito-digital</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/difamacao-nas-redes-sociais-e-responsabilidade-juridica</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-anonimato-internet-limites</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-ao-esquecimento-limites-da-remocao-de-conteudo-digital</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-de-arrependimento-no-e-commerce-regras-e-praticas</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-digital-e-responsabilidade-civil-nas-relacoes-online-guia-pratico</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/direito-do-consumidor-compras-online</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/estelionato-eletronico-e-direito-penal-direitos-penas-e-como-agir-em-casos-de-fraudes-virtuais</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/fake-news-difamacao</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/fraudes-bancarias-digitais-e-responsabilidade-civil-direitos-do-consumidor</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/fraudes-eletronicas-e-suas-consequencias-no-direito-penal-brasileiro</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/golpes-criptomoedas</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/golpes-digitais-e-responsabilidade-juridica-das-plataformas-guia-de-direitos</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/instagram-hackeado</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/inteligencia-artificial-e-responsabilidade-civil-quem-paga-paga-pelo-dano</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/invasao-de-dispositivo-informatico-consequencias-juridicas-e-como-se-proteger</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/invasao-dispositivo-informatico-consequencias-juridicas</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/lgpd-e-a-protecao-de-dados-pessoais-nas-relacoes-digitais-guia-completo-dos-seus-direitos</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/lgpd-erros-comuns</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/marco-civil-da-internet-e-seus-reflexos-praticos-na-protecao-de-direitos-digitais-no-brasil</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/nfts-e-propriedade-intelectual-o-que-voce-realmente-possui-no-mundo-digital</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/ofensas-redes-sociais-consequencias-juridicas</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/perseguicao-digital-protecao-juridica-vitima</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/protecao-dados-pessoais</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/regulamentacao-criptomoedas</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/revenge-porn-e-tutela-juridica-da-vitima-seus-direitos-e-como-agir</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas-e-como-se-proteger</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas-lei-14132-2021</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://www.lisomarbarbosa.adv.br/artigos/uso-indevido-de-imagem-na-internet-responsabilidade-civil-e-protecao-de-direitos</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 </urlset>
