@@ -1,5 +1,6 @@
 // Dados SEO para todos os artigos
 // Gerado automaticamente em 2026-09-04
+// Codificacao: UTF-8
 
 export interface ArticleSEO {
   slug: string;
@@ -31,72 +32,72 @@ export const articlesSEO: ArticleSEO[] = [
   {
     "slug": "lgpd-erros-comuns",
     "title": "LGPD: Erros Comuns que sua Empresa Comete - Lisomar Barbosa Adv",
-    "description": "Evite multas da LGPD! Conheça os erros mais frequentes de empresas na proteçª£o de dados e como corrigir. Consultoria jurídica especializada em compliance digital."
+    "description": "Evite multas da LGPD! Conheça os erros mais frequentes de empresas na protecao de dados e como corrigir. Consultoria juridica especializada em compliance digital."
   },
   {
     "slug": "protecao-dados-pessoais",
-    "title": "Proteçª£o de Dados Pessoais | Seus Direitos na LGPD - Lisomar Barbosa Adv",
-    "description": "Quais s ªao seus direitos sob a LGPD? Saiba como exigir proteçª£o de dados pessoais, solicitar exclus ªao e acionar empresas que violaram sua privacidade."
+    "title": "Protecao de Dados Pessoais | Seus Direitos na LGPD - Lisomar Barbosa Adv",
+    "description": "Quais sao seus direitos sob a LGPD? Saiba como exigir protecao de dados pessoais, solicitar exclusao e acionar empresas que violaram sua privacidade."
   },
   {
     "slug": "regulamentacao-criptomoedas",
-    "title": "Regulamenta ç ªao de Criptomoedas | Marco Legal no Brasil - Lisomar Barbosa Adv",
-    "description": "Criptomoedas s ªao regulamentadas no Brasil? Entenda o marco legal, tributa ç ªao e seguran ç a jur ídica para investir em ativos digitais com prote ç ªao."
+    "title": "Regulamentacao de Criptomoedas | Marco Legal no Brasil - Lisomar Barbosa Adv",
+    "description": "Criptomoedas sao regulamentadas no Brasil? Entenda o marco legal, tributacao e seguranca juridica para investir em ativos digitais com protecao."
   },
   {
     "slug": "fake-news-difamacao",
-    "title": "Fake News e Difama ç ªao | Como se Proteger - Lisomar Barbosa Adv",
-    "description": "V ítima de fake news ou difama ç ªao online? Saiba como remover conte údo, processar autores e receber indeniza ç ªao. Advocacia em crimes contra a honra na internet."
+    "title": "Fake News e Difamacao | Como se Proteger - Lisomar Barbosa Adv",
+    "description": "Vitima de fake news ou difamacao online? Saiba como remover conteudo, processar autores e receber indenizacao. Advocacia em crimes contra a honra na internet."
   },
   {
     "slug": "ofensas-redes-sociais-consequencias-juridicas",
-    "title": "Ofensas em Redes Sociais | Consequ ências Jur ídicas - Lisomar Barbosa Adv",
-    "description": "Ofendeu ou foi ofendido nas redes sociais? Conheça as penas por inj úria, difama ç ªao e cal únia online. Como reunir provas e processar o agressor."
+    "title": "Ofensas em Redes Sociais | Consequencias Juridicas - Lisomar Barbosa Adv",
+    "description": "Ofendeu ou foi ofendido nas redes sociais? Conheça as penas por injuria, difamacao e calunia online. Como reunir provas e processar o agressor."
   },
   {
     "slug": "stalking-virtual-consequencias-juridicas-e-como-se-proteger",
-    "title": "Stalking Virtual | Como Denunciar Persegui ç ªao Online - Lisomar Barbosa Adv",
-    "description": "Sofre persegui ç ªao virtual? Entenda o crime de stalking digital, como reunir provas, pedir medidas protetivas e processar o agressor. Atendimento especializado."
+    "title": "Stalking Virtual | Como Denunciar Perseguicao Online - Lisomar Barbosa Adv",
+    "description": "Sofre perseguicao virtual? Entenda o crime de stalking digital, como reunir provas, pedir medidas protetivas e processar o agressor. Atendimento especializado."
   },
   {
     "slug": "stalking-virtual-consequencias-juridicas-lei-14132-2021",
     "title": "Lei do Stalking (14.132/2021) | Pena e Como Denunciar - Lisomar Barbosa Adv",
-    "description": "A Lei 14.132/2021 tipifica o stalking. Saiba quais s ªao as penas por persegui ç ªao, como denunciar e proteger v ítimas de ass édio virtual."
+    "description": "A Lei 14.132/2021 tipifica o stalking. Saiba quais sao as penas por perseguicao, como denunciar e proteger vitimas de assedio virtual."
   },
   {
     "slug": "stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil",
-    "title": "O Que é Stalking Virtual? | Consequ ências no Brasil - Lisomar Barbosa Adv",
-    "description": "Stalking virtual é crime? Entenda o que caracteriza persegui ç ªao online, penas previstas no C ódigo Penal e como v ítimas podem se proteger juridicamente."
+    "title": "O Que e Stalking Virtual? | Consequencias no Brasil - Lisomar Barbosa Adv",
+    "description": "Stalking virtual e crime? Entenda o que caracteriza perseguicao online, penas previstas no Codigo Penal e como vitimas podem se proteger juridicamente."
   },
   {
     "slug": "stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online",
-    "title": "Persegui ç ªao Online | Como se Proteger do Stalking - Lisomar Barbosa Adv",
-    "description": "Está·´ sendo perseguido online? Guia completo sobre stalking virtual: como identificar, reunir provas, pedir prote ç ªao judicial e processar o agressor."
+    "title": "Perseguicao Online | Como se Proteger do Stalking - Lisomar Barbosa Adv",
+    "description": "Esta sendo perseguido online? Guia completo sobre stalking virtual: como identificar, reunir provas, pedir protecao judicial e processar o agressor."
   },
   {
     "slug": "invasao-dispositivo-informatico-consequencias-juridicas",
-    "title": "Invas ªao de Dispositivo | Crime e Consequ ências - Lisomar Barbosa Adv",
-    "description": "Teve celular ou computador invadido? Saiba as penas por invas ªao de dispositivo inform ático, como denunciar e proteger seus dados pessoais."
+    "title": "Invasao de Dispositivo | Crime e Consequencias - Lisomar Barbosa Adv",
+    "description": "Teve celular ou computador invadido? Saiba as penas por invasao de dispositivo informatico, como denunciar e proteger seus dados pessoais."
   },
   {
     "slug": "invasao-de-dispositivo-informatico-consequencias-juridicas-e-como-se-proteger",
-    "title": "Como se Proteger de Invas ªao de Dispositivo - Lisomar Barbosa Adv",
-    "description": "Evite invas ões de celular e computador! Dicas de seguran ç a digital, como identificar ataques e acionar a lei em casos de acesso n ªao autorizado."
+    "title": "Como se Proteger de Invasao de Dispositivo - Lisomar Barbosa Adv",
+    "description": "Evite invaso es de celular e computador! Dicas de seguranca digital, como identificar ataques e acionar a lei em casos de acesso nao autorizado."
   },
   {
     "slug": "direito-anonimato-internet-limites",
     "title": "Direito ao Anonimato na Internet | Limites Legais - Lisomar Barbosa Adv",
-    "description": "Até·´ onde vai o anonimato online? Entenda os limites jur ídicos, quando é poss ível identificar usu ários e como se proteger em redes sociais."
+    "description": "Ate onde vai o anonimato online? Entenda os limites juridicos, quando e possivel identificar usuarios e como se proteger em redes sociais."
   },
   {
     "slug": "direito-ao-esquecimento-limites-da-remocao-de-conteudo-digital",
-    "title": "Direito ao Esquecimento | Como Remover Conte údo - Lisomar Barbosa Adv",
-    "description": "Quer remover conte údo antigo da internet? Saiba se voc ê tem direito ao esquecimento, como exigir exclus ªao e limites legais dessa prote ç ªao."
+    "title": "Direito ao Esquecimento | Como Remover Conteudo - Lisomar Barbosa Adv",
+    "description": "Quer remover conteudo antigo da internet? Saiba se voce tem direito ao esquecimento, como exigir exclusao e limites legais dessa protecao."
   },
   {
     "slug": "direito-de-arrependimento-no-e-commerce-regras-e-praticas",
     "title": "Direito de Arrependimento no E-commerce | Regras - Lisomar Barbosa Adv",
-    "description": "Comprou online e quer devolver? Entenda o direito de arrependimento de 7 dias, como exigir reembolso e prote ç ªao do consumidor em compras digitais."
+    "description": "Comprou online e quer devolver? Entenda o direito de arrependimento de 7 dias, como exigir reembolso e protecao do consumidor em compras digitais."
   },
   {
     "slug": "direito-do-consumidor-compras-online",
@@ -105,122 +106,122 @@ export const articlesSEO: ArticleSEO[] = [
   },
   {
     "slug": "fraudes-bancarias-digitais-e-responsabilidade-civil-direitos-do-consumidor",
-    "title": "Fraudes Banc árias Digitais | Direitos do Consumidor - Lisomar Barbosa Adv",
-    "description": "Caiu em golpe banc ário? Saiba como o banco responde, como recuperar dinheiro e acionar o judici ário. Direitos do consumidor em transa ç ões digitais."
+    "title": "Fraudes Bancarias Digitais | Direitos do Consumidor - Lisomar Barbosa Adv",
+    "description": "Caiu em golpe bancario? Saiba como o banco responde, como recuperar dinheiro e acionar o judiciario. Direitos do consumidor em transacoes digitais."
   },
   {
     "slug": "fraudes-eletronicas-e-suas-consequencias-no-direito-penal-brasileiro",
-    "title": "Fraudes Eletr ônicas | Pena e Consequ ências - Lisomar Barbosa Adv",
-    "description": "Estelionato eletr ônico é crime? Entenda as penas por fraudes online, como denunciar e recuperar valores perdidos em golpes digitais."
+    "title": "Fraudes Eletronicas | Pena e Consequencias - Lisomar Barbosa Adv",
+    "description": "Estelionato eletronico e crime? Entenda as penas por fraudes online, como denunciar e recuperar valores perdidos em golpes digitais."
   },
   {
     "slug": "estelionato-eletronico-e-direito-penal-direitos-penas-e-como-agir-em-casos-de-fraudes-virtuais",
-    "title": "Estelionato Eletr ônico | Como Agir - Lisomar Barbosa Adv",
-    "description": "V ítima de estelionato online? Guia completo: como reunir provas, registrar BO, acionar banco e buscar indeniza ç ªao. Advocacia em crimes digitais."
+    "title": "Estelionato Eletronico | Como Agir - Lisomar Barbosa Adv",
+    "description": "Vitima de estelionato online? Guia completo: como reunir provas, registrar BO, acionar banco e buscar indenizacao. Advocacia em crimes digitais."
   },
   {
     "slug": "golpes-digitais-e-responsabilidade-juridica-das-plataformas-guia-de-direitos",
     "title": "Golpes Digitais | Responsabilidade das Plataformas - Lisomar Barbosa Adv",
-    "description": "A plataforma responde por golpes? Entenda a responsabilidade de redes sociais e marketplaces, como exigir indeniza ç ªao e proteger consumidores."
+    "description": "A plataforma responde por golpes? Entenda a responsabilidade de redes sociais e marketplaces, como exigir indenizacao e proteger consumidores."
   },
   {
     "slug": "cyberbullying-e-consequencias-juridicas-no-brasil-direitos-e-responsabilidades",
-    "title": "Cyberbullying | Consequ ências Jur ídicas no Brasil - Lisomar Barbosa Adv",
-    "description": "Cyberbullying é crime? Saiba as penas, como denunciar ass édio virtual, proteger v ítimas e acionar respons áveis. Direitos e deveres na internet."
+    "title": "Cyberbullying | Consequencias Juridicas no Brasil - Lisomar Barbosa Adv",
+    "description": "Cyberbullying e crime? Saiba as penas, como denunciar assedio virtual, proteger vitimas e acionar responsaveis. Direitos e deveres na internet."
   },
   {
     "slug": "deepfake-e-responsabilidade-civil-e-penal-direitos-crimes-e-indenizacoes-no-direito-digital",
-    "title": "Deepfake | Crimes e Indeniza ç ões - Lisomar Barbosa Adv",
-    "description": "V ítima de deepfake? Entenda responsabilidades civil e penal, como remover v ídeos falsos e buscar indeniza ç ªao por danos morais e imagem."
+    "title": "Deepfake | Crimes e Indenizacoes - Lisomar Barbosa Adv",
+    "description": "Vitima de deepfake? Entenda responsabilidades civil e penal, como remover videos falsos e buscar indenizacao por danos morais e imagem."
   },
   {
     "slug": "difamacao-nas-redes-sociais-e-responsabilidade-juridica",
-    "title": "Difama ç ªao em Redes Sociais | Responsabilidade - Lisomar Barbosa Adv",
-    "description": "Foi difamado online? Saiba como processar autores, remover conte údo e receber indeniza ç ªao. Crimes contra honra na internet."
+    "title": "Difamacao em Redes Sociais | Responsabilidade - Lisomar Barbosa Adv",
+    "description": "Foi difamado online? Saiba como processar autores, remover conteudo e receber indenizacao. Crimes contra honra na internet."
   },
   {
     "slug": "direito-digital-e-responsabilidade-civil-nas-relacoes-online-guia-pratico",
     "title": "Responsabilidade Civil no Direito Digital | Guia - Lisomar Barbosa Adv",
-    "description": "Danos online geram indeniza ç ªao? Guia pr ático sobre responsabilidade civil em rela ç ões digitais, como provar preju ízos e acionar a justi ç a."
+    "description": "Danos online geram indenizacao? Guia pratico sobre responsabilidade civil em relacoes digitais, como provar prejuizos e acionar a justica."
   },
   {
     "slug": "inteligencia-artificial-e-responsabilidade-civil-quem-paga-paga-pelo-dano",
     "title": "IA e Responsabilidade Civil | Quem Paga pelo Dano? - Lisomar Barbosa Adv",
-    "description": "IA causou dano? Quem responde? Entenda responsabilidade civil por intelig ência artificial, como acionar desenvolvedores e usu ários."
+    "description": "IA causou dano? Quem responde? Entenda responsabilidade civil por inteligencia artificial, como acionar desenvolvedores e usuarios."
   },
   {
     "slug": "marco-civil-da-internet-e-seus-reflexos-praticos-na-protecao-de-direitos-digitais-no-brasil",
-    "title": "Marco Civil da Internet | Direitos Pr áticos - Lisomar Barbosa Adv",
-    "description": "Quais s ªao seus direitos online? Guia do Marco Civil da Internet: neutralidade, privacidade, remo ç ªao de conte údo e responsabilidade de plataformas."
+    "title": "Marco Civil da Internet | Direitos Praticos - Lisomar Barbosa Adv",
+    "description": "Quais sao seus direitos online? Guia do Marco Civil da Internet: neutralidade, privacidade, remocao de conteudo e responsabilidade de plataformas."
   },
   {
     "slug": "nfts-e-propriedade-intelectual-o-que-voce-realmente-possui-no-mundo-digital",
-    "title": "NFTs e Propriedade Intelectual | O Que Voc ê Possui? - Lisomar Barbosa Adv",
-    "description": "Comprar NFT transfere propriedade intelectual? Entenda o que voc ê realmente possui, direitos autorais e riscos jur ídicos de ativos digitais."
+    "title": "NFTs e Propriedade Intelectual | O Que Voce Possui? - Lisomar Barbosa Adv",
+    "description": "Comprar NFT transfere propriedade intelectual? Entenda o que voce realmente possui, direitos autorais e riscos juridicos de ativos digitais."
   },
   {
     "slug": "responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico",
-    "title": "Responsabilidade de Provedores | Guia Jur ídico - Lisomar Barbosa Adv",
-    "description": "Provedor responde por conte údo de usu ários? Guia sobre responsabilidade de plataformas, remo ç ªao de conte údo ilícito e direitos do consumidor."
+    "title": "Responsabilidade de Provedores | Guia Juridico - Lisomar Barbosa Adv",
+    "description": "Provedor responde por conteudo de usuarios? Guia sobre responsabilidade de plataformas, remocao de conteudo ilicito e direitos do consumidor."
   },
   {
     "slug": "revenge-porn-e-tutela-juridica-da-vitima-seus-direitos-e-como-agir",
-    "title": "Revenge Porn | Direitos da V ítima - Lisomar Barbosa Adv",
-    "description": "Teve íntimas divulgadas sem consentimento? Saiba como remover conte údo, processar autor e receber indeniza ç ªao. Crimes sexuais digitais."
+    "title": "Revenge Porn | Direitos da Vitima - Lisomar Barbosa Adv",
+    "description": "Teve intimas divulgadas sem consentimento? Saiba como remover conteudo, processar autor e receber indenizacao. Crimes sexuais digitais."
   },
   {
     "slug": "uso-indevido-de-imagem-na-internet-responsabilidade-civil-e-protecao-de-direitos",
     "title": "Uso Indevido de Imagem | Como se Proteger - Lisomar Barbosa Adv",
-    "description": "Usaram sua foto sem permiss ªao? Entenda direitos de imagem, como exigir remo ç ªao, processar respons áveis e receber indeniza ç ªao."
+    "description": "Usaram sua foto sem permissao? Entenda direitos de imagem, como exigir remocao, processar responsaveis e receber indenizacao."
   },
   {
     "slug": "ataques-virtuais-e-responsabilidade-civil-por-danos-causados-guia-pratico",
     "title": "Ataques Virtuais | Responsabilidade Civil - Lisomar Barbosa Adv",
-    "description": "Sofreu ataque virtual? Guia pr ático sobre responsabilidade civil por danos online, como provar preju ízos e buscar indeniza ç ªao."
+    "description": "Sofreu ataque virtual? Guia pratico sobre responsabilidade civil por danos online, como provar prejuizos e buscar indenizacao."
   },
   {
     "slug": "contratos-digitais-validade-juridica-assinaturas-direitos",
     "title": "Contratos Digitais | Validade e Direitos - Lisomar Barbosa Adv",
-    "description": "Contrato online tem validade? Entenda requisitos jur ídicos, assinaturas digitais, direitos do consumidor e como contestar cl áusulas abusivas."
+    "description": "Contrato online tem validade? Entenda requisitos juridicos, assinaturas digitais, direitos do consumidor e como contestar clausulas abusivas."
   },
   {
     "slug": "contratos-software-licencas-uso-direitos-deveres",
-    "title": "Contratos de Software | Licen ç as e Direitos - Lisomar Barbosa Adv",
-    "description": "O que voc ê pode fazer com software licenciado? Entenda contratos de licen ç a, restri ç ões de uso, direitos autorais e responsabilidades."
+    "title": "Contratos de Software | Licencas e Direitos - Lisomar Barbosa Adv",
+    "description": "O que voce pode fazer com software licenciado? Entenda contratos de licenca, restricoes de uso, direitos autorais e responsabilidades."
   },
   {
     "slug": "crimes-contra-honra-internet-guia-completo",
     "title": "Crimes Contra a Honra na Internet | Guia Completo - Lisomar Barbosa Adv",
-    "description": "Inj úria, difama ç ªao ou cal únia online? Guia completo sobre crimes contra honra na internet, penas e como processar autores."
+    "description": "Injuria, difamacao ou calunia online? Guia completo sobre crimes contra honra na internet, penas e como processar autores."
   },
   {
     "slug": "crimes-digitais-e-os-limites-da-responsabilizacao-penal",
-    "title": "Crimes Digitais | Limites da Responsabiliza ç ªao Penal - Lisomar Barbosa Adv",
-    "description": "Até·´ onde vai a responsabilidade penal online? Entenda limites de tipifica ç ªao, quando h á crime digital e como se defender de acusa ç ões."
+    "title": "Crimes Digitais | Limites da Responsabilizacao Penal - Lisomar Barbosa Adv",
+    "description": "Ate onde vai a responsabilidade penal online? Entenda limites de tipificacao, quando ha crime digital e como se defender de acusacoes."
   },
   {
     "slug": "criptomoedas-e-regulamentacao-juridica-no-brasil-guia-completo",
-    "title": "Criptomoedas | Regulamenta ç ªao Jur ídica no Brasil - Lisomar Barbosa Adv",
-    "description": "Criptomoedas s ªao legais? Guia completo sobre regula ç ªao, tributa ç ªao, seguran ç a jur ídica e como investir com prote ç ªao no Brasil."
+    "title": "Criptomoedas | Regulamentacao Juridica no Brasil - Lisomar Barbosa Adv",
+    "description": "Criptomoedas sao legais? Guia completo sobre regulamentacao, tributacao, seguranca juridica e como investir com protecao no Brasil."
   },
   {
     "slug": "custodia-criptoativos",
-    "title": "Cust ódia de Criptoativos | Seguran ç a e Direitos - Lisomar Barbosa Adv",
-    "description": "Como guardar criptomoedas com seguran ç a? Entenda cust ódia, exchanges, carteiras digitais e direitos em caso de perda ou roubo."
+    "title": "Custodia de Criptoativos | Seguranca e Direitos - Lisomar Barbosa Adv",
+    "description": "Como guardar criptomoedas com seguranca? Entenda custodia, exchanges, carteiras digitais e direitos em caso de perda ou roubo."
   },
   {
     "slug": "perseguicao-digital-protecao-juridica-vitima",
-    "title": "Persegui ç ªao Digital | Prote ç ªao Jur ídica - Lisomar Barbosa Adv",
-    "description": "Sofre persegui ç ªao online? Saiba como a lei protege v ítimas, reunir provas, pedir medidas e processar agressores. Direitos digitais."
+    "title": "Perseguicao Digital | Protecao Juridica - Lisomar Barbosa Adv",
+    "description": "Sofre perseguicao online? Saiba como a lei protege vitimas, reunir provas, pedir medidas e processar agressores. Direitos digitais."
   },
   {
     "slug": "lgpd-e-a-protecao-de-dados-pessoais-nas-relacoes-digitais-guia-completo-dos-seus-direitos",
     "title": "LGPD | Guia Completo dos Seus Direitos - Lisomar Barbosa Adv",
-    "description": "Quais s ªao seus direitos na LGPD? Guia completo sobre prote ç ªao de dados pessoais, como exigir empresas e acionar ANPD."
+    "description": "Quais sao seus direitos na LGPD? Guia completo sobre protecao de dados pessoais, como exigir empresas e acionar ANPD."
   }
 ];
 
-// Funçª£o utilit ária para buscar SEO por slug
+// Funcao utilitaria para buscar SEO por slug
 export function getArticleSEO(slug: string): ArticleSEO | undefined {
   return articlesSEO.find(article => article.slug === slug);
 }
