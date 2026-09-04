@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCanonical } from '../hooks/useCanonical';
+import { useSEO } from '../hooks/useSEO';
+import { getArticleSEO } from '../data/articlesSEO';
 
 interface Article {
   slug: string;
@@ -8,16 +9,22 @@ interface Article {
   content: string;
 }
 
+const BASE_URL = 'https://www.lisomarbarbosa.adv.br';
+
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<Article | null>(null);
 
-  // Canonical tag dinamica para cada artigo
-  const canonicalUrl = slug 
-    ? `https://www.lisomarbarbosa.adv.br/artigos/${slug}`
-    : 'https://www.lisomarbarbosa.adv.br/';
-  
-  useCanonical(canonicalUrl);
+  // Buscar dados SEO especificos do artigo
+  const seoData = slug ? getArticleSEO(slug) : undefined;
+  const canonicalUrl = slug ? `${BASE_URL}/artigos/${slug}` : BASE_URL;
+
+  // Aplicar title, meta description e canonical tag
+  useSEO({
+    title: seoData?.title || 'Direito Digital | Lisomar Barbosa Adv',
+    description: seoData?.description || 'Advocacia especializada em direito digital, LGPD, crimes ciberneticos e protecao de dados.',
+    canonical: canonicalUrl,
+  });
 
   useEffect(() => {
     // Carregar artigo baseado no slug
