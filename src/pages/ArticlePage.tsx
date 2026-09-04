@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
 import { useOpenGraph } from '../hooks/useOpenGraph';
+import { useStructuredData } from '../hooks/useStructuredData';
 import { getArticleSEO } from '../data/articlesSEO';
 import { getArticleOG } from '../data/articlesOG';
 
@@ -37,6 +38,23 @@ export function ArticlePage() {
     image: imageUrl,
     url: canonicalUrl,
     type: 'article',
+  });
+
+  // Aplicar JSON-LD structured data (Organization, Article, BreadcrumbList)
+  useStructuredData({
+    article: seoData ? {
+      headline: seoData.title,
+      description: seoData.description,
+      image: imageUrl,
+      url: canonicalUrl,
+    } : undefined,
+    breadcrumb: {
+      items: [
+        { name: 'Home', item: BASE_URL },
+        { name: 'Artigos', item: `${BASE_URL}/artigos` },
+        { name: seoData?.title || 'Artigo', item: canonicalUrl },
+      ],
+    },
   });
 
   useEffect(() => {
