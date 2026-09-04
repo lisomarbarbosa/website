@@ -1,52 +1,19 @@
-import Link from 'next/link'
-import { articlesSEO } from '@/data/articlesSEO'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Artigos | Lisomar Barbosa Adv',
-  description: 'Artigos sobre direito digital, LGPD, crimes ciberneticos, protecao de dados e compliance.',
-}
+import Link from 'next/link';
 
 export default function ArtigosPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <section className="bg-gray-50 py-12">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Artigos</h1>
-          <p className="text-lg text-gray-600">Conteudo especializado sobre direito digital</p>
-        </div>
-      </section>
-
-      {/* Lista de Artigos */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articlesSEO.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/artigos/${article.slug}`}
-                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition"
-              >
-                <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                  {article.title.replace(' - Lisomar Barbosa Adv', '')}
-                </h3>
-                <p className="text-gray-600 line-clamp-3">
-                  {article.description}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 mt-20">
-        <div className="container mx-auto px-4 max-w-6xl text-center">
-          <p>&copy; 2026 Lisomar Barbosa Adv. Todos os direitos reservados.</p>
-          <p className="text-gray-400 mt-2">Direito Digital | LGPD | Crimes Ciberneticos</p>
-        </div>
-      </footer>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
+          Artigos
+        </h1>
+        <p className="text-gray-700 dark:text-gray-300">
+          Em breve: lista completa de artigos sobre Direito Digital.
+        </p>
+        <Link href="/" className="text-blue-600 hover:underline mt-4 inline-block">
+          ← Voltar ao in�cio
+        </Link>
+      </div>
     </div>
-  )
+  );
 }
