@@ -47,6 +47,7 @@ export function ArticlePage() {
       description: seoData.description,
       image: imageUrl,
       url: canonicalUrl,
+      datePublished: seoData.datePublished,
     } : undefined,
     breadcrumb: {
       items: [
