@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ Arquivo não encontrado: `src/pages/articles/ContratosSoftwareLicencasUsoDireitosDeveres.tsx`
+## ⚠️ Arquivo não encontrado: `src/pages/articles/CrimesContraHonraInternetGuiaCompleto.tsx`
 
 ## 📊 Resumo Executivo
 
