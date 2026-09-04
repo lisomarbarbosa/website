@@ -1,5 +1,2 @@
 # Redireciona URLs antigas de artigos para a estrutura canônica
 /blog/*  /artigos/:splat  301
-
-# SPA fallback — React Router (Cloudflare Pages)
-/*  /index.html  200
