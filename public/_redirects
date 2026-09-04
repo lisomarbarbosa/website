@@ -1,5 +1,7 @@
-# Redireciona URLs antigas de artigos para a estrutura canônica
-/blog/*  /artigos/:splat  301
+# Cloudflare Pages redirects
+/api/*  https://api.lisomarbarbosa.adv.br/:splat  301
+/artigos/*  /artigos/[slug]  200
 
-# SPA fallback - serve index.html para todas as outras rotas
-/*  /index.html  200
+# Static assets
+/assets/*  /assets/:splat  200
+/public/*  /public/:splat  200
