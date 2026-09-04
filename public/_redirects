@@ -1,2 +1,5 @@
 # Redireciona URLs antigas de artigos para a estrutura canônica
 /blog/*  /artigos/:splat  301
+
+# SPA fallback - serve index.html para todas as outras rotas
+/*  /index.html  200
