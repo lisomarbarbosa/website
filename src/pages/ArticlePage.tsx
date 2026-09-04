@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
+import { useOpenGraph } from '../hooks/useOpenGraph';
 import { getArticleSEO } from '../data/articlesSEO';
+import { getArticleOG } from '../data/articlesOG';
 
 interface Article {
   slug: string;
@@ -15,15 +17,26 @@ export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<Article | null>(null);
 
-  // Buscar dados SEO especificos do artigo
+  // Buscar dados SEO e OG especificos do artigo
   const seoData = slug ? getArticleSEO(slug) : undefined;
+  const ogData = slug ? getArticleOG(slug) : undefined;
   const canonicalUrl = slug ? `${BASE_URL}/artigos/${slug}` : BASE_URL;
+  const imageUrl = ogData?.image || '/og.webp';
 
-  // Aplicar title, meta description e canonical tag
+  // Aplicar SEO basico (title, meta description, canonical)
   useSEO({
     title: seoData?.title || 'Direito Digital | Lisomar Barbosa Adv',
     description: seoData?.description || 'Advocacia especializada em direito digital, LGPD, crimes ciberneticos e protecao de dados.',
     canonical: canonicalUrl,
+  });
+
+  // Aplicar Open Graph tags (Facebook, LinkedIn, WhatsApp)
+  useOpenGraph({
+    title: ogData?.title || seoData?.title || 'Direito Digital | Lisomar Barbosa Adv',
+    description: ogData?.description || seoData?.description || 'Advocacia especializada em direito digital.',
+    image: imageUrl,
+    url: canonicalUrl,
+    type: 'article',
   });
 
   useEffect(() => {
