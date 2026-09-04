@@ -18,6 +18,23 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${post.title} | Lisomar Barbosa | Direito Digital`,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Lisomar Barbosa'],
+      images: [{ url: post.image, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+    alternates: {
+      canonical: `https://lisomarbarbosa.adv.br/artigos/${post.slug}`,
+    },
   };
 }
 
@@ -34,6 +51,27 @@ export default async function ArtigoPage({ params }: { params: { slug: string } 
       <main className="pt-20 pb-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto">
+            {/* Breadcrumbs */}
+            <nav aria-label="Breadcrumb" className="mb-6">
+              <ol className="flex items-center gap-2 text-sm text-foreground/60">
+                <li>
+                  <Link href="/" className="hover:text-primary transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>/</li>
+                <li>
+                  <Link href="/artigos" className="hover:text-primary transition-colors">
+                    Artigos
+                  </Link>
+                </li>
+                <li>/</li>
+                <li aria-current="page" className="text-foreground">
+                  {post.title}
+                </li>
+              </ol>
+            </nav>
+            
             <Link href="/artigos" className="text-primary hover:underline mb-6 inline-block">
               ← Voltar aos Artigos
             </Link>
