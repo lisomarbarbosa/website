@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ Arquivo não encontrado: `src/pages/articles/CustodiaCriptoativos.tsx`
+## ⚠️ Arquivo não encontrado: `src/pages/articles/DireitoAnonimatoInternetLimites.tsx`
 
 ## 📊 Resumo Executivo
 
