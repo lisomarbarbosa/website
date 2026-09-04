@@ -91,3 +91,5 @@ export function ArticlePage() {
     </div>
   );
 }
+
+export default ArticlePage;
