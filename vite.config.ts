@@ -10,20 +10,4 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
-  build: {
-    target: 'esnext',
-    minify: 'esbuild',
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'lucide-icons': ['lucide-react'],
-        },
-      },
-    },
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react'],
-  },
 })
