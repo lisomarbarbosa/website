@@ -83,11 +83,6 @@ export default async function ArtigoPage({ params }: { params: { slug: string } 
     notFound();
   }
   
-  // Artigos relacionados (mesma categoria, exclui o atual, max 3)
-  const relatedPosts = blogPosts
-    .filter(p => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3);
-  
   return (
     <>
       <ArticleSchema post={post} />
@@ -158,29 +153,6 @@ export default async function ArtigoPage({ params }: { params: { slug: string } 
                   </p>
                 </footer>
               </article>
-              
-              {/* Artigos relacionados - Internal Linking */}
-              {relatedPosts.length > 0 && (
-                <section className="mt-12 pt-8 border-t">
-                  <h2 className="text-2xl font-bold mb-6">Artigos relacionados</h2>
-                  <ul className="grid gap-4 md:grid-cols-2">
-                    {relatedPosts.map(related => (
-                      <li key={related.slug}>
-                        <Link 
-                          href={`/artigos/${related.slug}`}
-                          className="block p-4 rounded-lg bg-accent/10 hover:bg-accent/20 transition-colors"
-                        >
-                          <h3 className="font-semibold mb-2 line-clamp-2">{related.title}</h3>
-                          <p className="text-sm text-foreground/60 line-clamp-2">{related.excerpt}</p>
-                          <span className="text-xs text-foreground/40 mt-2 inline-block">
-                            {related.date} • {related.readTime || '5 min'}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
             </div>
           </div>
         </main>
