@@ -6,7 +6,7 @@ interface HeaderProps {
   setActiveSection: (section: string) => void;
 }
 
-export const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
+const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
@@ -96,3 +96,5 @@ export const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
     </header>
   );
 };
+
+export default Header;
