@@ -1,5 +1,4 @@
 import { Mail, Phone, MapPin, Linkedin, Instagram } from 'lucide-react';
-import { Newsletter } from './Newsletter';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -28,20 +27,13 @@ const Footer = () => {
               </a>
               <div className="flex items-center gap-3 text-foreground-foreground/70">
                 <MapPin size={20} />
-                <span>Bel�m, Pará - Atendimento em todo o Brasil</span>
+                <span>Belém, Pará - Atendimento em todo o Brasil</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 className="text-xl font-bold mb-4">Newsletter</h3>
-            <Newsletter />
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <div>
-            <h3 className="text-lg font-bold mb-4">Redes Sociais</h3>
+            <h3 className="text-xl font-bold mb-4">Redes Sociais</h3>
             <div className="flex gap-4">
               <a
                 href="https://linkedin.com/in/lisomarbarbosa"
