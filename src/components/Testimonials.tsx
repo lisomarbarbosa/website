@@ -19,7 +19,7 @@ const testimonials = [
   },
 ];
 
-export const Testimonials = () => {
+const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextTestimonial = () => {
@@ -103,3 +103,5 @@ export const Testimonials = () => {
     </section>
   );
 };
+
+export default Testimonials;
