@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ofensas-nas-redes-sociais-consequencias-juridicas-e-como-se-proteger',
+    title: 'Ofensas nas redes sociais: consequências jurídicas e como se proteger',
+    excerpt: 'Entenda o que constitui ofensa nas redes, quais leis se aplicam e quais medidas você pode tomar para se defender ou evitar problemas.',
+    date: '2026-09-05',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NjA4NjM3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-lgpd-limites-juridicos-e-privacidade-no-trabalho',
     title: 'Monitoramento de Empregados e LGPD: Limites Jurídicos e Privacidade no Trabalho',
     excerpt: 'Entenda os limites do monitoramento de funcionários à luz da LGPD e da CLT. Saiba como proteger a privacidade dos trabalhadores e evitar graves passivos trabalhistas.',
