@@ -1,0 +1,38 @@
+name: Atualizar RSS do Pinterest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pinterest-articles.csv'
+      - 'src/data/blog.ts'
+      - 'scripts/generate-pinterest-csv.js'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-rss:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Gerar RSS
+        run: node scripts/generate-rss.js
+
+      - name: Salvar feed se houve alteração
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/rss.xml
+          git diff --cached --quiet || git commit -m 'chore: atualizar RSS do Pinterest'
+          git push
