@@ -4,7 +4,7 @@ interface HeroProps {
   setActiveSection: (section: string) => void;
 }
 
-export const Hero = ({ setActiveSection }: HeroProps) => {
+const Hero = ({ setActiveSection }: HeroProps) => {
   const scrollToContact = () => {
     const element = document.getElementById('contato');
     if (element) {
@@ -56,3 +56,5 @@ export const Hero = ({ setActiveSection }: HeroProps) => {
     </section>
   );
 };
+
+export default Hero;
