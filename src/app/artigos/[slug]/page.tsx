@@ -45,7 +45,7 @@ export default async function ArtigoPage({ params }: { params: { slug: string } 
                 </span>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
                 <div className="flex items-center gap-4 text-sm text-foreground/60 mb-6">
-                  <time dateTime={post.date}>{post.date}</time>
+                  <time>{post.date}</time>
                   <span>•</span>
                   <span>{post.readTime || '5 min'} de leitura</span>
                 </div>
