@@ -303,6 +303,12 @@ jobs:
         run: |
           node .github/scripts/update-sitemap.js
 
+      - name: 📌 Gerar RSS do Pinterest
+        if: steps.slot_check.outputs.skip != 'true' && env.skip_commit != 'true'
+        run: |
+          node scripts/generate-rss.js
+          echo "✅ RSS do Pinterest atualizado."
+
       - name: 🔍 Validate generated files
         if: steps.slot_check.outputs.skip != 'true'
         run: |
@@ -509,10 +515,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          node scripts/generate-rss.js
+
           # Adiciona todos os arquivos gerados/modificados pelo script
           git add src/data/blog.ts
           git add src/content/blog/
           git add public/sitemap.xml
+          git add public/rss.xml
           git add src/pages/articles/ || true
           git add src/App.tsx || true
 
