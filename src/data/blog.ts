@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-lgpd-limites-juridicos-e-privacidade-no-trabalho',
+    title: 'Monitoramento de Empregados e LGPD: Limites Jurídicos e Privacidade no Trabalho',
+    excerpt: 'Entenda os limites do monitoramento de funcionários à luz da LGPD e da CLT. Saiba como proteger a privacidade dos trabalhadores e evitar graves passivos trabalhistas.',
+    date: '2026-09-05',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1590098563831-d28f8c52726b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NjA2MDMzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ataques-virtuais-e-responsabilidade-civil-por-danos-causados-guia-pratico',
     title: 'Ataques virtuais e responsabilidade civil por danos causados: guia prático',
     excerpt: 'Entenda como a legislação brasileira trata a responsabilidade civil decorrente de ataques cibernéticos e quais medidas proteger seus direitos.',
