@@ -3,35 +3,27 @@
  * Uso: node scripts/generate-pinterest-csv.js
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ARTICLES_DIR = path.join(__dirname, '..', 'src', 'content', 'articles');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const BLOG_DATA_FILE = path.join(__dirname, '..', 'src', 'data', 'blog.ts');
 const OUTPUT_FILE = path.join(__dirname, '..', 'pinterest-articles.csv');
 
 function extractArticles() {
-  const files = fs.readdirSync(ARTICLES_DIR).filter(f => f.endsWith('.md'));
-  
-  return files.map(file => {
-    const filePath = path.join(ARTICLES_DIR, file);
-    const content = fs.readFileSync(filePath, 'utf-8');
-    
-    // Extrair frontmatter manualmente
-    const titleMatch = content.match(/^title:\s*["']([^"']+)["']/m);
-    const descMatch = content.match(/^description:\s*["']([^"']+)["']/m);
-    const dateMatch = content.match(/^date:\s*["']([^"']+)["']/m);
-    const keywordsMatch = content.match(/^keywords:\s*\[([^\]]+)\]/m);
-    
-    const slug = file.replace('.md', '');
-    
-    return {
-      title: titleMatch ? titleMatch[1] : slug,
-      description: descMatch ? descMatch[1] : '',
-      date: dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0],
-      keywords: keywordsMatch ? keywordsMatch[1].replace(/["']/g, '').split(',').map(k => k.trim()) : [],
-      slug
-    };
-  });
+  const source = fs.readFileSync(BLOG_DATA_FILE, 'utf-8');
+  const articlePattern = /\{\s*slug:\s*'([^']+)',\s*title:\s*'([^']*)',\s*excerpt:\s*'([^']*)',\s*date:\s*'([^']+)'/g;
+  const articles = [];
+  let match;
+
+  while ((match = articlePattern.exec(source)) !== null) {
+    const [, slug, title, description, date] = match;
+    articles.push({ title, description, date, keywords: [], slug });
+  }
+
+  return articles;
 }
 
 function escapeCSV(text) {
