@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-digitais-e-sua-validade-juridica-guia-completo-para-garantir-seguranca-e-eficacia',
+    title: 'Contratos Digitais e sua Validade Jurídica: Guia Completo para Garantir Segurança e Eficácia',
+    excerpt: 'Descubra como funcionam os contratos digitais no Brasil, as exigências de assinatura eletrônica, leis aplicáveis e como garantir a validade jurídica de suas transações online.',
+    date: '2026-09-08',
+    readTime: '11 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1762340278016-f5bb276dcf76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4ODcxNTk5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-por-conteudo-ilicito-na-internet-guia-completo',
     title: 'Responsabilidade por Conteúdo Ilícito na Internet: Guia Completo',
     excerpt: 'Entenda a responsabilidade civil e criminal por conteúdos ilícitos na internet, os limites do Marco Civil da Internet e como agir em caso de agressões virtuais.',
