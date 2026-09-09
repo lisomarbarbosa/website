@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'provas-digitais-e-sua-importancia-em-processos-judiciais-guia-completo',
+    title: 'Provas Digitais e Sua Importância em Processos Judiciais: Guia Completo',
+    excerpt: 'Entenda a validade, a coleta correta e a relevância das provas digitais nos processos judiciais brasileiros com a advogada especialista Lisomar Barbosa.',
+    date: '2026-09-09',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1592383010275-b028451b2947?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4OTU4NDkzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-digitais-e-sua-validade-juridica-guia-completo-para-garantir-seguranca-e-eficacia',
     title: 'Contratos Digitais e sua Validade Jurídica: Guia Completo para Garantir Segurança e Eficácia',
     excerpt: 'Descubra como funcionam os contratos digitais no Brasil, as exigências de assinatura eletrônica, leis aplicáveis e como garantir a validade jurídica de suas transações online.',
