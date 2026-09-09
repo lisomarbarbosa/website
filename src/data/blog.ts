@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'direito-ao-anonimato-na-internet-limites-e-protecoes-legais',
+    title: 'Direito ao anonimato na internet: limites e proteções legais',
+    excerpt: 'Entenda o direito ao anonimato online, seus fundamentos legais e os limites impostos pela lei para proteger direitos e segurança.',
+    date: '2026-09-09',
+    readTime: '11 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1738641928061-e68c5e8e2f2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4OTc1MDY2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'provas-digitais-e-sua-importancia-em-processos-judiciais-guia-completo',
     title: 'Provas Digitais e Sua Importância em Processos Judiciais: Guia Completo',
     excerpt: 'Entenda a validade, a coleta correta e a relevância das provas digitais nos processos judiciais brasileiros com a advogada especialista Lisomar Barbosa.',
