@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'crimes-contra-a-honra-na-internet-direitos-penas-e-como-se-proteger',
+    title: 'Crimes contra a honra na internet: direitos, penas e como se proteger',
+    excerpt: 'Entenda os crimes de calúnia, difamação e injúria praticados online, a legislação aplicável e passos práticos para denunciar e se proteger.',
+    date: '2026-09-10',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1590098563837-5e7669b27e55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MDQ0NTIwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'direito-ao-anonimato-na-internet-limites-e-protecoes-legais',
     title: 'Direito ao anonimato na internet: limites e proteções legais',
     excerpt: 'Entenda o direito ao anonimato online, seus fundamentos legais e os limites impostos pela lei para proteger direitos e segurança.',
