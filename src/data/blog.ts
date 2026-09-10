@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-completo',
+    title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Completo',
+    excerpt: 'Entenda os principais pontos legais, direitos do consumidor e obrigações das partes em contratos de software e licenças de uso.',
+    date: '2026-09-10',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1525540810550-5032f5d191b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MDYxNDczfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'crimes-contra-a-honra-na-internet-direitos-penas-e-como-se-proteger',
     title: 'Crimes contra a honra na internet: direitos, penas e como se proteger',
     excerpt: 'Entenda os crimes de calúnia, difamação e injúria praticados online, a legislação aplicável e passos práticos para denunciar e se proteger.',
