@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'vazamento-de-dados-e-possiveis-consequencias-juridicas',
+    title: 'Vazamento de Dados e Possíveis Consequências Jurídicas',
+    excerpt: 'Entenda as consequências jurídicas do vazamento de dados pessoais no Brasil, a responsabilidade das empresas segundo a LGPD e o CDC, e saiba como agir.',
+    date: '2026-09-11',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330389279-6f1f273799c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MTQ4MTM1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'direito-a-privacidade-e-protecao-contra-vigilancia-digital',
     title: 'Direito à Privacidade e Proteção contra Vigilância Digital',
     excerpt: 'Entenda como a LGPD, o Marco Civil e a Constituição protegem seus dados contra monitoramento indevido e quais medidas práticas adotar para resguardar sua intimidade online.',
