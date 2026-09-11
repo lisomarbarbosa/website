@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'direito-a-privacidade-e-protecao-contra-vigilancia-digital',
+    title: 'Direito à Privacidade e Proteção contra Vigilância Digital',
+    excerpt: 'Entenda como a LGPD, o Marco Civil e a Constituição protegem seus dados contra monitoramento indevido e quais medidas práticas adotar para resguardar sua intimidade online.',
+    date: '2026-09-11',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1718241905439-3562f088758d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MTMwNDY4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-completo',
     title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Completo',
     excerpt: 'Entenda os principais pontos legais, direitos do consumidor e obrigações das partes em contratos de software e licenças de uso.',
