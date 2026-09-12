@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'stalking-virtual-e-suas-consequencias-juridicas-no-brasil',
+    title: 'Stalking Virtual e Suas Consequências Jurídicas no Brasil',
+    excerpt: 'Entenda as consequências penais e cíveis do stalking virtual, a legislação aplicável como a Lei 14.132/2021 e como agir juridicamente perante a perseguição online.',
+    date: '2026-09-12',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1544847558-3ccacb31ee7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MjE0ODU5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'vazamento-de-dados-e-possiveis-consequencias-juridicas',
     title: 'Vazamento de Dados e Possíveis Consequências Jurídicas',
     excerpt: 'Entenda as consequências jurídicas do vazamento de dados pessoais no Brasil, a responsabilidade das empresas segundo a LGPD e o CDC, e saiba como agir.',
