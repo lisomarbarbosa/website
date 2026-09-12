@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo-o-que-diz-a-lei',
+    title: 'Responsabilidade de marketplaces nas relações de consumo: o que diz a lei',
+    excerpt: 'Entenda como a legislação brasileira define a responsabilidade de marketplaces por produtos e serviços vendidos por terceiros, incluindo CDC, LGPD e jurisprudência.',
+    date: '2026-09-12',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1677442135136-760c813028c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MjMxNTE0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'stalking-virtual-e-suas-consequencias-juridicas-no-brasil',
     title: 'Stalking Virtual e Suas Consequências Jurídicas no Brasil',
     excerpt: 'Entenda as consequências penais e cíveis do stalking virtual, a legislação aplicável como a Lei 14.132/2021 e como agir juridicamente perante a perseguição online.',
