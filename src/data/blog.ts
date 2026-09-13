@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'preservacao-de-provas-digitais-como-validar-mensagens-e-prints-em-processos-judiciais',
+    title: 'Preservação de Provas Digitais: Como Validar Mensagens e Prints em Processos Judiciais',
+    excerpt: 'Aprenda como preservar prints, conversas de WhatsApp e e-mails com validade jurídica no Brasil, utilizando ata notarial, blockchain e cadeia de custódia segundo o CPC e a LGPD.',
+    date: '2026-09-13',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1706759755831-bbbcca338f67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MzE5ODAzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'lgpd-e-protecao-de-dados-pessoais-nas-relacoes-digitais',
     title: 'LGPD e Proteção de Dados Pessoais nas Relações Digitais',
     excerpt: 'Entenda como a Lei Geral de Proteção de Dados (LGPD) protege sua privacidade no ambiente digital e quais as obrigações das empresas no tratamento de informações.',
