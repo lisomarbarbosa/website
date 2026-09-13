@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'lgpd-e-protecao-de-dados-pessoais-nas-relacoes-digitais',
+    title: 'LGPD e Proteção de Dados Pessoais nas Relações Digitais',
+    excerpt: 'Entenda como a Lei Geral de Proteção de Dados (LGPD) protege sua privacidade no ambiente digital e quais as obrigações das empresas no tratamento de informações.',
+    date: '2026-09-13',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1718241905559-f76f2718ddc1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5MzA1MjEwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo-o-que-diz-a-lei',
     title: 'Responsabilidade de marketplaces nas relações de consumo: o que diz a lei',
     excerpt: 'Entenda como a legislação brasileira define a responsabilidade de marketplaces por produtos e serviços vendidos por terceiros, incluindo CDC, LGPD e jurisprudência.',
