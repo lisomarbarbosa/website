@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'liberdade-de-expressao-na-internet-e-seus-limites-juridicos',
+    title: 'Liberdade de Expressão na Internet e Seus Limites Jurídicos',
+    excerpt: 'Compreenda os limites da liberdade de expressão nas redes sociais, o que diz a lei brasileira e como agir juridicamente em casos de abusos e ofensas virtuais.',
+    date: '2026-09-14',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1748609523112-da78cb7210a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5Mzk3OTA1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'preservacao-de-provas-digitais-como-validar-mensagens-e-prints-em-processos-judiciais',
     title: 'Preservação de Provas Digitais: Como Validar Mensagens e Prints em Processos Judiciais',
     excerpt: 'Aprenda como preservar prints, conversas de WhatsApp e e-mails com validade jurídica no Brasil, utilizando ata notarial, blockchain e cadeia de custódia segundo o CPC e a LGPD.',
