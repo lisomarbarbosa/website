@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-na-internet-seus-direitos-e-como-agir-no-ambiente-digital',
+    title: 'Calúnia e Injúria na Internet: Seus Direitos e Como Agir no Ambiente Digital',
+    excerpt: 'Saiba como identificar, provar e combater crimes contra a honra como calúnia e injúria cometidos nas redes sociais e na internet, resguardando seus direitos com eficácia.',
+    date: '2026-09-15',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1717501219184-c3fc77f501c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NDc4MzQxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'liberdade-de-expressao-na-internet-e-seus-limites-juridicos',
     title: 'Liberdade de Expressão na Internet e Seus Limites Jurídicos',
     excerpt: 'Compreenda os limites da liberdade de expressão nas redes sociais, o que diz a lei brasileira e como agir juridicamente em casos de abusos e ofensas virtuais.',
