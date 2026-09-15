@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'assinaturas-eletronicas-e-a-validade-dos-negocios-juridicos',
+    title: 'Assinaturas Eletrônicas e a Validade dos Negócios Jurídicos',
+    excerpt: 'Entenda como as assinaturas eletrônicas garantem a validade jurídica de contratos no Brasil, os tipos legais e como assegurar proteção jurídica em negócios digitais.',
+    date: '2026-09-15',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1706759755851-6163305080f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NDk1MTcwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-na-internet-seus-direitos-e-como-agir-no-ambiente-digital',
     title: 'Calúnia e Injúria na Internet: Seus Direitos e Como Agir no Ambiente Digital',
     excerpt: 'Saiba como identificar, provar e combater crimes contra a honra como calúnia e injúria cometidos nas redes sociais e na internet, resguardando seus direitos com eficácia.',
