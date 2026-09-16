@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-na-internet-seus-direitos-e-como-agir-legamente',
+    title: 'Calúnia e Injúria na Internet: Seus Direitos e Como Agir Legamente',
+    excerpt: 'Aprenda a identificar e combater calúnia e injúria no ambiente digital. Entenda a legislação, como preservar provas e buscar indenização com a advogada Lisomar Barbosa.',
+    date: '2026-09-16',
+    readTime: '11 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1762242298589-582f5f6c3fb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NTY0ODI3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'assinaturas-eletronicas-e-a-validade-dos-negocios-juridicos',
     title: 'Assinaturas Eletrônicas e a Validade dos Negócios Jurídicos',
     excerpt: 'Entenda como as assinaturas eletrônicas garantem a validade jurídica de contratos no Brasil, os tipos legais e como assegurar proteção jurídica em negócios digitais.',
