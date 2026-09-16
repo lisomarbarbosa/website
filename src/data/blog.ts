@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'assedio-digital-e-responsabilidade-das-plataformas-guia-juridico',
+    title: 'Assédio Digital e Responsabilidade das Plataformas: Guia Jurídico',
+    excerpt: 'Entenda como o direito brasileiro trata o assédio digital e a responsabilidade civil das redes sociais. Saiba como remover conteúdos e agir perante a lei.',
+    date: '2026-09-16',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NTgxNTczfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-na-internet-seus-direitos-e-como-agir-legamente',
     title: 'Calúnia e Injúria na Internet: Seus Direitos e Como Agir Legamente',
     excerpt: 'Aprenda a identificar e combater calúnia e injúria no ambiente digital. Entenda a legislação, como preservar provas e buscar indenização com a advogada Lisomar Barbosa.',
