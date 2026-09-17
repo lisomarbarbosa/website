@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-no-ambiente-digital-direitos-responsabilidades-e-como-se-proteger',
+    title: 'Calúnia e injúria no ambiente digital: direitos, responsabilidades e como se proteger',
+    excerpt: 'Entenda como a lei protege sua honra online, quais são os deveres das plataformas e quais medidas tomar ao ser vítima de calúnia ou injúria na internet.',
+    date: '2026-09-17',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1767481732836-f2ca9079e4ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NjUwNjczfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'assedio-digital-e-responsabilidade-das-plataformas-guia-juridico',
     title: 'Assédio Digital e Responsabilidade das Plataformas: Guia Jurídico',
     excerpt: 'Entenda como o direito brasileiro trata o assédio digital e a responsabilidade civil das redes sociais. Saiba como remover conteúdos e agir perante a lei.',
