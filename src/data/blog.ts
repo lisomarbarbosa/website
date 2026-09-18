@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-no-ambiente-digital-seus-direitos-e-como-agir',
+    title: 'Calúnia e Injúria no Ambiente Digital: Seus Direitos e Como Agir',
+    excerpt: 'Entenda a diferença entre calúnia e injúria na internet, as consequências penais e cíveis, e o passo a passo para preservar provas e buscar justiça.',
+    date: '2026-09-18',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1598495037740-2c360cf49e50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NzM1ODE2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-no-ambiente-digital-direitos-e-protecao',
     title: 'Calúnia e injúria no ambiente digital: direitos e proteção',
     excerpt: 'Entenda como a lei brasileira trata calúnia e injúria praticadas online e quais medidas tomar para se proteger.',
