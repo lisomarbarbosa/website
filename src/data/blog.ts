@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-no-ambiente-digital-o-que-voce-precisa-saber',
+    title: 'Calúnia e Injúria no Ambiente Digital: O que Você Precisa Saber',
+    excerpt: 'Entenda como a lei trata calúnia e injúria cometidas na internet, quais provas coletar e como se defender.',
+    date: '2026-09-18',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330300311-fbe6f4389012?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5NzUyNjI3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-no-ambiente-digital-seus-direitos-e-como-agir',
     title: 'Calúnia e Injúria no Ambiente Digital: Seus Direitos e Como Agir',
     excerpt: 'Entenda a diferença entre calúnia e injúria na internet, as consequências penais e cíveis, e o passo a passo para preservar provas e buscar justiça.',
