@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ataques-virtuais-e-responsabilidade-civil-como-funciona-a-reparacao-de-danos-na-era-digital',
+    title: 'Ataques Virtuais e Responsabilidade Civil: Como Funciona a Reparação de Danos na Era Digital',
+    excerpt: 'Entenda como a legislação brasileira trata os ataques virtuais, de quem é a responsabilidade pelos prejuízos e como buscar a reparação de danos materiais e morais na justiça.',
+    date: '2026-09-19',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1536926568015-57bb3c08fe10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5ODIwNzkyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-no-ambiente-digital-o-que-voce-precisa-saber',
     title: 'Calúnia e Injúria no Ambiente Digital: O que Você Precisa Saber',
     excerpt: 'Entenda como a lei trata calúnia e injúria cometidas na internet, quais provas coletar e como se defender.',
