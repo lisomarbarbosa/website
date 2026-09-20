@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-no-ambiente-digital-como-se-proteger-e-agir-juridicamente',
+    title: 'Calúnia e Injúria no Ambiente Digital: Como se Proteger e Agir Juridicamente',
+    excerpt: 'Entenda o que caracteriza calúnia e injúria na internet, saiba seus direitos e veja passos práticos para denunciar e se defender.',
+    date: '2026-09-20',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1762340280248-66d1dfed1182?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg5OTA4OTU4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-no-ambiente-digital-direitos-provas-e-defesa',
     title: 'Calúnia e injúria no ambiente digital: direitos, provas e defesa',
     excerpt: 'Entenda como calúnia e injúria ocorrem online, quais provas coletar, a legislação aplicável e passos práticos para se proteger e buscar reparação.',
