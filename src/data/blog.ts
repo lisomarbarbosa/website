@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-no-ambiente-digital-direitos-provas-e-protecao',
+    title: 'Calúnia e injúria no ambiente digital: direitos, provas e proteção',
+    excerpt: 'Entenda como a legislação brasileira trata calúnia e injúria praticadas na internet, quais provas coletar e como se proteger juridicamente.',
+    date: '2026-09-21',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1763568258439-de52f4b4e7f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwMDE3NDI5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-na-internet-direitos-provas-e-como-agir-em-casos-de-ataques-virtuais',
     title: 'Calúnia e injúria na internet: direitos, provas e como agir em casos de ataques virtuais',
     excerpt: 'Guia jurídico completo sobre calúnia e injúria digital. Saiba como identificar ofensas, produzir provas válidas, buscar indenização e acionar a Justiça.',
