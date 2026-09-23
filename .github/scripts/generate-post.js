@@ -11,6 +11,7 @@ const ROOT = process.cwd();
 const CONTENT_DIR         = join(ROOT, "src/content/blog");
 const BLOG_DATA_FILE      = join(ROOT, "src/data/blog.ts");
 const GENERATED_SLUG_FILE = join(ROOT, ".generated_slug");
+const USED_TOPICS_FILE    = join(ROOT, ".used_topics");
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const UNSPLASH_URL   = "https://api.unsplash.com/photos/random";
@@ -164,6 +165,26 @@ async function getPublishedSlugs() {
   }
 }
 
+// Carrega lista de slugs de TEMAS já usados (não slugs de posts)
+async function loadUsedTopicSlugs() {
+  try {
+    const raw = await readFile(USED_TOPICS_FILE, "utf8");
+    return raw.split("\n").map(l => l.trim()).filter(Boolean);
+  } catch (_) {
+    return [];
+  }
+}
+
+// Persiste o slug do tema usado ao arquivo de controle
+async function saveUsedTopicSlug(topicSlug) {
+  const existing = await loadUsedTopicSlugs();
+  if (!existing.includes(topicSlug)) {
+    existing.push(topicSlug);
+    await writeFile(USED_TOPICS_FILE, existing.join("\n") + "\n", "utf8");
+    log(`📌 Tema registrado em .used_topics: ${topicSlug}`);
+  }
+}
+
 function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -173,21 +194,59 @@ function shuffleArray(arr) {
   return a;
 }
 
-async function chooseTopic(usedTopicSlugs = []) {
+// ── chooseTopic — versão corrigida ─────────────────────────────────────────────
+//
+// PROBLEMA ANTERIOR:
+//   A comparação usava ts.slice(0,20) contra slugs de POSTS publicados.
+//   Isso causava dois erros:
+//   1. Falso positivo: temas com início parecido (ex: "calúnia e injúria na..."
+//      vs "calúnia e injúria no...") bloqueavam uns aos outros indevidamente,
+//      esgotando o pool e forçando o fallback para TODOS os temas.
+//   2. Falso negativo: variações com slug diferente após o 20º caractere
+//      passavam como "inéditas" mesmo sendo sobre o mesmo tema.
+//
+// CORREÇÃO:
+//   - Compara o SLUG COMPLETO do tema com slugs de POSTS existentes
+//     (correspondência exata: um tema → um slug canônico).
+//   - Também verifica o arquivo .used_topics que persiste entre runs do CI,
+//     garantindo que mesmo que um post falhe no meio, o tema não seja repetido.
+//   - Aceita slugs de posts que CONTENHAM o slug do tema como prefixo,
+//     cobrindo casos onde o título gerado expande o tema (ex: tema
+//     "calúnia e injúria..." → post "calúnia-e-injuria-...-guia-pratico").
+//
+async function chooseTopic(usedTopicSlugsSession = []) {
   if (process.env.CUSTOM_TOPIC && process.env.CUSTOM_TOPIC.trim()) {
     return process.env.CUSTOM_TOPIC.trim();
   }
-  const publishedSlugs = await getPublishedSlugs();
-  const allUsed = [...publishedSlugs, ...usedTopicSlugs];
+
+  const publishedPostSlugs  = await getPublishedSlugs();      // slugs dos arquivos .ts
+  const persistedTopicSlugs = await loadUsedTopicSlugs();     // .used_topics (cross-run)
+  const allUsedTopicSlugs   = [...new Set([...persistedTopicSlugs, ...usedTopicSlugsSession])];
+
   const available = TOPICS.filter(t => {
-    const ts = slugify(t);
-    return !allUsed.some(
-      used => used.includes(ts.slice(0, 20)) || ts.includes(used.slice(0, 20))
-    );
+    const topicSlug = slugify(t);
+
+    // 1. O tema foi explicitamente marcado como usado (cross-run ou sessão atual)
+    if (allUsedTopicSlugs.includes(topicSlug)) return false;
+
+    // 2. Já existe um post cujo slug é EXATAMENTE o slug do tema
+    if (publishedPostSlugs.includes(topicSlug)) return false;
+
+    // 3. Já existe um post cujo slug COMEÇA COM o slug do tema
+    //    (ex: tema "ataques-virtuais-e-responsabilidade-civil"
+    //         post  "ataques-virtuais-e-responsabilidade-civil-guia-pratico")
+    if (publishedPostSlugs.some(ps => ps.startsWith(topicSlug + "-"))) return false;
+
+    // 4. O slug do tema COMEÇA COM o slug de algum post existente
+    //    (variação inversa — post mais curto que o tema)
+    if (publishedPostSlugs.some(ps => topicSlug.startsWith(ps + "-"))) return false;
+
+    return true;
   });
+
   const pool = available.length > 0 ? available : TOPICS;
   const shuffled = shuffleArray(pool);
-  log(`🎲 Pool de temas disponíveis: ${pool.length} (${TOPICS.length - pool.length} já publicados)`);
+  log(`🎲 Pool de temas disponíveis: ${pool.length} (${TOPICS.length - pool.length} filtrados)`);
   const chosen = shuffled[0];
   log(`🎯 Tema sorteado: ${chosen}`);
   return chosen;
@@ -881,6 +940,8 @@ async function main() {
         image,
       });
       await saveGeneratedSlug(article.slug);
+      // ── Registra o tema como usado para evitar repetição em runs futuros ──
+      await saveUsedTopicSlug(slugify(topic));
     } catch (err) {
       log(`❌ Falha ao salvar arquivo: ${err.message}`);
       throw err;
