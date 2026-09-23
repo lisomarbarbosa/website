@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'protecao-de-dados-pessoais-e-responsabilidade-no-ambiente-digital',
+    title: 'Proteção de dados pessoais e responsabilidade no ambiente digital',
+    excerpt: 'Entenda os pilares da LGPD, Marco Civil e CDC para garantir direitos e definir responsabilidades no tratamento de dados online.',
+    date: '2026-09-23',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330300716-63c167c5efac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwMTg2OTE3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-no-ambiente-digital-direitos-provas-e-protecao',
     title: 'Calúnia e injúria no ambiente digital: direitos, provas e proteção',
     excerpt: 'Entenda como a legislação brasileira trata calúnia e injúria praticadas na internet, quais provas coletar e como se proteger juridicamente.',
