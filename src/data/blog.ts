@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'estelionato-eletronico-e-direito-penal-direitos-provas-e-responsabilidades-das-instituicoes',
+    title: 'Estelionato Eletrônico e Direito Penal: Direitos, Provas e Responsabilidades das Instituições',
+    excerpt: 'Entenda o crime de estelionato eletrônico no Direito Penal brasileiro, a responsabilidade das instituições financeiras, o mecanismo do Pix e como reaver seus valores.',
+    date: '2026-09-24',
+    readTime: '11 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782338938305-9c52ddef6bdc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwMjU2NDcyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'protecao-de-dados-pessoais-e-responsabilidade-no-ambiente-digital',
     title: 'Proteção de dados pessoais e responsabilidade no ambiente digital',
     excerpt: 'Entenda os pilares da LGPD, Marco Civil e CDC para garantir direitos e definir responsabilidades no tratamento de dados online.',
