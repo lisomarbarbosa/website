@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'crimes-contra-a-honra-na-internet-direitos-sancoes-e-como-se-proteger',
+    title: 'Crimes contra a honra na internet: direitos, sanções e como se proteger',
+    excerpt: 'Entenda os tipos de crimes contra a honra praticados online, a legislação aplicável e passos práticos para denunciar e se prevenir.',
+    date: '2026-09-25',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwMzQyNDMzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'estelionato-eletronico-e-direito-penal-direitos-provas-e-responsabilidades-das-instituicoes',
     title: 'Estelionato Eletrônico e Direito Penal: Direitos, Provas e Responsabilidades das Instituições',
     excerpt: 'Entenda o crime de estelionato eletrônico no Direito Penal brasileiro, a responsabilidade das instituições financeiras, o mecanismo do Pix e como reaver seus valores.',
