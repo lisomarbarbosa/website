@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'provas-digitais-relevancia-e-cuidados-em-processos-judiciais',
+    title: 'Provas digitais: relevância e cuidados em processos judiciais',
+    excerpt: 'Entenda como as provas digitais são admitidas, preservadas e valorizadas nos tribunais brasileiros, com base na LGPD, Marco Civil e jurisprudência.',
+    date: '2026-09-26',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1618385455730-2571c38966b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwNDQ0MDM4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'uso-indevido-de-imagem-na-internet-e-responsabilidade-civil',
     title: 'Uso indevido de imagem na internet e responsabilidade civil',
     excerpt: 'Entenda seus direitos e como agir quando sua imagem é usada sem autorização na web, com base na LGPD, CDC e Marco Civil.',
