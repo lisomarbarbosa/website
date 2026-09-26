@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'uso-indevido-de-imagem-na-internet-e-responsabilidade-civil',
+    title: 'Uso indevido de imagem na internet e responsabilidade civil',
+    excerpt: 'Entenda seus direitos e como agir quando sua imagem é usada sem autorização na web, com base na LGPD, CDC e Marco Civil.',
+    date: '2026-09-26',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782088581730-a89b9c117757?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwNDI2Njk5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'crimes-contra-a-honra-na-internet-direitos-sancoes-e-como-se-proteger',
     title: 'Crimes contra a honra na internet: direitos, sanções e como se proteger',
     excerpt: 'Entenda os tipos de crimes contra a honra praticados online, a legislação aplicável e passos práticos para denunciar e se prevenir.',
