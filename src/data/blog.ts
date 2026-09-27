@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-eletronicas-como-o-direito-penal-protege-vitimas-e-responsabiliza-autores',
+    title: 'Fraudes eletrônicas: como o Direito Penal protege vítimas e responsabiliza autores',
+    excerpt: 'Entenda os tipos de fraudes eletrônicas, as penas previstas no Código Penal e as medidas de prevenção e ação para quem foi vítima.',
+    date: '2026-09-27',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1760548425298-22aa4b60fc16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwNTE2Mzg4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'provas-digitais-relevancia-e-cuidados-em-processos-judiciais',
     title: 'Provas digitais: relevância e cuidados em processos judiciais',
     excerpt: 'Entenda como as provas digitais são admitidas, preservadas e valorizadas nos tribunais brasileiros, com base na LGPD, Marco Civil e jurisprudência.',
