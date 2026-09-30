@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-civil-por-danos-causados-na-internet-guia-pratico',
+    title: 'Responsabilidade civil por danos causados na internet: guia prático',
+    excerpt: 'Entenda como a legislação brasileira responsabiliza provedores, plataformas e usuários por danos online, com exemplos de jurisprudência e passos para proteger seus direitos.',
+    date: '2026-09-30',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1773245148743-c13c3b42095e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwNzk0NjQwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'stalking-virtual-direitos-legislacao-e-como-se-proteger',
     title: 'Stalking virtual: direitos, legislação e como se proteger',
     excerpt: 'Entenda o que configura stalking online, as penas previstas no Código Penal e na LGPD, e passos práticos para denunciar e se proteger.',
