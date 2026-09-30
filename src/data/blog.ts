@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'stalking-virtual-direitos-legislacao-e-como-se-proteger',
+    title: 'Stalking virtual: direitos, legislação e como se proteger',
+    excerpt: 'Entenda o que configura stalking online, as penas previstas no Código Penal e na LGPD, e passos práticos para denunciar e se proteger.',
+    date: '2026-09-30',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1787676205159-aed31d4e142b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwNzc5NDA5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-eletronicas-como-o-direito-penal-protege-vitimas-e-responsabiliza-autores',
     title: 'Fraudes eletrônicas: como o Direito Penal protege vítimas e responsabiliza autores',
     excerpt: 'Entenda os tipos de fraudes eletrônicas, as penas previstas no Código Penal e as medidas de prevenção e ação para quem foi vítima.',
