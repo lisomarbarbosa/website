@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-bancarias-digitais-responsabilidade-civil-e-como-se-proteger',
+    title: 'Fraudes bancárias digitais: responsabilidade civil e como se proteger',
+    excerpt: 'Entenda como funcionam as fraudes bancárias digitais, quem pode ser responsabilizado e quais medidas tomar para se proteger.',
+    date: '2026-10-02',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1581087724694-14c17b0c17fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkwOTY3NDUyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-civil-por-danos-causados-na-internet-guia-pratico',
     title: 'Responsabilidade civil por danos causados na internet: guia prático',
     excerpt: 'Entenda como a legislação brasileira responsabiliza provedores, plataformas e usuários por danos online, com exemplos de jurisprudência e passos para proteger seus direitos.',
