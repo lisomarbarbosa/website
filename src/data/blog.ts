@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cyberbullying-no-brasil-aspectos-legais-e-protecao-das-vitimas',
+    title: 'Cyberbullying no Brasil: aspectos legais e proteção das vítimas',
+    excerpt: 'Entenda as consequências jurídicas do cyberbullying, leis aplicáveis e como proteger seus direitos online.',
+    date: '2026-10-03',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1758399743449-e87b218fa63c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxMDMzMDE5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-bancarias-digitais-responsabilidade-civil-e-como-se-proteger',
     title: 'Fraudes bancárias digitais: responsabilidade civil e como se proteger',
     excerpt: 'Entenda como funcionam as fraudes bancárias digitais, quem pode ser responsabilizado e quais medidas tomar para se proteger.',
