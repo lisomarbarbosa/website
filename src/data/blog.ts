@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'criptomoedas-e-regulamentacao-juridica-no-brasil-o-guia-completo-para-investidores',
+    title: 'Criptomoedas e Regulamentação Jurídica no Brasil: O Guia Completo para Investidores',
+    excerpt: 'Entenda as leis de criptomoedas no Brasil, o Marco Legal (Lei 14.478/2022), regulação da Receita Federal, CDC, LGPD e como proteger seus investimentos.',
+    date: '2026-10-03',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1585079374502-415f8516dcc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxMDQ5NDY2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'cyberbullying-no-brasil-aspectos-legais-e-protecao-das-vitimas',
     title: 'Cyberbullying no Brasil: aspectos legais e proteção das vítimas',
     excerpt: 'Entenda as consequências jurídicas do cyberbullying, leis aplicáveis e como proteger seus direitos online.',
