@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'phishing-e-engenharia-social-aspectos-juridicos-e-protecao-do-consumidor',
+    title: 'Phishing e engenharia social: aspectos jurídicos e proteção do consumidor',
+    excerpt: 'Entenda como a lei brasileira tipifica phishing, quais direitos você tem e como se proteger contra golpes de engenharia social.',
+    date: '2026-10-04',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1768861812598-33dfaec89765?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxMTIxNjc0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'criptomoedas-e-regulamentacao-juridica-no-brasil-o-guia-completo-para-investidores',
     title: 'Criptomoedas e Regulamentação Jurídica no Brasil: O Guia Completo para Investidores',
     excerpt: 'Entenda as leis de criptomoedas no Brasil, o Marco Legal (Lei 14.478/2022), regulação da Receita Federal, CDC, LGPD e como proteger seus investimentos.',
