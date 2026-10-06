@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-trabalhistas-e-a-lgpd',
+    title: 'Monitoramento de Empregados e Proteção de Dados: Limites Trabalhistas e a LGPD',
+    excerpt: 'Entenda como a LGPD e a CLT regulam a vigilância no trabalho, protegendo a privacidade do empregado sem anular o poder diretivo do empregador.',
+    date: '2026-10-06',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxMjk4MjE3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'phishing-e-engenharia-social-aspectos-juridicos-e-protecao-do-consumidor',
     title: 'Phishing e engenharia social: aspectos jurídicos e proteção do consumidor',
     excerpt: 'Entenda como a lei brasileira tipifica phishing, quais direitos você tem e como se proteger contra golpes de engenharia social.',
