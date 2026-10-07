@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'marco-civil-da-internet-reflexos-praticos-para-usuarios-e-empresas',
+    title: 'Marco Civil da Internet: reflexos práticos para usuários e empresas',
+    excerpt: 'Entenda como o Marco Civil da Internet impacta direitos, responsabilidades e a proteção de dados no dia a dia digital.',
+    date: '2026-10-07',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1652532466485-b4dba5ac64b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNDAyMjEyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-trabalhistas-e-a-lgpd',
     title: 'Monitoramento de Empregados e Proteção de Dados: Limites Trabalhistas e a LGPD',
     excerpt: 'Entenda como a LGPD e a CLT regulam a vigilância no trabalho, protegendo a privacidade do empregado sem anular o poder diretivo do empregador.',
