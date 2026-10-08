@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-protecao-de-dados-direitos-e-limites-legais',
+    title: 'Monitoramento de empregados e proteção de dados: direitos e limites legais',
+    excerpt: 'Entenda como a LGPD, o CDC e o Marco Civil regulam o monitoramento no trabalho e quais cuidados a empresa deve tomar para evitar sanções.',
+    date: '2026-10-08',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1790746442364-1bb1046166a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNDcyNzg5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'marco-civil-da-internet-reflexos-praticos-para-usuarios-e-empresas',
     title: 'Marco Civil da Internet: reflexos práticos para usuários e empresas',
     excerpt: 'Entenda como o Marco Civil da Internet impacta direitos, responsabilidades e a proteção de dados no dia a dia digital.',
