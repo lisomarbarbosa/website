@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'estelionato-eletronico-analise-penal-e-protecao-ao-consumidor',
+    title: 'Estelionato eletrônico: análise penal e proteção ao consumidor',
+    excerpt: 'Entenda a tipificação, as modalidades e as defesas jurídicas contra o estelionato praticado por meios eletrônicos, com base no Código Penal, CDC, LGPD e jurisprudência atual.',
+    date: '2026-10-09',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1762267683517-6e9bc20675e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNTczMjUyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-protecao-de-dados-direitos-e-limites-legais',
     title: 'Monitoramento de empregados e proteção de dados: direitos e limites legais',
     excerpt: 'Entenda como a LGPD, o CDC e o Marco Civil regulam o monitoramento no trabalho e quais cuidados a empresa deve tomar para evitar sanções.',
