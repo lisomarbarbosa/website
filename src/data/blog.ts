@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'stalking-virtual-entenda-as-consequencias-juridicas-e-como-se-proteger',
+    title: 'Stalking virtual: entenda as consequências jurídicas e como se proteger',
+    excerpt: 'Artigo completo sobre stalking virtual, legislação aplicável, direitos da vítima e passos práticos para denunciar e prevenir.',
+    date: '2026-10-10',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1658909896496-3a9c405ca472?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNjU1ODI5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'direito-ao-anonimato-na-internet-fundamentos-limites-e-protecao-pratica',
     title: 'Direito ao anonimato na internet: fundamentos, limites e proteção prática',
     excerpt: 'Entenda como a legislação brasileira garante o anonimato online, quais são suas exceções e como proteger sua identidade digital.',
