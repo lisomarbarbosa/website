@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'direito-ao-anonimato-na-internet-fundamentos-limites-e-protecao-pratica',
+    title: 'Direito ao anonimato na internet: fundamentos, limites e proteção prática',
+    excerpt: 'Entenda como a legislação brasileira garante o anonimato online, quais são suas exceções e como proteger sua identidade digital.',
+    date: '2026-10-10',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1643302528971-ecbe713ffb20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNjQyMDUxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'estelionato-eletronico-analise-penal-e-protecao-ao-consumidor',
     title: 'Estelionato eletrônico: análise penal e proteção ao consumidor',
     excerpt: 'Entenda a tipificação, as modalidades e as defesas jurídicas contra o estelionato praticado por meios eletrônicos, com base no Código Penal, CDC, LGPD e jurisprudência atual.',
