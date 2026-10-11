@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'direito-ao-esquecimento-na-internet-limites-e-como-exercer-seus-direitos',
+    title: 'Direito ao esquecimento na internet: limites e como exercer seus direitos',
+    excerpt: 'Entenda o direito ao esquecimento, sua base legal na LGPD e Marco Civil, os limites da remoção de conteúdo e como agir para proteger sua reputação online.',
+    date: '2026-10-11',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1645562249772-970ddfe33cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNzMwMjE0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'stalking-virtual-entenda-as-consequencias-juridicas-e-como-se-proteger',
     title: 'Stalking virtual: entenda as consequências jurídicas e como se proteger',
     excerpt: 'Artigo completo sobre stalking virtual, legislação aplicável, direitos da vítima e passos práticos para denunciar e prevenir.',
