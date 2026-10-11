@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'estelionato-eletronico-e-direito-penal-tipificacao-penas-e-recuperacao-de-valores',
+    title: 'Estelionato Eletrônico e Direito Penal: Tipificação, Penas e Recuperação de Valores',
+    excerpt: 'Entenda o estelionato eletrônico no Direito Penal: as penas do Art. 171 § 2º-A, a jurisprudência, a responsabilidade dos bancos e como reaver prejuízos.',
+    date: '2026-10-11',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1790172068601-c192a0c1c0b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxNzQ0MDg0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'direito-ao-esquecimento-na-internet-limites-e-como-exercer-seus-direitos',
     title: 'Direito ao esquecimento na internet: limites e como exercer seus direitos',
     excerpt: 'Entenda o direito ao esquecimento, sua base legal na LGPD e Marco Civil, os limites da remoção de conteúdo e como agir para proteger sua reputação online.',
