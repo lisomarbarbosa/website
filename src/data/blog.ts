@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'golpes-digitais-e-responsabilidade-das-plataformas-o-que-voce-precisa-saber',
+    title: 'Golpes digitais e responsabilidade das plataformas: o que você precisa saber',
+    excerpt: 'Entenda como os golpes digitais funcionam, quais são as responsabilidades das plataformas e como se proteger conforme o CDC, LGPD e Marco Civil.',
+    date: '2026-10-12',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1616854675471-17b4fb2771b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkxODI2MTE5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'estelionato-eletronico-e-direito-penal-tipificacao-penas-e-recuperacao-de-valores',
     title: 'Estelionato Eletrônico e Direito Penal: Tipificação, Penas e Recuperação de Valores',
     excerpt: 'Entenda o estelionato eletrônico no Direito Penal: as penas do Art. 171 § 2º-A, a jurisprudência, a responsabilidade dos bancos e como reaver prejuízos.',
