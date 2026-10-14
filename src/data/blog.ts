@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'revenge-porn-como-a-lei-protege-a-vitima-e-quais-sao-os-passos-para-buscar-justica',
+    title: 'Revenge porn: como a lei protege a vítima e quais são os passos para buscar justiça',
+    excerpt: 'Entenda o que caracteriza o revenge porn, a tutela jurídica disponível e como agir para garantir seus direitos e obter reparação.',
+    date: '2026-10-14',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyMDAxODE1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'golpes-digitais-e-responsabilidade-das-plataformas-o-que-voce-precisa-saber',
     title: 'Golpes digitais e responsabilidade das plataformas: o que você precisa saber',
     excerpt: 'Entenda como os golpes digitais funcionam, quais são as responsabilidades das plataformas e como se proteger conforme o CDC, LGPD e Marco Civil.',
