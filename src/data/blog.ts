@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-pratico',
+    title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Prático',
+    excerpt: 'Entenda as cláusulas essenciais, aspectos legais e riscos envolvidos nos contratos de software e licenças de uso segundo a legislação brasileira.',
+    date: '2026-10-16',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1607944023727-62f96d76b2d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyMTczMDEzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'revenge-porn-e-tutela-juridica-da-vitima-protecao-direitos-e-medidas-cabiveis',
     title: 'Revenge Porn e Tutela Jurídica da Vítima: Proteção, Direitos e Medidas Cabíveis',
     excerpt: 'Entenda como a legislação brasileira protege vítimas de revenge porn, quais são os crimes praticados, o papel do Marco Civil e como agir rapidamente para remover conteúdos.',
