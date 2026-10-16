@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'revenge-porn-e-tutela-juridica-da-vitima-protecao-direitos-e-medidas-cabiveis',
+    title: 'Revenge Porn e Tutela Jurídica da Vítima: Proteção, Direitos e Medidas Cabíveis',
+    excerpt: 'Entenda como a legislação brasileira protege vítimas de revenge porn, quais são os crimes praticados, o papel do Marco Civil e como agir rapidamente para remover conteúdos.',
+    date: '2026-10-16',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1771789642871-389d3ec88440?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyMTU2Mjc3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'revenge-porn-como-a-lei-protege-a-vitima-e-quais-sao-os-passos-para-buscar-justica',
     title: 'Revenge porn: como a lei protege a vítima e quais são os passos para buscar justiça',
     excerpt: 'Entenda o que caracteriza o revenge porn, a tutela jurídica disponível e como agir para garantir seus direitos e obter reparação.',
