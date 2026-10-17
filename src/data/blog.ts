@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ataques-virtuais-e-responsabilidade-civil-guia-dos-seus-direitos',
+    title: 'Ataques Virtuais e Responsabilidade Civil: Guia dos Seus Direitos',
+    excerpt: 'Entenda como funciona a responsabilidade civil em ataques virtuais e vazamentos de dados no Brasil, e saiba como buscar indenização por danos morais e materiais.',
+    date: '2026-10-17',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1569087682520-45253cc2e0ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyMjU1ODM2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'nfts-e-propriedade-intelectual-protegendo-direitos-autorais-na-era-digital',
     title: 'NFTs e Propriedade Intelectual: Protegendo Direitos Autorais na Era Digital',
     excerpt: 'Entenda a relação jurídica entre NFTs, blockchain e direitos autorais no Brasil. Saiba o que você realmente adquire ao comprar um token não fungível no mercado digital.',
