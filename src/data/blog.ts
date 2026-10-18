@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-digitais-validade-juridica-e-cuidados-essenciais',
+    title: 'Contratos digitais: validade jurídica e cuidados essenciais',
+    excerpt: 'Entenda a validade dos contratos eletrônicos no Brasil, legislação aplicável e boas práticas para evitar riscos.',
+    date: '2026-10-18',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782221175646-9cbc0ef819fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyMzI2NjgxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ataques-virtuais-e-responsabilidade-civil-guia-dos-seus-direitos',
     title: 'Ataques Virtuais e Responsabilidade Civil: Guia dos Seus Direitos',
     excerpt: 'Entenda como funciona a responsabilidade civil em ataques virtuais e vazamentos de dados no Brasil, e saiba como buscar indenização por danos morais e materiais.',
