@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'deepfake-responsabilidade-civil-e-penal-no-brasil',
+    title: 'Deepfake: responsabilidade civil e penal no Brasil',
+    excerpt: 'Entenda como a legislação brasileira trata a criação e disseminação de deepfakes, seus impactos nos direitos de imagem, privacidade e as sanções civis e penais aplicáveis.',
+    date: '2026-10-18',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1561148272-d0ef93ca98aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyMzQzMDEwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-digitais-validade-juridica-e-cuidados-essenciais',
     title: 'Contratos digitais: validade jurídica e cuidados essenciais',
     excerpt: 'Entenda a validade dos contratos eletrônicos no Brasil, legislação aplicável e boas práticas para evitar riscos.',
