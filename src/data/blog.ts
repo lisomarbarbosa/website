@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'preservacao-de-provas-digitais-em-conflitos-juridicos-guia-pratico-e-legal',
+    title: 'Preservação de Provas Digitais em Conflitos Jurídicos: Guia Prático e Legal',
+    excerpt: 'Entenda como preservar mensagens, e-mails e prints de forma válida perante a Justiça. Conheça as exigências legais, ata notarial, LGPD e cadeia de custódia.',
+    date: '2026-10-19',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1542024477705-da3c99571800?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNDIzNDMwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'deepfake-responsabilidade-civil-e-penal-no-brasil',
     title: 'Deepfake: responsabilidade civil e penal no Brasil',
     excerpt: 'Entenda como a legislação brasileira trata a criação e disseminação de deepfakes, seus impactos nos direitos de imagem, privacidade e as sanções civis e penais aplicáveis.',
