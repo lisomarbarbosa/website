@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'provas-digitais-importancia-e-admissibilidade-nos-processos-judiciais',
+    title: 'Provas digitais: importância e admissibilidade nos processos judiciais',
+    excerpt: 'Entenda como as provas digitais são tratadas pela legislação brasileira, quais critérios garantem sua validade e como advogados podem coletá-las e preservá-las com segurança.',
+    date: '2026-10-21',
+    readTime: '14 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1618058313199-9037610ec161?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNjA2OTE2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo',
     title: 'Responsabilidade de marketplaces nas relações de consumo',
     excerpt: 'Entenda como a legislação brasileira define a responsabilidade de marketplaces e quais direitos o consumidor possui ao comprar em plataformas digitais.',
