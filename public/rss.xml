@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Tue, 20 Oct 2026 13:28:26 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 13:32:20 GMT</lastBuildDate>
+    <item>
+      <title>Responsabilidade de marketplaces nas relações de consumo</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-de-marketplaces-nas-relacoes-de-consumo</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-de-marketplaces-nas-relacoes-de-consumo</guid>
+      <pubDate>Wed, 21 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda como a legislação brasileira define a responsabilidade de marketplaces e quais direitos o consumidor possui ao comprar em plataformas digitais.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1782700573234-6ca95532a555?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNTg5NTQwfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>O Marco Civil da Internet na Prática: Direitos, Deveres e Responsabilidades Digitais</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/o-marco-civil-da-internet-na-pratica-direitos-deveres-e-responsabilidades-digitais</link>
@@ -896,15 +905,6 @@
       <description>Os golpes mais comuns no mercado de criptomoedas, sinais de alerta e medidas jurídicas possíveis.</description>
       <category>Cripto</category>
       <media:content url="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
-    </item>
-    <item>
-      <title>LGPD: Erros Comuns na Implementação e Como Evitá-los</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/lgpd-erros-comuns</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/lgpd-erros-comuns</guid>
-      <pubDate>Tue, 10 Sep 2024 15:00:00 GMT</pubDate>
-      <description>Conheça falhas frequentes na implementação da LGPD e como reduzir riscos regulatórios e operacionais.</description>
-      <category>LGPD</category>
-      <media:content url="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>

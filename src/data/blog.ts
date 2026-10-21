@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo',
+    title: 'Responsabilidade de marketplaces nas relações de consumo',
+    excerpt: 'Entenda como a legislação brasileira define a responsabilidade de marketplaces e quais direitos o consumidor possui ao comprar em plataformas digitais.',
+    date: '2026-10-21',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782700573234-6ca95532a555?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNTg5NTQwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'o-marco-civil-da-internet-na-pratica-direitos-deveres-e-responsabilidades-digitais',
     title: 'O Marco Civil da Internet na Prática: Direitos, Deveres e Responsabilidades Digitais',
     excerpt: 'Entenda os reflexos práticos do Marco Civil da Internet no Brasil, a responsabilidade de redes sociais, remoção de conteúdos, guarda de logs e a proteção dos seus direitos digitais.',
