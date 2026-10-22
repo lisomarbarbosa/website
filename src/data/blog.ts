@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-lgpd',
+    title: 'Monitoramento de Empregados e Proteção de Dados: Limites Legais e LGPD',
+    excerpt: 'Entenda os limites legais do monitoramento de empregados segundo a LGPD e CLT, direitos do trabalhador e como evitar abusos na fiscalização empresarial corporativa.',
+    date: '2026-10-22',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1579803167387-e9e0d40a9586?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNjc2MDI2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'provas-digitais-importancia-e-admissibilidade-nos-processos-judiciais',
     title: 'Provas digitais: importância e admissibilidade nos processos judiciais',
     excerpt: 'Entenda como as provas digitais são tratadas pela legislação brasileira, quais critérios garantem sua validade e como advogados podem coletá-las e preservá-las com segurança.',
