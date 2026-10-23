@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Thu, 22 Oct 2026 13:33:46 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2026 13:08:47 GMT</lastBuildDate>
+    <item>
+      <title>Revenge Porn e Tutela Jurídica da Vítima: Guia Completo sobre Direitos e Proteção Digital</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/revenge-porn-e-tutela-juridica-da-vitima-guia-completo-sobre-direitos-e-protecao-digital</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/revenge-porn-e-tutela-juridica-da-vitima-guia-completo-sobre-direitos-e-protecao-digital</guid>
+      <pubDate>Fri, 23 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Compreenda o enquadramento penal do vazamento de fotos e vídeos íntimos, como exigir a remoção de conteúdos na internet e buscar reparações financeiras pelos danos sofridos.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1581193633211-42cf83aaa734?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNzYwOTI3fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Monitoramento de Empregados e Proteção de Dados: Limites Legais e LGPD</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-lgpd</link>
@@ -896,15 +905,6 @@
       <description>Análise dos aspectos jurídicos da custódia de criptoativos, responsabilidade das exchanges e boas práticas de segurança.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
-    </item>
-    <item>
-      <title>Crimes Cibernéticos: Como se Proteger e Buscar Justiça</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/crimes-ciberneticos</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/crimes-ciberneticos</guid>
-      <pubDate>Wed, 20 Nov 2024 15:00:00 GMT</pubDate>
-      <description>Guia sobre crimes cibernéticos no Brasil, preservação de provas, registro de ocorrência e reparação judicial.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>

@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'revenge-porn-e-tutela-juridica-da-vitima-guia-completo-sobre-direitos-e-protecao-digital',
+    title: 'Revenge Porn e Tutela Jurídica da Vítima: Guia Completo sobre Direitos e Proteção Digital',
+    excerpt: 'Compreenda o enquadramento penal do vazamento de fotos e vídeos íntimos, como exigir a remoção de conteúdos na internet e buscar reparações financeiras pelos danos sofridos.',
+    date: '2026-10-23',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1581193633211-42cf83aaa734?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNzYwOTI3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-lgpd',
     title: 'Monitoramento de Empregados e Proteção de Dados: Limites Legais e LGPD',
     excerpt: 'Entenda os limites legais do monitoramento de empregados segundo a LGPD e CLT, direitos do trabalhador e como evitar abusos na fiscalização empresarial corporativa.',
