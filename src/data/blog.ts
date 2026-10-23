@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'golpes-digitais-e-a-responsabilidade-juridica-das-plataformas-de-internet',
+    title: 'Golpes digitais e a responsabilidade jurídica das plataformas de internet',
+    excerpt: 'Entenda quando redes sociais, bancos e plataformas digitais devem indenizar vítimas de fraudes e golpes virtuais segundo a legislação e jurisprudência brasileira.',
+    date: '2026-10-23',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1542903660-eedba2cda473?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNzc4NzY5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'revenge-porn-e-tutela-juridica-da-vitima-guia-completo-sobre-direitos-e-protecao-digital',
     title: 'Revenge Porn e Tutela Jurídica da Vítima: Guia Completo sobre Direitos e Proteção Digital',
     excerpt: 'Compreenda o enquadramento penal do vazamento de fotos e vídeos íntimos, como exigir a remoção de conteúdos na internet e buscar reparações financeiras pelos danos sofridos.',

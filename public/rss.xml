@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 23 Oct 2026 13:08:47 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2026 18:06:09 GMT</lastBuildDate>
+    <item>
+      <title>Golpes digitais e a responsabilidade jurídica das plataformas de internet</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/golpes-digitais-e-a-responsabilidade-juridica-das-plataformas-de-internet</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/golpes-digitais-e-a-responsabilidade-juridica-das-plataformas-de-internet</guid>
+      <pubDate>Fri, 23 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda quando redes sociais, bancos e plataformas digitais devem indenizar vítimas de fraudes e golpes virtuais segundo a legislação e jurisprudência brasileira.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1542903660-eedba2cda473?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyNzc4NzY5fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Revenge Porn e Tutela Jurídica da Vítima: Guia Completo sobre Direitos e Proteção Digital</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/revenge-porn-e-tutela-juridica-da-vitima-guia-completo-sobre-direitos-e-protecao-digital</link>
@@ -896,15 +905,6 @@
       <description>Conheça os principais direitos do titular de dados pessoais garantidos pela LGPD e como exercê-los.</description>
       <category>LGPD</category>
       <media:content url="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
-    </item>
-    <item>
-      <title>Custódia de Criptoativos: Aspectos Jurídicos e Melhores Práticas</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/custodia-criptoativos</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/custodia-criptoativos</guid>
-      <pubDate>Sun, 15 Dec 2024 15:00:00 GMT</pubDate>
-      <description>Análise dos aspectos jurídicos da custódia de criptoativos, responsabilidade das exchanges e boas práticas de segurança.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>
