@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'assedio-digital-e-responsabilidade-juridica-das-plataformas',
+    title: 'Assédio digital e responsabilidade jurídica das plataformas',
+    excerpt: 'Entenda os direitos das vítimas, a legislação aplicável e como responsabilizar plataformas por falhas na moderação de conteúdo abusivo.',
+    date: '2026-10-24',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1780723877285-5f8ae020f727?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyODQ1MjAxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'golpes-digitais-e-a-responsabilidade-juridica-das-plataformas-de-internet',
     title: 'Golpes digitais e a responsabilidade jurídica das plataformas de internet',
     excerpt: 'Entenda quando redes sociais, bancos e plataformas digitais devem indenizar vítimas de fraudes e golpes virtuais segundo a legislação e jurisprudência brasileira.',

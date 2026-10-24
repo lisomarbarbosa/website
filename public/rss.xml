@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 23 Oct 2026 18:06:09 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 12:33:21 GMT</lastBuildDate>
+    <item>
+      <title>Assédio digital e responsabilidade jurídica das plataformas</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/assedio-digital-e-responsabilidade-juridica-das-plataformas</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/assedio-digital-e-responsabilidade-juridica-das-plataformas</guid>
+      <pubDate>Sat, 24 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda os direitos das vítimas, a legislação aplicável e como responsabilizar plataformas por falhas na moderação de conteúdo abusivo.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1780723877285-5f8ae020f727?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyODQ1MjAxfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Golpes digitais e a responsabilidade jurídica das plataformas de internet</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/golpes-digitais-e-a-responsabilidade-juridica-das-plataformas-de-internet</link>
@@ -896,15 +905,6 @@
       <description>Como agir juridicamente contra fake news e difamação nas redes sociais, com foco em honra, imagem e responsabilidade.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
-    </item>
-    <item>
-      <title>Proteção de Dados Pessoais: Seus Direitos como Titular</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/protecao-dados-pessoais</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/protecao-dados-pessoais</guid>
-      <pubDate>Fri, 10 Jan 2025 15:00:00 GMT</pubDate>
-      <description>Conheça os principais direitos do titular de dados pessoais garantidos pela LGPD e como exercê-los.</description>
-      <category>LGPD</category>
-      <media:content url="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>
