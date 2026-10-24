@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sat, 24 Oct 2026 12:33:21 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 17:08:42 GMT</lastBuildDate>
+    <item>
+      <title>NFTs e Propriedade Intelectual: Guia Jurídico para o Mercado Digital</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/nfts-e-propriedade-intelectual-guia-juridico-para-o-mercado-digital</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/nfts-e-propriedade-intelectual-guia-juridico-para-o-mercado-digital</guid>
+      <pubDate>Sat, 24 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda o impacto dos NFTs nos direitos autorais no Brasil. Análise da Lei 9.610/98, CDC e LGPD com orientações práticas para criadores e investidores.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1692607431230-5fabd2b717cb?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyODYxNzIyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Assédio digital e responsabilidade jurídica das plataformas</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/assedio-digital-e-responsabilidade-juridica-das-plataformas</link>
@@ -896,15 +905,6 @@
       <description>Guia prático para implementação de programa de compliance com a Lei Geral de Proteção de Dados.</description>
       <category>LGPD</category>
       <media:content url="https://images.unsplash.com/photo-1633265486064-086b219458ec?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
-    </item>
-    <item>
-      <title>Fake News e Difamação Digital: Seus Direitos e Como se Defender</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/fake-news-difamacao</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/fake-news-difamacao</guid>
-      <pubDate>Sat, 25 Jan 2025 15:00:00 GMT</pubDate>
-      <description>Como agir juridicamente contra fake news e difamação nas redes sociais, com foco em honra, imagem e responsabilidade.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>

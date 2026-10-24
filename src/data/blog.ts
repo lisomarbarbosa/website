@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'nfts-e-propriedade-intelectual-guia-juridico-para-o-mercado-digital',
+    title: 'NFTs e Propriedade Intelectual: Guia Jurídico para o Mercado Digital',
+    excerpt: 'Entenda o impacto dos NFTs nos direitos autorais no Brasil. Análise da Lei 9.610/98, CDC e LGPD com orientações práticas para criadores e investidores.',
+    date: '2026-10-24',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1692607431230-5fabd2b717cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyODYxNzIyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'assedio-digital-e-responsabilidade-juridica-das-plataformas',
     title: 'Assédio digital e responsabilidade jurídica das plataformas',
     excerpt: 'Entenda os direitos das vítimas, a legislação aplicável e como responsabilizar plataformas por falhas na moderação de conteúdo abusivo.',
