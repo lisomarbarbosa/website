@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-eletronicas-e-o-direito-penal-crimes-riscos-e-responsabilidades',
+    title: 'Fraudes Eletrônicas e o Direito Penal: Crimes, Riscos e Responsabilidades',
+    excerpt: 'Entenda como o Direito Penal brasileiro pune fraudes eletrônicas, quais são os crimes virtuais mais comuns e como buscar a reparação de prejuízos.',
+    date: '2026-10-25',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1571818684035-c1afe7eab7f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyOTQ5MDAyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'nfts-e-propriedade-intelectual-guia-juridico-para-o-mercado-digital',
     title: 'NFTs e Propriedade Intelectual: Guia Jurídico para o Mercado Digital',
     excerpt: 'Entenda o impacto dos NFTs nos direitos autorais no Brasil. Análise da Lei 9.610/98, CDC e LGPD com orientações práticas para criadores e investidores.',

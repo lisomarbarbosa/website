@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sat, 24 Oct 2026 17:08:42 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 17:23:22 GMT</lastBuildDate>
+    <item>
+      <title>Fraudes Eletrônicas e o Direito Penal: Crimes, Riscos e Responsabilidades</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/fraudes-eletronicas-e-o-direito-penal-crimes-riscos-e-responsabilidades</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/fraudes-eletronicas-e-o-direito-penal-crimes-riscos-e-responsabilidades</guid>
+      <pubDate>Sun, 25 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda como o Direito Penal brasileiro pune fraudes eletrônicas, quais são os crimes virtuais mais comuns e como buscar a reparação de prejuízos.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1571818684035-c1afe7eab7f5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkyOTQ5MDAyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>NFTs e Propriedade Intelectual: Guia Jurídico para o Mercado Digital</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/nfts-e-propriedade-intelectual-guia-juridico-para-o-mercado-digital</link>
@@ -896,15 +905,6 @@
       <description>Análise do marco legal das criptomoedas no Brasil, incluindo regulação, tributação e desafios jurídicos do mercado cripto.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
-    </item>
-    <item>
-      <title>Compliance com a LGPD: Guia Completo para Empresas</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/compliance-lgpd</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/compliance-lgpd</guid>
-      <pubDate>Thu, 20 Feb 2025 15:00:00 GMT</pubDate>
-      <description>Guia prático para implementação de programa de compliance com a Lei Geral de Proteção de Dados.</description>
-      <category>LGPD</category>
-      <media:content url="https://images.unsplash.com/photo-1633265486064-086b219458ec?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>
