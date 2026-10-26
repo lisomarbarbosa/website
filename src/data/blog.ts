@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-digitais-e-sua-validade-juridica-guia-pratico-e-legal',
+    title: 'Contratos Digitais e sua Validade Jurídica: Guia Prático e Legal',
+    excerpt: 'Entenda os requisitos legais para a validade dos contratos digitais, os tipos de assinatura eletrônica segundo a legislação e como proteger seus acordos virtuais.',
+    date: '2026-10-26',
+    readTime: '11 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1643302528919-2fa617888ab1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMDQzNzM2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'validade-juridica-das-assinaturas-eletronicas-em-contratos-e-negocios',
     title: 'Validade Jurídica das Assinaturas Eletrônicas em Contratos e Negócios',
     excerpt: 'Entenda como funcionam as assinaturas eletrônicas no Brasil, os tipos previstos na Lei 14.063/2020 e como garantir a validade dos seus contratos digitais.',

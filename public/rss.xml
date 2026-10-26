@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Mon, 26 Oct 2026 14:57:59 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 19:42:17 GMT</lastBuildDate>
+    <item>
+      <title>Contratos Digitais e sua Validade Jurídica: Guia Prático e Legal</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/contratos-digitais-e-sua-validade-juridica-guia-pratico-e-legal</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/contratos-digitais-e-sua-validade-juridica-guia-pratico-e-legal</guid>
+      <pubDate>Mon, 26 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda os requisitos legais para a validade dos contratos digitais, os tipos de assinatura eletrônica segundo a legislação e como proteger seus acordos virtuais.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1643302528919-2fa617888ab1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMDQzNzM2fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Validade Jurídica das Assinaturas Eletrônicas em Contratos e Negócios</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/validade-juridica-das-assinaturas-eletronicas-em-contratos-e-negocios</link>
@@ -896,15 +905,6 @@
       <description>Artigo técnico sobre o crime de perseguição no ambiente digital, seus desdobramentos civis e penais e os deveres das plataformas.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1588873281272-14886ba1f737?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDM2MTcyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Invasão de Dispositivo Informático: Análise Completa das Consequências Jurídicas no Ordenamento Brasileiro</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/invasao-dispositivo-informatico-consequencias-juridicas</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/invasao-dispositivo-informatico-consequencias-juridicas</guid>
-      <pubDate>Sat, 22 Aug 2026 15:00:00 GMT</pubDate>
-      <description>Estudo sobre o crime de invasão de dispositivo informático, responsabilidade civil, preservação de provas digitais e impactos jurídicos no Brasil.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1756671994948-183e2d833da0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQxODI4fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>
