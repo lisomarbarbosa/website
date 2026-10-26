@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'validade-juridica-das-assinaturas-eletronicas-em-contratos-e-negocios',
+    title: 'Validade Jurídica das Assinaturas Eletrônicas em Contratos e Negócios',
+    excerpt: 'Entenda como funcionam as assinaturas eletrônicas no Brasil, os tipos previstos na Lei 14.063/2020 e como garantir a validade dos seus contratos digitais.',
+    date: '2026-10-26',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1694283798186-90d1459eef3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMDI2Njc5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-eletronicas-e-o-direito-penal-crimes-riscos-e-responsabilidades',
     title: 'Fraudes Eletrônicas e o Direito Penal: Crimes, Riscos e Responsabilidades',
     excerpt: 'Entenda como o Direito Penal brasileiro pune fraudes eletrônicas, quais são os crimes virtuais mais comuns e como buscar a reparação de prejuízos.',

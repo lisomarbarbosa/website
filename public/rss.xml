@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sun, 25 Oct 2026 17:23:22 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 14:57:59 GMT</lastBuildDate>
+    <item>
+      <title>Validade Jurídica das Assinaturas Eletrônicas em Contratos e Negócios</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/validade-juridica-das-assinaturas-eletronicas-em-contratos-e-negocios</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/validade-juridica-das-assinaturas-eletronicas-em-contratos-e-negocios</guid>
+      <pubDate>Mon, 26 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda como funcionam as assinaturas eletrônicas no Brasil, os tipos previstos na Lei 14.063/2020 e como garantir a validade dos seus contratos digitais.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1694283798186-90d1459eef3f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMDI2Njc5fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Fraudes Eletrônicas e o Direito Penal: Crimes, Riscos e Responsabilidades</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/fraudes-eletronicas-e-o-direito-penal-crimes-riscos-e-responsabilidades</link>
@@ -896,15 +905,6 @@
       <description>Estudo sobre o crime de invasão de dispositivo informático, responsabilidade civil, preservação de provas digitais e impactos jurídicos no Brasil.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1756671994948-183e2d833da0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQxODI4fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Regulamentação de Criptomoedas no Brasil: Marco Legal e Perspectivas</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/regulamentacao-criptomoedas</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/regulamentacao-criptomoedas</guid>
-      <pubDate>Mon, 10 Mar 2025 15:00:00 GMT</pubDate>
-      <description>Análise do marco legal das criptomoedas no Brasil, incluindo regulação, tributação e desafios jurídicos do mercado cripto.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&amp;auto=format&amp;fit=crop&amp;q=80" medium="image" />
     </item>
   </channel>
 </rss>
