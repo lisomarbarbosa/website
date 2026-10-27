@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-completo-para-empresas-e-usuarios',
+    title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Completo para Empresas e Usuários',
+    excerpt: 'Entenda as regras essenciais dos contratos de software, licenças de uso, SaaS e LGPD no Direito Digital brasileiro com a advogada especialista Lisomar Barbosa.',
+    date: '2026-10-27',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1589225992735-1c7ff828fedc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMTI4MzkzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-civil-por-danos-na-internet-guia-completo-dos-seus-direitos',
     title: 'Responsabilidade Civil por Danos na Internet: Guia Completo dos Seus Direitos',
     excerpt: 'Entenda como funciona a indenização por danos morais e materiais na internet segundo o Marco Civil, o Código Civil e o CDC. Saiba como agir e se proteger.',
