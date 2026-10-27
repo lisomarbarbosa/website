@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-civil-por-danos-na-internet-guia-completo-dos-seus-direitos',
+    title: 'Responsabilidade Civil por Danos na Internet: Guia Completo dos Seus Direitos',
+    excerpt: 'Entenda como funciona a indenização por danos morais e materiais na internet segundo o Marco Civil, o Código Civil e o CDC. Saiba como agir e se proteger.',
+    date: '2026-10-27',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1589225992720-bae0fde0c592?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMTEwMTM1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-digitais-e-sua-validade-juridica-guia-pratico-e-legal',
     title: 'Contratos Digitais e sua Validade Jurídica: Guia Prático e Legal',
     excerpt: 'Entenda os requisitos legais para a validade dos contratos digitais, os tipos de assinatura eletrônica segundo a legislação e como proteger seus acordos virtuais.',
