@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Wed, 28 Oct 2026 14:56:53 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2026 19:17:33 GMT</lastBuildDate>
+    <item>
+      <title>Cyberbullying e Consequências Jurídicas no Brasil: Direitos, Penas e Como Agir</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/cyberbullying-e-consequencias-juridicas-no-brasil-direitos-penas-e-como-agir</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/cyberbullying-e-consequencias-juridicas-no-brasil-direitos-penas-e-como-agir</guid>
+      <pubDate>Wed, 28 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda as leis brasileiras sobre cyberbullying, a recente Lei 14.811/2024, as penas criminais, a reparação por danos morais e os passos jurídicos para vítimas e famílias.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1608742213509-815b97c30b36?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMjE1MDUzfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Marco Civil da Internet: Seus Reflexos Práticos e Direitos Digitais</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/marco-civil-da-internet-seus-reflexos-praticos-e-direitos-digitais</link>
@@ -896,15 +905,6 @@
       <description>Entenda como a Constituição, o Marco Civil da Internet e a LGPD equilibram privacidade, liberdade de expressão e responsabilização por abusos no ambiente digital.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDk1ODE1fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Contratos de software e licenças de uso: o que você precisa saber antes de clicar em &quot;concordo&quot;</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/contratos-software-licencas-uso-direitos-deveres</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/contratos-software-licencas-uso-direitos-deveres</guid>
-      <pubDate>Sun, 23 Aug 2026 15:00:00 GMT</pubDate>
-      <description>Saiba como funcionam licenças de uso, contratos de SaaS, desenvolvimento por encomenda, portabilidade de dados e cláusulas contratuais que merecem atenção.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1783547351290-e3c2cb1cb1a1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDg0NDIyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>

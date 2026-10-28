@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cyberbullying-e-consequencias-juridicas-no-brasil-direitos-penas-e-como-agir',
+    title: 'Cyberbullying e Consequências Jurídicas no Brasil: Direitos, Penas e Como Agir',
+    excerpt: 'Entenda as leis brasileiras sobre cyberbullying, a recente Lei 14.811/2024, as penas criminais, a reparação por danos morais e os passos jurídicos para vítimas e famílias.',
+    date: '2026-10-28',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1608742213509-815b97c30b36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMjE1MDUzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'marco-civil-da-internet-seus-reflexos-praticos-e-direitos-digitais',
     title: 'Marco Civil da Internet: Seus Reflexos Práticos e Direitos Digitais',
     excerpt: 'Compreenda o Marco Civil da Internet (Lei 12.965/14): neutralidade de rede, responsabilidade de plataformas, guarda de logs e proteção à privacidade.',
