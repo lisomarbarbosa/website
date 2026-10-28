@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Tue, 27 Oct 2026 19:13:13 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2026 14:56:53 GMT</lastBuildDate>
+    <item>
+      <title>Marco Civil da Internet: Seus Reflexos Práticos e Direitos Digitais</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/marco-civil-da-internet-seus-reflexos-praticos-e-direitos-digitais</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/marco-civil-da-internet-seus-reflexos-praticos-e-direitos-digitais</guid>
+      <pubDate>Wed, 28 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Compreenda o Marco Civil da Internet (Lei 12.965/14): neutralidade de rede, responsabilidade de plataformas, guarda de logs e proteção à privacidade.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1694340016914-e684a924f5b3?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMTk5NDEzfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Contratos de Software e Licenças de Uso: Guia Jurídico Completo para Empresas e Usuários</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/contratos-de-software-e-licencas-de-uso-guia-juridico-completo-para-empresas-e-usuarios</link>
@@ -896,15 +905,6 @@
       <description>Saiba como funcionam licenças de uso, contratos de SaaS, desenvolvimento por encomenda, portabilidade de dados e cláusulas contratuais que merecem atenção.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1783547351290-e3c2cb1cb1a1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDg0NDIyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Perseguição digital: quando a tela do celular vira uma ameaça real e o que a lei faz para proteger você</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/perseguicao-digital-protecao-juridica-vitima</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/perseguicao-digital-protecao-juridica-vitima</guid>
-      <pubDate>Sun, 23 Aug 2026 15:00:00 GMT</pubDate>
-      <description>O stalking digital é uma forma real de violência. Entenda a proteção jurídica disponível, a importância das provas e as medidas cabíveis para cessar a conduta.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1768637757717-3e47abf07422?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDQ3NTM3fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>

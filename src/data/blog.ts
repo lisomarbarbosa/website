@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'marco-civil-da-internet-seus-reflexos-praticos-e-direitos-digitais',
+    title: 'Marco Civil da Internet: Seus Reflexos Práticos e Direitos Digitais',
+    excerpt: 'Compreenda o Marco Civil da Internet (Lei 12.965/14): neutralidade de rede, responsabilidade de plataformas, guarda de logs e proteção à privacidade.',
+    date: '2026-10-28',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1694340016914-e684a924f5b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMTk5NDEzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-completo-para-empresas-e-usuarios',
     title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Completo para Empresas e Usuários',
     excerpt: 'Entenda as regras essenciais dos contratos de software, licenças de uso, SaaS e LGPD no Direito Digital brasileiro com a advogada especialista Lisomar Barbosa.',
