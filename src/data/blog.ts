@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-no-brasil',
+    title: 'Remoção de Conteúdo Online e Responsabilidade das Plataformas no Brasil',
+    excerpt: 'Guia completo sobre como remover publicações ofensivas e a responsabilidade civil das redes sociais segundo o Marco Civil da Internet e LGPD.',
+    date: '2026-10-29',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1678811326980-ea1b88cd9e8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMzAyMDI4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-por-conteudo-ilicito-na-internet-direitos-e-deveres',
     title: 'Responsabilidade por Conteúdo Ilícito na Internet: Direitos e Deveres',
     excerpt: 'Entenda quem responde pela publicação de conteúdo ilícito na internet, o papel das plataformas e como agir diante de ofensas, vazamentos e fake news.',
