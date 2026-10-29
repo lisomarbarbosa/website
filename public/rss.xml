@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Wed, 28 Oct 2026 19:17:33 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2026 15:03:25 GMT</lastBuildDate>
+    <item>
+      <title>Responsabilidade por Conteúdo Ilícito na Internet: Direitos e Deveres</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-por-conteudo-ilicito-na-internet-direitos-e-deveres</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-por-conteudo-ilicito-na-internet-direitos-e-deveres</guid>
+      <pubDate>Thu, 29 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda quem responde pela publicação de conteúdo ilícito na internet, o papel das plataformas e como agir diante de ofensas, vazamentos e fake news.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1571818684035-c1afe7eab7f5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMjg2MjA1fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Cyberbullying e Consequências Jurídicas no Brasil: Direitos, Penas e Como Agir</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/cyberbullying-e-consequencias-juridicas-no-brasil-direitos-penas-e-como-agir</link>
@@ -896,15 +905,6 @@
       <description>Comprar pela internet virou rotina, mas poucos sabem exatamente o que a lei protege quando algo dá errado. Este artigo explica, em linguagem clara, os principais direitos do consumidor digital e como agir diante de problemas reais.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1697545806029-f22eb0f36bb2?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTA3NjgyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Direito ao anonimato na internet: onde termina a liberdade e começa a responsabilidade</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/direito-anonimato-internet-limites</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/direito-anonimato-internet-limites</guid>
-      <pubDate>Sun, 23 Aug 2026 15:00:00 GMT</pubDate>
-      <description>Entenda como a Constituição, o Marco Civil da Internet e a LGPD equilibram privacidade, liberdade de expressão e responsabilização por abusos no ambiente digital.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NDk1ODE1fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>

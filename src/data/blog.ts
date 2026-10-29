@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-por-conteudo-ilicito-na-internet-direitos-e-deveres',
+    title: 'Responsabilidade por Conteúdo Ilícito na Internet: Direitos e Deveres',
+    excerpt: 'Entenda quem responde pela publicação de conteúdo ilícito na internet, o papel das plataformas e como agir diante de ofensas, vazamentos e fake news.',
+    date: '2026-10-29',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1571818684035-c1afe7eab7f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMjg2MjA1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'cyberbullying-e-consequencias-juridicas-no-brasil-direitos-penas-e-como-agir',
     title: 'Cyberbullying e Consequências Jurídicas no Brasil: Direitos, Penas e Como Agir',
     excerpt: 'Entenda as leis brasileiras sobre cyberbullying, a recente Lei 14.811/2024, as penas criminais, a reparação por danos morais e os passos jurídicos para vítimas e famílias.',
