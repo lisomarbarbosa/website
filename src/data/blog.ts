@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-civil-por-danos-na-internet-direitos-e-indenizacoes',
+    title: 'Responsabilidade Civil por Danos na Internet: Direitos e Indenizações',
+    excerpt: 'Entenda a responsabilidade civil por danos na internet, saiba como obter indenizações por calúnia, golpes e vazamento de dados, e aprenda a produzir provas válidas.',
+    date: '2026-10-30',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1516618317270-b99d1715c58d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMzg2NjQzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ecommerce-e-direito-de-arrependimento-guia-completo-para-consumidores-e-lojistas',
     title: 'E‑commerce e Direito de Arrependimento: Guia Completo para Consumidores e Lojistas',
     excerpt: 'Entenda como funciona o direito de arrependimento nas compras online, prazos, devoluções, reembolsos e obrigações das plataformas segundo CDC, LGPD e jurisprudência.',
