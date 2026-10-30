@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ecommerce-e-direito-de-arrependimento-guia-completo-para-consumidores-e-lojistas',
+    title: 'E‑commerce e Direito de Arrependimento: Guia Completo para Consumidores e Lojistas',
+    excerpt: 'Entenda como funciona o direito de arrependimento nas compras online, prazos, devoluções, reembolsos e obrigações das plataformas segundo CDC, LGPD e jurisprudência.',
+    date: '2026-10-30',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1601571047421-64e17b56cbbd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzMzcyMjI3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-no-brasil',
     title: 'Remoção de Conteúdo Online e Responsabilidade das Plataformas no Brasil',
     excerpt: 'Guia completo sobre como remover publicações ofensivas e a responsabilidade civil das redes sociais segundo o Marco Civil da Internet e LGPD.',
