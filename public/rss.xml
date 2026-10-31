@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 30 Oct 2026 18:57:23 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 14:23:02 GMT</lastBuildDate>
+    <item>
+      <title>Invasão de Dispositivo Informático: Crime, Direitos e Consequências Jurídicas</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/invasao-de-dispositivo-informatico-crime-direitos-e-consequencias-juridicas</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/invasao-de-dispositivo-informatico-crime-direitos-e-consequencias-juridicas</guid>
+      <pubDate>Sat, 31 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Entenda o crime de invasão de dispositivo informático (Art. 154-A do CP), reparações cíveis, LGPD e o passo a passo para proteger seus direitos digitais em caso de ataques cibernéticos.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1636054354111-620bb6a7d982?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNDU2NTgyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Responsabilidade Civil por Danos na Internet: Direitos e Indenizações</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-civil-por-danos-na-internet-direitos-e-indenizacoes</link>
@@ -896,15 +905,6 @@
       <description>Entenda como a difamação digital gera responsabilidade civil e penal, direitos de resposta e proteção de dados pessoais.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1776243365952-1f103dea9bec?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NjE4MjkzfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Stalking Virtual: O que é e quais as consequências jurídicas no Brasil</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-o-que-e-e-quais-as-consequencias-juridicas-no-brasil</guid>
-      <pubDate>Mon, 24 Aug 2026 15:00:00 GMT</pubDate>
-      <description>Entenda o que é stalking virtual, como se proteger e quais as ações legais previstas no Brasil, incluindo LGPD, Marco Civil e Lei 13.869/2019.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1751448555253-f39c06e29d82?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg3NTc3MTkxfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>

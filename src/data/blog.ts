@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'invasao-de-dispositivo-informatico-crime-direitos-e-consequencias-juridicas',
+    title: 'Invasão de Dispositivo Informático: Crime, Direitos e Consequências Jurídicas',
+    excerpt: 'Entenda o crime de invasão de dispositivo informático (Art. 154-A do CP), reparações cíveis, LGPD e o passo a passo para proteger seus direitos digitais em caso de ataques cibernéticos.',
+    date: '2026-10-31',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1636054354111-620bb6a7d982?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNDU2NTgyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-civil-por-danos-na-internet-direitos-e-indenizacoes',
     title: 'Responsabilidade Civil por Danos na Internet: Direitos e Indenizações',
     excerpt: 'Entenda a responsabilidade civil por danos na internet, saiba como obter indenizações por calúnia, golpes e vazamento de dados, e aprenda a produzir provas válidas.',
