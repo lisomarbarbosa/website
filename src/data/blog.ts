@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-dos-marketplaces-nas-relacoes-de-consumo',
+    title: 'Responsabilidade dos Marketplaces nas Relações de Consumo',
+    excerpt: 'Entenda a responsabilidade civil e a solidariedade dos marketplaces em falhas de entrega, fraudes e defeitos de produtos no e-commerce.',
+    date: '2026-10-31',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNDcwMTY4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'invasao-de-dispositivo-informatico-crime-direitos-e-consequencias-juridicas',
     title: 'Invasão de Dispositivo Informático: Crime, Direitos e Consequências Jurídicas',
     excerpt: 'Entenda o crime de invasão de dispositivo informático (Art. 154-A do CP), reparações cíveis, LGPD e o passo a passo para proteger seus direitos digitais em caso de ataques cibernéticos.',
