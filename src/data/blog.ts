@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'e-commerce-e-direito-de-arrependimento-guia-pratico-dos-seus-direitos',
+    title: 'E-Commerce e Direito de Arrependimento: Guia Prático dos Seus Direitos',
+    excerpt: 'Entenda como funciona o direito de arrependimento em compras online, prazos de 7 dias, regras de frete de devolução e o que diz a jurisprudência.',
+    date: '2026-11-01',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1602130520529-8a9be291ca62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNTU4NzgxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'invasao-de-dispositivo-informatico-consequencias-juridicas-e-direitos-da-vitima',
     title: 'Invasão de Dispositivo Informático: Consequências Jurídicas e Direitos da Vítima',
     excerpt: 'Descubra o que é a invasão de dispositivo informático segundo o Artigo 154-A do Código Penal, as sanções aplicáveis, a responsabilidade civil e como agir ao ser vítima de crimes cibernéticos.',
