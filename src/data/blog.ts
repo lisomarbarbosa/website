@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'invasao-de-dispositivo-informatico-consequencias-juridicas-e-direitos-da-vitima',
+    title: 'Invasão de Dispositivo Informático: Consequências Jurídicas e Direitos da Vítima',
+    excerpt: 'Descubra o que é a invasão de dispositivo informático segundo o Artigo 154-A do Código Penal, as sanções aplicáveis, a responsabilidade civil e como agir ao ser vítima de crimes cibernéticos.',
+    date: '2026-11-01',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1667372335962-5fd503a8ae5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNTQ0NzA5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-dos-marketplaces-nas-relacoes-de-consumo',
     title: 'Responsabilidade dos Marketplaces nas Relações de Consumo',
     excerpt: 'Entenda a responsabilidade civil e a solidariedade dos marketplaces em falhas de entrega, fraudes e defeitos de produtos no e-commerce.',
