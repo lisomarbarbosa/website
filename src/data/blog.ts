@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-completo',
+    title: 'Remoção de Conteúdo Online e Responsabilidade das Plataformas: Guia Completo',
+    excerpt: 'Guia prático e jurídico sobre remoção de conteúdo ilícito na internet, responsabilidade das plataformas, Marco Civil da Internet, LGPD e jurisprudência atual.',
+    date: '2026-11-02',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1614064548306-51cd89c21764?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNjU4ODAzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'invasao-de-dispositivo-informatico-aspectos-legais-crimes-e-consequencias-juridicas',
     title: 'Invasão de Dispositivo Informático: Aspectos Legais, Crimes e Consequências Jurídicas',
     excerpt: 'Entenda o crime de invasão de dispositivo informático (Art. 154-A do CP), suas consequências penais e cíveis, e como se proteger juridicamente no ambiente digital.',
