@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'invasao-de-dispositivo-informatico-aspectos-legais-crimes-e-consequencias-juridicas',
+    title: 'Invasão de Dispositivo Informático: Aspectos Legais, Crimes e Consequências Jurídicas',
+    excerpt: 'Entenda o crime de invasão de dispositivo informático (Art. 154-A do CP), suas consequências penais e cíveis, e como se proteger juridicamente no ambiente digital.',
+    date: '2026-11-02',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1595896424050-f70867364590?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNjQyMjE3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'e-commerce-e-direito-de-arrependimento-guia-pratico-dos-seus-direitos',
     title: 'E-Commerce e Direito de Arrependimento: Guia Prático dos Seus Direitos',
     excerpt: 'Entenda como funciona o direito de arrependimento em compras online, prazos de 7 dias, regras de frete de devolução e o que diz a jurisprudência.',
