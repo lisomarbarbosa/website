@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-por-conteudo-ilicito-na-internet-regras-plataformas-e-reparacao-de-danos',
+    title: 'Responsabilidade por Conteúdo Ilícito na Internet: Regras, Plataformas e Reparação de Danos',
+    excerpt: 'Entenda quem responde pela publicação de conteúdo ilícito na internet. Conheça as regras do Marco Civil, as exceções para remoção e como buscar indenização civil.',
+    date: '2026-11-03',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1606606767399-01e271823a2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzNzM3MzUyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-completo',
     title: 'Remoção de Conteúdo Online e Responsabilidade das Plataformas: Guia Completo',
     excerpt: 'Guia prático e jurídico sobre remoção de conteúdo ilícito na internet, responsabilidade das plataformas, Marco Civil da Internet, LGPD e jurisprudência atual.',
