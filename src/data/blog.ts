@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'invasao-de-dispositivo-informatico-entenda-o-crime-e-suas-consequencias-juridicas',
+    title: 'Invasão de Dispositivo Informático: Entenda o Crime e Suas Consequências Jurídicas',
+    excerpt: 'Descubra o que caracteriza o crime de invasão de dispositivo informático, as leis aplicáveis como a Lei Carolina Dieckmann e o que fazer se você for vítima de ataques cibernéticos.',
+    date: '2026-11-04',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1641580550451-3a452effc5b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzODI0NjkwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-pratico',
     title: 'Remoção de conteúdo online e responsabilidade das plataformas: guia prático',
     excerpt: 'Entenda como funciona a remoção de conteúdos ilícitos, os deveres das plataformas e os direitos dos usuários segundo o Marco Civil, LGPD e CDC.',
