@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-pratico',
+    title: 'Remoção de conteúdo online e responsabilidade das plataformas: guia prático',
+    excerpt: 'Entenda como funciona a remoção de conteúdos ilícitos, os deveres das plataformas e os direitos dos usuários segundo o Marco Civil, LGPD e CDC.',
+    date: '2026-11-04',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1756908992154-c8a89f5e517f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzODA4MTEwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-por-conteudo-ilicito-na-internet-regras-plataformas-e-reparacao-de-danos',
     title: 'Responsabilidade por Conteúdo Ilícito na Internet: Regras, Plataformas e Reparação de Danos',
     excerpt: 'Entenda quem responde pela publicação de conteúdo ilícito na internet. Conheça as regras do Marco Civil, as exceções para remoção e como buscar indenização civil.',
