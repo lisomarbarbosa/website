@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo-guia-completo',
+    title: 'Responsabilidade de Marketplaces nas Relações de Consumo: Guia Completo',
+    excerpt: 'Entenda quando os marketplaces respondem por falhas de entrega, produtos com defeito e golpes online, segundo o CDC e as decisões do STJ.',
+    date: '2026-11-05',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1763568258143-904ea924ac53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzOTEyMzgyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'invasao-de-dispositivo-informatico-entenda-o-crime-e-suas-consequencias-juridicas',
     title: 'Invasão de Dispositivo Informático: Entenda o Crime e Suas Consequências Jurídicas',
     excerpt: 'Descubra o que caracteriza o crime de invasão de dispositivo informático, as leis aplicáveis como a Lei Carolina Dieckmann e o que fazer se você for vítima de ataques cibernéticos.',
