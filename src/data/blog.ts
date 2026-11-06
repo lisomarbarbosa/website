@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-dos-provedores-de-internet-no-brasil-direitos-e-deveres',
+    title: 'Responsabilidade dos provedores de internet no Brasil: direitos e deveres',
+    excerpt: 'Entenda a responsabilidade civil e penal dos provedores de conexão e de aplicações, com base no Marco Civil, CDC e LGPD.',
+    date: '2026-11-06',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1718241905450-a26e6c964239?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzOTc5OTk0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo-guia-completo',
     title: 'Responsabilidade de Marketplaces nas Relações de Consumo: Guia Completo',
     excerpt: 'Entenda quando os marketplaces respondem por falhas de entrega, produtos com defeito e golpes online, segundo o CDC e as decisões do STJ.',
