@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'crimes-contra-a-honra-praticados-pela-internet-legislacao-provas-e-reparacao',
+    title: 'Crimes contra a honra praticados pela internet: legislação, provas e reparação',
+    excerpt: 'Guia jurídico completo sobre calúnia, difamação e injúria na internet. Saiba como identificar os crimes, coletar provas válidas e acionar a Justiça.',
+    date: '2026-11-06',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1640158615573-cd28feb1bf4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzkzOTk2MDAzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-dos-provedores-de-internet-no-brasil-direitos-e-deveres',
     title: 'Responsabilidade dos provedores de internet no Brasil: direitos e deveres',
     excerpt: 'Entenda a responsabilidade civil e penal dos provedores de conexão e de aplicações, com base no Marco Civil, CDC e LGPD.',
