@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-de-software-e-licencas-de-uso-o-que-voce-precisa-saber',
+    title: 'Contratos de software e licenças de uso: o que você precisa saber',
+    excerpt: 'Guia completo sobre cláusulas essenciais, direitos do consumidor, LGPD e boas práticas na contratação de software.',
+    date: '2026-11-07',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1602130520529-8a9be291ca62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MDYyNjU2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'crimes-contra-a-honra-praticados-pela-internet-legislacao-provas-e-reparacao',
     title: 'Crimes contra a honra praticados pela internet: legislação, provas e reparação',
     excerpt: 'Guia jurídico completo sobre calúnia, difamação e injúria na internet. Saiba como identificar os crimes, coletar provas válidas e acionar a Justiça.',

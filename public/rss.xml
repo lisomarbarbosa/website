@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 06 Nov 2026 20:13:23 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 14:44:17 GMT</lastBuildDate>
+    <item>
+      <title>Contratos de software e licenças de uso: o que você precisa saber</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/contratos-de-software-e-licencas-de-uso-o-que-voce-precisa-saber</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/contratos-de-software-e-licencas-de-uso-o-que-voce-precisa-saber</guid>
+      <pubDate>Sat, 07 Nov 2026 15:00:00 GMT</pubDate>
+      <description>Guia completo sobre cláusulas essenciais, direitos do consumidor, LGPD e boas práticas na contratação de software.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1602130520529-8a9be291ca62?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MDYyNjU2fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Crimes contra a honra praticados pela internet: legislação, provas e reparação</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/crimes-contra-a-honra-praticados-pela-internet-legislacao-provas-e-reparacao</link>
@@ -896,15 +905,6 @@
       <description>Entenda os princípios do Marco Civil da Internet (Lei 12.965/14), neutralidade da rede, guarda de registros e como a legislação protege seus direitos no ambiente digital.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1771922748624-b205cf5d002d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MTkyMDI0fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Stalking Virtual: Consequências Jurídicas e Como se Proteger da Perseguição Online</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/stalking-virtual-consequencias-juridicas-e-como-se-proteger-da-perseguicao-online</guid>
-      <pubDate>Sun, 30 Aug 2026 15:00:00 GMT</pubDate>
-      <description>Entenda o enquadramento penal do stalking virtual, as sanções cíveis, a produção de provas válidas e as medidas de proteção cabíveis contra perseguidores virtuais.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1758525589668-6fe313595396?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MTEzMTgwfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>
