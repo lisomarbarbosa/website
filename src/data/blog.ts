@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo-direitos-e-deveres-das-plataformas',
+    title: 'Responsabilidade de Marketplaces nas Relações de Consumo: Direitos e Deveres das Plataformas',
+    excerpt: 'Entenda a responsabilidade jurídica dos marketplaces em falhas na entrega, defeitos e fraudes, conforme o Código de Defesa do Consumidor e a jurisprudência.',
+    date: '2026-11-07',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1575925241243-c92143b66005?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MDc2MDU5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-de-software-e-licencas-de-uso-o-que-voce-precisa-saber',
     title: 'Contratos de software e licenças de uso: o que você precisa saber',
     excerpt: 'Guia completo sobre cláusulas essenciais, direitos do consumidor, LGPD e boas práticas na contratação de software.',
