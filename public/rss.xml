@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sat, 07 Nov 2026 18:27:40 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 14:51:00 GMT</lastBuildDate>
+    <item>
+      <title>Preservação de Provas Digitais em Conflitos Jurídicos: Guia Prático</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/preservacao-de-provas-digitais-em-conflitos-juridicos-guia-pratico</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/preservacao-de-provas-digitais-em-conflitos-juridicos-guia-pratico</guid>
+      <pubDate>Sun, 08 Nov 2026 15:00:00 GMT</pubDate>
+      <description>Aprenda como preservar prints, e-mails e áudios com validade jurídica perante os tribunais. Entenda a importância da cadeia de custódia e as regras da LGPD e Marco Civil.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1718241905916-1f9786324de9?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MTQ5NDYwfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Responsabilidade de Marketplaces nas Relações de Consumo: Direitos e Deveres das Plataformas</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-de-marketplaces-nas-relacoes-de-consumo-direitos-e-deveres-das-plataformas</link>
@@ -896,15 +905,6 @@
       <description>Descubra os aspectos jurídicos do cyberbullying no Brasil, as novidades da Lei 14.811/2024, a reparação por danos morais e como agir em casos de ataques virtuais.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1636484227749-9bbeaf58be1e?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MjY4NzQxfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Responsabilidade dos Provedores de Internet no Brasil: Guia Jurídico</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/responsabilidade-dos-provedores-de-internet-no-brasil-guia-juridico</guid>
-      <pubDate>Mon, 31 Aug 2026 15:00:00 GMT</pubDate>
-      <description>Entenda como funciona a responsabilidade civil dos provedores de internet no Brasil, as regras do Marco Civil da Internet, da LGPD e os direitos dos usuários nas redes.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MjA2Mzg4fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>

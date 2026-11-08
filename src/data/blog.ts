@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'preservacao-de-provas-digitais-em-conflitos-juridicos-guia-pratico',
+    title: 'Preservação de Provas Digitais em Conflitos Jurídicos: Guia Prático',
+    excerpt: 'Aprenda como preservar prints, e-mails e áudios com validade jurídica perante os tribunais. Entenda a importância da cadeia de custódia e as regras da LGPD e Marco Civil.',
+    date: '2026-11-08',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1718241905916-1f9786324de9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MTQ5NDYwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-de-marketplaces-nas-relacoes-de-consumo-direitos-e-deveres-das-plataformas',
     title: 'Responsabilidade de Marketplaces nas Relações de Consumo: Direitos e Deveres das Plataformas',
     excerpt: 'Entenda a responsabilidade jurídica dos marketplaces em falhas na entrega, defeitos e fraudes, conforme o Código de Defesa do Consumidor e a jurisprudência.',
