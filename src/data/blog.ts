@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-juridico-completo',
+    title: 'Remoção de Conteúdo Online e Responsabilidade das Plataformas: Guia Jurídico Completo',
+    excerpt: 'Entenda a legislação brasileira sobre a remoção de conteúdos ofensivos na internet, a responsabilidade das redes sociais e os direitos previstos no Marco Civil da Internet e na LGPD.',
+    date: '2026-11-08',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1670392205249-f7144f72b8eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MTYzMTU1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'preservacao-de-provas-digitais-em-conflitos-juridicos-guia-pratico',
     title: 'Preservação de Provas Digitais em Conflitos Jurídicos: Guia Prático',
     excerpt: 'Aprenda como preservar prints, e-mails e áudios com validade jurídica perante os tribunais. Entenda a importância da cadeia de custódia e as regras da LGPD e Marco Civil.',
