@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas-direitos-e-dever-de-seguranca',
+    title: 'Golpes Digitais e Responsabilidade Jurídica das Plataformas: Direitos e Dever de Segurança',
+    excerpt: 'Entenda a responsabilidade jurídica de bancos, redes sociais e marketplaces em golpes digitais. Saiba o que diz a lei e como buscar a devida reparação judicial.',
+    date: '2026-11-09',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1780723877280-753ce010ca3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MjY2MjMyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'assinaturas-eletronicas-e-validade-juridica-nos-negocios-digitais',
     title: 'Assinaturas Eletrônicas e Validade Jurídica nos Negócios Digitais',
     excerpt: 'Entenda como funcionam as assinaturas eletrônicas no Brasil, as diferenças entre modalidades e o que a legislação exige para a validade plena dos seus contratos.',
