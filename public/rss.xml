@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sun, 08 Nov 2026 18:39:16 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 18:29:10 GMT</lastBuildDate>
+    <item>
+      <title>Assinaturas Eletrônicas e Validade Jurídica nos Negócios Digitais</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/assinaturas-eletronicas-e-validade-juridica-nos-negocios-digitais</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/assinaturas-eletronicas-e-validade-juridica-nos-negocios-digitais</guid>
+      <pubDate>Mon, 09 Nov 2026 15:00:00 GMT</pubDate>
+      <description>Entenda como funcionam as assinaturas eletrônicas no Brasil, as diferenças entre modalidades e o que a legislação exige para a validade plena dos seus contratos.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1757466762489-52fea38071ad?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MjQ4OTUwfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Remoção de Conteúdo Online e Responsabilidade das Plataformas: Guia Jurídico Completo</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-juridico-completo</link>
@@ -896,15 +905,6 @@
       <description>Entenda como a lei brasileira protege sua imagem online, quais danos podem ser reparados e como agir diante de uso não autorizado.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1782330421256-c65e36240e05?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4MzUyODY1fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>NFTs e Propriedade Intelectual: O que você realmente possui no mundo digital?</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/nfts-e-propriedade-intelectual-o-que-voce-realmente-possui-no-mundo-digital</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/nfts-e-propriedade-intelectual-o-que-voce-realmente-possui-no-mundo-digital</guid>
-      <pubDate>Tue, 01 Sep 2026 15:00:00 GMT</pubDate>
-      <description>Entenda a relação entre NFTs e direitos autorais. Aprenda a distinguir a posse de um token da propriedade da obra digital e como proteger seus direitos no ambiente Web3.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1748609523112-da78cb7210a2?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4Mjg1MDcyfA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>

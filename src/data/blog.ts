@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'assinaturas-eletronicas-e-validade-juridica-nos-negocios-digitais',
+    title: 'Assinaturas Eletrônicas e Validade Jurídica nos Negócios Digitais',
+    excerpt: 'Entenda como funcionam as assinaturas eletrônicas no Brasil, as diferenças entre modalidades e o que a legislação exige para a validade plena dos seus contratos.',
+    date: '2026-11-09',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1757466762489-52fea38071ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MjQ4OTUwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'remocao-de-conteudo-online-e-responsabilidade-das-plataformas-guia-juridico-completo',
     title: 'Remoção de Conteúdo Online e Responsabilidade das Plataformas: Guia Jurídico Completo',
     excerpt: 'Entenda a legislação brasileira sobre a remoção de conteúdos ofensivos na internet, a responsabilidade das redes sociais e os direitos previstos no Marco Civil da Internet e na LGPD.',
