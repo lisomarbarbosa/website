@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-boas-praticas',
+    title: 'Monitoramento de empregados e proteção de dados: limites legais e boas práticas',
+    excerpt: 'Entenda os limites legais do monitoramento no trabalho e como a LGPD protege a privacidade dos colaboradores.',
+    date: '2026-11-10',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1633185075416-c9ef98858411?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0MzQzMzA4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas-direitos-e-dever-de-seguranca',
     title: 'Golpes Digitais e Responsabilidade Jurídica das Plataformas: Direitos e Dever de Segurança',
     excerpt: 'Entenda a responsabilidade jurídica de bancos, redes sociais e marketplaces em golpes digitais. Saiba o que diz a lei e como buscar a devida reparação judicial.',
