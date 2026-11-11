@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-pratico-e-protecao-legal',
+    title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Prático e Proteção Legal',
+    excerpt: 'Entenda os aspectos jurídicos dos contratos de software, licenças EULA, SaaS e direitos de autor. Proteja sua empresa e seus direitos com nosso guia completo.',
+    date: '2026-11-11',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1764432340198-c997e41fd8c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NDEyNTEzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-boas-praticas',
     title: 'Monitoramento de empregados e proteção de dados: limites legais e boas práticas',
     excerpt: 'Entenda os limites legais do monitoramento no trabalho e como a LGPD protege a privacidade dos colaboradores.',
