@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ataques-virtuais-e-responsabilidade-civil-saiba-seus-direitos-e-como-obter-indenizacao',
+    title: 'Ataques virtuais e responsabilidade civil: saiba seus direitos e como obter indenização',
+    excerpt: 'Entenda como funciona a responsabilidade civil em incidentes de segurança, vazamentos de dados e fraudes virtuais, além dos caminhos legais para obter ressarcimento.',
+    date: '2026-11-11',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1780764818910-80526d8aeb6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NDMwODU0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-de-software-e-licencas-de-uso-guia-juridico-pratico-e-protecao-legal',
     title: 'Contratos de Software e Licenças de Uso: Guia Jurídico Prático e Proteção Legal',
     excerpt: 'Entenda os aspectos jurídicos dos contratos de software, licenças EULA, SaaS e direitos de autor. Proteja sua empresa e seus direitos com nosso guia completo.',
