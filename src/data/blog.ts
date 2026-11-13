@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'provas-digitais-no-processo-judicial-validade-cadeia-de-custodia-e-aspectos-legais',
+    title: 'Provas Digitais no Processo Judicial: Validade, Cadeia de Custódia e Aspectos Legais',
+    excerpt: 'Entenda o papel das provas digitais nos processos judiciais, seus requisitos de validade jurídica, a relevância da cadeia de custódia e como preservá-las adequadamente.',
+    date: '2026-11-13',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1736196073961-877792084e15?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NTg1OTYwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ataques-virtuais-e-responsabilidade-civil-saiba-seus-direitos-e-como-obter-indenizacao',
     title: 'Ataques virtuais e responsabilidade civil: saiba seus direitos e como obter indenização',
     excerpt: 'Entenda como funciona a responsabilidade civil em incidentes de segurança, vazamentos de dados e fraudes virtuais, além dos caminhos legais para obter ressarcimento.',
