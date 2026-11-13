@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-digitais-e-sua-validade-juridica-no-brasil',
+    title: 'Contratos Digitais e Sua Validade Jurídica no Brasil',
+    excerpt: 'Entenda como funcionam os contratos digitais, os tipos de assinaturas eletrônicas, os requisitos de validade e como proteger seu negócio segundo a legislação brasileira.',
+    date: '2026-11-13',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1771789642845-bc6dd4d8f50e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NjAyODU4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'provas-digitais-no-processo-judicial-validade-cadeia-de-custodia-e-aspectos-legais',
     title: 'Provas Digitais no Processo Judicial: Validade, Cadeia de Custódia e Aspectos Legais',
     excerpt: 'Entenda o papel das provas digitais nos processos judiciais, seus requisitos de validade jurídica, a relevância da cadeia de custódia e como preservá-las adequadamente.',

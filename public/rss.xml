@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 13 Nov 2026 16:06:01 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 20:47:38 GMT</lastBuildDate>
+    <item>
+      <title>Contratos Digitais e Sua Validade Jurídica no Brasil</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/contratos-digitais-e-sua-validade-juridica-no-brasil</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/contratos-digitais-e-sua-validade-juridica-no-brasil</guid>
+      <pubDate>Fri, 13 Nov 2026 15:00:00 GMT</pubDate>
+      <description>Entenda como funcionam os contratos digitais, os tipos de assinaturas eletrônicas, os requisitos de validade e como proteger seu negócio segundo a legislação brasileira.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1771789642845-bc6dd4d8f50e?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NjAyODU4fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Provas Digitais no Processo Judicial: Validade, Cadeia de Custódia e Aspectos Legais</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/provas-digitais-no-processo-judicial-validade-cadeia-de-custodia-e-aspectos-legais</link>
@@ -896,15 +905,6 @@
       <description>Entenda os aspectos jurídicos do phishing e da engenharia social no Brasil, as leis aplicáveis, a responsabilidade dos bancos e como buscar o ressarcimento dos prejuízos.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1595896424050-f70867364590?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NjQ1OTA4fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Ofensas nas redes sociais: consequências jurídicas e como se proteger</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/ofensas-nas-redes-sociais-consequencias-juridicas-e-como-se-proteger</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/ofensas-nas-redes-sociais-consequencias-juridicas-e-como-se-proteger</guid>
-      <pubDate>Sat, 05 Sep 2026 15:00:00 GMT</pubDate>
-      <description>Entenda o que constitui ofensa nas redes, quais leis se aplicam e quais medidas você pode tomar para se defender ou evitar problemas.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NjA4NjM3fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>
