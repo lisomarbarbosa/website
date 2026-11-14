@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-eletronicas-e-consequencias-no-direito-penal-brasileiro',
+    title: 'Fraudes Eletrônicas e Consequências no Direito Penal Brasileiro',
+    excerpt: 'Entenda os tipos de fraudes digitais, a legislação aplicável e como proteger seus direitos e agir judicialmente.',
+    date: '2026-11-14',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1670392206557-1aede9bfd387?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NjY3ODI4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-digitais-e-sua-validade-juridica-no-brasil',
     title: 'Contratos Digitais e Sua Validade Jurídica no Brasil',
     excerpt: 'Entenda como funcionam os contratos digitais, os tipos de assinaturas eletrônicas, os requisitos de validade e como proteger seu negócio segundo a legislação brasileira.',
