@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'criptomoedas-e-regulamentacao-juridica-no-brasil-panorama-atual',
+    title: 'Criptomoedas e regulamentação jurídica no Brasil: panorama atual',
+    excerpt: 'Entenda como a legislação brasileira trata criptoativos, obrigações de exchanges, tributação e proteção ao consumidor.',
+    date: '2026-11-14',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330389364-889dca412416?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NjgyNTg3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-eletronicas-e-consequencias-no-direito-penal-brasileiro',
     title: 'Fraudes Eletrônicas e Consequências no Direito Penal Brasileiro',
     excerpt: 'Entenda os tipos de fraudes digitais, a legislação aplicável e como proteger seus direitos e agir judicialmente.',

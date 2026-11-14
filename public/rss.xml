@@ -5,7 +5,16 @@
     <link>https://www.lisomarbarbosa.adv.br/</link>
     <description>Conteúdos jurídicos sobre Direito Digital, LGPD, privacidade, tecnologia e direitos online.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sat, 14 Nov 2026 14:50:28 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 18:56:27 GMT</lastBuildDate>
+    <item>
+      <title>Criptomoedas e regulamentação jurídica no Brasil: panorama atual</title>
+      <link>https://www.lisomarbarbosa.adv.br/artigos/criptomoedas-e-regulamentacao-juridica-no-brasil-panorama-atual</link>
+      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/criptomoedas-e-regulamentacao-juridica-no-brasil-panorama-atual</guid>
+      <pubDate>Sat, 14 Nov 2026 15:00:00 GMT</pubDate>
+      <description>Entenda como a legislação brasileira trata criptoativos, obrigações de exchanges, tributação e proteção ao consumidor.</description>
+      <category>Direito Digital</category>
+      <media:content url="https://images.unsplash.com/photo-1782330389364-889dca412416?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NjgyNTg3fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
+    </item>
     <item>
       <title>Fraudes Eletrônicas e Consequências no Direito Penal Brasileiro</title>
       <link>https://www.lisomarbarbosa.adv.br/artigos/fraudes-eletronicas-e-consequencias-no-direito-penal-brasileiro</link>
@@ -896,15 +905,6 @@
       <description>Entenda o panorama legal da proteção de crianças no ambiente digital, os deveres das empresas de tecnologia e a responsabilidade dos pais segundo o ECA e a LGPD.</description>
       <category>Direito Digital</category>
       <media:content url="https://images.unsplash.com/photo-1702368198452-d89194714d70?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4NzEzMjE3fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
-    </item>
-    <item>
-      <title>Vazamento de dados: consequências jurídicas e como se proteger</title>
-      <link>https://www.lisomarbarbosa.adv.br/artigos/vazamento-de-dados-consequencias-juridicas-e-como-se-proteger</link>
-      <guid isPermaLink="true">https://www.lisomarbarbosa.adv.br/artigos/vazamento-de-dados-consequencias-juridicas-e-como-se-proteger</guid>
-      <pubDate>Sun, 06 Sep 2026 15:00:00 GMT</pubDate>
-      <description>Entenda as implicações legais de vazamentos de dados no Brasil, baseadas na LGPD, CDC e jurisprudência, e saiba quais medidas adotar.</description>
-      <category>Direito Digital</category>
-      <media:content url="https://images.unsplash.com/photo-1760548425298-22aa4b60fc16?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzg4Njk2MTk0fA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" medium="image" />
     </item>
   </channel>
 </rss>
