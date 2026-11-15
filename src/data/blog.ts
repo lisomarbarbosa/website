@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ofensas-nas-redes-sociais-e-suas-consequencias-juridicas',
+    title: 'Ofensas nas Redes Sociais e Suas Consequências Jurídicas',
+    excerpt: 'Entenda os crimes contra a honra na internet, a reparação por danos morais e os passos jurídicos para responsabilizar infratores no ambiente digital.',
+    date: '2026-11-15',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1790746442364-1bb1046166a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NzcxMzE4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'crimes-contra-a-honra-na-internet-calunia-difamacao-e-injuria-no-ambiente-digital',
     title: 'Crimes contra a Honra na Internet: Calúnia, Difamação e Injúria no Ambiente Digital',
     excerpt: 'Entenda como o Direito Digital pune a calúnia, difamação e injúria na internet, as causas de aumento de pena e como produzir provas digitais válidas para defender sua honra.',
