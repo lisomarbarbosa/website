@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'crimes-contra-a-honra-na-internet-calunia-difamacao-e-injuria-no-ambiente-digital',
+    title: 'Crimes contra a Honra na Internet: Calúnia, Difamação e Injúria no Ambiente Digital',
+    excerpt: 'Entenda como o Direito Digital pune a calúnia, difamação e injúria na internet, as causas de aumento de pena e como produzir provas digitais válidas para defender sua honra.',
+    date: '2026-11-15',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1516618317270-b99d1715c58d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0NzU2NTQxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'criptomoedas-e-regulamentacao-juridica-no-brasil-panorama-atual',
     title: 'Criptomoedas e regulamentação jurídica no Brasil: panorama atual',
     excerpt: 'Entenda como a legislação brasileira trata criptoativos, obrigações de exchanges, tributação e proteção ao consumidor.',
