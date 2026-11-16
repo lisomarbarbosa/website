@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-lgpd-limites-eticos-e-juridicos-no-trabalho',
+    title: 'Monitoramento de Empregados e LGPD: Limites Éticos e Jurídicos no Trabalho',
+    excerpt: 'Entenda os limites legais do monitoramento de empregados pela LGPD e CLT. Descubra os direitos do trabalhador e as obrigações das empresas no ambiente corporativo.',
+    date: '2026-11-16',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1575925241243-c92143b66005?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0ODUyMjI3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ofensas-nas-redes-sociais-e-suas-consequencias-juridicas',
     title: 'Ofensas nas Redes Sociais e Suas Consequências Jurídicas',
     excerpt: 'Entenda os crimes contra a honra na internet, a reparação por danos morais e os passos jurídicos para responsabilizar infratores no ambiente digital.',
