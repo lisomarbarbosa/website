@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'invasao-de-dispositivo-informatico-crimes-direitos-das-vitimas-e-consequencias-juridicas',
+    title: 'Invasão de Dispositivo Informático: Crimes, Direitos das Vítimas e Consequências Jurídicas',
+    excerpt: 'Descubra o que caracteriza o crime de invasão de dispositivo informático no Brasil, as penalidades legais, a responsabilidade de empresas e como agir caso seja vítima.',
+    date: '2026-11-16',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1548092372-0d1bd40894a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0ODcwODE2fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-lgpd-limites-eticos-e-juridicos-no-trabalho',
     title: 'Monitoramento de Empregados e LGPD: Limites Éticos e Jurídicos no Trabalho',
     excerpt: 'Entenda os limites legais do monitoramento de empregados pela LGPD e CLT. Descubra os direitos do trabalhador e as obrigações das empresas no ambiente corporativo.',
