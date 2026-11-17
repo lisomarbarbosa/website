@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas',
+    title: 'Golpes digitais e responsabilidade jurídica das plataformas',
+    excerpt: 'Entenda os tipos de golpes online, a responsabilidade das plataformas e como proteger seus direitos.',
+    date: '2026-11-17',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1762267683517-6e9bc20675e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0OTUzMDE5fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'marco-civil-da-internet-entenda-os-reflexos-praticos-e-seus-direitos-digitais',
     title: 'Marco Civil da Internet: Entenda os Reflexos Práticos e Seus Direitos Digitais',
     excerpt: 'Descubra como o Marco Civil da Internet afeta sua rotina online, a responsabilidade das redes sociais, privacidade e remoção de conteúdo de forma clara.',
