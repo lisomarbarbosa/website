@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'marco-civil-da-internet-entenda-os-reflexos-praticos-e-seus-direitos-digitais',
+    title: 'Marco Civil da Internet: Entenda os Reflexos Práticos e Seus Direitos Digitais',
+    excerpt: 'Descubra como o Marco Civil da Internet afeta sua rotina online, a responsabilidade das redes sociais, privacidade e remoção de conteúdo de forma clara.',
+    date: '2026-11-17',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1593407088324-762bb4a610e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk0OTM2NTUwfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'invasao-de-dispositivo-informatico-crimes-direitos-das-vitimas-e-consequencias-juridicas',
     title: 'Invasão de Dispositivo Informático: Crimes, Direitos das Vítimas e Consequências Jurídicas',
     excerpt: 'Descubra o que caracteriza o crime de invasão de dispositivo informático no Brasil, as penalidades legais, a responsabilidade de empresas e como agir caso seja vítima.',
