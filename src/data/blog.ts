@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'contratos-digitais-validade-juridica-e-principais-cuidados',
+    title: 'Contratos digitais: validade jurídica e principais cuidados',
+    excerpt: 'Entenda a validade dos contratos eletrônicos no Brasil, legislação aplicável e boas práticas para evitar riscos.',
+    date: '2026-11-18',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1782330300444-4acba20c673e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MDIxMTg4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'golpes-digitais-e-responsabilidade-juridica-das-plataformas',
     title: 'Golpes digitais e responsabilidade jurídica das plataformas',
     excerpt: 'Entenda os tipos de golpes online, a responsabilidade das plataformas e como proteger seus direitos.',
