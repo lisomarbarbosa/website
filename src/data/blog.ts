@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ofensas-nas-redes-sociais-responsabilidade-civil-e-criminal-na-era-digital',
+    title: 'Ofensas nas Redes Sociais: Responsabilidade Civil e Criminal na Era Digital',
+    excerpt: 'Descubra as consequências jurídicas das ofensas na internet, como identificar agressores, aplicar o Marco Civil e o Código Penal, e como produzir provas válidas.',
+    date: '2026-11-19',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1602130520529-8a9be291ca62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MTA4Mzg4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'contratos-digitais-validade-juridica-e-principais-cuidados',
     title: 'Contratos digitais: validade jurídica e principais cuidados',
     excerpt: 'Entenda a validade dos contratos eletrônicos no Brasil, legislação aplicável e boas práticas para evitar riscos.',
