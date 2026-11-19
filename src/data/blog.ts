@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'regulamentacao-das-criptomoedas-no-brasil-direitos-deveres-e-seguranca-juridica-dos-ativos-virtuais',
+    title: 'Regulamentação das Criptomoedas no Brasil: Direitos, Deveres e Segurança Jurídica dos Ativos Virtuais',
+    excerpt: 'Entenda o Marco Legal das Criptomoedas no Brasil (Lei 14.478/2022), as regras da Receita Federal, direitos do investidor e como se proteger de fraudes no mercado de criptoativos.',
+    date: '2026-11-19',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1762340277075-a669833a035d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MTI1NTYyfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ofensas-nas-redes-sociais-responsabilidade-civil-e-criminal-na-era-digital',
     title: 'Ofensas nas Redes Sociais: Responsabilidade Civil e Criminal na Era Digital',
     excerpt: 'Descubra as consequências jurídicas das ofensas na internet, como identificar agressores, aplicar o Marco Civil e o Código Penal, e como produzir provas válidas.',
