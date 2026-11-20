@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'calunia-e-injuria-no-ambiente-digital-aspectos-juridicos-e-producao-de-provas',
+    title: 'Calúnia e Injúria no Ambiente Digital: Aspectos Jurídicos e Produção de Provas',
+    excerpt: 'Guia completo sobre crimes de calúnia e injúria na internet, causas de aumento de pena, remoção de conteúdo e indenização por danos morais.',
+    date: '2026-11-20',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1642060590674-0298cdeeea2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MTkzMjY0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'regulamentacao-das-criptomoedas-no-brasil-direitos-deveres-e-seguranca-juridica-dos-ativos-virtuais',
     title: 'Regulamentação das Criptomoedas no Brasil: Direitos, Deveres e Segurança Jurídica dos Ativos Virtuais',
     excerpt: 'Entenda o Marco Legal das Criptomoedas no Brasil (Lei 14.478/2022), as regras da Receita Federal, direitos do investidor e como se proteger de fraudes no mercado de criptoativos.',
