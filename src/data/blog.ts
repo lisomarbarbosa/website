@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'revenge-porn-e-tutela-juridica-como-a-lei-protege-as-vitimas-no-brasil',
+    title: 'Revenge Porn e Tutela Jurídica: Como a Lei Protege as Vítimas no Brasil',
+    excerpt: 'Entenda os direitos das vítimas de revenge porn, as leis aplicáveis como Marco Civil e Código Penal, e os passos práticos para remover vídeos e obter reparação.',
+    date: '2026-11-20',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1757466762489-52fea38071ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MjEwOTcxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'calunia-e-injuria-no-ambiente-digital-aspectos-juridicos-e-producao-de-provas',
     title: 'Calúnia e Injúria no Ambiente Digital: Aspectos Jurídicos e Produção de Provas',
     excerpt: 'Guia completo sobre crimes de calúnia e injúria na internet, causas de aumento de pena, remoção de conteúdo e indenização por danos morais.',
