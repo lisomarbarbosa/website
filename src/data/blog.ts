@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-civil-no-direito-digital-guia-completo-para-garantir-seus-direitos-online',
+    title: 'Responsabilidade Civil no Direito Digital: Guia Completo para Garantir Seus Direitos Online',
+    excerpt: 'Descubra como funciona a responsabilidade civil no meio digital, os direitos dos usuários e a aplicação do Marco Civil da Internet, LGPD e CDC nas relações online.',
+    date: '2026-11-21',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1767481732759-ac03db215634?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1Mjc2OTIxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'revenge-porn-e-tutela-juridica-como-a-lei-protege-as-vitimas-no-brasil',
     title: 'Revenge Porn e Tutela Jurídica: Como a Lei Protege as Vítimas no Brasil',
     excerpt: 'Entenda os direitos das vítimas de revenge porn, as leis aplicáveis como Marco Civil e Código Penal, e os passos práticos para remover vídeos e obter reparação.',
