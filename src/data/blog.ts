@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-dos-marketplaces-no-codigo-de-defesa-do-consumidor',
+    title: 'Responsabilidade dos Marketplaces no Código de Defesa do Consumidor',
+    excerpt: 'Entenda quando as plataformas de e-commerce respondem por defeitos, atrasos e fraudes em vendas de terceiros, segundo a lei e o STJ.',
+    date: '2026-11-21',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1758525589668-6fe313595396?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MjkyNDY4fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-civil-no-direito-digital-guia-completo-para-garantir-seus-direitos-online',
     title: 'Responsabilidade Civil no Direito Digital: Guia Completo para Garantir Seus Direitos Online',
     excerpt: 'Descubra como funciona a responsabilidade civil no meio digital, os direitos dos usuários e a aplicação do Marco Civil da Internet, LGPD e CDC nas relações online.',
