@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-eletronicas-e-o-direito-penal-entenda-os-golpes-virtuais-e-suas-consequencias-juridicas',
+    title: 'Fraudes Eletrônicas e o Direito Penal: Entenda os Golpes Virtuais e Suas Consequências Jurídicas',
+    excerpt: 'Saiba como o Direito Penal pune fraudes eletrônicas, a aplicação da Lei 14.155/2021, o estelionato virtual e a responsabilidade das instituições financeiras na visão da advogada Lisomar Barbosa.',
+    date: '2026-11-22',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1623132908722-1dabfa33efdb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1MzYzNzIxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-dos-marketplaces-no-codigo-de-defesa-do-consumidor',
     title: 'Responsabilidade dos Marketplaces no Código de Defesa do Consumidor',
     excerpt: 'Entenda quando as plataformas de e-commerce respondem por defeitos, atrasos e fraudes em vendas de terceiros, segundo a lei e o STJ.',
