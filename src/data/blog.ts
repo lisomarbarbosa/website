@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'responsabilidade-por-publicacao-de-conteudo-ilicito-na-internet-guia-juridico-completo',
+    title: 'Responsabilidade por Publicação de Conteúdo Ilícito na Internet: Guia Jurídico Completo',
+    excerpt: 'Entenda como funciona a responsabilidade civil e penal por conteúdos ilícitos na internet, os direitos da vítima e o regramento do Marco Civil da Internet e da LGPD.',
+    date: '2026-11-22',
+    readTime: '8 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1618060932014-4deda4932554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1Mzc5NzE3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-eletronicas-e-o-direito-penal-entenda-os-golpes-virtuais-e-suas-consequencias-juridicas',
     title: 'Fraudes Eletrônicas e o Direito Penal: Entenda os Golpes Virtuais e Suas Consequências Jurídicas',
     excerpt: 'Saiba como o Direito Penal pune fraudes eletrônicas, a aplicação da Lei 14.155/2021, o estelionato virtual e a responsabilidade das instituições financeiras na visão da advogada Lisomar Barbosa.',
