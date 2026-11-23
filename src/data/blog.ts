@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-a-lgpd',
+    title: 'Monitoramento de empregados e proteção de dados: limites legais e a LGPD',
+    excerpt: 'Entenda os limites do monitoramento de empregados pelo empregador à luz da LGPD, da CLT e da Constituição Federal. Saiba o que é permitido e evite processos.',
+    date: '2026-11-23',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1666037813276-dc0046b1d219?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1NDY0MDE3fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'responsabilidade-por-publicacao-de-conteudo-ilicito-na-internet-guia-juridico-completo',
     title: 'Responsabilidade por Publicação de Conteúdo Ilícito na Internet: Guia Jurídico Completo',
     excerpt: 'Entenda como funciona a responsabilidade civil e penal por conteúdos ilícitos na internet, os direitos da vítima e o regramento do Marco Civil da Internet e da LGPD.',
