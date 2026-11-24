@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'direito-do-consumidor-nas-compras-pela-internet-guia-completo-e-pratico',
+    title: 'Direito do Consumidor nas Compras pela Internet: Guia Completo e Prático',
+    excerpt: 'Entenda os seus direitos essenciais no e-commerce: prazo de arrependimento de 7 dias, entrega, garantia, proteção de dados e como agir em casos de fraudes.',
+    date: '2026-11-24',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1677442135131-4d7c123aef1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1NTYyNTkzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'e-commerce-e-direito-de-arrependimento-guia-pratico-para-consumidores-e-lojas-virtuais',
     title: 'E-commerce e Direito de Arrependimento: Guia Prático para Consumidores e Lojas Virtuais',
     excerpt: 'Entenda como funciona o direito de arrependimento em compras online segundo o CDC e o Decreto do E-commerce. Saiba prazos, regras de frete e devoluções.',
