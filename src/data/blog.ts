@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'e-commerce-e-direito-de-arrependimento-guia-pratico-para-consumidores-e-lojas-virtuais',
+    title: 'E-commerce e Direito de Arrependimento: Guia Prático para Consumidores e Lojas Virtuais',
+    excerpt: 'Entenda como funciona o direito de arrependimento em compras online segundo o CDC e o Decreto do E-commerce. Saiba prazos, regras de frete e devoluções.',
+    date: '2026-11-24',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1585804934223-63b7cd6262c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1NTQ4MzQ1fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'fraudes-bancarias-digitais-e-responsabilidade-civil-seus-direitos-e-como-agir',
     title: 'Fraudes Bancárias Digitais e Responsabilidade Civil: Seus Direitos e Como Agir',
     excerpt: 'Entenda a responsabilidade civil dos bancos em fraudes bancárias digitais, o entendimento do STJ, CDC e LGPD, e saiba como reaver valores subtraídos em golpes.',
