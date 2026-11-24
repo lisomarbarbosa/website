@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fraudes-bancarias-digitais-e-responsabilidade-civil-seus-direitos-e-como-agir',
+    title: 'Fraudes Bancárias Digitais e Responsabilidade Civil: Seus Direitos e Como Agir',
+    excerpt: 'Entenda a responsabilidade civil dos bancos em fraudes bancárias digitais, o entendimento do STJ, CDC e LGPD, e saiba como reaver valores subtraídos em golpes.',
+    date: '2026-11-24',
+    readTime: '9 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1607292803026-3b9d9b3d0fe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1NDgzNzQxfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'monitoramento-de-empregados-e-protecao-de-dados-limites-legais-e-a-lgpd',
     title: 'Monitoramento de empregados e proteção de dados: limites legais e a LGPD',
     excerpt: 'Entenda os limites do monitoramento de empregados pelo empregador à luz da LGPD, da CLT e da Constituição Federal. Saiba o que é permitido e evite processos.',
