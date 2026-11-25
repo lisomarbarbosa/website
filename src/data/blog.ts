@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'guia-do-direito-do-consumidor-nas-compras-pela-internet-seus-direitos-protegidos',
+    title: 'Guia do Direito do Consumidor nas Compras pela Internet: Seus Direitos Protegidos',
+    excerpt: 'Conheça os seus direitos em compras online: arrependimento, atraso na entrega, trocas e LGPD. Artigo completo da advogada especialista Lisomar Barbosa.',
+    date: '2026-11-25',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1720962158924-6b1d12429ffd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1NjMxNTU0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'direito-do-consumidor-nas-compras-pela-internet-guia-completo-e-pratico',
     title: 'Direito do Consumidor nas Compras pela Internet: Guia Completo e Prático',
     excerpt: 'Entenda os seus direitos essenciais no e-commerce: prazo de arrependimento de 7 dias, entrega, garantia, proteção de dados e como agir em casos de fraudes.',
