@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ataques-virtuais-e-responsabilidade-civil-por-danos-causados',
+    title: 'Ataques virtuais e responsabilidade civil por danos causados',
+    excerpt: 'Entenda como a lei brasileira trata a responsabilidade civil por danos decorrentes de ataques cibernéticos e quais medidas proteger seus direitos.',
+    date: '2026-11-26',
+    readTime: '7 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1678809768466-43d610e470b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1NzMzMDgzfA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'guia-do-direito-do-consumidor-nas-compras-pela-internet-seus-direitos-protegidos',
     title: 'Guia do Direito do Consumidor nas Compras pela Internet: Seus Direitos Protegidos',
     excerpt: 'Conheça os seus direitos em compras online: arrependimento, atraso na entrega, trocas e LGPD. Artigo completo da advogada especialista Lisomar Barbosa.',
