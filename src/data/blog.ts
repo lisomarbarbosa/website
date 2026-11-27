@@ -10,6 +10,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'estelionato-eletronico-e-o-direito-penal-penas-protecao-e-direitos-da-vitima',
+    title: 'Estelionato Eletrônico e o Direito Penal: Penas, Proteção e Direitos da Vítima',
+    excerpt: 'Entenda a tipificação do estelionato eletrônico pela Lei 14.155/2021, a responsabilidade dos bancos, o mecanismo de devolução do Pix e como agir em casos de fraudes na internet.',
+    date: '2026-11-27',
+    readTime: '10 min',
+    category: 'Direito Digital',
+    image: 'https://images.unsplash.com/photo-1636081891531-f5379c90433a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM3NzY4fDB8MXxyYW5kb218fHx8fHx8fHwxNzk1ODE4NTM0fA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+
+  {
     slug: 'ataques-virtuais-e-responsabilidade-civil-por-danos-causados',
     title: 'Ataques virtuais e responsabilidade civil por danos causados',
     excerpt: 'Entenda como a lei brasileira trata a responsabilidade civil por danos decorrentes de ataques cibernéticos e quais medidas proteger seus direitos.',
